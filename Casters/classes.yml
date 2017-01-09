@@ -1,0 +1,134 @@
+# +----------------------------------------------------+ #
+# <                Classes Config File.                > #
+# +----------------------------------------------------+ #
+Guardian:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Cavalier:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Charge: 5
+Barbarian:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Blackguard:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Strike: 10
+Assassin:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Duelist:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Fletcher:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Mustketeer:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Distorter:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Charge: 5
+Inferno:
+  Strength:
+    Base:
+    Scale: 0.25
+  Constitution:
+    Base: 3
+    Scale: 3
+  Dexterity:
+    Base: 2
+    Scale: 2
+  Intellect:
+    Base:
+    Scale: 2
+  Wisdom:
+    Base: 1
+    Mana:
+      Scale: 1
+      Regen: 10
+  Level:
+    Fireball: 5
+    FireCharge: 10
+    FireBomb: 15
+  Armor: [DIAMOND_HELMET, CHAINMAIL_CHESTPLATE, LEATHER_LEGGINGS, GOLD_BOOTS]
+  Weapon: [WOOD_HOE, STONE_AXE, BLAZE_ROD]
+Shaman:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Bolt: 5
+    LightningStorm: 10
+    ChainLightning: 15
+Warlock:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Siphon: 5
+    DarkBomb: 10
+Oracle:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Bloodmage:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+Monk:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Bandage: 1
+Templar:
+  Strength: 4
+  Constitution: 3
+  Dexterity: 2
+  Intellect: 5
+  Wisdom: 1
+  Level:
+    Revive: 40

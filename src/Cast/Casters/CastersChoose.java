@@ -1,0 +1,70 @@
+package Cast.Casters;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import Cast.CommandInterface;
+import Cast.Main;
+import Cast.Essentials.Caster;
+
+public class CastersChoose implements CommandInterface
+{
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
+
+	private final String[] types = { "Guardian", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist",
+			"Fletcher", "Musketeer", "Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk",
+			"Templar" };
+
+	private final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Orc", "Giant" };
+
+	private final String[] jobs = { "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer", "Miner" };
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
+	{
+		if (sender instanceof Player)
+		{
+			Player player = (Player) sender;
+			Caster caster = Main.getCasters().get(player.getUniqueId());
+
+			if (args.length != 2)
+			{
+				return false;
+			}
+
+			for (int i = 0; i < types.length; ++i)
+			{
+				if (args[1].equalsIgnoreCase(types[i]))
+				{
+					caster.setType(types[i]);
+					return true;
+				}
+			}
+
+			for (int i = 0; i < races.length; ++i)
+			{
+				if (args[1].equalsIgnoreCase(races[i]))
+				{
+					caster.setRace(races[i]);
+					return true;
+				}
+			}
+
+			for (int i = 0; i < jobs.length; ++i)
+			{
+				if (args[1].equalsIgnoreCase(jobs[i]))
+				{
+					caster.setJob(jobs[i]);
+					return true;
+				}
+			}
+
+			player.sendMessage(header + ChatColor.GRAY + "That Class/Race/Job Does Not Exist!");
+
+		}
+
+		return true;
+	}
+}

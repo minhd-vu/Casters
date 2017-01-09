@@ -1,0 +1,213 @@
+# +----------------------------------------------------+ #
+# <                 Casts Config File.                 > #
+# +----------------------------------------------------+ #
+Fireball:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  DeletionTimer: 100.0
+  Damage: 10
+  ManaCost: 5.0
+  Velocity: 1.0
+  Gravity: TRUE
+  FireTicks:
+    Fireball: 100
+    Target: 50
+  AreaOfEffect: 1
+  Explosion: 0
+  Incendiary: FALSE
+  SingleTarget: TRUE
+DarkBomb:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  DeletionTimer: 5.0
+  Damage: 10
+  ManaCost: 5.0
+  Gravity: FALSE
+  Charged: FALSE
+  Incendiary: FALSE
+  FireTicks:
+    DarkBomb: 0
+    Target: 0
+  AreaOfEffect: 1
+  Explosion: 0
+  Duration: 100
+  Amplifier: 1
+  Explode: FALSE
+Bolt:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  Damage: 10
+  ManaCost: 3.0
+  Range: 8
+  Explosion: 5
+  Explode: FALSE
+  Incendiary: FALSE
+Revive:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 200
+  ManaCost: 10.0
+  Range: 16
+  Percentage: 100
+FireBomb:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  ManaCost: 3.0
+  DeletionTimer: 5.0
+  Damage: 10
+  Gravity: FALSE
+  FireTicks:
+    Fireball: 100
+    Target: 50
+  AreaOfEffect: 5
+  Explosion: 3
+  Incendiary: TRUE
+  SingleTarget: FALSE
+FireCharge:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  DeletionTimer: 5.0
+  Damage: 10
+  ManaCost: 3.0
+  Gravity: FALSE
+  FireTicks:
+    Fireball: 100
+    Target: 50
+  AreaOfEffect: 3
+  Explosion: 1
+  Incendiary: TRUE
+  SingleTarget: FALSE
+Charge:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 100
+  Damage: 4.0
+  ManaCost: 3.0
+  Range: 8
+  Stun: 60
+Strike:
+  WarmUp:
+    Duration: 0
+    Amplifier: 0
+  Cooldown: 100
+  ManaCost: 3.0
+  Bleed:
+    Damage: 1
+    Duration: 100
+    Period: 20
+  Damage: 3
+  Range: 4
+Bandage:
+  WarmUp:
+    Duration: 0
+    Amplifier: 0
+  Cooldown: 40
+  ManaCost: 3.0
+  Heal: 1
+  Range: 8
+Beasts:
+  WarmUp:
+     Duration: 20
+     Amplifier: 5
+  Cooldown: 100
+  ManaCost: 3.0
+  Duration: 0
+  Amount: 3
+  Range: 10
+LightningStorm:
+  WarmUp:
+    Duration: 60
+    Amplifier: 5
+  Cooldown: 100
+  Damage: 10
+  ManaCost: 3.0
+  Range: 12
+  Explosion: 0
+  Explode: FALSE
+  Incendiary: FALSE
+ChainLightning:
+  WarmUp:
+    Duration: 50
+    Amplifier: 5
+  Cooldown: 100
+  Period: 10
+  Damage: 5
+  ManaCost: 3.0
+  Range:
+    Player: 10
+    Target: 8
+  Explosion: 0
+  Explode: FALSE
+  Incendiary: FALSE
+Reflect:
+  WarmUp:
+    Duration: 20
+    Amplifier: 5
+  Cooldown: 100
+  ManaCost: 3.0
+  Duration: 100
+  Percentage: 100
+Backstab:
+  WarmUp:
+    Duration: 20
+    Amplifier: 5
+  Cooldown: 100
+  ManaCost: 5.0
+  Duration: 200
+  Percentage: 150
+  Sneaking: 200
+Siphon:
+  WarmUp:
+    Duration: 20
+    Amplifier: 5
+  Cooldown: 100
+  Damage:
+    Initial: 3.0
+    Tick: 1.0
+  Percentage:
+    Initial: 50
+    Tick: 100
+  ManaCost: 4.0
+  Range: 8
+  Duration: 100.0
+  Period: 20.0
+Taunt:
+  WarmUp:
+    Duration: 40
+    Amplifier: 5
+  Cooldown: 200
+  ManaCost: 7.0
+  Range: 10
+  Duration: 100
+  Amplifier: 2
+Vanish:
+  WarmUp:
+    Duration: 0
+    Amplifier: 0
+  Cooldown: 240
+  ManaCost: 6.0
+  Duration: 100
+  Range: 16
+Bomb:
+  WarmUp:
+    Duration: 20
+    Amplifier: 5
+  Cooldown: 100
+  Gravity: TRUE
+  ManaCost: 5.0
+  Range: 8
+  Fuse: 40
+  Velocity: 0
+  Incendiary: TRUE

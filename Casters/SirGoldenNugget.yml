@@ -1,0 +1,45 @@
+# +----------------------------------------------------+
+# <            SirGoldenNugget Config File.            >
+# +----------------------------------------------------+
+
+Type: Inferno
+Race: Dwarf
+Job: Alchemist
+Title: Inferno
+Guild:
+Channel: Shout
+Level:
+  Type:
+    Current: 50
+    Max: 50
+  Race:
+    Current: 49
+    Max: 50
+  Job:
+    Current: 49
+    Max: 50
+Health:
+  Current: 10.0
+  Max: 10.0
+Mana:
+  Current: 90.0
+  Max: 20.0
+  Regen: 1.0
+  Timer: 20.0
+Exp:
+  Type:
+    Current: 7.0
+    Max: 0.0
+  Race:
+    Current: 0.0
+    Max: 1000.0
+  Job:
+    Current: 397.0
+    Max: 1000.0
+Stats:
+  Points: 0
+  Strength: 0
+  Constitution: 0
+  Dexterity: 0
+  Intellect: 0
+  Wisdom: 70

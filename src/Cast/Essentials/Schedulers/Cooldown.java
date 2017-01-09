@@ -1,0 +1,81 @@
+package Cast.Essentials.Schedulers;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import Cast.Configs.Config;
+
+public class Cooldown
+{
+	private HashMap<String, Long> cooldown = new HashMap<String, Long>();
+
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
+			+ ChatColor.WHITE + " ";
+
+	private double seconds;
+
+	public Cooldown()
+	{
+		seconds = 0;
+	}
+
+	public boolean hasCooldown(String name)
+	{
+		if (cooldown.containsKey(name))
+		{
+			double secondsleft = getCooldown(name);
+
+			if (secondsleft > 0)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean hasCooldown(Player player, String name)
+	{
+		if (cooldown.containsKey(player.getName()))
+		{
+			double secondsleft = getCooldown(player.getName());
+
+			if (secondsleft > 0)
+			{
+				player.sendMessage(header + name + ChatColor.GRAY + ": " + secondsleft + " Seconds Left!");
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public double getCooldown(String name)
+	{
+		return Double.parseDouble(new DecimalFormat("##.#")
+				.format((double) (((cooldown.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0))));
+	}
+
+	public double getCooldown()
+	{
+		return seconds * 20;
+	}
+
+	public void start(String name)
+	{
+		cooldown.put(name, System.currentTimeMillis());
+	}
+
+	public void setCooldown(double duration)
+	{
+		seconds = duration / 20;
+	}
+
+	public void setCooldown(Config config, String path)
+	{
+		seconds = config.getDouble(path) / 20;
+	}
+}

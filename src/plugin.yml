@@ -1,0 +1,16 @@
+name: Casters
+version: 3.2
+author: SirGoldenNugget
+main: Cast.Main
+description: Casters Plugin.
+commands:
+    casters:
+        description: Lists All Casters Commands.
+    cast:
+        description: Lists All Cast Commands.
+    wand:
+        description: Lists All Wand Commands.
+    chat:
+        description: Lists All Chat Commands.
+    guild:
+        description: Lists All Guild Commands.
