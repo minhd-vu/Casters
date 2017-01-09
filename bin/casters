@@ -1,0 +1,16 @@
+Casters To Do List:
+1. Make A Config File For Each Of The Classes Which Include Their Base Stats Along With Scale.
+2. Create An Experience Class File Or Rename The Levels Class To It. Might have been done.
+3. Make Class Files For Each Class So That You Can Set Base Cast Levels.
+4. Make The Values of Wand Adjustable In Classes Config.
+5. Make Classes That Aren't Just Mages Along With More Skills.
+6. Add In Casters' Command.
+7. Configure Custom Chat.
+8. Incorporate Stats Into Skills.
+9. Make Multiple Types of Experience.
+10. Make It So That Attributes Do Something.
+11. Make It So When Hitting With A Non Type Weapon It Deals No Damage.
+12. Make It So Changing Classes Resets Stats.
+13. Add In Messaging System.
+14. Add In Party System.
+15. Make it So That Things In Main Are Static And No Need To Pass Into The Casters.
