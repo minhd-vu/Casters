@@ -17,7 +17,6 @@ import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import Cast.Main;
 import Cast.Configs.Config;
 import Cast.Essentials.Effects.Effect;
-import Cast.Guild.Guild;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
 import me.tigerhix.lib.scoreboard.common.EntryBuilder;
 import me.tigerhix.lib.scoreboard.common.animate.HighlightedString;
@@ -28,8 +27,7 @@ import me.tigerhix.lib.scoreboard.type.ScoreboardHandler;
 public class Caster
 {
 	private Player player;
-	private Guild guild;
-
+	
 	private Config config;
 	private Config typeconfig;
 	private Config raceconfig;
@@ -137,7 +135,6 @@ public class Caster
 		getConfigMana();
 		getConfigArmor();
 		getConfigWeapon();
-		getConfigGuild();
 
 		effect.put("Stunned", new Effect());
 		effect.put("Bleeding", new Effect());
@@ -381,12 +378,7 @@ public class Caster
 	{
 		this.player = Bukkit.getPlayer(uuid);
 	}
-
-	public Guild getGuild()
-	{
-		return guild;
-	}
-
+	
 	private void getConfigType()
 	{
 		type = config.getString("Type");
@@ -538,18 +530,6 @@ public class Caster
 		for (String material : (List<String>) typeconfig.getList(type + ".Weapon"))
 		{
 			weapon.add(Material.getMaterial(material));
-		}
-	}
-	
-	private void getConfigGuild()
-	{
-		for (Guild guild : Main.getGuilds())
-		{
-			if (config.getString("Guild").equals(guild.getName()))
-			{
-				setGuild(guild);
-				break;
-			}
 		}
 	}
 
@@ -849,11 +829,6 @@ public class Caster
 		}
 
 		return false;
-	}
-
-	public void setGuild(Guild guild)
-	{
-		this.guild = guild;
 	}
 
 	public void setConfig()

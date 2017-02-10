@@ -1,12 +1,9 @@
 package Cast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,12 +60,6 @@ import Cast.Essentials.Horses;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
 import Cast.Essentials.Chat.ChatTitles;
-import Cast.Guild.Guild;
-import Cast.Guild.GuildCreate;
-import Cast.Guild.GuildInvite;
-import Cast.Guild.GuildJoin;
-import Cast.Guild.GuildRemove;
-import Cast.Guild.Guilds;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
 import Cast.Wands.WandList;
@@ -105,14 +96,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastersArmor castersarmor = new CastersArmor();
 	private static CastersWeapon castersweapon = new CastersWeapon();
 	private static CastersWhoIs casterswhois = new CastersWhoIs();
-
-	private static List<Guild> guildlist = new ArrayList<Guild>();
-	private static Guilds guild = new Guilds();
-	private static GuildCreate guildcreate = new GuildCreate();
-	private static GuildInvite guildinvite = new GuildInvite();
-	private static GuildJoin guildjoin = new GuildJoin();
-	private static GuildRemove guildremove = new GuildRemove();
-
+	
 	private static Wands wand = new Wands();
 	private static Casts cast = new Casts();
 	
@@ -155,8 +139,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastTaunt casttaunt;
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public void onEnable()
 	{
@@ -172,32 +155,6 @@ public class Main extends JavaPlugin implements Listener
 		jobs = manager.getNewConfig("jobs.yml", new String[] { "Jobs Config File." });
 		chats = manager.getNewConfig("chat.yml", new String[] { "Chat Config File." });
 		mobs = manager.getNewConfig("mobs.yml", new String[] { "Mobs Config File." });
-		guilds = manager.getNewConfig("guilds.yml", new String[] { "Guilds Config File." });
-		
-		for (String name : (List<String>) guilds.getList("Guilds"))
-		{
-			Guild guild = new Guild(name);
-			guild.setAbreviation(guilds.getString(name + ".Abreviation"));
-			guild.setDescription(guilds.getString(name + ".Description"));
-			
-			for (OfflinePlayer offlineplayer : Bukkit.getOfflinePlayers())
-			{
-				if (offlineplayer.getName().equals(guilds.getString(name + ".Member")))
-				{
-					guild.getMembers().add(offlineplayer.getUniqueId());
-				}
-				
-				else if (offlineplayer.getName().equals(guilds.getString(name + ".Officer")))
-				{
-					guild.getMembers().add(offlineplayer.getUniqueId());
-				}
-				
-				else if (offlineplayer.getName().equals(guilds.getString(name + ".Leader")))
-				{
-					guild.getMembers().add(offlineplayer.getUniqueId());
-				}
-			}
-		}
 
 		spells.put("Fireball", "Casts A Fireball");
 		spells.put("DarkBomb", "Casts A DarkBomb");
@@ -315,13 +272,7 @@ public class Main extends JavaPlugin implements Listener
 		castershandler.register("armor", castersarmor);
 		castershandler.register("weapon", castersweapon);
 		castershandler.register("whois", casterswhois);
-
-		guildhandler.register("guild", guild);
-		guildhandler.register("create", guildcreate);
-		guildhandler.register("invite", guildinvite);
-		guildhandler.register("join", guildjoin);
-		guildhandler.register("remove", guildremove);
-
+		
 		wandhandler.register("wand", wand);
 		wandhandler.register("list", wandlist);
 
@@ -398,11 +349,6 @@ public class Main extends JavaPlugin implements Listener
 	public static HashMap<String, String> getCasts()
 	{
 		return spells;
-	}
-
-	public static List<Guild> getGuilds()
-	{
-		return guildlist;
 	}
 
 	public static ConfigManager getConfigManager()
