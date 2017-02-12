@@ -1,37 +1,11 @@
 ## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/SirGoldenNugget/Casters/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Casters is a plugin developed for the soul purpose for those RPG enthusiasts to have a home in Minecraft. The Casters Plugins provides key RPG elements such as classes, secondary classes (professions), spells/casts, and much more to come.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### About the Author
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SirGoldenNugget/Casters/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+SirGoldenNugget (Minh Vu) has been coding since the age of 12, first learning about C++ and then gravitating towards Java once he started high school totaling a 4+ years of programming experience.
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Want to learn more? Check out the [source](https://github.com/SirGoldenNugget/Casters) or [other projects](https://github.com/SirGoldenNugget) and we’ll help you sort it out.
