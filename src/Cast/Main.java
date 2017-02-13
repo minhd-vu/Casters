@@ -1,5 +1,6 @@
 package Cast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -60,6 +61,7 @@ import Cast.Essentials.Horses;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
 import Cast.Essentials.Chat.ChatTitles;
+import Cast.Party.Party;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
 import Cast.Wands.WandList;
@@ -101,7 +103,7 @@ public class Main extends JavaPlugin implements Listener
 	private static Casts cast = new Casts();
 	
 	private static HashMap<String, String> spells = new HashMap<String, String>();
-
+	
 	private static Experience experience;
 	private static Enchant enchant = new Enchant();
 	private static Armor armor = new Armor();
@@ -139,6 +141,8 @@ public class Main extends JavaPlugin implements Listener
 	private static CastTaunt casttaunt;
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
+
+	private static ArrayList<Party> parties = new ArrayList<Party>();
 	
 	@Override
 	public void onEnable()

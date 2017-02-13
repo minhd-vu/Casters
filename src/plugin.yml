@@ -12,5 +12,5 @@ commands:
         description: Lists All Wand Commands.
     chat:
         description: Lists All Chat Commands.
-    guild:
-        description: Lists All Guild Commands.
+    party:
+        description: Lists All Party Commands.
