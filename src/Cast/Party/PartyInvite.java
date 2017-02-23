@@ -50,7 +50,7 @@ public class PartyInvite implements CommandInterface
 							else if (!c.hasParty())
 							{
 								c.setInvite(new Invite(caster));
-								c.getPlayer().sendMessage(Party.header + caster.getPlayer().getName() + " Invites You To Join His/Her Party!\n" + Party.header + " Do " + ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " accept" + ChatColor.GRAY + "To Join The Or" + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline" + ChatColor.GRAY + " To Decline The Invitation.");
+								c.getPlayer().sendMessage(Party.header + caster.getPlayer().getName() + " Invites You To Join His/Her Party!\n" + Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " accept" + ChatColor.GRAY + "To Join The Party.\n" + Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline" + ChatColor.GRAY + " To Decline The Invitation.");
 
 								new BukkitRunnable()
 								{

@@ -11,27 +11,26 @@ import org.bukkit.entity.Player;
 import Cast.CommandInterface;
 import Cast.Main;
 import Cast.Essentials.Caster;
+import Cast.Party.Party;
 
 public class ChatChannel implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private List<String> commands = new ArrayList<String>();
 
-	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Chat Channel" + ChatColor.DARK_GRAY
-			+ "]";
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Chat Channel" + ChatColor.DARK_GRAY + "]";
 	private String fill = "--------------------";
 
 	public ChatChannel()
 	{
 		commands.add(ChatColor.AQUA + "GBL" + ChatColor.GRAY + " - Global Chat, Everyone Can See This.");
-		commands.add(
-				ChatColor.YELLOW + "LOC" + ChatColor.GRAY + " - Local Chat, People Within 64 Blocks Can See This.");
+		commands.add(ChatColor.YELLOW + "LOC" + ChatColor.GRAY + " - Local Chat, People Within 64 Blocks Can See This.");
 		commands.add(ChatColor.RED + "SHO" + ChatColor.GRAY + " - Shout Chat, People Within 128 Blocks Can See This.");
 		commands.add(ChatColor.GREEN + "RPG" + ChatColor.GRAY + " - Roleplay Chat, For People Who Wish To RP");
-		commands.add(ChatColor.DARK_PURPLE + "LFG" + ChatColor.GRAY
-				+ " - Looking For Group Chat, For People Who Need A Group.");
+		commands.add(ChatColor.DARK_PURPLE + "LFG" + ChatColor.GRAY + " - Looking For Group Chat, For People Who Need A Group.");
 		commands.add(ChatColor.DARK_GREEN + "TRD" + ChatColor.GRAY + " - Trade Chat, For People Who Wish To Trade.");
 		commands.add(ChatColor.BLUE + "HLP" + ChatColor.GRAY + " - Help Chat, For Those Who Need Help.");
+		commands.add(ChatColor.GOLD + "PTY" + ChatColor.GRAY + " - Party Chat, For Communications Within Parties.");
 
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
 		pages.setError("Chat Channel");
@@ -97,6 +96,22 @@ public class ChatChannel implements CommandInterface
 					case "help":
 						caster.setChannel("Help");
 						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Help Channel!");
+						break;
+
+					case "p":
+					case "pty":
+					case "party":
+						if (caster.hasParty())
+						{
+							caster.setChannel("Party");
+							player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Party Channel!");
+						}
+
+						else
+						{
+							caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Join This Channel!");
+						}
+
 						break;
 
 					default:

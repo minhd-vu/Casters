@@ -65,9 +65,11 @@ import Cast.Essentials.Chat.ChatTitles;
 import Cast.Party.Parties;
 import Cast.Party.Party;
 import Cast.Party.PartyAccept;
+import Cast.Party.PartyChat;
 import Cast.Party.PartyCreate;
 import Cast.Party.PartyDecline;
 import Cast.Party.PartyInvite;
+import Cast.Party.PartyLeader;
 import Cast.Party.PartyMembers;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
@@ -154,6 +156,8 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyInvite partyinvite;
 	private static PartyAccept partyaccept;
 	private static PartyDecline partydecline;
+	private static PartyChat partychat;
+	private static PartyLeader partyleader;
 
 	@Override
 	public void onEnable()
@@ -251,6 +255,8 @@ public class Main extends JavaPlugin implements Listener
 		partyinvite = new PartyInvite();
 		partyaccept = new PartyAccept();
 		partydecline = new PartyDecline();
+		partychat = new PartyChat();
+		partyleader = new PartyLeader();
 
 		registerCommands();
 
@@ -295,7 +301,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		for (Player player : Bukkit.getOnlinePlayers())
 		{
-			player.kickPlayer(this.getName() + " Is Restarting!");
+			player.kickPlayer("Server Is Restarting!");
 		}
 	}
 
@@ -353,6 +359,8 @@ public class Main extends JavaPlugin implements Listener
 		partyhandler.register("invite", partyinvite);
 		partyhandler.register("accept", partyaccept);
 		partyhandler.register("decline", partydecline);
+		partyhandler.register("chat", partychat);
+		partyhandler.register("leader", partyleader);
 
 		getCommand("casters").setExecutor(castershandler);
 		getCommand("wand").setExecutor(wandhandler);

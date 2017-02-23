@@ -95,7 +95,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player) && !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -108,7 +108,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player) && !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -121,7 +121,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange).contains(player) && !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange).contains(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -139,6 +139,19 @@ public class Chat implements CommandInterface, Listener
 
 			case "Help":
 				message += ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "HLP" + ChatColor.DARK_GRAY + "] ";
+				break;
+
+			case "Party":
+				message += ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "PTY" + ChatColor.DARK_GRAY + "] ";
+
+				for (Caster player : Main.getCasters().values())
+				{
+					if (!caster.getParty().getMembers().contains(player))
+					{
+						event.getRecipients().remove(player);
+					}
+				}
+
 				break;
 
 			default:
