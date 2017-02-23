@@ -1,6 +1,5 @@
 package Cast.Casts.Types;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,8 +53,7 @@ public class TargettedCast extends Cast
 			Location low = block.getLocation();
 			Location high = low.clone().add(1, 1, 1);
 
-			AxisAlignedBB boundingbox = new AxisAlignedBB(low.getX(), low.getY(), low.getZ(), high.getX(), high.getY(),
-					high.getZ());
+			AxisAlignedBB boundingbox = new AxisAlignedBB(low.getX(), low.getY(), low.getZ(), high.getX(), high.getY(), high.getZ());
 
 			for (Entity target : entity)
 			{
@@ -72,8 +70,51 @@ public class TargettedCast extends Cast
 
 		return player;
 	}
+	
+	/*public LivingEntity getTarget(Player player, int range)
+	{
+		List<Entity> entities = player.getNearbyEntities(range, range, range);
+		ArrayList<LivingEntity> livingentities = new ArrayList<LivingEntity>();
 
-	public LivingEntity getTargetOther(Player player, int range)
+		for (Entity e : entities)
+		{
+			if (e instanceof LivingEntity)
+			{
+				livingentities.add((LivingEntity) e);
+			}
+		}
+		
+		BlockIterator blockiterator = new BlockIterator(player, range);
+		Block block;
+		Location loc;
+		int bx, by, bz;
+		double ex, ey, ez;
+		
+		while (blockiterator.hasNext())
+		{
+			block = blockiterator.next();
+			bx = block.getX();
+			by = block.getY();
+			bz = block.getZ();
+			
+			for (LivingEntity entity : livingentities)
+			{
+				loc = entity.getLocation();
+				ex = loc.getX();
+				ey = loc.getY();
+				ez = loc.getZ();
+				if ((bx - .75 <= ex && ex <= bx + 1.75) && (bz - .75 <= ez && ez <= bz + 1.75)
+						&& (by - 1 <= ey && ey <= by + 2.5))
+				{
+					return entity;
+				}
+			}
+		}
+		
+		return null;
+	}*/
+
+	/*public LivingEntity getTarget(Player player, int range)
 	{
 		ArrayList<Entity> entities = (ArrayList<Entity>) player.getNearbyEntities(range, range, range);
 		ArrayList<Block> sightblock = (ArrayList<Block>) player.getLineOfSight((Set<Material>) null, range);
@@ -105,5 +146,5 @@ public class TargettedCast extends Cast
 		}
 
 		return null;
-	}
+	}*/
 }

@@ -2,6 +2,7 @@ package Cast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -61,7 +62,10 @@ import Cast.Essentials.Horses;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
 import Cast.Essentials.Chat.ChatTitles;
+import Cast.Party.Parties;
 import Cast.Party.Party;
+import Cast.Party.PartyCreate;
+import Cast.Party.PartyMembers;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
 import Cast.Wands.WandList;
@@ -142,7 +146,11 @@ public class Main extends JavaPlugin implements Listener
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
 
-	private static ArrayList<Party> parties = new ArrayList<Party>();
+	private static List<Party> parties = new ArrayList<Party>();
+	
+	private static Parties partycmd;
+	private static PartyCreate partycreate;
+	private static PartyMembers partymembers;
 	
 	@Override
 	public void onEnable()
@@ -493,5 +501,10 @@ public class Main extends JavaPlugin implements Listener
 	public static CastBomb getCastBomb()
 	{
 		return castbomb;
+	}
+	
+	public static List<Party> getParties()
+	{
+		return parties;
 	}
 }

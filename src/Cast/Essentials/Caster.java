@@ -17,6 +17,8 @@ import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import Cast.Main;
 import Cast.Configs.Config;
 import Cast.Essentials.Effects.Effect;
+import Cast.Party.Invite;
+import Cast.Party.Party;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
 import me.tigerhix.lib.scoreboard.common.EntryBuilder;
 import me.tigerhix.lib.scoreboard.common.animate.HighlightedString;
@@ -27,6 +29,9 @@ import me.tigerhix.lib.scoreboard.type.ScoreboardHandler;
 public class Caster
 {
 	private Player player;
+	
+	private Party party;
+	private Invite invite;
 	
 	private Config config;
 	private Config typeconfig;
@@ -378,6 +383,21 @@ public class Caster
 	{
 		this.player = Bukkit.getPlayer(uuid);
 	}
+
+	public Player getPlayer()
+	{
+		return player;
+	}
+	
+	public Party getParty()
+	{
+		return party;
+	}
+	
+	public Invite getInvite()
+	{
+		return invite;
+	}
 	
 	private void getConfigType()
 	{
@@ -643,11 +663,6 @@ public class Caster
 		return jobmaxexp;
 	}
 
-	public Player getPlayer()
-	{
-		return player;
-	}
-
 	public double getHealth()
 	{
 		return health;
@@ -829,6 +844,16 @@ public class Caster
 		}
 
 		return false;
+	}
+	
+	public void setParty(Party party)
+	{
+		this.party = party;
+	}
+	
+	public void setInvite(Invite invite)
+	{
+		this.invite = invite;
 	}
 
 	public void setConfig()

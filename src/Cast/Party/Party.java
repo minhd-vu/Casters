@@ -2,29 +2,35 @@ package Cast.Party;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import org.bukkit.ChatColor;
+
+import Cast.Essentials.Caster;
 
 public class Party
 {
-	private UUID leader;
-	private List<UUID> members = new ArrayList<UUID>();
+	public static String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Party" + ChatColor.DARK_GRAY + "]";
 	
-	public Party(UUID leader)
+	private Caster leader;
+	private List<Caster> members = new ArrayList<Caster>();
+	
+	public Party(Caster leader)
+	{
+		this.leader = leader;
+		members.add(leader);
+	}
+	
+	public void setLeader(Caster leader)
 	{
 		this.leader = leader;
 	}
 	
-	public void setLeader(UUID leader)
-	{
-		this.leader = leader;
-	}
-	
-	public UUID getLeader()
+	public Caster getLeader()
 	{
 		return leader;
 	}
 	
-	public List<UUID> getMembers()
+	public List<Caster> getMembers()
 	{
 		return members;
 	}

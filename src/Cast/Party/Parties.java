@@ -25,8 +25,6 @@ public class Parties implements CommandInterface
 				+ " - Lists All Party Commands.");
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " create" + ChatColor.GRAY
 				+ " - Creates A Party.");
-		commands.add(
-				ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " list" + ChatColor.GRAY + " - Shows All Parties.");
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " members" + ChatColor.GRAY + " - Shows People In Party.");
 		commands.add(ChatColor.DARK_AQUA + "/party " + ChatColor.AQUA + " invite <name>" + ChatColor.GRAY
 				+ " - Invites A Player To The Party.");
@@ -36,6 +34,10 @@ public class Parties implements CommandInterface
 				+ " - Sets The Party Leader.");
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " disband" + ChatColor.GRAY
 				+ " - Disbands The Party.");
+		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " accept" + ChatColor.GRAY
+				+ " - Accepts The Party Invite.");
+		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " decline" + ChatColor.GRAY
+				+ " - Declines The Party Invite.");
 
 		pages.setHeader(fill + header + fill);
 		pages.setError("Party");
