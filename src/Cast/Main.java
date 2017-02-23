@@ -64,7 +64,10 @@ import Cast.Essentials.Chat.ChatChannel;
 import Cast.Essentials.Chat.ChatTitles;
 import Cast.Party.Parties;
 import Cast.Party.Party;
+import Cast.Party.PartyAccept;
 import Cast.Party.PartyCreate;
+import Cast.Party.PartyDecline;
+import Cast.Party.PartyInvite;
 import Cast.Party.PartyMembers;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
@@ -87,46 +90,43 @@ public class Main extends JavaPlugin implements Listener
 	private static Config jobs;
 	private static Config chats;
 	private static Config mobs;
-	private static Config guilds;
 
-	private static HashMap<UUID, Caster> casters = new HashMap<UUID, Caster>();
+	private static HashMap<UUID, Caster> casters;
 
-	private static Casters casterscmd = new Casters();
-	private static CastersInfo castersinfo = new CastersInfo();
-	private static CastersLevel casterslevel = new CastersLevel();
-	private static CastersStats castersstats = new CastersStats();
-	private static CastersChoose casterschoose = new CastersChoose();
-	private static CastersClasses castersclasses = new CastersClasses();
-	private static CastersRaces castersraces = new CastersRaces();
-	private static CastersJobs castersjobs = new CastersJobs();
-	private static CastersArmor castersarmor = new CastersArmor();
-	private static CastersWeapon castersweapon = new CastersWeapon();
-	private static CastersWhoIs casterswhois = new CastersWhoIs();
-	
-	private static Wands wand = new Wands();
-	private static Casts cast = new Casts();
-	
-	private static HashMap<String, String> spells = new HashMap<String, String>();
-	
+	private static Casters casterscmd;
+	private static CastersInfo castersinfo;
+	private static CastersLevel casterslevel;
+	private static CastersStats castersstats;
+	private static CastersChoose casterschoose;
+	private static CastersClasses castersclasses;
+	private static CastersRaces castersraces;
+	private static CastersJobs castersjobs;
+	private static CastersArmor castersarmor;
+	private static CastersWeapon castersweapon;
+	private static CastersWhoIs casterswhois;
+
+	private static Wands wand;
+	private static Casts cast;
+
+	private static HashMap<String, String> spells;
+
 	private static Experience experience;
-	private static Enchant enchant = new Enchant();
-	private static Armor armor = new Armor();
-	private static Attack attack = new Attack();
-	private static Horses horses = new Horses();
+	private static Enchant enchant;
+	private static Armor armor;
+	private static Attack attack;
+	private static Horses horses;
 
 	private static Chat chat;
 	private static ChatTitles chattitles;
-	private static ChatChannel chatchannel = new ChatChannel();
+	private static ChatChannel chatchannel;
 
-	private static WandList wandlist = new WandList();
-
+	private static WandList wandlist;
 	private static WandInferno wandinferno;
 	private static WandDistorter wanddistorter;
 	private static WandShaman wandshaman;
 	private static WandWarlock wandwarlock;
 
-	private static CastList castlist = new CastList();
-
+	private static CastList castlist;
 	private static CastFireball castfireball;
 	private static CastDarkBomb castdarkbomb;
 	private static CastBolt castbolt;
@@ -146,12 +146,15 @@ public class Main extends JavaPlugin implements Listener
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
 
-	private static List<Party> parties = new ArrayList<Party>();
-	
+	private static List<Party> parties;
+
 	private static Parties partycmd;
 	private static PartyCreate partycreate;
 	private static PartyMembers partymembers;
-	
+	private static PartyInvite partyinvite;
+	private static PartyAccept partyaccept;
+	private static PartyDecline partydecline;
+
 	@Override
 	public void onEnable()
 	{
@@ -168,6 +171,24 @@ public class Main extends JavaPlugin implements Listener
 		chats = manager.getNewConfig("chat.yml", new String[] { "Chat Config File." });
 		mobs = manager.getNewConfig("mobs.yml", new String[] { "Mobs Config File." });
 
+		casters = new HashMap<UUID, Caster>();
+
+		casterscmd = new Casters();
+		castersinfo = new CastersInfo();
+		casterslevel = new CastersLevel();
+		castersstats = new CastersStats();
+		casterschoose = new CastersChoose();
+		castersclasses = new CastersClasses();
+		castersraces = new CastersRaces();
+		castersjobs = new CastersJobs();
+		castersarmor = new CastersArmor();
+		castersweapon = new CastersWeapon();
+		casterswhois = new CastersWhoIs();
+
+		wand = new Wands();
+		cast = new Casts();
+
+		spells = new HashMap<String, String>();
 		spells.put("Fireball", "Casts A Fireball");
 		spells.put("DarkBomb", "Casts A DarkBomb");
 		spells.put("Bolt", "Casts A Bolt");
@@ -188,14 +209,22 @@ public class Main extends JavaPlugin implements Listener
 		spells.put("Bomb", "Casts A Bomb");
 
 		experience = new Experience();
+		enchant = new Enchant();
+		armor = new Armor();
+		attack = new Attack();
+		horses = new Horses();
 
 		chat = new Chat();
+		chattitles = new ChatTitles();
+		chatchannel = new ChatChannel();
 
+		wandlist = new WandList();
 		wandinferno = new WandInferno("Inferno");
 		wanddistorter = new WandDistorter("Distorter");
 		wandshaman = new WandShaman("Shaman");
 		wandwarlock = new WandWarlock("Warlock");
 
+		castlist = new CastList();
 		castfireball = new CastFireball("Fireball");
 		castdarkbomb = new CastDarkBomb("DarkBomb");
 		castbolt = new CastBolt("Bolt");
@@ -215,12 +244,17 @@ public class Main extends JavaPlugin implements Listener
 		castvanish = new CastVanish("Vanish");
 		castbomb = new CastBomb("Bomb");
 
+		parties = new ArrayList<Party>();
+		partycmd = new Parties();
+		partycreate = new PartyCreate();
+		partymembers = new PartyMembers();
+		partyinvite = new PartyInvite();
+		partyaccept = new PartyAccept();
+		partydecline = new PartyDecline();
+
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, horses, chat, wandinferno, wanddistorter,
-				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
-				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castbackstab, castsiphon, castvanish, castbomb);
+		registerEvents(this, this, experience, enchant, armor, attack, horses, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castbackstab, castsiphon, castvanish, castbomb);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
@@ -284,7 +318,7 @@ public class Main extends JavaPlugin implements Listener
 		castershandler.register("armor", castersarmor);
 		castershandler.register("weapon", castersweapon);
 		castershandler.register("whois", casterswhois);
-		
+
 		wandhandler.register("wand", wand);
 		wandhandler.register("list", wandlist);
 
@@ -312,8 +346,13 @@ public class Main extends JavaPlugin implements Listener
 		chathandler.register("chat", chat);
 		chathandler.register("titles", chattitles);
 		chathandler.register("channel", chatchannel);
-		
+
 		partyhandler.register("party", partycmd);
+		partyhandler.register("create", partycreate);
+		partyhandler.register("members", partymembers);
+		partyhandler.register("invite", partyinvite);
+		partyhandler.register("accept", partyaccept);
+		partyhandler.register("decline", partydecline);
 
 		getCommand("casters").setExecutor(castershandler);
 		getCommand("wand").setExecutor(wandhandler);
@@ -359,7 +398,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		return casters;
 	}
-	
+
 	public static HashMap<String, String> getCasts()
 	{
 		return spells;
@@ -408,11 +447,6 @@ public class Main extends JavaPlugin implements Listener
 	public static Config getConfigChats()
 	{
 		return chats;
-	}
-	
-	public static Config getConfigGuilds()
-	{
-		return guilds;
 	}
 
 	public static CastFireball getCastFireball()
@@ -504,7 +538,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		return castbomb;
 	}
-	
+
 	public static List<Party> getParties()
 	{
 		return parties;

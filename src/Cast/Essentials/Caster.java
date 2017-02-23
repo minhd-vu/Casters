@@ -29,10 +29,10 @@ import me.tigerhix.lib.scoreboard.type.ScoreboardHandler;
 public class Caster
 {
 	private Player player;
-	
+
 	private Party party;
 	private Invite invite;
-	
+
 	private Config config;
 	private Config typeconfig;
 	private Config raceconfig;
@@ -107,17 +107,18 @@ public class Caster
 	public static final String[] jobs = { "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer",
 			"Miner" };
 
-	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
-			+ ChatColor.WHITE + " ";
+	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
 
 	public Caster(Player player)
 	{
 		this.player = player;
+		party = null;
+		invite = null;
 
 		if (!Main.getConfigManager().getFileExists(this.player.getName() + ".yml"))
 		{
-			config = Main.getConfigManager().getNewConfig(this.player.getName() + ".yml",
-					new String[] { this.player.getName() + " Config File." });
+			config = Main.getConfigManager().getNewConfig(this.player.getName() + ".yml", new String[] {
+					this.player.getName() + " Config File." });
 			setNewConfig();
 		}
 
@@ -125,7 +126,7 @@ public class Caster
 		{
 			config = Main.getConfigManager().getConfig(this.player.getName() + ".yml");
 		}
-		
+
 		typeconfig = Main.getConfigManager().getConfig("classes.yml");
 		raceconfig = Main.getConfigManager().getConfig("races.yml");
 		jobconfig = Main.getConfigManager().getConfig("jobs.yml");
@@ -172,9 +173,7 @@ public class Caster
 
 		Scoreboard scoreboard = (Scoreboard) ScoreboardLib.createScoreboard(player).setHandler(new ScoreboardHandler()
 		{
-			private final HighlightedString casterstext = new HighlightedString("Casters",
-					ChatColor.DARK_AQUA.toString() + ChatColor.BOLD.toString(),
-					ChatColor.AQUA.toString() + ChatColor.BOLD.toString());
+			private final HighlightedString casterstext = new HighlightedString("Casters", ChatColor.DARK_AQUA.toString() + ChatColor.BOLD.toString(), ChatColor.AQUA.toString() + ChatColor.BOLD.toString());
 			private final HighlightedString nametext = new HighlightedString(player.getName(), "&6", "&e");
 
 			public String getTitle(Player player)
@@ -185,8 +184,7 @@ public class Caster
 			public List<Entry> getEntries(Player player)
 			{
 				EntryBuilder entrybuilder = new EntryBuilder();
-				entrybuilder.next("    " + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###" + casterstext.next()
-						+ ChatColor.DARK_GRAY + ChatColor.MAGIC + "###");
+				entrybuilder.next("    " + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###" + casterstext.next() + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###");
 				entrybuilder.next("    " + nametext.next());
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.GREEN + "Class: " + type);
@@ -197,104 +195,87 @@ public class Caster
 
 				if (Main.getCastFireball().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireball().getName() + ": "
-							+ Main.getCastFireball().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireball().getName() + ": " + Main.getCastFireball().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastDarkBomb().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastDarkBomb().getName() + ": "
-							+ Main.getCastDarkBomb().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastDarkBomb().getName() + ": " + Main.getCastDarkBomb().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastBolt().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBolt().getName() + ": "
-							+ Main.getCastBolt().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBolt().getName() + ": " + Main.getCastBolt().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastRevive().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastRevive().getName() + ": "
-							+ Main.getCastRevive().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastRevive().getName() + ": " + Main.getCastRevive().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastFireBomb().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireBomb().getName() + ": "
-							+ Main.getCastFireBomb().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireBomb().getName() + ": " + Main.getCastFireBomb().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastFireCharge().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireCharge().getName() + ": "
-							+ Main.getCastFireCharge().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireCharge().getName() + ": " + Main.getCastFireCharge().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastCharge().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastCharge().getName() + ": "
-							+ Main.getCastCharge().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastCharge().getName() + ": " + Main.getCastCharge().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastStrike().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastStrike().getName() + ": "
-							+ Main.getCastStrike().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastStrike().getName() + ": " + Main.getCastStrike().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastBandage().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBandage().getName() + ": "
-							+ Main.getCastBandage().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBandage().getName() + ": " + Main.getCastBandage().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastBeasts().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBeasts().getName() + ": "
-							+ Main.getCastBeasts().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBeasts().getName() + ": " + Main.getCastBeasts().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastLightningStorm().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastLightningStorm().getName() + ": "
-							+ Main.getCastLightningStorm().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastLightningStorm().getName() + ": " + Main.getCastLightningStorm().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastChainLightning().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastChainLightning().getName() + ": "
-							+ Main.getCastChainLightning().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastChainLightning().getName() + ": " + Main.getCastChainLightning().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastReflect().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastReflect().getName() + ": "
-							+ Main.getCastReflect().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastReflect().getName() + ": " + Main.getCastReflect().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastBackstab().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBackstab().getName() + ": "
-							+ Main.getCastBackstab().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBackstab().getName() + ": " + Main.getCastBackstab().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastSiphon().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastSiphon().getName() + ": "
-							+ Main.getCastSiphon().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastSiphon().getName() + ": " + Main.getCastSiphon().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastVanish().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastVanish().getName() + ": "
-							+ Main.getCastVanish().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastVanish().getName() + ": " + Main.getCastVanish().getCooldown().getCooldown(player.getName()));
 				}
 
 				if (Main.getCastBomb().getCooldown().hasCooldown(player.getName()))
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBomb().getName() + ": "
-							+ Main.getCastBomb().getCooldown().getCooldown(player.getName()));
+					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBomb().getName() + ": " + Main.getCastBomb().getCooldown().getCooldown(player.getName()));
 				}
 
 				entrybuilder.blank();
@@ -307,8 +288,7 @@ public class Caster
 
 				if (effect.get("Silenced").hasTime())
 				{
-					entrybuilder
-							.next("     " + ChatColor.LIGHT_PURPLE + "Silenced " + effect.get("Silenced").getTime());
+					entrybuilder.next("     " + ChatColor.LIGHT_PURPLE + "Silenced " + effect.get("Silenced").getTime());
 				}
 
 				if (effect.get("Bleeding").hasTime())
@@ -328,26 +308,22 @@ public class Caster
 
 				if (effect.get("Invisible").hasTime())
 				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Invisible " + effect.get("Invisible").getTime());
+					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Invisible " + effect.get("Invisible").getTime());
 				}
 
 				if (effect.get("Reflecting").hasTime())
 				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Reflecting " + effect.get("Reflecting").getTime());
+					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Reflecting " + effect.get("Reflecting").getTime());
 				}
 
 				if (effect.get("Backstabbing").hasTime())
 				{
-					entrybuilder.next(
-							"    " + ChatColor.LIGHT_PURPLE + "Backstabbing " + effect.get("Backstabbing").getTime());
+					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Backstabbing " + effect.get("Backstabbing").getTime());
 				}
 
 				if (effect.get("Siphoning").hasTime())
 				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Siphoning " + effect.get("Siphoning").getTime());
+					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Siphoning " + effect.get("Siphoning").getTime());
 				}
 
 				if (effect.get("Siphoned").hasTime())
@@ -368,12 +344,7 @@ public class Caster
 			@Override
 			public void run()
 			{
-				ActionBarAPI.sendActionBar(player,
-						ChatColor.RED + "❤ " + Double.parseDouble(new DecimalFormat("##.#").format(player.getHealth()))
-								+ "/" + Double.parseDouble(new DecimalFormat("##.#").format(player.getMaxHealth()))
-								+ "        " + ChatColor.BLUE + "✦ "
-								+ Double.parseDouble(new DecimalFormat("##.#").format(mana)) + "/"
-								+ Double.parseDouble(new DecimalFormat("##.#").format(maxmana)));
+				ActionBarAPI.sendActionBar(player, ChatColor.RED + "❤ " + Double.parseDouble(new DecimalFormat("##.#").format(player.getHealth())) + "/" + Double.parseDouble(new DecimalFormat("##.#").format(player.getMaxHealth())) + "        " + ChatColor.BLUE + "✦ " + Double.parseDouble(new DecimalFormat("##.#").format(mana)) + "/" + Double.parseDouble(new DecimalFormat("##.#").format(maxmana)));
 			}
 
 		}.runTaskTimer(Main.getInstance(), 0, 2);
@@ -388,17 +359,27 @@ public class Caster
 	{
 		return player;
 	}
-	
+
 	public Party getParty()
 	{
 		return party;
 	}
-	
+
+	public boolean hasParty()
+	{
+		return party != null;
+	}
+
 	public Invite getInvite()
 	{
 		return invite;
 	}
-	
+
+	public boolean hasInvite()
+	{
+		return invite != null;
+	}
+
 	private void getConfigType()
 	{
 		type = config.getString("Type");
@@ -764,15 +745,13 @@ public class Caster
 	{
 		if (!casts.containsKey(name))
 		{
-			player.sendMessage(
-					header + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+			player.sendMessage(header + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
 
 		else if (casts.get(name) > typelevel)
 		{
-			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
-					+ ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name) + ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
 
@@ -826,8 +805,7 @@ public class Caster
 	{
 		if (effect.get("Stunned").hasTime())
 		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
-					+ name + ChatColor.GRAY + " While Stunned!");
+			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + " While Stunned!");
 			return true;
 		}
 
@@ -838,19 +816,18 @@ public class Caster
 	{
 		if (effect.get("Silenced").hasTime())
 		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
-					+ name + ChatColor.GRAY + " While Silenced!");
+			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + " While Silenced!");
 			return true;
 		}
 
 		return false;
 	}
-	
+
 	public void setParty(Party party)
 	{
 		this.party = party;
 	}
-	
+
 	public void setInvite(Invite invite)
 	{
 		this.invite = invite;
@@ -963,8 +940,7 @@ public class Caster
 		getConfigArmor();
 		getConfigWeapon();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type + "!");
 	}
 
 	public void setTypeLevel(int typelevel)
@@ -989,8 +965,7 @@ public class Caster
 		getConfigRace();
 		setCasts();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race + "!");
 	}
 
 	public void setRaceLevel(int racelevel)
@@ -1015,8 +990,7 @@ public class Caster
 		getConfigJob();
 		setCasts();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job + "!");
 	}
 
 	public void setJobLevel(int joblevel)

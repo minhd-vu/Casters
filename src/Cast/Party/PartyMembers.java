@@ -19,29 +19,27 @@ public class PartyMembers implements CommandInterface
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			String message = "";
-
-			for (Party party : Main.getParties())
+			if (caster.hasParty())
 			{
-				if (party.getMembers().contains(caster))
-				{
-					message += Party.header + ChatColor.AQUA + " Leader: " + party.getLeader().getPlayer().getName() + "\nMembers: ";
+				String message = Party.header + ChatColor.AQUA + " Leader: " + ChatColor.GRAY + caster.getParty().getLeader().getPlayer().getName() + "\n" + Party.header + ChatColor.AQUA + " Members: " + ChatColor.GRAY;
 
-					for (Caster member : party.getMembers())
+				for (Caster member : caster.getParty().getMembers())
+				{
+					if (member.equals(caster) && !caster.equals(caster.getParty().getLeader()))
 					{
-						if (member.equals(caster) && !caster.equals(party.getLeader()))
-						{
-							player.sendMessage(member.getPlayer().getName() + ", ");
-						}
+						player.sendMessage(member.getPlayer().getName() + ", ");
 					}
-					
-					message.trim().substring(0, message.length() - 1);
-					
-					break;
 				}
+
+				message.trim().substring(0, message.length() - 1);
+
+				player.sendMessage(message);
 			}
-			
-			player.sendMessage(message);
+
+			else
+			{
+				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Are Not Party Of A Party!");
+			}
 		}
 
 		return true;

@@ -32,14 +32,10 @@ public class Chat implements CommandInterface, Listener
 
 	public Chat()
 	{
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " <page>" + ChatColor.GRAY
-				+ " - Lists All Chat Commands.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " titles" + ChatColor.GRAY
-				+ " - Lists All Avaliable Titles.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel" + ChatColor.GRAY
-				+ " - Lists All Public Channels.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel <channel>" + ChatColor.GRAY
-				+ " - Join A Chat Channel.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " <page>" + ChatColor.GRAY + " - Lists All Chat Commands.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " titles" + ChatColor.GRAY + " - Lists All Avaliable Titles.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel" + ChatColor.GRAY + " - Lists All Public Channels.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel <channel>" + ChatColor.GRAY + " - Join A Chat Channel.");
 
 		titles.put("Guardian", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Guardian" + ChatColor.DARK_GRAY + "]");
 		titles.put("Cavalier", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Cavalier" + ChatColor.DARK_GRAY + "]");
@@ -99,8 +95,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player)
-							&& !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player) && !caster.getPlayer().equals(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -113,8 +108,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player)
-							&& !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player) && !caster.getPlayer().equals(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -127,8 +121,7 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange)
-							.contains(player) && !caster.getPlayer().equals(player))
+					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange).contains(player) && !caster.getPlayer().equals(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -157,7 +150,6 @@ public class Chat implements CommandInterface, Listener
 			message += titles.get(caster.getTitle()) + " ";
 		}
 
-		event.setFormat(message + ChatColor.GRAY + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + " >> "
-				+ ChatColor.GRAY + event.getMessage());
+		event.setFormat(message + ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + " >> " + ChatColor.GRAY + event.getMessage());
 	}
 }

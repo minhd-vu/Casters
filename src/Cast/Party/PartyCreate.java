@@ -18,11 +18,16 @@ public class PartyCreate implements CommandInterface
 		{
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
-			
-			Main.getParties().add(new Party(caster));
-			player.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Created A Party!");
+
+			if (!caster.hasParty())
+			{
+				Party party = new Party(caster);
+				Main.getParties().add(party);
+				caster.setParty(party);
+				player.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Created A Party!");
+			}
 		}
-		
+
 		return true;
 	}
 }
