@@ -1,18 +1,14 @@
 package Cast.Casts.Types;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
-import net.minecraft.server.v1_10_R1.AxisAlignedBB;
+import org.bukkit.util.BlockIterator;
 
 public class TargettedCast extends Cast
 {
@@ -21,7 +17,7 @@ public class TargettedCast extends Cast
 		super(name);
 	}
 
-	public LivingEntity getTarget(Player player, int range)
+	/*public LivingEntity getTarget(Player player, int range)
 	{
 		List<Entity> entity = player.getNearbyEntities(range, range, range);
 
@@ -69,9 +65,9 @@ public class TargettedCast extends Cast
 		}
 
 		return player;
-	}
+	}*/
 	
-	/*public LivingEntity getTarget(Player player, int range)
+	public LivingEntity getTarget(Player player, int range)
 	{
 		List<Entity> entities = player.getNearbyEntities(range, range, range);
 		ArrayList<LivingEntity> livingentities = new ArrayList<LivingEntity>();
@@ -112,7 +108,7 @@ public class TargettedCast extends Cast
 		}
 		
 		return null;
-	}*/
+	}
 
 	/*public LivingEntity getTarget(Player player, int range)
 	{

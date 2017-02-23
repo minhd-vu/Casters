@@ -268,10 +268,10 @@ public class Main extends JavaPlugin implements Listener
 	public void registerCommands()
 	{
 		CommandHandler castershandler = new CommandHandler();
-		CommandHandler guildhandler = new CommandHandler();
 		CommandHandler wandhandler = new CommandHandler();
 		CommandHandler casthandler = new CommandHandler();
 		CommandHandler chathandler = new CommandHandler();
+		CommandHandler partyhandler = new CommandHandler();
 
 		castershandler.register("casters", casterscmd);
 		castershandler.register("info", castersinfo);
@@ -312,12 +312,14 @@ public class Main extends JavaPlugin implements Listener
 		chathandler.register("chat", chat);
 		chathandler.register("titles", chattitles);
 		chathandler.register("channel", chatchannel);
+		
+		partyhandler.register("party", partycmd);
 
 		getCommand("casters").setExecutor(castershandler);
-		getCommand("guild").setExecutor(guildhandler);
 		getCommand("wand").setExecutor(wandhandler);
 		getCommand("cast").setExecutor(casthandler);
 		getCommand("chat").setExecutor(chathandler);
+		getCommand("party").setExecutor(partyhandler);
 	}
 
 	public static void registerEvents(Plugin plugin, Listener... listeners)
