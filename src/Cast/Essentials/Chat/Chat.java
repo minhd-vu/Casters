@@ -32,10 +32,14 @@ public class Chat implements CommandInterface, Listener
 
 	public Chat()
 	{
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " <page>" + ChatColor.GRAY + " - Lists All Chat Commands.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " titles" + ChatColor.GRAY + " - Lists All Avaliable Titles.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel" + ChatColor.GRAY + " - Lists All Public Channels.");
-		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel <channel>" + ChatColor.GRAY + " - Join A Chat Channel.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " <page>" + ChatColor.GRAY
+				+ " - Lists All Chat Commands.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " titles" + ChatColor.GRAY
+				+ " - Lists All Avaliable Titles.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel" + ChatColor.GRAY
+				+ " - Lists All Public Channels.");
+		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel <channel>" + ChatColor.GRAY
+				+ " - Join A Chat Channel.");
 
 		titles.put("Guardian", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Guardian" + ChatColor.DARK_GRAY + "]");
 		titles.put("Cavalier", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Cavalier" + ChatColor.DARK_GRAY + "]");
@@ -121,7 +125,8 @@ public class Chat implements CommandInterface, Listener
 
 				for (Player player : Bukkit.getOnlinePlayers())
 				{
-					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange).contains(player))
+					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange)
+							.contains(player))
 					{
 						event.getRecipients().remove(player);
 					}
@@ -158,11 +163,17 @@ public class Chat implements CommandInterface, Listener
 				break;
 		}
 
+		if (!event.getRecipients().contains(caster.getPlayer()))
+		{
+			event.getRecipients().add(caster.getPlayer());
+		}
+
 		if (titles.containsKey(caster.getTitle()))
 		{
 			message += titles.get(caster.getTitle()) + " ";
 		}
 
-		event.setFormat(message + ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + " >> " + ChatColor.GRAY + event.getMessage());
+		event.setFormat(message + ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + " >> "
+				+ ChatColor.GRAY + event.getMessage());
 	}
 }

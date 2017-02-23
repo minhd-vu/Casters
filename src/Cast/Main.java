@@ -70,6 +70,7 @@ import Cast.Party.PartyCreate;
 import Cast.Party.PartyDecline;
 import Cast.Party.PartyInvite;
 import Cast.Party.PartyLeader;
+import Cast.Party.PartyLeave;
 import Cast.Party.PartyMembers;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
@@ -158,6 +159,7 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyDecline partydecline;
 	private static PartyChat partychat;
 	private static PartyLeader partyleader;
+	private static PartyLeave partyleave;
 
 	@Override
 	public void onEnable()
@@ -257,10 +259,14 @@ public class Main extends JavaPlugin implements Listener
 		partydecline = new PartyDecline();
 		partychat = new PartyChat();
 		partyleader = new PartyLeader();
+		partyleave = new PartyLeave();
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, horses, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castbackstab, castsiphon, castvanish, castbomb);
+		registerEvents(this, this, experience, enchant, armor, attack, horses, chat, wandinferno, wanddistorter,
+				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
+				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
+				castbackstab, castsiphon, castvanish, castbomb);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
@@ -361,6 +367,7 @@ public class Main extends JavaPlugin implements Listener
 		partyhandler.register("decline", partydecline);
 		partyhandler.register("chat", partychat);
 		partyhandler.register("leader", partyleader);
+		partyhandler.register("leave", partyleave);
 
 		getCommand("casters").setExecutor(castershandler);
 		getCommand("wand").setExecutor(wandhandler);
