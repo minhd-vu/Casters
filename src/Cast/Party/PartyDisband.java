@@ -30,7 +30,8 @@ public class PartyDisband implements CommandInterface
 						for (Caster member : party.getMembers())
 						{
 							member.setParty(null);
-							member.getPlayer().sendMessage(Party.header + " The Party Has Been Disbanded.");
+							member.getPlayer()
+									.sendMessage(Party.header + ChatColor.GRAY + " The Party Has Been Disbanded.");
 						}
 
 						Main.getParties().remove(party);

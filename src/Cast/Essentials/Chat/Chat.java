@@ -153,7 +153,7 @@ public class Chat implements CommandInterface, Listener
 				{
 					if (!caster.getParty().getMembers().contains(player))
 					{
-						event.getRecipients().remove(player);
+						event.getRecipients().remove(player.getPlayer());
 					}
 				}
 

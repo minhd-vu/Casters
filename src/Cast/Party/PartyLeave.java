@@ -39,6 +39,11 @@ public class PartyLeave implements CommandInterface
 
 					caster.setParty(null);
 
+					if (caster.getChannel().equals("Party"))
+					{
+						caster.getPlayer().performCommand("chat channel global");
+					}
+
 					caster.getPlayer().sendMessage(Party.header + ChatColor.RED + " You Have Left The Party.");
 				}
 

@@ -21,19 +21,19 @@ public class PartyMembers implements CommandInterface
 
 			if (caster.hasParty())
 			{
-				String message = Party.header + ChatColor.AQUA + " Leader: " + ChatColor.GRAY + caster.getParty().getLeader().getPlayer().getName() + "\n" + Party.header + ChatColor.AQUA + " Members: " + ChatColor.GRAY;
+				String message = Party.header + ChatColor.AQUA + " Leader: " + ChatColor.GRAY
+						+ caster.getParty().getLeader().getPlayer().getName() + "\n" + Party.header + ChatColor.AQUA
+						+ " Members: " + ChatColor.GRAY;
 
 				for (Caster member : caster.getParty().getMembers())
 				{
-					if (member.equals(caster) && !caster.equals(caster.getParty().getLeader()))
+					if (!member.equals(caster.getParty().getLeader()))
 					{
-						player.sendMessage(member.getPlayer().getName() + ", ");
+						message += member.getPlayer().getName() + ", ";
 					}
 				}
 
-				message.trim().substring(0, message.length() - 1);
-
-				player.sendMessage(message);
+				player.sendMessage(message.substring(0, message.length() - 2));
 			}
 
 			else

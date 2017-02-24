@@ -68,6 +68,7 @@ import Cast.Party.PartyAccept;
 import Cast.Party.PartyChat;
 import Cast.Party.PartyCreate;
 import Cast.Party.PartyDecline;
+import Cast.Party.PartyDisband;
 import Cast.Party.PartyInvite;
 import Cast.Party.PartyLeader;
 import Cast.Party.PartyLeave;
@@ -160,6 +161,7 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyChat partychat;
 	private static PartyLeader partyleader;
 	private static PartyLeave partyleave;
+	private static PartyDisband partydisband;
 
 	@Override
 	public void onEnable()
@@ -260,6 +262,7 @@ public class Main extends JavaPlugin implements Listener
 		partychat = new PartyChat();
 		partyleader = new PartyLeader();
 		partyleave = new PartyLeave();
+		partydisband = new PartyDisband();
 
 		registerCommands();
 
@@ -368,6 +371,7 @@ public class Main extends JavaPlugin implements Listener
 		partyhandler.register("chat", partychat);
 		partyhandler.register("leader", partyleader);
 		partyhandler.register("leave", partyleave);
+		partyhandler.register("disband", partydisband);
 
 		getCommand("casters").setExecutor(castershandler);
 		getCommand("wand").setExecutor(wandhandler);

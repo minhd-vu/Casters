@@ -24,7 +24,8 @@ public class PartyInvite implements CommandInterface
 
 			if (args.length != 2)
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " Correct Usage: " + ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " invite <name>");
+				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " Correct Usage: " + ChatColor.DARK_AQUA
+						+ "/party" + ChatColor.AQUA + " invite <name>");
 				return false;
 			}
 
@@ -34,7 +35,8 @@ public class PartyInvite implements CommandInterface
 				{
 					if (caster.getPlayer().getName().equals(args[1]))
 					{
-						caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Are Already In The Party.");
+						caster.getPlayer()
+								.sendMessage(Party.header + ChatColor.GRAY + " You Are Already In The Party.");
 						return false;
 					}
 
@@ -44,13 +46,23 @@ public class PartyInvite implements CommandInterface
 						{
 							if (caster.getParty().getMembers().contains(c))
 							{
-								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + c.getPlayer().getName() + ChatColor.GRAY + " Is Already In The Party.");
+								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " "
+										+ c.getPlayer().getName() + ChatColor.GRAY + " Is Already In The Party.");
 							}
 
 							else if (!c.hasParty())
 							{
+								caster.getPlayer()
+										.sendMessage(Party.header + ChatColor.GRAY + " You Invite " + ChatColor.WHITE
+												+ c.getPlayer().getName() + ChatColor.GRAY + " To The Party.");
 								c.setInvite(new Invite(caster));
-								c.getPlayer().sendMessage(Party.header + caster.getPlayer().getName() + " Invites You To Join His/Her Party!\n" + Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " accept" + ChatColor.GRAY + "To Join The Party.\n" + Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline" + ChatColor.GRAY + " To Decline The Invitation.");
+								c.getPlayer()
+										.sendMessage(Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName()
+												+ ChatColor.GRAY + " Invites You To Join His/Her Party!\n"
+												+ Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA
+												+ " accept" + ChatColor.GRAY + " To Join The Party.\n" + Party.header
+												+ ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline"
+												+ ChatColor.GRAY + " To Decline The Invitation.");
 
 								new BukkitRunnable()
 								{
@@ -60,7 +72,10 @@ public class PartyInvite implements CommandInterface
 										if (c.getInvite() != null)
 										{
 											c.setInvite(null);
-											c.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " " + c.getInvite().getSender().getPlayer().getName() + "'s Party Invitation Has Expired.");
+											c.getPlayer()
+													.sendMessage(Party.header + ChatColor.GRAY + " "
+															+ c.getInvite().getSender().getPlayer().getName()
+															+ "'s Party Invitation Has Expired.");
 										}
 									}
 
@@ -69,7 +84,8 @@ public class PartyInvite implements CommandInterface
 
 							else
 							{
-								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + c.getPlayer().getName() + ChatColor.GRAY + " Is Already In A Party.");
+								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " "
+										+ c.getPlayer().getName() + ChatColor.GRAY + " Is Already In A Party.");
 							}
 
 							return true;
@@ -81,13 +97,15 @@ public class PartyInvite implements CommandInterface
 
 				else
 				{
-					caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Invite People!");
+					caster.getPlayer()
+							.sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Invite People!");
 				}
 			}
 
 			else
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Invite People!");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Invite People!");
 			}
 		}
 

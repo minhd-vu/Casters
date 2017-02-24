@@ -25,17 +25,20 @@ public class PartyAccept implements CommandInterface
 
 				for (Caster c : caster.getParty().getMembers())
 				{
-					c.getPlayer().sendMessage(Party.header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Has Joined The Party.");
+					c.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " " + caster.getPlayer().getName()
+							+ ChatColor.GRAY + " Has Joined The Party.");
 				}
 
 				caster.getInvite().getSender().getParty().getMembers().add(caster);
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Joined The Party.");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Joined The Party.");
 				caster.setInvite(null);
 			}
 
 			else
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Have No Pending Party Invitations!");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.GRAY + " You Have No Pending Party Invitations!");
 			}
 		}
 
