@@ -7,11 +7,12 @@ import org.bukkit.entity.Player;
 
 import Cast.CommandInterface;
 import Cast.Main;
+import Cast.Essentials.Class;
 
 public class CastersInfo implements CommandInterface
 {
-	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Info" + ChatColor.DARK_GRAY
-			+ "] ";
+	private String header =
+			ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Info" + ChatColor.DARK_GRAY + "] ";
 	private String fill = "--------------------";
 	private String bar = "-----------------------------------------------------";
 
@@ -250,46 +251,21 @@ public class CastersInfo implements CommandInterface
 				return false;
 			}
 
-			if (type)
+			for (Class c : Main.getClasses())
 			{
-				player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + "-" + header.substring(0, header.length() - 1)
-						+ fill + "\n" + ChatColor.DARK_AQUA + name + ChatColor.GRAY + " - " + description + "."
-						+ ChatColor.DARK_AQUA + "\nBase Stats:" + ChatColor.DARK_AQUA + "\nStrength: " + ChatColor.GRAY
-						+ Main.getConfigType().getInt(name + ".Strength") + ChatColor.DARK_AQUA + "\nConstitution: "
-						+ ChatColor.GRAY + Main.getConfigType().getInt(name + ".Constitution") + ChatColor.DARK_AQUA
-						+ "\nDexterity: " + ChatColor.GRAY + Main.getConfigType().getInt(name + ".Dexterity")
-						+ ChatColor.DARK_AQUA + "\nIntellect: " + ChatColor.GRAY
-						+ Main.getConfigType().getInt(name + ".Intellect") + ChatColor.DARK_AQUA + "\nWisdom: "
-						+ ChatColor.GRAY + Main.getConfigType().getInt(name + ".Wisdom") + "\n" + ChatColor.DARK_GRAY
-						+ bar);
-			}
-
-			else if (race)
-			{
-				player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + "-" + header.substring(0, header.length() - 1)
-						+ fill + "\n" + ChatColor.DARK_AQUA + name + ChatColor.GRAY + " - " + description + "."
-						+ ChatColor.DARK_AQUA + "\nBonuses:" + ChatColor.DARK_AQUA + "\nStrength: " + ChatColor.GRAY
-						+ Main.getConfigRace().getInt(name + ".Strength") + ChatColor.DARK_AQUA + "\nConstitution: "
-						+ ChatColor.GRAY + Main.getConfigRace().getInt(name + ".Constitution") + ChatColor.DARK_AQUA
-						+ "\nDexterity: " + ChatColor.GRAY + Main.getConfigRace().getInt(name + ".Dexterity")
-						+ ChatColor.DARK_AQUA + "\nIntellect: " + ChatColor.GRAY
-						+ Main.getConfigRace().getInt(name + ".Intellect") + ChatColor.DARK_AQUA + "\nWisdom: "
-						+ ChatColor.GRAY + Main.getConfigRace().getInt(name + ".Wisdom") + "\n" + ChatColor.DARK_GRAY
-						+ bar);
-			}
-
-			else if (job)
-			{
-				player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + "-" + header.substring(0, header.length() - 1)
-						+ fill + "\n" + ChatColor.DARK_AQUA + name + ChatColor.GRAY + " - " + description + "."
-						+ ChatColor.DARK_AQUA + "\nStrength: " + ChatColor.GRAY
-						+ Main.getConfigJob().getInt(name + ".Strength") + ChatColor.DARK_AQUA + "\nConstitution: "
-						+ ChatColor.GRAY + Main.getConfigJob().getInt(name + ".Constitution") + ChatColor.DARK_AQUA
-						+ "\nDexterity: " + ChatColor.GRAY + Main.getConfigJob().getInt(name + ".Dexterity")
-						+ ChatColor.DARK_AQUA + "\nIntellect: " + ChatColor.GRAY
-						+ Main.getConfigJob().getInt(name + ".Intellect") + ChatColor.DARK_AQUA + "\nWisdom: "
-						+ ChatColor.GRAY + Main.getConfigJob().getInt(name + ".Wisdom") + "\n" + ChatColor.DARK_GRAY
-						+ bar);
+				if (c.getName().equalsIgnoreCase(args[1]))
+				{
+					player.sendMessage(
+							"\n" + ChatColor.DARK_GRAY + fill + "-" + header.substring(0, header.length() - 1) + fill
+									+ "\n" + ChatColor.DARK_AQUA + name + ChatColor.GRAY + " - " + description + "."
+									+ ChatColor.DARK_AQUA + "\nBase Stats:" + ChatColor.DARK_AQUA + "\nStrength: "
+									+ ChatColor.GRAY + c.getStrength() + ChatColor.DARK_AQUA + "\nConstitution: "
+									+ ChatColor.GRAY + c.getConstitution() + ChatColor.DARK_AQUA + "\nDexterity: "
+									+ ChatColor.GRAY + c.getDexterity() + ChatColor.DARK_AQUA + "\nIntellect: "
+									+ ChatColor.GRAY + c.getIntellect() + ChatColor.DARK_AQUA + "\nWisdom: "
+									+ ChatColor.GRAY + c.getWisdom() + "\n" + ChatColor.DARK_GRAY + bar);
+					break;
+				}
 			}
 		}
 

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -61,6 +62,7 @@ import Cast.Essentials.Class;
 import Cast.Essentials.Enchant;
 import Cast.Essentials.Experience;
 import Cast.Essentials.Horses;
+import Cast.Essentials.Mob;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
 import Cast.Essentials.Chat.ChatTitles;
@@ -90,6 +92,7 @@ public class Main extends JavaPlugin implements Listener
 	private static ConfigManager manager;
 
 	private static List<Class> classes;
+	private static List<Mob> mobs;
 
 	private static HashMap<UUID, Caster> casters;
 
@@ -440,6 +443,10 @@ public class Main extends JavaPlugin implements Listener
 		classes.add(farmer);
 		classes.add(miner);
 
+		mobs = new ArrayList<Mob>();
+
+		mobs.add(new Mob(EntityType.ZOMBIE, 20, 5));
+
 		casters = new HashMap<UUID, Caster>();
 		casterscmd = new Casters();
 		castersinfo = new CastersInfo();
@@ -682,6 +689,11 @@ public class Main extends JavaPlugin implements Listener
 	public static List<Class> getClasses()
 	{
 		return classes;
+	}
+
+	public static List<Mob> getMobs()
+	{
+		return mobs;
 	}
 
 	public static HashMap<UUID, Caster> getCasters()
