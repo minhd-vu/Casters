@@ -13,4 +13,9 @@ Casters To Do List:
 12. Make It So Changing Classes Resets Stats.
 13. Add In Messaging System.
 14. Add In Party System.
-15. Make it So That Things In Main Are Static And No Need To Pass Into The Casters.
+15. Make It So That Things In Main Are Static And No Need To Pass Into The Casters.
+
+16. Make All Configs Local And Make The Only Config Files Be Player Saves.
+17. Add In More Health Without Scaling As In Allow For Health An Damage Numbers To Be In The 100s.
+18. Test Out Custom Recipes.
+19. Add In Passives
