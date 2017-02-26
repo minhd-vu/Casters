@@ -26,8 +26,18 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 	{
 		super(name);
 
-		range = Main.getConfigCasts().getInt("Revive.Range");
-		percentage = Main.getConfigCasts().getInt("Revive.Percentage");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		range = 16;
+		percentage = 100;
 
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 		info.add(ChatColor.DARK_AQUA + "Percentage: " + ChatColor.GRAY + percentage + "%");
@@ -73,6 +83,7 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 
 								new BukkitRunnable()
 								{
+									@SuppressWarnings("deprecation")
 									@Override
 									public void run()
 									{

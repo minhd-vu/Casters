@@ -20,9 +20,10 @@ public class Attack implements Listener
 
 			if (event.getCause().equals(DamageCause.ENTITY_ATTACK))
 			{
-				if (caster.getWeapon().contains(caster.getPlayer().getInventory().getItemInMainHand().getType()))
+				if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()))
 				{
-					event.setDamage(caster.getStrength() * caster.getStrengthScale() + event.getDamage());
+					event.setDamage(caster.getStrength() * caster.getStrengthScale()
+							+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
 				}
 
 				else
@@ -34,9 +35,12 @@ public class Attack implements Listener
 
 		else if (event.getDamager() instanceof Creature)
 		{
-			if (Main.getConfigMobs().getDouble(event.getDamager().getName() + ".Damage") > 0)
+			for (Mob mob : Main.getMobs())
 			{
-				event.setDamage(Main.getConfigMobs().getDouble(event.getDamager().getName() + ".Damage"));
+				if (((Creature) event.getDamager()).getType().equals(mob.getEntityType()) && mob.getDamage() > 0)
+				{
+					event.setDamage(mob.getDamage());
+				}
 			}
 		}
 	}

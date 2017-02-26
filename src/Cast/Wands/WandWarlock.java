@@ -3,6 +3,7 @@ package Cast.Wands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -32,6 +33,22 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 	public WandWarlock(String name)
 	{
 		super(name);
+
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(20);
+		timer = 100;
+		damage = 2;
+		manacost = 1;
+		gravity = false;
+		areaofeffect = 1;
+		singletarget = true;
+		charged = false;
+		explode = false;
+
+		info.add(ChatColor.DARK_AQUA + name + " Wand:");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP.");
 	}
 
 	@Override
@@ -47,6 +64,7 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -149,6 +167,7 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityExplodeEvent(EntityExplodeEvent event)
 	{

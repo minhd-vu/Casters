@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Configs.Config;
 import Cast.Essentials.Caster;
 
 public class Bleed
@@ -169,19 +168,19 @@ public class Bleed
 		}.runTaskLater(plugin, duration);
 	}
 
-	public void setDamage(Config config, String path)
+	public void setDamage(double damage)
 	{
-		damage = config.getDouble(path);
+		this.damage = damage;
 	}
 
-	public void setDuration(Config config, String path)
+	public void setDuration(int duration)
 	{
-		duration = config.getInt(path);
+		this.duration = duration;
 	}
 
-	public void setPeriod(Config config, String path)
+	public void setPeriod(int period)
 	{
-		period = config.getInt(path);
+		this.period = period;
 	}
 
 	public double getDamage()

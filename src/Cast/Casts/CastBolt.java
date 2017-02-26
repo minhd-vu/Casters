@@ -30,11 +30,21 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 	{
 		super(name);
 
-		damage = Main.getConfigCasts().getDouble("Bolt.Damage");
-		range = Main.getConfigCasts().getInt("Bolt.Range");
-		explosion = Main.getConfigCasts().getInt("Bolt.Explosion");
-		explode = Main.getConfigCasts().getBoolean("Bolt.Explode");
-		incendiary = Main.getConfigCasts().getBoolean("Bolt.Incendiary");
+		warmup.setDuration(40);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		damage = 10;
+		range = 8;
+		explosion = 5;
+		explode = false;
+		incendiary = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");

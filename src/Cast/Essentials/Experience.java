@@ -39,19 +39,19 @@ public class Experience implements Listener
 
 	public Experience()
 	{
-		explossgeneral = (float) Main.getConfigExp().getDouble("Experience.Loss.General");
+		explossgeneral = 10;
 
-		expgainplayer = (float) Main.getConfigExp().getDouble("Experience.Gain.Player");
-		explossplayer = (float) Main.getConfigExp().getDouble("Experience.Loss.Player");
-		expgaincreature = (float) Main.getConfigExp().getDouble("Experience.Gain.Creature");
-		explosscreature = (float) Main.getConfigExp().getDouble("Experience.Loss.Creature");
+		expgainplayer = 50;
+		explossplayer = 25;
+		expgaincreature = 10;
+		explosscreature = 10;
 
-		expgainbreak = (float) Main.getConfigExp().getDouble("Experience.Gain.Break");
-		expgainmine = (float) Main.getConfigExp().getDouble("Experience.Gain.Mine");
-		expgaincraft = (float) Main.getConfigExp().getDouble("Experience.Gain.Craft");
-		expgainfarm = (float) Main.getConfigExp().getDouble("Experience.Gain.Farm");
+		expgainbreak = 1;
+		expgainmine = 10;
+		expgaincraft = 5;
+		expgainfarm = 5;
 
-		scale = Main.getConfigExp().getDouble("Experience.Scale");
+		scale = 1;
 	}
 
 	@EventHandler

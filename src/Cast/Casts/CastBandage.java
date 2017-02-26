@@ -24,8 +24,18 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 	{
 		super(name);
 
-		heal = Main.getConfigCasts().getDouble("Bandage.Heal");
-		range = Main.getConfigCasts().getInt("Bandage.Range");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		heal = 1;
+		range = 8;
 
 		info.add(ChatColor.DARK_AQUA + "Heal:" + heal + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range:" + range + " Blocks");
@@ -60,6 +70,7 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 
 				new BukkitRunnable()
 				{
+					@SuppressWarnings("deprecation")
 					@Override
 					public void run()
 					{

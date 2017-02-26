@@ -31,8 +31,18 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 	{
 		super(name);
 
-		duration = Main.getConfigCasts().getInt("Reflect.Duration");
-		percentage = Main.getConfigCasts().getInt("Reflect.Percentage");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		duration = 100;
+		percentage = 100;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Percentage: " + ChatColor.GRAY + percentage + " %");

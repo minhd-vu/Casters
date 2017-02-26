@@ -3,6 +3,7 @@ package Cast.Wands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -32,6 +33,21 @@ public class WandShaman extends Wand implements CommandInterface, Listener
 	public WandShaman(String name)
 	{
 		super(name);
+
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(20);
+		timer = 100;
+		damage = 2;
+		manacost = 1;
+		gravity = false;
+		areaofeffect = 1;
+		singletarget = true;
+		velocity = 1;
+
+		info.add(ChatColor.DARK_AQUA + name + " Wand:");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP.");
 	}
 
 	@Override
@@ -81,6 +97,7 @@ public class WandShaman extends Wand implements CommandInterface, Listener
 
 					new BukkitRunnable()
 					{
+						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{
@@ -117,6 +134,7 @@ public class WandShaman extends Wand implements CommandInterface, Listener
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{

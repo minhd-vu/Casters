@@ -12,7 +12,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Configs.Config;
 import Cast.Essentials.Caster;
 
 public class WarmUp
@@ -130,13 +129,13 @@ public class WarmUp
 		return amplifier;
 	}
 
-	public void setDuration(Config config, String path)
+	public void setDuration(int duration)
 	{
-		duration = config.getInt(path);
+		this.duration = duration;
 	}
 
-	public void setAmplifier(Config config, String path)
+	public void setAmplifier(int amplifier)
 	{
-		amplifier = config.getInt(path);
+		this.amplifier = amplifier;
 	}
 }

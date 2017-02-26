@@ -13,8 +13,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Configs.Config;
-
 public class Stun
 {
 	private HashMap<String, Long> stuns = new HashMap<String, Long>();
@@ -123,9 +121,9 @@ public class Stun
 		}
 	}
 
-	public void setDuration(Config config, String path)
+	public void setDuration(int duration)
 	{
-		duration = config.getInt(path);
+		this.duration = duration;
 	}
 
 	public int getDuration()

@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 
 import Cast.CommandInterface;
 import Cast.Main;
-import Cast.Configs.Config;
 import Cast.Essentials.Caster;
+import Cast.Essentials.Class;
 import Cast.Essentials.Chat.Pages;
 
 public class CastList implements CommandInterface
@@ -46,9 +46,9 @@ public class CastList implements CommandInterface
 						Integer.parseInt(args[1]);
 					}
 
-					setCommands(caster.getTypeConfig(), caster.getType());
-					setCommands(caster.getRaceConfig(), caster.getRace());
-					setCommands(caster.getJobConfig(), caster.getJob());
+					setCommands(caster.getType());
+					setCommands(caster.getRace());
+					setCommands(caster.getJob());
 
 					pages.setCommand("cast list");
 					pages.display(player, args, 1);
@@ -83,7 +83,7 @@ public class CastList implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(type))
 				{
-					setCommands(caster.getTypeConfig(), type);
+					setCommands(type);
 					pages.display(player, args, 2);
 
 					return true;
@@ -94,7 +94,7 @@ public class CastList implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(race))
 				{
-					setCommands(caster.getRaceConfig(), race);
+					setCommands(race);
 					pages.display(player, args, 2);
 
 					return true;
@@ -105,7 +105,7 @@ public class CastList implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(job))
 				{
-					setCommands(caster.getJobConfig(), job);
+					setCommands(job);
 					pages.display(player, args, 2);
 
 					return true;
@@ -117,19 +117,24 @@ public class CastList implements CommandInterface
 
 	}
 
-	private void setCommands(Config config, String name)
+	private void setCommands(String name)
 	{
 		pages.setCommand("cast list " + name.toLowerCase());
 
 		commands.add(ChatColor.DARK_AQUA + name + " Casts:");
 
-		for (String cast : Main.getCasts().keySet())
+		for (Class c : Main.getClasses())
 		{
-			if (config.getInt(name + ".Level." + cast) > 0)
+			if (c.getName().equalsIgnoreCase(name))
 			{
-				commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + config.getInt(name + ".Level." + cast)
-						+ " - " + ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase()
-						+ ChatColor.GRAY + " - " + Main.getCasts().get(cast) + ".");
+				for (String cast : c.getCasts().keySet())
+				{
+					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
+							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
+							+ " - " + Main.getCasts().get(cast) + ".");
+				}
+
+				break;
 			}
 		}
 

@@ -28,9 +28,19 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 	{
 		super(name);
 
-		stun.setDuration(Main.getConfigCasts(), "Charge.Stun");
-		damage = Main.getConfigCasts().getDouble("Charge.Damage");
-		range = Main.getConfigCasts().getInt("Charge.Range");
+		warmup.setDuration(40);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		stun.setDuration(60);
+		damage = 4;
+		range = 8;
 
 		info.add(ChatColor.DARK_AQUA + "Stun: " + ChatColor.GRAY + stun.getDuration() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
@@ -68,6 +78,7 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
+						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{

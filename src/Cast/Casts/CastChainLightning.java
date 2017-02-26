@@ -32,13 +32,23 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 	{
 		super(name);
 
-		period = Main.getConfigCasts().getInt("ChainLightning.Period");
-		damage = Main.getConfigCasts().getDouble("ChainLightning.Damage");
-		playerrange = Main.getConfigCasts().getInt("ChainLightning.Range.Player");
-		targetrange = Main.getConfigCasts().getInt("ChainLightning.Range.Target");
-		explosion = Main.getConfigCasts().getInt("ChainLightning.Explosion");
-		explode = Main.getConfigCasts().getBoolean("ChainLightning.Explode");
-		incendiary = Main.getConfigCasts().getBoolean("ChainLightning.Incendiary");
+		warmup.setDuration(50);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		period = 10;
+		damage = 5;
+		playerrange = 10;
+		targetrange = 8;
+		explosion = 0;
+		explode = false;
+		incendiary = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "PlayerRange: " + ChatColor.GRAY + playerrange + " Blocks");
