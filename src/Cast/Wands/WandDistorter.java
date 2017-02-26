@@ -3,6 +3,7 @@ package Cast.Wands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -34,6 +35,20 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 	public WandDistorter(String name)
 	{
 		super(name);
+
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(20);
+		timer = 100;
+		damage = 2;
+		manacost = 1;
+		gravity = false;
+		areaofeffect = 1;
+		singletarget = true;
+
+		info.add(ChatColor.DARK_AQUA + name + " Wand:");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP.");
 	}
 
 	@Override
@@ -49,6 +64,7 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
