@@ -80,6 +80,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
+						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{

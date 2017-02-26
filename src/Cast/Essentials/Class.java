@@ -9,6 +9,7 @@ import org.bukkit.Material;
 public class Class
 {
 	private String name;
+	private String description;
 
 	private List<Material> armor;
 	private HashMap<Material, Integer> weapon;
@@ -26,9 +27,11 @@ public class Class
 	private int intellectscale;
 	private int wisdomscale;
 
-	public Class(String name, int strength, int constitution, int dexterity, int intellect, int wisdom)
+	public Class(String name, String description, int strength, int constitution, int dexterity, int intellect,
+			int wisdom)
 	{
 		this.name = name;
+		this.description = description;
 
 		armor = new ArrayList<Material>();
 		weapon = new HashMap<Material, Integer>();
@@ -41,10 +44,12 @@ public class Class
 		this.wisdom = wisdom;
 	}
 
-	public Class(String name, int strength, int constitution, int dexterity, int intellect, int wisdom,
-			int strengthscale, int constitutionscale, int dexterityscale, int intellectscale, int wisdomscale)
+	public Class(String name, String description, int strength, int constitution, int dexterity, int intellect,
+			int wisdom, int strengthscale, int constitutionscale, int dexterityscale, int intellectscale,
+			int wisdomscale)
 	{
 		this.name = name;
+		this.description = description;
 
 		armor = new ArrayList<Material>();
 		weapon = new HashMap<Material, Integer>();
@@ -66,6 +71,11 @@ public class Class
 	public String getName()
 	{
 		return name;
+	}
+
+	public String getDescription()
+	{
+		return description;
 	}
 
 	public List<Material> getArmor()

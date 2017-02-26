@@ -172,7 +172,7 @@ public class Main extends JavaPlugin implements Listener
 
 		classes = new ArrayList<Class>();
 
-		Class paladin = new Class("Paladin", 2, 5, -2, -1, 3);
+		Class paladin = new Class("Paladin", "Description", 2, 5, -2, -1, 3);
 		paladin.getArmor().add(Material.DIAMOND_HELMET);
 		paladin.getArmor().add(Material.DIAMOND_CHESTPLATE);
 		paladin.getArmor().add(Material.DIAMOND_LEGGINGS);
@@ -184,7 +184,7 @@ public class Main extends JavaPlugin implements Listener
 		paladin.getWeapon().put(Material.WOOD_SWORD, 5);
 		paladin.getCasts().put("Reflect", 1);
 
-		Class cavalier = new Class("Cavalier", 3, 3, 4, 2, -1);
+		Class cavalier = new Class("Cavalier", "Description", 3, 3, 4, 2, -1);
 		cavalier.getArmor().add(Material.IRON_HELMET);
 		cavalier.getArmor().add(Material.DIAMOND_CHESTPLATE);
 		cavalier.getArmor().add(Material.CHAINMAIL_LEGGINGS);
@@ -196,7 +196,7 @@ public class Main extends JavaPlugin implements Listener
 		cavalier.getWeapon().put(Material.WOOD_SPADE, 4);
 		cavalier.getCasts().put("Charge", 1);
 
-		Class barbarian = new Class("Barbarian", 5, 3, 2, -4, -3);
+		Class barbarian = new Class("Barbarian", "Description", 5, 3, 2, -4, -3);
 		barbarian.getArmor().add(Material.DIAMOND_HELMET);
 		barbarian.getArmor().add(Material.IRON_CHESTPLATE);
 		barbarian.getArmor().add(Material.CHAINMAIL_LEGGINGS);
@@ -208,7 +208,7 @@ public class Main extends JavaPlugin implements Listener
 		barbarian.getWeapon().put(Material.WOOD_AXE, 5);
 		barbarian.getCasts().put("Taunt", 1);
 
-		Class blackguard = new Class("Blackguard", 3, 4, 2, 2, -4);
+		Class blackguard = new Class("Blackguard", "Description", 3, 4, 2, 2, -4);
 		blackguard.getArmor().add(Material.CHAINMAIL_HELMET);
 		blackguard.getArmor().add(Material.IRON_CHESTPLATE);
 		blackguard.getArmor().add(Material.IRON_LEGGINGS);
@@ -219,7 +219,7 @@ public class Main extends JavaPlugin implements Listener
 		blackguard.getWeapon().put(Material.STONE_SWORD, 6);
 		blackguard.getWeapon().put(Material.WOOD_SWORD, 5);
 
-		Class assassin = new Class("Assassin", 4, -2, 5, -3, 1);
+		Class assassin = new Class("Assassin", "Description", 4, -2, 5, -3, 1);
 		assassin.getArmor().add(Material.GOLD_HELMET);
 		assassin.getArmor().add(Material.LEATHER_CHESTPLATE);
 		assassin.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -231,7 +231,7 @@ public class Main extends JavaPlugin implements Listener
 		assassin.getWeapon().put(Material.WOOD_SWORD, 5);
 		assassin.getCasts().put("Vanish", 1);
 
-		Class duelist = new Class("Duelist", 3, 1, 4, -2, -2);
+		Class duelist = new Class("Duelist", "Description", 3, 1, 4, -2, -2);
 		duelist.getArmor().add(Material.CHAINMAIL_HELMET);
 		duelist.getArmor().add(Material.LEATHER_CHESTPLATE);
 		duelist.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -243,7 +243,7 @@ public class Main extends JavaPlugin implements Listener
 		duelist.getWeapon().put(Material.WOOD_SWORD, 5);
 		duelist.getCasts().put("Strike", 1);
 
-		Class fletcher = new Class("Fletcher", 2, 1, 4, -2, -2);
+		Class fletcher = new Class("Fletcher", "Description", 2, 1, 4, -2, -2);
 		fletcher.getArmor().add(Material.GOLD_HELMET);
 		fletcher.getArmor().add(Material.LEATHER_CHESTPLATE);
 		fletcher.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -255,7 +255,7 @@ public class Main extends JavaPlugin implements Listener
 		fletcher.getWeapon().put(Material.WOOD_SWORD, 5);
 		fletcher.getCasts().put("Beasts", 1);
 
-		Class musketeer = new Class("Musketeer", 1, 2, 3, 1, 1);
+		Class musketeer = new Class("Musketeer", "Description", 1, 2, 3, 1, 1);
 		musketeer.getArmor().add(Material.IRON_HELMET);
 		musketeer.getArmor().add(Material.CHAINMAIL_CHESTPLATE);
 		musketeer.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -269,7 +269,7 @@ public class Main extends JavaPlugin implements Listener
 		musketeer.getWeapon().put(Material.WOOD_SWORD, 5);
 		musketeer.getCasts().put("Bomb", 1);
 
-		Class distorter = new Class("Distorter", -3, 1, 2, 4, 5);
+		Class distorter = new Class("Distorter", "Description", -3, 1, 2, 4, 5);
 		distorter.getArmor().add(Material.LEATHER_HELMET);
 		distorter.getArmor().add(Material.LEATHER_CHESTPLATE);
 		distorter.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -280,7 +280,7 @@ public class Main extends JavaPlugin implements Listener
 		distorter.getWeapon().put(Material.STONE_HOE, 5);
 		distorter.getWeapon().put(Material.WOOD_HOE, 5);
 
-		Class inferno = new Class("Inferno", 0, -2, 1, 5, 4);
+		Class inferno = new Class("Inferno", "Description", 0, -2, 1, 5, 4);
 		inferno.getArmor().add(Material.LEATHER_HELMET);
 		inferno.getArmor().add(Material.LEATHER_CHESTPLATE);
 		inferno.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -292,7 +292,7 @@ public class Main extends JavaPlugin implements Listener
 		cavalier.getWeapon().put(Material.WOOD_HOE, 5);
 		inferno.getCasts().put("Fireball", 1);
 
-		Class shaman = new Class("Shaman", 3, 1, 3, 3, 2);
+		Class shaman = new Class("Shaman", "Description", 3, 1, 3, 3, 2);
 		shaman.getArmor().add(Material.CHAINMAIL_HELMET);
 		shaman.getArmor().add(Material.CHAINMAIL_CHESTPLATE);
 		shaman.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -305,7 +305,7 @@ public class Main extends JavaPlugin implements Listener
 		shaman.getCasts().put("Bolt", 1);
 		shaman.getCasts().put("ChainLightning", 5);
 
-		Class warlock = new Class("Warlock", -2, 4, -2, 4, 4);
+		Class warlock = new Class("Warlock", "Description", -2, 4, -2, 4, 4);
 		warlock.getArmor().add(Material.LEATHER_HELMET);
 		warlock.getArmor().add(Material.LEATHER_CHESTPLATE);
 		warlock.getArmor().add(Material.IRON_LEGGINGS);
@@ -318,7 +318,7 @@ public class Main extends JavaPlugin implements Listener
 		warlock.getCasts().put("DarkBomb", 1);
 		warlock.getCasts().put("Siphon", 5);
 
-		Class oracle = new Class("Oracle", 0, 1, 1, 3, 4);
+		Class oracle = new Class("Oracle", "Description", 0, 1, 1, 3, 4);
 		oracle.getArmor().add(Material.LEATHER_HELMET);
 		oracle.getArmor().add(Material.LEATHER_CHESTPLATE);
 		oracle.getArmor().add(Material.IRON_LEGGINGS);
@@ -329,7 +329,7 @@ public class Main extends JavaPlugin implements Listener
 		oracle.getWeapon().put(Material.STONE_SPADE, 5);
 		oracle.getWeapon().put(Material.WOOD_SPADE, 4);
 
-		Class bloodmage = new Class("Bloodmage", -4, 4, -3, 5, 3);
+		Class bloodmage = new Class("Bloodmage", "Description", -4, 4, -3, 5, 3);
 		bloodmage.getArmor().add(Material.LEATHER_HELMET);
 		bloodmage.getArmor().add(Material.LEATHER_CHESTPLATE);
 		bloodmage.getArmor().add(Material.IRON_LEGGINGS);
@@ -340,7 +340,7 @@ public class Main extends JavaPlugin implements Listener
 		bloodmage.getWeapon().put(Material.STONE_SPADE, 5);
 		bloodmage.getWeapon().put(Material.WOOD_SPADE, 4);
 
-		Class monk = new Class("Monk", 2, 3, 3, 2, 3);
+		Class monk = new Class("Monk", "Description", 2, 3, 3, 2, 3);
 		monk.getArmor().add(Material.LEATHER_HELMET);
 		monk.getArmor().add(Material.LEATHER_CHESTPLATE);
 		monk.getArmor().add(Material.IRON_LEGGINGS);
@@ -351,7 +351,7 @@ public class Main extends JavaPlugin implements Listener
 		monk.getWeapon().put(Material.STONE_SPADE, 5);
 		monk.getWeapon().put(Material.WOOD_SPADE, 4);
 
-		Class cleric = new Class("Cleric", 2, 3, 3, 2, 3);
+		Class cleric = new Class("Cleric", "Description", 2, 3, 3, 2, 3);
 		cleric.getArmor().add(Material.LEATHER_HELMET);
 		cleric.getArmor().add(Material.LEATHER_CHESTPLATE);
 		cleric.getArmor().add(Material.IRON_LEGGINGS);
@@ -363,51 +363,51 @@ public class Main extends JavaPlugin implements Listener
 		cleric.getWeapon().put(Material.WOOD_SPADE, 4);
 		cleric.getCasts().put("Revive", 1);
 
-		Class dwarf = new Class("Dwarf", 3, 4, 0, -3, -2);
+		Class dwarf = new Class("Dwarf", "Description", 3, 4, 0, -3, -2);
 		dwarf.getArmor().add(Material.DIAMOND_HELMET);
 		dwarf.getWeapon().put(Material.DIAMOND_PICKAXE, 5);
 
-		Class human = new Class("Human", 2, 1, 1, 2, 1);
+		Class human = new Class("Human", "Description", 2, 1, 1, 2, 1);
 		human.getCasts().put("Bandage", 1);
 
-		Class elf = new Class("Elf", -3, -2, 3, 4, 3);
+		Class elf = new Class("Elf", "Description", -3, -2, 3, 4, 3);
 		elf.getArmor().add(Material.GOLD_HELMET);
 		elf.getWeapon().put(Material.BOW, 3);
 
-		Class troll = new Class("Troll", 4, 5, -4, -4, -2);
+		Class troll = new Class("Troll", "Description", 4, 5, -4, -4, -2);
 		troll.getArmor().add(Material.IRON_LEGGINGS);
 
-		Class goblin = new Class("Goblin", 1, 2, 4, -2, 0);
+		Class goblin = new Class("Goblin", "Description", 1, 2, 4, -2, 0);
 		goblin.getArmor().add(Material.LEATHER_CHESTPLATE);
 
-		Class giant = new Class("Giant", 2, 5, -5, -3, 2);
+		Class giant = new Class("Giant", "Description", 2, 5, -5, -3, 2);
 		giant.getArmor().add(Material.IRON_CHESTPLATE);
 
-		Class undead = new Class("Undead", 0, 3, -2, 3, 2);
+		Class undead = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		undead.getArmor().add(Material.GOLD_HELMET);
 
-		Class demon = new Class("Demon", 5, -2, 2, 4, -5);
+		Class demon = new Class("Demon", "Description", 5, -2, 2, 4, -5);
 		demon.getArmor().add(Material.GOLD_HELMET);
 
-		Class alchemist = new Class("Undead", 0, 3, -2, 3, 2);
+		Class alchemist = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		alchemist.getArmor().add(Material.GOLD_HELMET);
 
-		Class enchanter = new Class("Undead", 0, 3, -2, 3, 2);
+		Class enchanter = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		enchanter.getArmor().add(Material.GOLD_HELMET);
 
-		Class blacksmith = new Class("Undead", 0, 3, -2, 3, 2);
+		Class blacksmith = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		blacksmith.getArmor().add(Material.GOLD_HELMET);
 
-		Class engineer = new Class("Undead", 0, 3, -2, 3, 2);
+		Class engineer = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		engineer.getArmor().add(Material.GOLD_HELMET);
 
-		Class artisan = new Class("Undead", 0, 3, -2, 3, 2);
+		Class artisan = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		artisan.getArmor().add(Material.GOLD_HELMET);
 
-		Class farmer = new Class("Undead", 0, 3, -2, 3, 2);
+		Class farmer = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		farmer.getArmor().add(Material.GOLD_HELMET);
 
-		Class miner = new Class("Undead", 0, 3, -2, 3, 2);
+		Class miner = new Class("Undead", "Description", 0, 3, -2, 3, 2);
 		miner.getArmor().add(Material.GOLD_HELMET);
 
 		classes.add(paladin);

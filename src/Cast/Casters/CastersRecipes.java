@@ -23,7 +23,7 @@ public class CastersRecipes implements CommandInterface
 	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Recipes" + ChatColor.DARK_GRAY + "]";
 	private String fill = ChatColor.DARK_GRAY + "----------------------";
 
-	public void Recpies()
+	public CastersRecipes()
 	{
 		ItemStack leather = new ItemStack(Material.LEATHER, 1);
 		ShapedRecipe rottenfleshtoleather = new ShapedRecipe(leather);
@@ -36,6 +36,24 @@ public class CastersRecipes implements CommandInterface
 		ironfencetochainmailhelmet.shape("&&&", "& &");
 		ironfencetochainmailhelmet.setIngredient('&', Material.IRON_FENCE);
 		Main.getInstance().getServer().addRecipe(ironfencetochainmailhelmet);
+
+		ItemStack chainmailchestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
+		ShapedRecipe ironfencetochainmailchestplate = new ShapedRecipe(chainmailchestplate);
+		ironfencetochainmailchestplate.shape("& &", "&&&", "&&&");
+		ironfencetochainmailchestplate.setIngredient('&', Material.IRON_FENCE);
+		Main.getInstance().getServer().addRecipe(ironfencetochainmailchestplate);
+
+		ItemStack chainmailleggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
+		ShapedRecipe ironfencetochainmailleggings = new ShapedRecipe(chainmailleggings);
+		ironfencetochainmailleggings.shape("&&&", "& &", "& &");
+		ironfencetochainmailleggings.setIngredient('&', Material.IRON_FENCE);
+		Main.getInstance().getServer().addRecipe(ironfencetochainmailleggings);
+
+		ItemStack chainmailboots = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
+		ShapedRecipe ironfencetochainmailboots = new ShapedRecipe(chainmailboots);
+		ironfencetochainmailboots.shape("& &", "& &");
+		ironfencetochainmailboots.setIngredient('&', Material.IRON_FENCE);
+		Main.getInstance().getServer().addRecipe(ironfencetochainmailboots);
 
 		commands.add(ChatColor.GRAY + "9 Rotten Flesh -> 1 Leather.");
 		commands.add(ChatColor.GRAY + "Use Iron Fence To Craft Chainmail Armor.");
@@ -51,9 +69,12 @@ public class CastersRecipes implements CommandInterface
 	{
 		if (sender instanceof Player)
 		{
-			Player player = (Player) sender;
+			if (args.length <= 2)
+			{
+				Player player = (Player) sender;
 
-			pages.display(player, args, 0);
+				pages.display(player, args, 1);
+			}
 		}
 
 		return true;
