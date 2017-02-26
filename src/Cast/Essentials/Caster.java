@@ -96,10 +96,10 @@ public class Caster
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
 	public static final String[] types =
-			{ "Guardian", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
+			{ "Paladins", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
 					"Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk", "Templar" };
 
-	public static final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Orc", "Giant" };
+	public static final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Giant", "Demon", "Undead" };
 
 	public static final String[] jobs =
 			{ "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer", "Miner" };
@@ -358,6 +358,7 @@ public class Caster
 
 		new BukkitRunnable()
 		{
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run()
 			{

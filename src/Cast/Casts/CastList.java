@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import Cast.CommandInterface;
 import Cast.Main;
 import Cast.Essentials.Caster;
+import Cast.Essentials.Class;
 import Cast.Essentials.Chat.Pages;
 
 public class CastList implements CommandInterface
@@ -36,7 +37,7 @@ public class CastList implements CommandInterface
 
 			commands.clear();
 
-			/*-if (args.length <= 2)
+			if (args.length <= 2)
 			{
 				try
 				{
@@ -44,87 +45,99 @@ public class CastList implements CommandInterface
 					{
 						Integer.parseInt(args[1]);
 					}
-			
-					setCommands(caster.getTypeConfig(), caster.getType());
-					setCommands(caster.getRaceConfig(), caster.getRace());
-					setCommands(caster.getJobConfig(), caster.getJob());
-			
+
+					setCommands(caster.getType());
+					setCommands(caster.getRace());
+					setCommands(caster.getJob());
+
 					pages.setCommand("cast list");
 					pages.display(player, args, 1);
-			
+
 					return true;
 				}
-			
+
 				catch (NumberFormatException e)
 				{
-			
+
 				}
 			}
-			
+
 			if (args[1].equalsIgnoreCase("all"))
 			{
 				commands.add(ChatColor.DARK_AQUA + "All Collective Casts:");
-			
+
 				for (String cast : Main.getCasts().keySet())
 				{
 					commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase()
 							+ ChatColor.GRAY + " - " + Main.getCasts().get(cast));
 				}
-			
+
 				pages.setCommand("cast list all");
 				pages.setPage(commands);
 				pages.display(player, args, 2);
-			
+
 				return true;
 			}
-			
+
 			for (String type : Caster.types)
 			{
 				if (args[1].equalsIgnoreCase(type))
 				{
-					setCommands(caster.getTypeConfig(), type);
+					setCommands(type);
 					pages.display(player, args, 2);
-			
+
 					return true;
 				}
 			}
-			
+
 			for (String race : Caster.races)
 			{
 				if (args[1].equalsIgnoreCase(race))
 				{
-					setCommands(caster.getRaceConfig(), race);
+					setCommands(race);
 					pages.display(player, args, 2);
-			
+
 					return true;
 				}
 			}
-			
+
 			for (String job : Caster.jobs)
 			{
 				if (args[1].equalsIgnoreCase(job))
 				{
-					setCommands(caster.getJobConfig(), job);
+					setCommands(job);
 					pages.display(player, args, 2);
-			
+
 					return true;
 				}
-			}*/
+			}
 		}
 
 		return true;
 
 	}
 
-	private void setCommands(Caster caster)
+	private void setCommands(String name)
 	{
-		/*-pages.setCommand("cast list " + name.toLowerCase());
-		
+		pages.setCommand("cast list " + name.toLowerCase());
+
 		commands.add(ChatColor.DARK_AQUA + name + " Casts:");
-		commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + config.getInt(name + ".Level." + cast) + " - "
-				+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY + " - "
-				+ Main.getCasts().get(cast) + ".");
-		
-		pages.setPage(commands);*/
+
+		for (Class c : Main.getClasses())
+		{
+			if (c.getName().equalsIgnoreCase(name))
+			{
+				for (String cast : c.getCasts().keySet())
+				{
+					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
+							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
+							+ " - " + Main.getCasts().get(cast) + ".");
+				}
+
+				break;
+			}
+		}
+
+		pages.setPage(commands);
 	}
 }
