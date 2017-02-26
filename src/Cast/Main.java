@@ -445,7 +445,11 @@ public class Main extends JavaPlugin implements Listener
 
 		mobs = new ArrayList<Mob>();
 
-		mobs.add(new Mob(EntityType.ZOMBIE, 20, 5));
+		mobs.add(new Mob(EntityType.ZOMBIE, 20, 2));
+		mobs.add(new Mob(EntityType.ENDERMAN, 20, 10));
+		mobs.add(new Mob(EntityType.SKELETON, 20, 10));
+		mobs.add(new Mob(EntityType.SPIDER, 20, 10));
+		mobs.add(new Mob(EntityType.CAVE_SPIDER, 20, 10));
 
 		casters = new HashMap<UUID, Caster>();
 		casterscmd = new Casters();

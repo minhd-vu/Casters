@@ -63,9 +63,9 @@ public class Chat implements CommandInterface, Listener
 		pages.setCommand("chat");
 		pages.setPage(commands);
 
-		localrange = Main.getConfigChats().getInt("Range.Local");
-		shoutrange = Main.getConfigChats().getInt("Range.Shout");
-		roleplayrange = Main.getConfigChats().getInt("Range.Roleplay");
+		localrange = 128;
+		shoutrange = 256;
+		roleplayrange = 64;
 	}
 
 	@Override

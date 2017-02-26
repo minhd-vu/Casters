@@ -40,7 +40,10 @@ public class Wand
 	public Wand(String name)
 	{
 		this.name = name;
+		
 
+
+		/*-
 		warmup.setDuration(Main.getConfigWands(), name + ".WarmUp.Duration");
 		warmup.setAmplifier(Main.getConfigWands(), name + ".WarmUp.Amplifier");
 		cooldown.setCooldown(Main.getConfigWands(), "Wand." + name + ".Cooldown");
@@ -59,7 +62,7 @@ public class Wand
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
-		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP.");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP.");*/
 
 		pages.setHeader(ChatColor.DARK_GRAY + fill + cheader + fill);
 		pages.setError("Wand " + name);
