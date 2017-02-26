@@ -24,8 +24,18 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 	{
 		super(name);
 
-		duration = Main.getConfigCasts().getInt("Vanish.Duration");
-		range = Main.getConfigCasts().getInt("Vanish.Range");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		duration = 100;
+		range = 16;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");

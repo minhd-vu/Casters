@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Configs.Config;
 import Cast.Essentials.Caster;
 
 public class Siphon extends Bleed
@@ -44,6 +43,7 @@ public class Siphon extends Bleed
 
 		new BukkitRunnable()
 		{
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run()
 			{
@@ -133,6 +133,7 @@ public class Siphon extends Bleed
 
 		new BukkitRunnable()
 		{
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run()
 			{
@@ -190,8 +191,8 @@ public class Siphon extends Bleed
 		}.runTaskLater(plugin, duration);
 	}
 
-	public void setPercentage(Config config, String path)
+	public void setPercentage(double percentage)
 	{
-		this.percentage = config.getDouble(path);
+		this.percentage = percentage;
 	}
 }

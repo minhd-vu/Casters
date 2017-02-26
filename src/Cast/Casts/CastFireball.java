@@ -42,16 +42,26 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 	{
 		super(name);
 
-		timer = Main.getConfigCasts().getDouble("Fireball.DeletionTimer");
-		damage = Main.getConfigCasts().getDouble("Fireball.Damage");
-		velocity = Main.getConfigCasts().getDouble("Fireball.Velocity");
-		gravity = Main.getConfigCasts().getBoolean("Fireball.Gravity");
-		fireballfireticks = Main.getConfigCasts().getInt("Fireball.FireTicks.Fireball");
-		targetfireticks = Main.getConfigCasts().getInt("Fireball.FireTicks.Target");
-		areaofeffect = Main.getConfigCasts().getInt("Fireball.AreaOfEffect");
-		explosion = Main.getConfigCasts().getInt("Fireball.Explosion");
-		incendiary = Main.getConfigCasts().getBoolean("Fireball.Incendiary");
-		singletarget = Main.getConfigCasts().getBoolean("Fireball.SingleTarget");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		timer = 100;
+		damage = 2;
+		velocity = 1;
+		gravity = true;
+		fireballfireticks = 100;
+		targetfireticks = 50;
+		areaofeffect = 1;
+		explosion = 0;
+		incendiary = false;
+		singletarget = true;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
@@ -84,6 +94,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 
 				new BukkitRunnable()
 				{
+					@SuppressWarnings("deprecation")
 					@Override
 					public void run()
 					{
@@ -128,6 +139,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{

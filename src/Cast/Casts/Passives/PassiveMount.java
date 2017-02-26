@@ -7,11 +7,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import Cast.Main;
+import Cast.Casts.Types.Passive;
 import Cast.Essentials.Caster;
 
-public class PassiveMount implements Listener
+public class PassiveMount extends Passive implements Listener
 {
-	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
+	public PassiveMount(String name)
+	{
+		super(name);
+	}
+
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]";
 
 	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event)
@@ -20,10 +26,10 @@ public class PassiveMount implements Listener
 		{
 			Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
 
-			if (caster.getCasts().containsKey("Mount"))
+			if (caster.getCasts().containsKey(name))
 			{
-				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "You Must Be Have The Cast " + ChatColor.WHITE
-						+ "Mount" + ChatColor.GRAY + " To Ride A Horse!");
+				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " You Must Be Have The Cast " + ChatColor.WHITE
+						+ name + ChatColor.GRAY + " To Ride A Horse!");
 
 				event.setCancelled(true);
 			}

@@ -46,17 +46,28 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 	{
 		super(name);
 
-		seconds = Main.getConfigCasts().getDouble("DarkBomb.DeletionTimer");
-		damage = Main.getConfigCasts().getDouble("DarkBomb.Damage");
-		gravity = Main.getConfigCasts().getBoolean("DarkBomb.Gravity");
-		charged = Main.getConfigCasts().getBoolean("DarkBomb.Charged");
-		darkbombfireticks = Main.getConfigCasts().getInt("DarkBomb.FireTicks.DarkBomb");
-		targetfireticks = Main.getConfigCasts().getInt("DarkBomb.FireTicks.Target");
-		areaofeffect = Main.getConfigCasts().getInt("DarkBomb.AreaOfEffect");
-		explosion = Main.getConfigCasts().getInt("DarkBomb.Explosion");
-		duration = Main.getConfigCasts().getInt("DarkBomb.Duration");
-		amplifier = Main.getConfigCasts().getInt("DarkBomb.Amplifier");
-		explode = Main.getConfigCasts().getBoolean("DarkBomb.Explode");
+		warmup.setDuration(40);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 5;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		seconds = 5;
+		damage = 10;
+		gravity = false;
+		charged = false;
+		incendiary = false;
+		darkbombfireticks = 0;
+		targetfireticks = 0;
+		areaofeffect = 1;
+		explosion = 0;
+		duration = 100;
+		amplifier = 1;
+		explode = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
@@ -90,6 +101,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 
 				new BukkitRunnable()
 				{
+					@SuppressWarnings("deprecation")
 					@Override
 					public void run()
 					{
@@ -167,6 +179,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityExplodeEvent(EntityExplodeEvent event)
 	{

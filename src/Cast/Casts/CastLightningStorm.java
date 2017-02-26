@@ -30,11 +30,21 @@ public class CastLightningStorm extends ActiveCast implements CommandInterface, 
 	{
 		super(name);
 
-		damage = Main.getConfigCasts().getDouble("LightningStorm.Damage");
-		range = Main.getConfigCasts().getInt("LightningStorm.Range");
-		explosion = Main.getConfigCasts().getInt("LightningStorm.Explosion");
-		explode = Main.getConfigCasts().getBoolean("LightningStorm.Explode");
-		incendiary = Main.getConfigCasts().getBoolean("LightningStorm.Incendiary");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		damage = 10;
+		range = 12;
+		explosion = 0;
+		explode = false;
+		incendiary = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");

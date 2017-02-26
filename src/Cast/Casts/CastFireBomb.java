@@ -41,15 +41,25 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 	{
 		super(name);
 
-		seconds = Main.getConfigCasts().getDouble("FireBomb.DeletionTimer");
-		damage = Main.getConfigCasts().getDouble("FireBomb.Damage");
-		gravity = Main.getConfigCasts().getBoolean("FireBomb.Gravity");
-		firebombfireticks = Main.getConfigCasts().getInt("FireBomb.FireTicks.FireBomb");
-		targetfireticks = Main.getConfigCasts().getInt("FireBomb.FireTicks.Target");
-		areaofeffect = Main.getConfigCasts().getInt("FireBomb.AreaOfEffect");
-		explosion = Main.getConfigCasts().getInt("FireBomb.Explosion");
-		incendiary = Main.getConfigCasts().getBoolean("FireBomb.Incendiary");
-		singletarget = Main.getConfigCasts().getBoolean("FireBomb.SingleTarget");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		seconds = 5;
+		damage = 10;
+		gravity = false;
+		firebombfireticks = 100;
+		targetfireticks = 50;
+		areaofeffect = 5;
+		explosion = 3;
+		incendiary = true;
+		singletarget = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
@@ -82,6 +92,7 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 
 				new BukkitRunnable()
 				{
+					@SuppressWarnings("deprecation")
 					@Override
 					public void run()
 					{
@@ -124,6 +135,7 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{

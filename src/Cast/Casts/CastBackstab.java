@@ -32,9 +32,19 @@ public class CastBackstab extends ActiveCast implements CommandInterface, Listen
 	{
 		super(name);
 
-		duration = Main.getConfigCasts().getInt("Backstab.Duration");
-		percentage = Main.getConfigCasts().getInt("Backstab.Percentage");
-		sneaking = Main.getConfigCasts().getInt("Backstab.Sneaking");
+		warmup.setDuration(20);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 5;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		duration = 200;
+		percentage = 150;
+		sneaking = 200;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Bonus: " + percentage + "%");
@@ -108,6 +118,7 @@ public class CastBackstab extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{

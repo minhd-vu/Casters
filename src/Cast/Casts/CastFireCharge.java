@@ -41,15 +41,25 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 	{
 		super(name);
 
-		seconds = Main.getConfigCasts().getDouble("FireCharge.DeletionTimer");
-		damage = Main.getConfigCasts().getDouble("FireCharge.Damage");
-		gravity = Main.getConfigCasts().getBoolean("FireCharge.Gravity");
-		firechargefireticks = Main.getConfigCasts().getInt("FireCharge.FireTicks.FireCharge");
-		targetfireticks = Main.getConfigCasts().getInt("FireCharge.FireTicks.Target");
-		areaofeffect = Main.getConfigCasts().getInt("FireCharge.AreaOfEffect");
-		explosion = Main.getConfigCasts().getInt("FireCharge.Explosion");
-		incendiary = Main.getConfigCasts().getBoolean("FireCharge.Incendiary");
-		singletarget = Main.getConfigCasts().getBoolean("FireCharge.SingleTarget");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		seconds = 5;
+		damage = 10;
+		gravity = false;
+		firechargefireticks = 100;
+		targetfireticks = 50;
+		areaofeffect = 5;
+		explosion = 3;
+		incendiary = true;
+		singletarget = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
@@ -82,6 +92,7 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 
 				new BukkitRunnable()
 				{
+					@SuppressWarnings("deprecation")
 					@Override
 					public void run()
 					{
@@ -124,6 +135,7 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{

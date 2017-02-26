@@ -26,11 +26,21 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 	{
 		super(name);
 
-		gravity = Main.getConfigCasts().getBoolean("Bomb.Gravity");
-		range = Main.getConfigCasts().getInt("Bomb.Range");
-		fuse = Main.getConfigCasts().getInt("Bomb.Fuse");
-		velocity = Main.getConfigCasts().getInt("Bomb.Velocity");
-		incendiary = Main.getConfigCasts().getBoolean("Bomb.Incendiary");
+		warmup.setDuration(20);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 5;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		gravity = true;
+		range = 8;
+		fuse = 40;
+		velocity = 0;
+		incendiary = true;
 
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 		info.add(ChatColor.DARK_AQUA + "Fuse: " + ChatColor.GRAY + fuse / 20.0 + " Seconds");

@@ -28,13 +28,23 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 	{
 		super(name);
 
-		siphon.setDuration(Main.getConfigCasts(), "Siphon.Duration");
-		siphon.setPeriod(Main.getConfigCasts(), "Siphon.Period");
-		siphon.setDamage(Main.getConfigCasts(), "Siphon.Damage.Tick");
-		siphon.setPercentage(Main.getConfigCasts(), "Siphon.Percentage.Tick");
-		damage = Main.getConfigCasts().getDouble("Siphon.Damage.Initial");
-		percentage = Main.getConfigCasts().getInt("Siphon.Percentage.Initial");
-		range = Main.getConfigCasts().getInt("Siphon.Range");
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(40);
+		manacost = 3;
+
+		info.add(ChatColor.DARK_AQUA + name + " Cast:");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+
+		siphon.setDuration(100);
+		siphon.setPeriod(20);
+		siphon.setDamage(1);
+		siphon.setPercentage(100);
+		damage = 3;
+		percentage = 50;
+		range = 8;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + siphon.getDuration() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Siphon: " + ChatColor.GRAY + siphon.getDamage() + " HP");
@@ -74,6 +84,7 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
+						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{

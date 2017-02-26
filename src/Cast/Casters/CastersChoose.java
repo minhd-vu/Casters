@@ -13,11 +13,11 @@ public class CastersChoose implements CommandInterface
 {
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
 
-	private final String[] types = { "Guardian", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist",
-			"Fletcher", "Musketeer", "Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk",
-			"Templar" };
+	private final String[] types =
+			{ "Paladin", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
+					"Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk", "Templar" };
 
-	private final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Orc", "Giant" };
+	private final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Giant", "Demon", "Undead" };
 
 	private final String[] jobs = { "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer", "Miner" };
 

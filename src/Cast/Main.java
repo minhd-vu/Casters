@@ -172,6 +172,13 @@ public class Main extends JavaPlugin implements Listener
 
 		classes = new ArrayList<Class>();
 
+		Class admin = new Class("Admin", 50, 50, 50, 50, 50);
+		admin.getCasts().put("Reflect", 1);
+		admin.getCasts().put("Revive", 1);
+		admin.getCasts().put("Siphon", 1);
+
+		classes.add(admin);
+
 		Class paladin = new Class("Paladin", 2, 5, -2, -1, 3);
 		paladin.getArmor().add(Material.DIAMOND_HELMET);
 		paladin.getArmor().add(Material.DIAMOND_CHESTPLATE);
