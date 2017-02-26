@@ -64,6 +64,7 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -166,6 +167,7 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityExplodeEvent(EntityExplodeEvent event)
 	{
