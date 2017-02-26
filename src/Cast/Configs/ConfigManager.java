@@ -39,8 +39,6 @@ public class ConfigManager
 		if (!file.exists())
 		{
 			this.prepareFile(fileName);
-			if (header != null && header.length != 0)
-				this.setHeader(file, header);
 		}
 
 		Config config = new Config(this.getConfigContent(fileName), file, this.getCommentsNum(file), plugin);
@@ -102,56 +100,6 @@ public class ConfigManager
 	public void prepareFile(String filePath)
 	{
 		this.prepareFile(filePath, null);
-	}
-
-	public void setHeader(File file, String[] header)
-	{
-		if (!file.exists())
-			return;
-
-		try
-		{
-			String currentLine;
-			StringBuilder config = new StringBuilder("");
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-
-			while ((currentLine = reader.readLine()) != null)
-				config.append(currentLine + "\n");
-
-			reader.close();
-			config.append("# +----------------------------------------------------+ #\n");
-
-			for (String line : header)
-			{
-				if (line.length() > 50)
-					continue;
-
-				int lenght = (50 - line.length()) / 2;
-				StringBuilder finalLine = new StringBuilder(line);
-
-				for (int i = 0; i < lenght; i++)
-				{
-					finalLine.append(" ");
-					finalLine.reverse();
-					finalLine.append(" ");
-					finalLine.reverse();
-				}
-
-				if (line.length() % 2 != 0)
-					finalLine.append(" ");
-
-				config.append("# < " + finalLine.toString() + " > #\n");
-			}
-			config.append("# +----------------------------------------------------+ #");
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			writer.write(this.prepareConfigString(config.toString()));
-			writer.flush();
-			writer.close();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	public InputStream getConfigContent(File file)

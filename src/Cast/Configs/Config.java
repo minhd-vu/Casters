@@ -135,13 +135,6 @@ public class Config
 		this.config.set(path, value);
 	}
 
-	public void setHeader(String[] header)
-	{
-		manager.setHeader(this.file, header);
-		this.comments = header.length + 2;
-		this.reloadConfig();
-	}
-
 	@SuppressWarnings("deprecation")
 	public void reloadConfig()
 	{
