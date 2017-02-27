@@ -55,6 +55,7 @@ import Cast.Casts.CastStrike;
 import Cast.Casts.CastTaunt;
 import Cast.Casts.CastVanish;
 import Cast.Casts.Casts;
+import Cast.Casts.Passives.PassiveBackstab;
 import Cast.Configs.ConfigManager;
 import Cast.Essentials.Armor;
 import Cast.Essentials.Attack;
@@ -149,6 +150,8 @@ public class Main extends JavaPlugin implements Listener
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
 	private static CastMount castmount;
+
+	private static PassiveBackstab passivebackstab;
 
 	private static List<Party> parties;
 
@@ -525,6 +528,8 @@ public class Main extends JavaPlugin implements Listener
 		castvanish = new CastVanish("Vanish");
 		castbomb = new CastBomb("Bomb");
 		castmount = new CastMount("Mount");
+
+		// passivebackstab = new PassiveBackstab("Backstab");
 
 		parties = new ArrayList<Party>();
 		partycmd = new Parties();
