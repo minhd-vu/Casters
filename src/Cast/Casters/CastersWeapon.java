@@ -38,15 +38,16 @@ public class CastersWeapon implements CommandInterface
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (!pages.hasPages())
-			{
-				for (Material material : caster.getWeapon().keySet())
-				{
-					weapon.add(ChatColor.DARK_AQUA + material.toString());
-				}
+			weapon.clear();
+			pages.clear();
 
-				pages.setPage(weapon);
+			for (Material material : caster.getWeapon().keySet())
+			{
+				weapon.add(ChatColor.DARK_AQUA + material.toString() + ChatColor.GRAY + " - "
+						+ caster.getWeapon().get(material));
 			}
+
+			pages.setPage(weapon);
 
 			pages.display(player, args, 1);
 		}

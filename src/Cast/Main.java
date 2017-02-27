@@ -295,11 +295,11 @@ public class Main extends JavaPlugin implements Listener
 		inferno.getArmor().add(Material.LEATHER_CHESTPLATE);
 		inferno.getArmor().add(Material.LEATHER_LEGGINGS);
 		inferno.getArmor().add(Material.LEATHER_BOOTS);
-		cavalier.getWeapon().put(Material.DIAMOND_HOE, 5);
-		cavalier.getWeapon().put(Material.IRON_HOE, 5);
-		cavalier.getWeapon().put(Material.GOLD_HOE, 5);
-		cavalier.getWeapon().put(Material.STONE_HOE, 5);
-		cavalier.getWeapon().put(Material.WOOD_HOE, 5);
+		inferno.getWeapon().put(Material.DIAMOND_HOE, 5);
+		inferno.getWeapon().put(Material.IRON_HOE, 5);
+		inferno.getWeapon().put(Material.GOLD_HOE, 5);
+		inferno.getWeapon().put(Material.STONE_HOE, 5);
+		inferno.getWeapon().put(Material.WOOD_HOE, 5);
 		inferno.getCasts().put("Fireball", 1);
 
 		Type shaman = new Type("Shaman", "Description", 3, 1, 3, 3, 2);
@@ -664,7 +664,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		casters.put(event.getPlayer().getUniqueId(), new Caster(event.getPlayer()));
 		event.setJoinMessage(
-				ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Has Joined The Server.");
+				ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GREEN + " Has Joined The Server.");
 	}
 
 	@EventHandler
@@ -673,7 +673,7 @@ public class Main extends JavaPlugin implements Listener
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
 		event.getPlayer().leaveVehicle();
-		event.setQuitMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Has Left The Server.");
+		event.setQuitMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.RED + " Has Left The Server.");
 	}
 
 	@EventHandler
@@ -682,7 +682,8 @@ public class Main extends JavaPlugin implements Listener
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
 		event.getPlayer().leaveVehicle();
-		event.setLeaveMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Has Left The Server.");
+		event.setLeaveMessage(
+				ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Was Kicked From The Server.");
 	}
 
 	public static Main getInstance()

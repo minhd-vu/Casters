@@ -10,6 +10,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
+import Cast.Main;
+import Cast.Essentials.Caster;
+
 public class TargettedCast extends Cast
 {
 	public TargettedCast(String name, String description)
@@ -103,13 +106,28 @@ public class TargettedCast extends Cast
 			for (LivingEntity entity : livingentities)
 			{
 				loc = entity.getLocation();
+
 				ex = loc.getX();
 				ey = loc.getY();
 				ez = loc.getZ();
+
 				if ((bx - .75 <= ex && ex <= bx + 1.75) && (bz - .75 <= ez && ez <= bz + 1.75)
 						&& (by - 1 <= ey && ey <= by + 2.5))
 				{
-					return entity;
+					if (entity instanceof Player)
+					{
+						Caster caster = Main.getCasters().get(player.getUniqueId());
+
+						if (caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
+						{
+							return null;
+						}
+					}
+
+					else
+					{
+						return entity;
+					}
 				}
 			}
 		}

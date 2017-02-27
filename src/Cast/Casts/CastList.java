@@ -131,7 +131,7 @@ public class CastList implements CommandInterface
 				{
 					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
 							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
-							+ " - " + Main.getCasts().get(cast) + ".");
+							+ " - " + Main.getCasts().get(cast).getDescription() + ".");
 				}
 
 				break;

@@ -1,9 +1,10 @@
 package Cast.Essentials;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -87,7 +88,7 @@ public class Caster
 	private double wisdomscale;
 	private double wisdomregenscale;
 
-	private List<Material> armor = new ArrayList<Material>();
+	private Set<Material> armor = new HashSet<Material>();
 	private HashMap<Material, Integer> weapon = new HashMap<Material, Integer>();
 
 	private HashMap<String, Boolean> casting = new HashMap<String, Boolean>();
@@ -564,7 +565,7 @@ public class Caster
 		return wisdomscale;
 	}
 
-	public List<Material> getArmor()
+	public Set<Material> getArmor()
 	{
 		return armor;
 	}
@@ -765,13 +766,44 @@ public class Caster
 		this.channel = channel;
 	}
 
+	public void getConfigs()
+	{
+		armor.clear();
+		weapon.clear();
+		casts.clear();
+
+		getConfigJob();
+		getConfigRace();
+		getConfigType();
+	}
+
 	public void setType(String type)
 	{
 		this.type = type;
 		config.set("Type", this.type);
-		getConfigType();
+		getConfigs();
 
 		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type
+				+ ChatColor.GRAY + "!");
+	}
+
+	public void setRace(String race)
+	{
+		this.race = race;
+		config.set("Race", this.race);
+		getConfigs();
+
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race
+				+ ChatColor.GRAY + "!");
+	}
+
+	public void setJob(String job)
+	{
+		this.job = job;
+		config.set("Job", this.job);
+		getConfigs();
+
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job
 				+ ChatColor.GRAY + "!");
 	}
 
@@ -790,16 +822,6 @@ public class Caster
 		typemaxexp = (float) (typelevel * scale + scale);
 	}
 
-	public void setRace(String race)
-	{
-		this.race = race;
-		config.set("Race", this.race);
-		getConfigRace();
-
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race
-				+ ChatColor.GRAY + "!");
-	}
-
 	public void setRaceLevel(int racelevel)
 	{
 		this.racelevel = racelevel;
@@ -813,16 +835,6 @@ public class Caster
 	public void setRaceMaxExp()
 	{
 		racemaxexp = (float) (typelevel * scale + scale);
-	}
-
-	public void setJob(String job)
-	{
-		this.job = job;
-		config.set("Job", this.job);
-		getConfigJob();
-
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job
-				+ ChatColor.GRAY + "!");
 	}
 
 	public void setJobLevel(int joblevel)

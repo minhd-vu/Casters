@@ -27,20 +27,23 @@ public class CastersWhoIs implements CommandInterface
 			{
 				return false;
 			}
-			
+
 			if (!Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1])))
 			{
 				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY
 						+ "]" + ChatColor.GRAY + "That Player Is Not Online!");
 			}
-			
+
 			else
 			{
 				Caster caster = Main.getCasters().get(Bukkit.getPlayer(args[1]).getUniqueId());
-				player.sendMessage(fill + header + fill + "\n" + ChatColor.DARK_AQUA + "Class: " + ChatColor.AQUA
-						+ caster.getType() + " - " + caster.getTypeLevel() + "/" + caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Race: "
-						+ ChatColor.AQUA + caster.getRace() + " - " + caster.getRaceLevel() + "/" + caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA
-						+ "Job: " + ChatColor.AQUA + caster.getJob() + " - " + caster.getJobLevel() + "/" + caster.getJobMaxLevel() + "\n" + bar);
+				player.sendMessage("\n" + fill + header + fill + "\n" + ChatColor.DARK_AQUA + args[1] + "\n"
+						+ ChatColor.DARK_AQUA + "Class: " + ChatColor.AQUA + caster.getType() + " - "
+						+ caster.getTypeLevel() + "/" + caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Race: "
+						+ ChatColor.AQUA + caster.getRace() + " - " + caster.getRaceLevel() + "/"
+						+ caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Job: " + ChatColor.AQUA
+						+ caster.getJob() + " - " + caster.getJobLevel() + "/" + caster.getJobMaxLevel() + "\n"
+						+ ChatColor.DARK_GRAY + bar);
 			}
 		}
 

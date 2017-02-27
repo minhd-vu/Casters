@@ -26,8 +26,8 @@ public class Pages
 	private String fill = ChatColor.DARK_GRAY + "---------------------";
 
 	private HashMap<Integer, String> pages = new HashMap<Integer, String>();
-	private TextComponent footer = new TextComponent(
-			ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "Next Page" + ChatColor.DARK_GRAY + "]");
+	private TextComponent footer =
+			new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "Next Page" + ChatColor.DARK_GRAY + "]");
 
 	public void setHeader(String header)
 	{
@@ -48,6 +48,11 @@ public class Pages
 	public boolean hasPages()
 	{
 		return set;
+	}
+
+	public void clear()
+	{
+		pages.clear();
 	}
 
 	public void setPage(HashMap<String, String> list)

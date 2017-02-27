@@ -18,8 +18,8 @@ public class CastersArmor implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String fill = "-------------------";
-	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Armor" + ChatColor.DARK_GRAY
-			+ "]";
+	private String header =
+			ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Armor" + ChatColor.DARK_GRAY + "]";
 
 	private List<String> armor = new ArrayList<String>();
 
@@ -38,15 +38,15 @@ public class CastersArmor implements CommandInterface
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (!pages.hasPages())
-			{
-				for (Material material : caster.getArmor())
-				{
-					armor.add(ChatColor.DARK_AQUA + material.toString());
-				}
+			armor.clear();
+			pages.clear();
 
-				pages.setPage(armor);
+			for (Material material : caster.getArmor())
+			{
+				armor.add(ChatColor.DARK_AQUA + material.toString());
 			}
+
+			pages.setPage(armor);
 
 			pages.display(player, args, 1);
 		}
