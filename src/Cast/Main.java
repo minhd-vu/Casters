@@ -662,6 +662,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
+		event.getPlayer().leaveVehicle();
 		event.setQuitMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Has Left The Server.");
 	}
 
@@ -670,6 +671,7 @@ public class Main extends JavaPlugin implements Listener
 	{
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
+		event.getPlayer().leaveVehicle();
 		event.setLeaveMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Has Left The Server.");
 	}
 
