@@ -42,16 +42,15 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 	private int amplifier;
 	private boolean explode;
 
-	public CastDarkBomb(String name)
+	public CastDarkBomb(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(40);
 		warmup.setAmplifier(5);
 		cooldown.setCooldown(100);
 		manacost = 5;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

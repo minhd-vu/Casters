@@ -69,7 +69,7 @@ public class CastList implements CommandInterface
 				for (String cast : Main.getCasts().keySet())
 				{
 					commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase()
-							+ ChatColor.GRAY + " - " + Main.getCasts().get(cast));
+							+ ChatColor.GRAY + " - " + Main.getCasts().get(cast).getDescription());
 				}
 
 				pages.setCommand("cast list all");

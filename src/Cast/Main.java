@@ -56,6 +56,7 @@ import Cast.Casts.CastTaunt;
 import Cast.Casts.CastVanish;
 import Cast.Casts.Casts;
 import Cast.Casts.Passives.PassiveBackstab;
+import Cast.Casts.Types.Cast;
 import Cast.Configs.ConfigManager;
 import Cast.Essentials.Armor;
 import Cast.Essentials.Attack;
@@ -110,11 +111,6 @@ public class Main extends JavaPlugin implements Listener
 	private static CastersWhoIs casterswhois;
 	private static CastersRecipes castersrecipes;
 
-	private static Wands wand;
-	private static Casts cast;
-
-	private static HashMap<String, String> spells;
-
 	private static Experience experience;
 	private static Enchant enchant;
 	private static Armor armor;
@@ -124,12 +120,16 @@ public class Main extends JavaPlugin implements Listener
 	private static ChatTitles chattitles;
 	private static ChatChannel chatchannel;
 
+	private static Wands wand;
 	private static WandList wandlist;
 	private static WandInferno wandinferno;
 	private static WandDistorter wanddistorter;
 	private static WandShaman wandshaman;
 	private static WandWarlock wandwarlock;
 
+	private static HashMap<String, Cast> casts;
+
+	private static Casts cast;
 	private static CastList castlist;
 	private static CastFireball castfireball;
 	private static CastDarkBomb castdarkbomb;
@@ -448,7 +448,6 @@ public class Main extends JavaPlugin implements Listener
 		classes.add(miner);
 
 		mobs = new ArrayList<Mob>();
-
 		mobs.add(new Mob(EntityType.ZOMBIE, 20, 2));
 		mobs.add(new Mob(EntityType.ENDERMAN, 20, 10));
 		mobs.add(new Mob(EntityType.SKELETON, 20, 10));
@@ -469,29 +468,32 @@ public class Main extends JavaPlugin implements Listener
 		casterswhois = new CastersWhoIs();
 		castersrecipes = new CastersRecipes();
 
-		wand = new Wands();
 		cast = new Casts();
+		castlist = new CastList();
+		casts = new HashMap<String, Cast>();
+		casts.put("Fireball", castfireball = new CastFireball("Fireball", "Casts A Fireball"));
+		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "Casts A Dark Bomb"));
+		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Casts A Bolt"));
+		casts.put("Revive", castrevive = new CastRevive("Revive", "Revive A Player"));
+		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "Casts A Fire Bomb"));
+		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "Casts A Fire Charge"));
+		casts.put("Charge", castcharge = new CastCharge("Charge", "Charge Your Opponent"));
+		casts.put("Strike", caststrike = new CastStrike("Strike", "Strike Your Opponent"));
+		casts.put("Bandage", castbandage = new CastBandage("Bandage", "Bandage Yourself Or An Ally"));
+		casts.put("Beasts", castbeasts = new CastBeasts("Beasts", "Summon A Pack Of Wolves."));
+		casts.put("LightningStorm",
+				castlightningstorm = new CastLightningStorm("LightningStorm", "Cast A Lightning Storm"));
+		casts.put("ChainLightning",
+				castchainlightning = new CastChainLightning("ChainLightning", "Consecutively Strikes Opponenets"));
+		casts.put("Reflect", castreflect = new CastReflect("Reflect", "Relects All Incoming Damage"));
+		casts.put("Backstab", castbackstab = new CastBackstab("Backstab", "Attacks From The Back Deal More."));
+		casts.put("Siphon", castsiphon = new CastSiphon("Siphon", "Siphons Health From Your Opponent"));
+		casts.put("Taunt", casttaunt = new CastTaunt("Taunt", "Taunt All Nearby Opponents."));
+		casts.put("Vanish", castvanish = new CastVanish("Vanish", "Vanish In A Cloud Of Smoke."));
+		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
+		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 
-		spells = new HashMap<String, String>();
-		spells.put("Fireball", "Casts A Fireball");
-		spells.put("DarkBomb", "Casts A DarkBomb");
-		spells.put("Bolt", "Casts A Bolt");
-		spells.put("Revive", "Revive A Player");
-		spells.put("FireBomb", "Casts A FireBomb");
-		spells.put("FireCharge", "Casts A FireCharge");
-		spells.put("Charge", "Charge Your Opponent");
-		spells.put("Strike", "Strike You Opponent");
-		spells.put("Bandage", "Bandage Yourself Or An Ally.");
-		spells.put("Beasts", "Summon A Pack Of Wolves");
-		spells.put("LightningStorm", "Cast A Lightning Storm");
-		spells.put("ChainLightning", "Consecutively Strikes Opponents");
-		spells.put("Reflect", "Reflects All Incoming Damage");
-		spells.put("Backstab", "Attacks From The Back Deal More.");
-		spells.put("Siphon", "Siphon Health From You Opponent");
-		spells.put("Taunt", "Taunt All Nearby Opponents");
-		spells.put("Vanish", "Vanish In A Cloud of Smoke");
-		spells.put("Bomb", "Casts A Bomb");
-		spells.put("Mount", "Mounts Onto A Horse");
+		// passivebackstab = new PassiveBackstab("Backstab");
 
 		experience = new Experience();
 		enchant = new Enchant();
@@ -502,34 +504,12 @@ public class Main extends JavaPlugin implements Listener
 		chattitles = new ChatTitles();
 		chatchannel = new ChatChannel();
 
+		wand = new Wands();
 		wandlist = new WandList();
 		wandinferno = new WandInferno("Inferno");
 		wanddistorter = new WandDistorter("Distorter");
 		wandshaman = new WandShaman("Shaman");
 		wandwarlock = new WandWarlock("Warlock");
-
-		castlist = new CastList();
-		castfireball = new CastFireball("Fireball");
-		castdarkbomb = new CastDarkBomb("DarkBomb");
-		castbolt = new CastBolt("Bolt");
-		castrevive = new CastRevive("Revive");
-		castfirebomb = new CastFireBomb("FireBomb");
-		castfirecharge = new CastFireCharge("FireCharge");
-		castcharge = new CastCharge("Charge");
-		caststrike = new CastStrike("Strike");
-		castbandage = new CastBandage("Bandage");
-		castbeasts = new CastBeasts("Beasts");
-		castlightningstorm = new CastLightningStorm("LightningStorm");
-		castchainlightning = new CastChainLightning("ChainLightning");
-		castreflect = new CastReflect("Reflect");
-		castbackstab = new CastBackstab("Backstab");
-		castsiphon = new CastSiphon("Siphon");
-		casttaunt = new CastTaunt("Taunt");
-		castvanish = new CastVanish("Vanish");
-		castbomb = new CastBomb("Bomb");
-		castmount = new CastMount("Mount");
-
-		// passivebackstab = new PassiveBackstab("Backstab");
 
 		parties = new ArrayList<Party>();
 		partycmd = new Parties();
@@ -713,104 +693,14 @@ public class Main extends JavaPlugin implements Listener
 		return casters;
 	}
 
-	public static HashMap<String, String> getCasts()
+	public static HashMap<String, Cast> getCasts()
 	{
-		return spells;
+		return casts;
 	}
 
 	public static ConfigManager getConfigManager()
 	{
 		return manager;
-	}
-
-	public static CastFireball getCastFireball()
-	{
-		return castfireball;
-	}
-
-	public static CastDarkBomb getCastDarkBomb()
-	{
-		return castdarkbomb;
-	}
-
-	public static CastBolt getCastBolt()
-	{
-		return castbolt;
-	}
-
-	public static CastRevive getCastRevive()
-	{
-		return castrevive;
-	}
-
-	public static CastFireBomb getCastFireBomb()
-	{
-		return castfirebomb;
-	}
-
-	public static CastFireCharge getCastFireCharge()
-	{
-		return castfirecharge;
-	}
-
-	public static CastCharge getCastCharge()
-	{
-		return castcharge;
-	}
-
-	public static CastStrike getCastStrike()
-	{
-		return caststrike;
-	}
-
-	public static CastBandage getCastBandage()
-	{
-		return castbandage;
-	}
-
-	public static CastBeasts getCastBeasts()
-	{
-		return castbeasts;
-	}
-
-	public static CastLightningStorm getCastLightningStorm()
-	{
-		return castlightningstorm;
-	}
-
-	public static CastChainLightning getCastChainLightning()
-	{
-		return castchainlightning;
-	}
-
-	public static CastReflect getCastReflect()
-	{
-		return castreflect;
-	}
-
-	public static CastBackstab getCastBackstab()
-	{
-		return castbackstab;
-	}
-
-	public static CastSiphon getCastSiphon()
-	{
-		return castsiphon;
-	}
-
-	public static CastTaunt getCastTaunt()
-	{
-		return casttaunt;
-	}
-
-	public static CastVanish getCastVanish()
-	{
-		return castvanish;
-	}
-
-	public static CastBomb getCastBomb()
-	{
-		return castbomb;
 	}
 
 	public static List<Party> getParties()

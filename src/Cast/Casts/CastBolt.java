@@ -26,16 +26,15 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 	private boolean explode;
 	private boolean incendiary;
 
-	public CastBolt(String name)
+	public CastBolt(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(40);
 		warmup.setAmplifier(5);
 		cooldown.setCooldown(100);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

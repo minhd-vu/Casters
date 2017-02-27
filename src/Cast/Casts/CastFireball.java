@@ -38,16 +38,15 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 	private boolean incendiary;
 	private boolean singletarget;
 
-	public CastFireball(String name)
+	public CastFireball(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

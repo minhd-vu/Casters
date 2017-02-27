@@ -28,16 +28,15 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 	private boolean explode;
 	private boolean incendiary;
 
-	public CastChainLightning(String name)
+	public CastChainLightning(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(50);
 		warmup.setAmplifier(5);
 		cooldown.setCooldown(100);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

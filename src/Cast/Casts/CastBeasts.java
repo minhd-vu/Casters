@@ -23,16 +23,15 @@ public class CastBeasts extends TargettedCast implements CommandInterface, Liste
 	private int amount;
 	private int range;
 
-	public CastBeasts(String name)
+	public CastBeasts(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(20);
 		warmup.setAmplifier(5);
 		cooldown.setCooldown(100);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

@@ -22,16 +22,15 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 	private boolean gravity;
 	private boolean incendiary;
 
-	public CastBomb(String name)
+	public CastBomb(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(20);
 		warmup.setAmplifier(5);
 		cooldown.setCooldown(100);
 		manacost = 5;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");

@@ -22,21 +22,20 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 	private int range;
 	private int percentage;
 
-	public CastRevive(String name)
+	public CastRevive(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
 
-		range = 16;
+		range = 32;
 		percentage = 100;
 
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");

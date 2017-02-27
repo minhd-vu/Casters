@@ -15,22 +15,31 @@ import Cast.Essentials.Schedulers.WarmUp;
 public class Cast
 {
 	protected String name;
-	protected Pages pages = new Pages();
-	protected List<String> info = new ArrayList<String>();
+	protected String description;
+	protected Pages pages;
+	protected List<String> info;
 
 	protected int level;
 
-	protected WarmUp warmup = new WarmUp();
-	protected Cooldown cooldown = new Cooldown();
+	protected WarmUp warmup;
+	protected Cooldown cooldown;
 
 	protected double manacost;
 
 	protected String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]";
 	protected String fill = "------------------------";
 
-	public Cast(String name)
+	public Cast(String name, String description)
 	{
 		this.name = name;
+		this.description = description;
+
+		pages = new Pages();
+		info = new ArrayList<String>();
+		warmup = new WarmUp();
+		cooldown = new Cooldown();
+
+		info.add(ChatColor.DARK_AQUA + this.name + ChatColor.GRAY + " - " + this.description);
 
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
 		pages.setCommand("cast " + name + " info");
@@ -40,6 +49,11 @@ public class Cast
 	public String getName()
 	{
 		return name;
+	}
+
+	public String getDescription()
+	{
+		return description;
 	}
 
 	public List<String> getInfo()

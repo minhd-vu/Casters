@@ -92,7 +92,7 @@ public class Caster
 
 	private HashMap<String, Boolean> casting = new HashMap<String, Boolean>();
 	private HashMap<String, Boolean> warmingup = new HashMap<String, Boolean>();
-	private HashMap<String, Effect> effect = new HashMap<String, Effect>();
+	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
 	public static final String[] types =
@@ -138,16 +138,16 @@ public class Caster
 		getConfigHealth();
 		getConfigMana();
 
-		effect.put("Stunned", new Effect());
-		effect.put("Bleeding", new Effect());
-		effect.put("Siphoning", new Effect());
-		effect.put("Siphoned", new Effect());
-		effect.put("Silenced", new Effect());
-		effect.put("Reflecting", new Effect());
-		effect.put("Taunted", new Effect());
-		effect.put("Taunting", new Effect());
-		effect.put("Invisible", new Effect());
-		effect.put("Backstabbing", new Effect());
+		effects.put("Stunned", new Effect());
+		effects.put("Bleeding", new Effect());
+		effects.put("Siphoning", new Effect());
+		effects.put("Siphoned", new Effect());
+		effects.put("Silenced", new Effect());
+		effects.put("Reflecting", new Effect());
+		effects.put("Taunted", new Effect());
+		effects.put("Taunting", new Effect());
+		effects.put("Invisible", new Effect());
+		effects.put("Backstabbing", new Effect());
 
 		new BukkitRunnable()
 		{
@@ -192,165 +192,26 @@ public class Caster
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.DARK_AQUA + "Cooldowns:");
 
-				if (Main.getCastFireball().getCooldown().hasCooldown(player.getName()))
+				for (String cast : Main.getCasts().keySet())
 				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireball().getName() + ": "
-							+ Main.getCastFireball().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastDarkBomb().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastDarkBomb().getName() + ": "
-							+ Main.getCastDarkBomb().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastBolt().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBolt().getName() + ": "
-							+ Main.getCastBolt().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastRevive().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastRevive().getName() + ": "
-							+ Main.getCastRevive().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastFireBomb().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireBomb().getName() + ": "
-							+ Main.getCastFireBomb().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastFireCharge().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastFireCharge().getName() + ": "
-							+ Main.getCastFireCharge().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastCharge().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastCharge().getName() + ": "
-							+ Main.getCastCharge().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastStrike().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastStrike().getName() + ": "
-							+ Main.getCastStrike().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastBandage().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBandage().getName() + ": "
-							+ Main.getCastBandage().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastBeasts().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBeasts().getName() + ": "
-							+ Main.getCastBeasts().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastLightningStorm().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastLightningStorm().getName() + ": "
-							+ Main.getCastLightningStorm().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastChainLightning().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastChainLightning().getName() + ": "
-							+ Main.getCastChainLightning().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastReflect().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastReflect().getName() + ": "
-							+ Main.getCastReflect().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastBackstab().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBackstab().getName() + ": "
-							+ Main.getCastBackstab().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastSiphon().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastSiphon().getName() + ": "
-							+ Main.getCastSiphon().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastVanish().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastVanish().getName() + ": "
-							+ Main.getCastVanish().getCooldown().getCooldown(player.getName()));
-				}
-
-				if (Main.getCastBomb().getCooldown().hasCooldown(player.getName()))
-				{
-					entrybuilder.next("    " + ChatColor.AQUA + Main.getCastBomb().getName() + ": "
-							+ Main.getCastBomb().getCooldown().getCooldown(player.getName()));
+					if (Main.getCasts().get(cast).getCooldown().hasCooldown(player.getName()))
+					{
+						entrybuilder.next("    " + ChatColor.AQUA + Main.getCasts().get(cast).getName() + ": "
+								+ Main.getCasts().get(cast).getCooldown().getCooldown(player.getName()));
+					}
 				}
 
 				entrybuilder.blank();
 
 				entrybuilder.next("    " + ChatColor.DARK_PURPLE + "Effects:");
 
-				if (effect.get("Stunned").hasTime())
+				for (String effect : effects.keySet())
 				{
-					entrybuilder.next("     " + ChatColor.LIGHT_PURPLE + "Stunned " + effect.get("Stunned").getTime());
-				}
-
-				if (effect.get("Silenced").hasTime())
-				{
-					entrybuilder
-							.next("     " + ChatColor.LIGHT_PURPLE + "Silenced " + effect.get("Silenced").getTime());
-				}
-
-				if (effect.get("Bleeding").hasTime())
-				{
-					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Bleeding " + effect.get("Bleeding").getTime());
-				}
-
-				if (effect.get("Taunted").hasTime())
-				{
-					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Taunted " + effect.get("Taunted").getTime());
-				}
-
-				if (effect.get("Taunting").hasTime())
-				{
-					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Taunting " + effect.get("Taunting").getTime());
-				}
-
-				if (effect.get("Invisible").hasTime())
-				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Invisible " + effect.get("Invisible").getTime());
-				}
-
-				if (effect.get("Reflecting").hasTime())
-				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Reflecting " + effect.get("Reflecting").getTime());
-				}
-
-				if (effect.get("Backstabbing").hasTime())
-				{
-					entrybuilder.next(
-							"    " + ChatColor.LIGHT_PURPLE + "Backstabbing " + effect.get("Backstabbing").getTime());
-				}
-
-				if (effect.get("Siphoning").hasTime())
-				{
-					entrybuilder
-							.next("    " + ChatColor.LIGHT_PURPLE + "Siphoning " + effect.get("Siphoning").getTime());
-				}
-
-				if (effect.get("Siphoned").hasTime())
-				{
-					entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + "Siphoned " + effect.get("Siphoned").getTime());
+					if (effects.get(effect).hasTime())
+					{
+						entrybuilder
+								.next("     " + ChatColor.LIGHT_PURPLE + effect + " " + effects.get(effect).getTime());
+					}
 				}
 
 				entrybuilder.blank();
@@ -562,9 +423,9 @@ public class Caster
 
 	public boolean hasEffect(String name)
 	{
-		if (effect.containsKey(name))
+		if (effects.containsKey(name))
 		{
-			return effect.get(name).hasTime();
+			return effects.get(name).hasTime();
 		}
 
 		return false;
@@ -791,7 +652,7 @@ public class Caster
 
 	public boolean isStunned(String name)
 	{
-		if (effect.get("Stunned").hasTime())
+		if (effects.get("Stunned").hasTime())
 		{
 			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Stunned!");
@@ -803,7 +664,7 @@ public class Caster
 
 	public boolean isSilenced(String name)
 	{
-		if (effect.get("Silenced").hasTime())
+		if (effects.get("Silenced").hasTime())
 		{
 			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Silenced!");
@@ -902,9 +763,9 @@ public class Caster
 
 	public void setEffect(String name, double duration)
 	{
-		if (effect.containsKey(name))
+		if (effects.containsKey(name))
 		{
-			effect.get(name).setDuration(duration);
+			effects.get(name).setDuration(duration);
 		}
 	}
 

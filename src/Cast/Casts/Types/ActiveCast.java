@@ -6,9 +6,9 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ActiveCast extends Cast
 {
-	public ActiveCast(String name)
+	public ActiveCast(String name, String description)
 	{
-		super(name);
+		super(name, description);
 	}
 
 	public void decast(Player player)

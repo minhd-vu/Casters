@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
 import Cast.Main;
@@ -25,16 +26,15 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 {
 	private static List<Horse> horses;
 
-	public CastMount(String name)
+	public CastMount(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
-		warmup.setDuration(0);
-		warmup.setAmplifier(0);
+		warmup.setDuration(20);
+		warmup.setAmplifier(5);
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
@@ -71,12 +71,31 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 					return false;
 				}
 
-				Horse horse = (Horse) player.getWorld().spawnEntity(player.getLocation(), EntityType.HORSE);
-				horse.setAdult();
-				horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-				horse.setOwner(player);
-				horse.addPassenger(player);
-				horses.add(horse);
+				else if (warmup.getDuration() > 0)
+				{
+					warmup.start(Main.getInstance(), caster, name);
+				}
+
+				new BukkitRunnable()
+				{
+					@Override
+					public void run()
+					{
+						caster.setCasting(name, true);
+
+						Horse horse = (Horse) player.getWorld().spawnEntity(player.getLocation(), EntityType.HORSE);
+						horse.setAdult();
+						horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+						horse.setOwner(player);
+						horse.addPassenger(player);
+						horses.add(horse);
+
+						cooldown.start(player.getName());
+
+						caster.setCasting(name, false);
+					}
+
+				}.runTaskLater(Main.getInstance(), warmup.getDuration());
 			}
 		}
 
