@@ -12,6 +12,7 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -91,6 +92,23 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 			{
 				horses.remove((Horse) event.getVehicle());
 				event.getVehicle().remove();
+			}
+		}
+	}
+
+	@EventHandler
+	public void onVehicleEnterEvent(VehicleEnterEvent event)
+	{
+		if (event.getVehicle() instanceof Horse)
+		{
+			Caster caster = Main.getCasters().get(event.getEntered().getUniqueId());
+
+			if (caster.getCasts().containsKey(name))
+			{
+				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " You Must Be Have The Cast " + ChatColor.WHITE
+						+ name + ChatColor.GRAY + " To Ride A Horse!");
+
+				event.setCancelled(true);
 			}
 		}
 	}
