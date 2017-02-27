@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import Cast.CommandInterface;
 import Cast.Main;
 import Cast.Essentials.Caster;
-import Cast.Essentials.Class;
+import Cast.Essentials.Type;
 import Cast.Essentials.Chat.Pages;
 
 public class CastList implements CommandInterface
@@ -79,33 +79,33 @@ public class CastList implements CommandInterface
 				return true;
 			}
 
-			for (String type : Caster.types)
+			for (Type type : Main.getClasses())
 			{
-				if (args[1].equalsIgnoreCase(type))
+				if (args[1].equalsIgnoreCase(type.getName()))
 				{
-					setCommands(type);
+					setCommands(type.getName());
 					pages.display(player, args, 2);
 
 					return true;
 				}
 			}
 
-			for (String race : Caster.races)
+			for (Type race : Main.getRaces())
 			{
-				if (args[1].equalsIgnoreCase(race))
+				if (args[1].equalsIgnoreCase(race.getName()))
 				{
-					setCommands(race);
+					setCommands(race.getName());
 					pages.display(player, args, 2);
 
 					return true;
 				}
 			}
 
-			for (String job : Caster.jobs)
+			for (Type job : Main.getJobs())
 			{
-				if (args[1].equalsIgnoreCase(job))
+				if (args[1].equalsIgnoreCase(job.getName()))
 				{
-					setCommands(job);
+					setCommands(job.getName());
 					pages.display(player, args, 2);
 
 					return true;
@@ -123,7 +123,7 @@ public class CastList implements CommandInterface
 
 		commands.add(ChatColor.DARK_AQUA + name + " Casts:");
 
-		for (Class c : Main.getClasses())
+		for (Type c : Main.getTypes())
 		{
 			if (c.getName().equalsIgnoreCase(name))
 			{

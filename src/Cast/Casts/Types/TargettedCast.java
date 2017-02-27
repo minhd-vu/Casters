@@ -17,47 +17,65 @@ public class TargettedCast extends Cast
 		super(name, description);
 	}
 
-	/*
-	 * = public LivingEntity getTarget(Player player, int range) { List<Entity>
-	 * entity = player.getNearbyEntities(range, range, range);
-	 * 
-	 * Set<Material> transparent = new HashSet<Material>();
-	 * transparent.add(Material.AIR); transparent.add(Material.WATER);
-	 * transparent.add(Material.STATIONARY_WATER);
-	 * transparent.add(Material.GRASS); transparent.add(Material.LONG_GRASS);
-	 * transparent.add(Material.VINE); transparent.add(Material.GLASS);
-	 * transparent.add(Material.THIN_GLASS);
-	 * transparent.add(Material.STAINED_GLASS);
-	 * transparent.add(Material.STAINED_GLASS_PANE);
-	 * 
-	 * List<Block> lineofsight = player.getLineOfSight(transparent, range);
-	 * 
-	 * for (Block block : lineofsight) { if (block.getType() != Material.AIR &&
-	 * block.getType() != Material.WATER && block.getType() !=
-	 * Material.STATIONARY_WATER && block.getType() != Material.GRASS &&
-	 * block.getType() != Material.LONG_GRASS && block.getType() !=
-	 * Material.VINE && block.getType() != Material.GLASS && block.getType() !=
-	 * Material.THIN_GLASS && block.getType() != Material.STAINED_GLASS &&
-	 * block.getType() != Material.STAINED_GLASS_PANE) { break; }
-	 * 
-	 * Location low = block.getLocation(); Location high = low.clone().add(1, 1,
-	 * 1);
-	 * 
-	 * AxisAlignedBB boundingbox = new AxisAlignedBB(low.getX(), low.getY(),
-	 * low.getZ(), high.getX(), high.getY(), high.getZ());
-	 * 
-	 * for (Entity target : entity) { if (target instanceof LivingEntity) { if
-	 * (target.getLocation().distance(player.getEyeLocation()) <= range &&
-	 * ((CraftEntity) target).getHandle().getBoundingBox().b(boundingbox)) {
-	 * return (LivingEntity) target; } } } }
-	 * 
-	 * return player; }
-	 */
+	/*-
+	public LivingEntity getTarget(Player player, int range)
+	{
+		List<Entity> entity = player.getNearbyEntities(range, range, range);
+	
+		Set<Material> transparent = new HashSet<Material>();
+		transparent.add(Material.AIR);
+		transparent.add(Material.WATER);
+		transparent.add(Material.STATIONARY_WATER);
+		transparent.add(Material.GRASS);
+		transparent.add(Material.LONG_GRASS);
+		transparent.add(Material.VINE);
+		transparent.add(Material.GLASS);
+		transparent.add(Material.THIN_GLASS);
+		transparent.add(Material.STAINED_GLASS);
+		transparent.add(Material.STAINED_GLASS_PANE);
+	
+		List<Block> lineofsight = player.getLineOfSight(transparent, range);
+	
+		for (Block block : lineofsight)
+		{
+			if (block.getType() != Material.AIR && block.getType() != Material.WATER
+					&& block.getType() != Material.STATIONARY_WATER && block.getType() != Material.GRASS
+					&& block.getType() != Material.LONG_GRASS && block.getType() != Material.VINE
+					&& block.getType() != Material.GLASS && block.getType() != Material.THIN_GLASS
+					&& block.getType() != Material.STAINED_GLASS && block.getType() != Material.STAINED_GLASS_PANE)
+			{
+				break;
+			}
+	
+			Location low = block.getLocation();
+			Location high = low.clone().add(1, 1, 1);
+	
+			AxisAlignedBB boundingbox =
+					new AxisAlignedBB(low.getX(), low.getY(), low.getZ(), high.getX(), high.getY(), high.getZ());
+	
+			for (Entity target : entity)
+			{
+				if (target instanceof LivingEntity)
+				{
+					if (target.getLocation().distance(player.getEyeLocation()) <= range
+							&& ((CraftEntity) target).getHandle().getBoundingBox().b(boundingbox))
+					{
+						return (LivingEntity) target;
+					}
+				}
+			}
+		}
+	
+		return player;
+	}
+	*/
 
 	public LivingEntity getTarget(Player player, int range)
 	{
 		List<Entity> entities = player.getNearbyEntities(range, range, range);
 		ArrayList<LivingEntity> livingentities = new ArrayList<LivingEntity>();
+
+		entities.remove(player.getVehicle());
 
 		for (Entity e : entities)
 		{

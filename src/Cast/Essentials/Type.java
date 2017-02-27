@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.bukkit.Material;
 
-public class Class
+public class Type
 {
 	private String name;
 	private String description;
@@ -27,7 +27,7 @@ public class Class
 	private int intellectscale;
 	private int wisdomscale;
 
-	public Class(String name, String description, int strength, int constitution, int dexterity, int intellect,
+	public Type(String name, String description, int strength, int constitution, int dexterity, int intellect,
 			int wisdom)
 	{
 		this.name = name;
@@ -44,7 +44,7 @@ public class Class
 		this.wisdom = wisdom;
 	}
 
-	public Class(String name, String description, int strength, int constitution, int dexterity, int intellect,
+	public Type(String name, String description, int strength, int constitution, int dexterity, int intellect,
 			int wisdom, int strengthscale, int constitutionscale, int dexterityscale, int intellectscale,
 			int wisdomscale)
 	{

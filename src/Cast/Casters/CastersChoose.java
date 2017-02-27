@@ -8,18 +8,11 @@ import org.bukkit.entity.Player;
 import Cast.CommandInterface;
 import Cast.Main;
 import Cast.Essentials.Caster;
+import Cast.Essentials.Type;
 
 public class CastersChoose implements CommandInterface
 {
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
-
-	private final String[] types =
-			{ "Paladin", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
-					"Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk", "Templar" };
-
-	private final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Giant", "Demon", "Undead" };
-
-	private final String[] jobs = { "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer", "Miner" };
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
@@ -34,29 +27,29 @@ public class CastersChoose implements CommandInterface
 				return false;
 			}
 
-			for (int i = 0; i < types.length; ++i)
+			for (Type type : Main.getClasses())
 			{
-				if (args[1].equalsIgnoreCase(types[i]))
+				if (args[1].equalsIgnoreCase(type.getName()))
 				{
-					caster.setType(types[i]);
+					caster.setType(type.getName());
 					return true;
 				}
 			}
 
-			for (int i = 0; i < races.length; ++i)
+			for (Type race : Main.getRaces())
 			{
-				if (args[1].equalsIgnoreCase(races[i]))
+				if (args[1].equalsIgnoreCase(race.getName()))
 				{
-					caster.setRace(races[i]);
+					caster.setRace(race.getName());
 					return true;
 				}
 			}
 
-			for (int i = 0; i < jobs.length; ++i)
+			for (Type job : Main.getJobs())
 			{
-				if (args[1].equalsIgnoreCase(jobs[i]))
+				if (args[1].equalsIgnoreCase(job.getName()))
 				{
-					caster.setJob(jobs[i]);
+					caster.setJob(job.getName());
 					return true;
 				}
 			}

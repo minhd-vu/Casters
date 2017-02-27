@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import Cast.CommandInterface;
 import Cast.Main;
-import Cast.Essentials.Class;
+import Cast.Essentials.Type;
 
 public class CastersInfo implements CommandInterface
 {
@@ -28,7 +28,7 @@ public class CastersInfo implements CommandInterface
 				return false;
 			}
 
-			for (Class c : Main.getClasses())
+			for (Type c : Main.getClasses())
 			{
 				if (c.getName().equalsIgnoreCase(args[1]))
 				{

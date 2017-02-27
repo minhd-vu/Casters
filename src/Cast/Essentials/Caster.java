@@ -95,15 +95,6 @@ public class Caster
 	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
-	public static final String[] types =
-			{ "Paladin", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
-					"Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk", "Templar" };
-
-	public static final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Giant", "Demon", "Undead" };
-
-	public static final String[] jobs =
-			{ "Alchemist", "Enchanter", "Blacksmith", "Engineer", "Artisan", "Farmer", "Miner" };
-
 	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
 
@@ -273,7 +264,7 @@ public class Caster
 	{
 		type = config.getString("Type");
 
-		for (Class c : Main.getClasses())
+		for (Type c : Main.getClasses())
 		{
 			if (c.getName().equals(type))
 			{
@@ -297,7 +288,7 @@ public class Caster
 	{
 		race = config.getString("Race");
 
-		for (Class c : Main.getClasses())
+		for (Type c : Main.getRaces())
 		{
 			if (c.getName().equals(race))
 			{
@@ -314,7 +305,7 @@ public class Caster
 	{
 		job = config.getString("Job");
 
-		for (Class c : Main.getClasses())
+		for (Type c : Main.getJobs())
 		{
 			if (c.getName().equals(job))
 			{
@@ -780,8 +771,8 @@ public class Caster
 		config.set("Type", this.type);
 		getConfigType();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type
+				+ ChatColor.GRAY + "!");
 	}
 
 	public void setTypeLevel(int typelevel)
@@ -805,8 +796,8 @@ public class Caster
 		config.set("Race", this.race);
 		getConfigRace();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race
+				+ ChatColor.GRAY + "!");
 	}
 
 	public void setRaceLevel(int racelevel)
@@ -830,8 +821,8 @@ public class Caster
 		config.set("Job", this.job);
 		getConfigJob();
 
-		player.sendMessage(
-				header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job
+				+ ChatColor.GRAY + "!");
 	}
 
 	public void setJobLevel(int joblevel)

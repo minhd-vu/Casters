@@ -85,10 +85,23 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
+							double vertical;
+
+							if (player.leaveVehicle())
+							{
+								vertical = 0.0;
+							}
+
+							else
+							{
+								vertical = 0.5;
+							}
+
 							double x = target.getLocation().getX() - player.getLocation().getX();
 							double z = target.getLocation().getZ() - player.getLocation().getZ();
 
-							Vector v = new Vector(x / (range / 2), 0.5, z / (range / 2));
+							Vector v = new Vector(x / (range / 2), vertical, z / (range / 2));
+
 							player.setVelocity(v);
 
 							player.getWorld().spigot().playEffect(player.getLocation(), Effect.CLOUD, 0, 0, 0.0F, 0.1F,

@@ -90,6 +90,8 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 						horse.addPassenger(player);
 						horses.add(horse);
 
+						cast(player);
+
 						cooldown.start(player.getName());
 
 						caster.setCasting(name, false);
@@ -122,7 +124,7 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 		{
 			Caster caster = Main.getCasters().get(event.getEntered().getUniqueId());
 
-			if (caster.getCasts().containsKey(name))
+			if (!caster.getCasts().containsKey(name))
 			{
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " You Must Be Have The Cast " + ChatColor.WHITE
 						+ name + ChatColor.GRAY + " To Ride A Horse!");
