@@ -16,6 +16,7 @@ public class PartyChat implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
+			@SuppressWarnings("unused")
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
 			player.performCommand("chat channel party");

@@ -368,7 +368,7 @@ public class Caster
 		}
 
 		player.setHealth(health);
-		player.setHealthScaled(false); // FIX THIS
+		player.setHealthScaled(false);
 		player.setMaxHealth(maxhealth);
 	}
 

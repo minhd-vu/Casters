@@ -74,7 +74,7 @@ public class Armor implements Listener
 				}
 			}
 
-			event.getPlayer().sendMessage(header + ChatColor.GRAY + "You Are Not Allowed To Wear That!");
+			event.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
 			event.setCancelled(true);
 			event.getPlayer().updateInventory();
 		}
@@ -137,7 +137,7 @@ public class Armor implements Listener
 				return;
 			}
 
-			event.getWhoClicked().sendMessage(header + ChatColor.GRAY + "You Are Not Allowed To Wear That!");
+			event.getWhoClicked().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
 			event.setCancelled(true);
 			((Player) event.getWhoClicked()).updateInventory();
 		}
@@ -154,7 +154,7 @@ public class Armor implements Listener
 				return;
 			}
 
-			event.getWhoClicked().sendMessage(header + "You Are Not Allowed To Wear That!");
+			event.getWhoClicked().sendMessage(header + "Your Class Cannot Wear That.");
 			event.setCancelled(true);
 			((Player) event.getWhoClicked()).updateInventory();
 		}
@@ -171,7 +171,7 @@ public class Armor implements Listener
 				return;
 			}
 
-			event.getWhoClicked().sendMessage(header + ChatColor.GRAY + "You Are Not Allowed To Wear That!");
+			event.getWhoClicked().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
 			event.setCancelled(true);
 			((Player) event.getWhoClicked()).updateInventory();
 		}
@@ -243,7 +243,7 @@ public class Armor implements Listener
 						return;
 					}
 
-					caster.getPlayer().sendMessage(header + ChatColor.GRAY + "You Are Not Allowed To Wear That!");
+					caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
 					event.setCancelled(true);
 					caster.getPlayer().updateInventory();
 				}

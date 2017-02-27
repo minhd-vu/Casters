@@ -32,6 +32,7 @@ public class Experience implements Listener
 	private float expgaincraft;
 	private float expgainfarm;
 
+	@SuppressWarnings("unused")
 	private double scale;
 
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"

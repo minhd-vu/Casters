@@ -154,6 +154,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastBomb castbomb;
 	private static CastMount castmount;
 
+	@SuppressWarnings("unused")
 	private static PassiveBackstab passivebackstab;
 
 	private static List<Party> parties;
