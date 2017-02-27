@@ -663,8 +663,9 @@ public class Main extends JavaPlugin implements Listener
 	public void onPlayerJoinEvent(PlayerJoinEvent event)
 	{
 		casters.put(event.getPlayer().getUniqueId(), new Caster(event.getPlayer()));
-		event.setJoinMessage(
-				ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GREEN + " Has Joined The Server.");
+		event.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]"
+				+ ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GREEN
+				+ " Has Joined The Server.");
 	}
 
 	@EventHandler
@@ -673,7 +674,9 @@ public class Main extends JavaPlugin implements Listener
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
 		event.getPlayer().leaveVehicle();
-		event.setQuitMessage(ChatColor.WHITE + event.getPlayer().getName() + ChatColor.RED + " Has Left The Server.");
+		event.setQuitMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]"
+				+ ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.RED
+				+ " Has Left The Server.");
 	}
 
 	@EventHandler
@@ -682,8 +685,9 @@ public class Main extends JavaPlugin implements Listener
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
 		event.getPlayer().leaveVehicle();
-		event.setLeaveMessage(
-				ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY + " Was Kicked From The Server.");
+		event.setLeaveMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY
+				+ "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY
+				+ " Was Kicked From The Server.");
 	}
 
 	public static Main getInstance()

@@ -55,8 +55,10 @@ public class CastersRecipes implements CommandInterface
 		ironfencetochainmailboots.setIngredient('&', Material.IRON_FENCE);
 		Main.getInstance().getServer().addRecipe(ironfencetochainmailboots);
 
-		commands.add(ChatColor.GRAY + "9 Rotten Flesh -> 1 Leather.");
-		commands.add(ChatColor.GRAY + "Use Iron Fence To Craft Chainmail Armor.");
+		commands.add(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "1" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY
+				+ "9 Rotten Flesh -> 1 Leather.");
+		commands.add(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "2" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY
+				+ "Use Iron Fence To Craft Chainmail Armor.");
 
 		pages.setHeader(fill + header + fill);
 		pages.setError("Casters");
