@@ -51,15 +51,16 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (args.length > 1)
+			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
 				pages.display(player, args, 2);
 
 				return true;
 			}
 
-			if (caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp() && !caster.isSilenced(name)
-					&& !caster.isStunned(name) && !cooldown.hasCooldown(player, name) && caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
+					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
+					&& caster.hasMana(manacost, name))
 			{
 				if (warmup.getDuration() > 0)
 				{
@@ -100,22 +101,19 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 							@Override
 							public void run()
 							{
-								if (caster.getEffect("Invisible"))
+								for (Player p : player.getServer().getOnlinePlayers())
 								{
-									for (Player p : player.getServer().getOnlinePlayers())
+									p.showPlayer(player);
+
+									if (player.getNearbyEntities(range, range, range).contains(p))
 									{
-										p.showPlayer(player);
-
-										if (player.getNearbyEntities(range, range, range).contains(p))
-										{
-											p.sendMessage(header + ChatColor.WHITE + player.getName() + ChatColor.GRAY
-													+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
-										}
+										p.sendMessage(header + ChatColor.WHITE + player.getName() + ChatColor.GRAY
+												+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
 									}
-
-									player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Are Now "
-											+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
 								}
+
+								player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Are Now "
+										+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
 
 								caster.setCasting(name, false);
 							}
@@ -137,7 +135,7 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 		{
 			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
 
-			if (caster.getEffect("Invisible"))
+			if (caster.hasEffect("Invisible"))
 			{
 				for (Player p : event.getEntity().getServer().getOnlinePlayers())
 				{

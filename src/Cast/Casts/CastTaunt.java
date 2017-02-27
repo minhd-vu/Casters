@@ -60,15 +60,16 @@ public class CastTaunt extends ActiveCast implements CommandInterface, Listener
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (args.length > 1)
+			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
 				pages.display(player, args, 2);
 
 				return true;
 			}
 
-			if (caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp() && !caster.isSilenced(name)
-					&& !caster.isStunned(name) && !cooldown.hasCooldown(player, name) && caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
+					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
+					&& caster.hasMana(manacost, name))
 			{
 				if (warmup.getDuration() > 0)
 				{
@@ -134,7 +135,7 @@ public class CastTaunt extends ActiveCast implements CommandInterface, Listener
 			Caster attacker = Main.getCasters().get(event.getDamager().getUniqueId());
 			Caster defender = Main.getCasters().get(event.getEntity().getUniqueId());
 
-			if (attacker.getEffect("Taunted") && !defender.getEffect("Taunting"))
+			if (attacker.hasEffect("Taunted") && !defender.hasEffect("Taunting"))
 			{
 				attacker.getPlayer().sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY
 						+ " Cannot Attack That Player While " + ChatColor.WHITE + "Taunted" + ChatColor.GRAY + "!");

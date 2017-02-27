@@ -77,15 +77,16 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 			Player player = (Player) sender;
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (args.length > 1)
+			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
 				pages.display(player, args, 2);
 
 				return true;
 			}
 
-			if (caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp() && !caster.isSilenced(name)
-					&& !caster.isStunned(name) && !cooldown.hasCooldown(player, name) && caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
+					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
+					&& caster.hasMana(manacost, name))
 			{
 				if (warmup.getDuration() > 0)
 				{

@@ -96,7 +96,7 @@ public class Caster
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
 	public static final String[] types =
-			{ "Paladins", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
+			{ "Paladin", "Cavalier", "Barbarian", "Blackguard", "Assassin", "Duelist", "Fletcher", "Musketeer",
 					"Distorter", "Inferno", "Shaman", "Warlock", "Oracle", "Bloodmage", "Monk", "Templar" };
 
 	public static final String[] races = { "Dwarf", "Human", "Elf", "Troll", "Goblin", "Giant", "Demon", "Undead" };
@@ -110,6 +110,7 @@ public class Caster
 	public Caster(Player player)
 	{
 		this.player = player;
+
 		party = null;
 		invite = null;
 
@@ -118,6 +119,9 @@ public class Caster
 			config = Main.getConfigManager().getNewConfig(this.player.getName() + ".yml",
 					new String[] { this.player.getName() + " Config File." });
 			setNewConfig();
+
+			Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Welcome " + ChatColor.WHITE + player.getName()
+					+ ChatColor.DARK_AQUA + " To CasterCraft!");
 		}
 
 		else
@@ -291,6 +295,7 @@ public class Caster
 				}
 
 				entrybuilder.blank();
+
 				entrybuilder.next("    " + ChatColor.DARK_PURPLE + "Effects:");
 
 				if (effect.get("Stunned").hasTime())
@@ -509,6 +514,8 @@ public class Caster
 			health = maxhealth;
 		}
 
+		player.setHealth(health);
+		player.setHealthScaled(false); // FIX THIS
 		player.setMaxHealth(maxhealth);
 	}
 
@@ -553,7 +560,7 @@ public class Caster
 		return job;
 	}
 
-	public boolean getEffect(String name)
+	public boolean hasEffect(String name)
 	{
 		if (effect.containsKey(name))
 		{

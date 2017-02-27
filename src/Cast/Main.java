@@ -47,6 +47,7 @@ import Cast.Casts.CastFireCharge;
 import Cast.Casts.CastFireball;
 import Cast.Casts.CastLightningStorm;
 import Cast.Casts.CastList;
+import Cast.Casts.CastMount;
 import Cast.Casts.CastReflect;
 import Cast.Casts.CastRevive;
 import Cast.Casts.CastSiphon;
@@ -61,7 +62,6 @@ import Cast.Essentials.Caster;
 import Cast.Essentials.Class;
 import Cast.Essentials.Enchant;
 import Cast.Essentials.Experience;
-import Cast.Essentials.Horses;
 import Cast.Essentials.Mob;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
@@ -118,7 +118,6 @@ public class Main extends JavaPlugin implements Listener
 	private static Enchant enchant;
 	private static Armor armor;
 	private static Attack attack;
-	private static Horses horses;
 
 	private static Chat chat;
 	private static ChatTitles chattitles;
@@ -149,6 +148,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastTaunt casttaunt;
 	private static CastVanish castvanish;
 	private static CastBomb castbomb;
+	private static CastMount castmount;
 
 	private static List<Party> parties;
 
@@ -195,6 +195,7 @@ public class Main extends JavaPlugin implements Listener
 		cavalier.getWeapon().put(Material.STONE_SPADE, 5);
 		cavalier.getWeapon().put(Material.WOOD_SPADE, 4);
 		cavalier.getCasts().put("Charge", 1);
+		cavalier.getCasts().put("Mount", 1);
 
 		Class barbarian = new Class("Barbarian", "Description", 5, 3, 2, -4, -3);
 		barbarian.getArmor().add(Material.DIAMOND_HELMET);
@@ -487,12 +488,12 @@ public class Main extends JavaPlugin implements Listener
 		spells.put("Taunt", "Taunt All Nearby Opponents");
 		spells.put("Vanish", "Vanish In A Cloud of Smoke");
 		spells.put("Bomb", "Casts A Bomb");
+		spells.put("Mount", "Mounts Onto A Horse");
 
 		experience = new Experience();
 		enchant = new Enchant();
 		armor = new Armor();
 		attack = new Attack();
-		horses = new Horses();
 
 		chat = new Chat();
 		chattitles = new ChatTitles();
@@ -523,6 +524,7 @@ public class Main extends JavaPlugin implements Listener
 		casttaunt = new CastTaunt("Taunt");
 		castvanish = new CastVanish("Vanish");
 		castbomb = new CastBomb("Bomb");
+		castmount = new CastMount("Mount");
 
 		parties = new ArrayList<Party>();
 		partycmd = new Parties();
@@ -538,10 +540,10 @@ public class Main extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, horses, chat, wandinferno, wanddistorter,
-				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
-				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castbackstab, castsiphon, castvanish, castbomb);
+		registerEvents(this, this, experience, enchant, armor, attack, chat, wandinferno, wanddistorter, wandshaman,
+				wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge, castcharge,
+				caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castbackstab,
+				castsiphon, castvanish, castbomb, castmount);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
@@ -630,6 +632,7 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("taunt", casttaunt);
 		casthandler.register("vanish", castvanish);
 		casthandler.register("bomb", castbomb);
+		casthandler.register("mount", castmount);
 
 		chathandler.register("chat", chat);
 		chathandler.register("titles", chattitles);

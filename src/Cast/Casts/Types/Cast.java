@@ -32,17 +32,6 @@ public class Cast
 	{
 		this.name = name;
 
-		/*-
-		warmup.setDuration(Main.getConfigCasts(), name + ".WarmUp.Duration");
-		warmup.setAmplifier(Main.getConfigCasts(), name + ".WarmUp.Amplifier");
-		cooldown.setCooldown(Main.getConfigCasts(), name + ".Cooldown");
-		manacost = Main.getConfigCasts().getDouble(name + ".ManaCost");
-		
-		info.add(ChatColor.DARK_AQUA + name + " Cast:");
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");*/
-
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
 		pages.setCommand("cast " + name + " info");
 		pages.setError("Cast " + name);
