@@ -81,17 +81,15 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 
 							if (player.getNearbyEntities(range, range, range).contains(p))
 							{
-								p.sendMessage(header + ChatColor.WHITE + "Someone" + ChatColor.GRAY + " Has "
+								p.sendMessage(header + ChatColor.WHITE + " Someone" + ChatColor.GRAY + " Has "
 										+ ChatColor.WHITE + "Vanished" + ChatColor.GRAY + "!");
 							}
 						}
 
 						player.getWorld().playEffect(player.getLocation(), org.bukkit.Effect.SMOKE, 4);
 
-						player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Have "
+						player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Have "
 								+ ChatColor.WHITE + "Vanished" + ChatColor.GRAY + "!");
-
-						cast(player);
 
 						cooldown.start(player.getName());
 
@@ -106,12 +104,12 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 
 									if (player.getNearbyEntities(range, range, range).contains(p))
 									{
-										p.sendMessage(header + ChatColor.WHITE + player.getName() + ChatColor.GRAY
+										p.sendMessage(header + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
 												+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
 									}
 								}
 
-								player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Are Now "
+								player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are Now "
 										+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
 
 								caster.setCasting(name, false);
@@ -144,12 +142,12 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 
 					if (event.getEntity().getNearbyEntities(range, range, range).contains(p))
 					{
-						p.sendMessage(header + ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY + " Has "
-								+ ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
+						p.sendMessage(header + ChatColor.WHITE + " " + event.getEntity().getName() + ChatColor.GRAY
+								+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
 					}
 				}
 
-				caster.getPlayer().sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Are Now "
+				caster.getPlayer().sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are Now "
 						+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
 
 				caster.setCasting(name, false);

@@ -203,7 +203,7 @@ public class Caster
 					if (effects.get(effect).hasTime())
 					{
 						entrybuilder
-								.next("     " + ChatColor.LIGHT_PURPLE + effect + " " + effects.get(effect).getTime());
+								.next("    " + ChatColor.LIGHT_PURPLE + effect + " " + effects.get(effect).getTime());
 					}
 				}
 
