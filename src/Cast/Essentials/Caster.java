@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -367,9 +368,9 @@ public class Caster
 			health = maxhealth;
 		}
 
-		player.setHealth(health);
-		player.setHealthScaled(false);
 		player.setMaxHealth(maxhealth);
+		player.setHealth(health);
+		player.setHealthScale(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
 	}
 
 	private void getConfigMana()
