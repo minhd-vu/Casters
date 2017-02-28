@@ -67,6 +67,8 @@ public class Caster
 	private double health;
 	private double maxhealth;
 	private double basemaxhealth;
+	private double healthregen;
+	private double basehealthregen;
 
 	private double mana;
 	private double maxmana;

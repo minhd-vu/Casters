@@ -64,6 +64,7 @@ import Cast.Essentials.Caster;
 import Cast.Essentials.Enchant;
 import Cast.Essentials.Experience;
 import Cast.Essentials.Mob;
+import Cast.Essentials.Regen;
 import Cast.Essentials.Type;
 import Cast.Essentials.Chat.Chat;
 import Cast.Essentials.Chat.ChatChannel;
@@ -118,6 +119,7 @@ public class Main extends JavaPlugin implements Listener
 	private static Enchant enchant;
 	private static Armor armor;
 	private static Attack attack;
+	private static Regen regen;
 
 	private static Chat chat;
 	private static ChatTitles chattitles;
@@ -519,6 +521,7 @@ public class Main extends JavaPlugin implements Listener
 		enchant = new Enchant();
 		armor = new Armor();
 		attack = new Attack();
+		regen = new Regen();
 
 		chat = new Chat();
 		chattitles = new ChatTitles();
@@ -545,10 +548,10 @@ public class Main extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, chat, wandinferno, wanddistorter, wandshaman,
-				wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge, castcharge,
-				caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castbackstab,
-				castsiphon, castvanish, castbomb, castmount);
+		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
+				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
+				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
+				castbackstab, castsiphon, castvanish, castbomb, castmount);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
