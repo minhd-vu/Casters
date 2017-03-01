@@ -31,9 +31,9 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 		cooldown.setCooldown(100);
 		manacost = 5;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		gravity = true;
 		range = 8;
@@ -72,7 +72,7 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 				{
 					if (warmup.getDuration() > 0)
 					{
-						warmup.start(Main.getInstance(), caster, target, name);
+						warmup.start(caster, target, name);
 					}
 
 					new BukkitRunnable()
@@ -87,13 +87,13 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 
 							if (velocity > 0)
 							{
-								tnt = (TNTPrimed) player.getWorld().spawn(player.getLocation(), TNTPrimed.class);
+								tnt = player.getWorld().spawn(player.getLocation(), TNTPrimed.class);
 								tnt.setVelocity(player.getLocation().getDirection().normalize().multiply(velocity));
 							}
 
 							else
 							{
-								tnt = (TNTPrimed) player.getWorld().spawn(target.getLocation(), TNTPrimed.class);
+								tnt = player.getWorld().spawn(target.getLocation(), TNTPrimed.class);
 							}
 
 							tnt.setGravity(gravity);

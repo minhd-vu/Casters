@@ -37,9 +37,9 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 		cooldown.setCooldown(100);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		period = 10;
 		damage = 5;
@@ -81,7 +81,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 				{
 					if (warmup.getDuration() > 0)
 					{
-						warmup.start(Main.getInstance(), caster, target, name);
+						warmup.start(caster, target, name);
 					}
 
 					new BukkitRunnable()

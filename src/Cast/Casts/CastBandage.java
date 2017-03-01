@@ -65,7 +65,7 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 
 				if (warmup.getDuration() > 0)
 				{
-					warmup.start(Main.getProvidingPlugin(this.getClass()), caster, target, name);
+					warmup.start(caster, target, name);
 				}
 
 				new BukkitRunnable()
@@ -98,7 +98,7 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 						caster.setCasting(name, false);
 					}
 
-				}.runTaskLater(Main.getProvidingPlugin(this.getClass()), warmup.getDuration());
+				}.runTaskLater(Main.getInstance(), warmup.getDuration());
 			}
 		}
 

@@ -74,7 +74,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 				{
 					if (warmup.getDuration() > 0)
 					{
-						warmup.start(Main.getInstance(), caster, target, name);
+						warmup.start(caster, target, name);
 					}
 
 					new BukkitRunnable()
@@ -107,7 +107,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 
 				else if (explode)
 				{
-					warmup.start(Main.getInstance(), caster, name);
+					warmup.start(caster, name);
 
 					Block block = player.getTargetBlock((Set<Material>) null, range);
 

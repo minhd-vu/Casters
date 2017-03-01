@@ -7,11 +7,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import Cast.Main;
 import Cast.Essentials.Caster;
 
 public class WarmUp
@@ -43,7 +43,7 @@ public class WarmUp
 		return false;
 	}
 
-	public void start(Plugin plugin, Caster caster, String name)
+	public void start(Caster caster, String name)
 	{
 		caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
 		caster.setWarmingUp(name, true);
@@ -55,7 +55,7 @@ public class WarmUp
 			{
 				caster.setWarmingUp(name, false);
 			}
-		}.runTaskLater(plugin, duration);
+		}.runTaskLater(Main.getInstance(), duration);
 
 		warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
 
@@ -74,7 +74,7 @@ public class WarmUp
 				+ ChatColor.WHITE + name + ChatColor.GRAY + "!");
 	}
 
-	public void start(Plugin plugin, Caster caster, LivingEntity target, String name)
+	public void start(Caster caster, LivingEntity target, String name)
 	{
 		caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
 		caster.setWarmingUp(name, true);
@@ -87,7 +87,7 @@ public class WarmUp
 				caster.setWarmingUp(name, false);
 			}
 
-		}.runTaskLater(plugin, duration);
+		}.runTaskLater(Main.getInstance(), duration);
 
 		warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
 

@@ -34,7 +34,7 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 		{
 			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
 
-			if (caster.hasCast(name))
+			if (caster.getCasts().containsKey(name))
 			{
 				if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK)
 						|| event.getCause().equals(DamageCause.LAVA))

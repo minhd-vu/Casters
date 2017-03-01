@@ -42,7 +42,7 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 			LivingEntity target = (LivingEntity) event.getEntity();
 
-			if (caster.hasCast(name))
+			if (caster.getCasts().containsKey(name))
 			{
 				if (target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
 				{

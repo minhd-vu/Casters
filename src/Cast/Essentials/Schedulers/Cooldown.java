@@ -56,7 +56,7 @@ public class Cooldown
 	public double getCooldown(String name)
 	{
 		return Double.parseDouble(new DecimalFormat("##.#")
-				.format((double) (((cooldown.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0))));
+				.format(((cooldown.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0)));
 	}
 
 	public double getCooldown()

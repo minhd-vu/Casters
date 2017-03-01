@@ -36,9 +36,9 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		duration = 100;
 		percentage = 100;
@@ -70,7 +70,7 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 			{
 				if (warmup.getDuration() > 0)
 				{
-					warmup.start(Main.getInstance(), caster, name);
+					warmup.start(caster, name);
 				}
 
 				new BukkitRunnable()

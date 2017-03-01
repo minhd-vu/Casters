@@ -47,9 +47,9 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		timer = 100;
 		damage = 2;
@@ -89,7 +89,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 			{
 				if (warmup.getDuration() > 0)
 				{
-					warmup.start(Main.getInstance(), caster, name);
+					warmup.start(caster, name);
 				}
 
 				new BukkitRunnable()
@@ -101,7 +101,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						Snowball fireball = (Snowball) player.launchProjectile(Snowball.class);
+						Snowball fireball = player.launchProjectile(Snowball.class);
 						fireball.setVelocity(fireball.getVelocity().normalize().multiply(velocity));
 						fireball.setFireTicks(fireballfireticks);
 						fireball.setGravity(gravity);

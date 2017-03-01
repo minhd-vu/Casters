@@ -75,7 +75,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 				{
 					if (warmup.getDuration() > 0)
 					{
-						warmup.start(Main.getInstance(), caster, target, name);
+						warmup.start(caster, target, name);
 					}
 
 					new BukkitRunnable()

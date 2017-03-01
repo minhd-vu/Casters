@@ -157,18 +157,20 @@ public class Caster
 
 		}.runTaskTimer(Main.getInstance(), 0, (long) manatimer);
 
-		Scoreboard scoreboard = (Scoreboard) ScoreboardLib.createScoreboard(player).setHandler(new ScoreboardHandler()
+		Scoreboard scoreboard = ScoreboardLib.createScoreboard(player).setHandler(new ScoreboardHandler()
 		{
 			private final HighlightedString casterstext =
 					new HighlightedString("Casters", ChatColor.DARK_AQUA.toString() + ChatColor.BOLD.toString(),
 							ChatColor.AQUA.toString() + ChatColor.BOLD.toString());
 			private final HighlightedString nametext = new HighlightedString(player.getName(), "&6", "&e");
 
+			@Override
 			public String getTitle(Player player)
 			{
 				return null;
 			}
 
+			@Override
 			public List<Entry> getEntries(Player player)
 			{
 				EntryBuilder entrybuilder = new EntryBuilder();

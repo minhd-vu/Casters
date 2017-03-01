@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
 import Cast.Main;
-import Cast.Essentials.Caster;
 
 public class TargettedCast extends Cast
 {
@@ -114,14 +113,10 @@ public class TargettedCast extends Cast
 				if ((bx - .75 <= ex && ex <= bx + 1.75) && (bz - .75 <= ez && ez <= bz + 1.75)
 						&& (by - 1 <= ey && ey <= by + 2.5))
 				{
-					if (entity instanceof Player)
+					if (entity instanceof Player && Main.getCasters().get(player.getUniqueId()).getParty().getMembers()
+							.contains(Main.getCasters().get(entity.getUniqueId())))
 					{
-						Caster caster = Main.getCasters().get(player.getUniqueId());
-
-						if (caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
-						{
-							return null;
-						}
+						return null;
 					}
 
 					else

@@ -36,9 +36,9 @@ public class CastTaunt extends ActiveCast implements CommandInterface, Listener
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		range = 10;
 		duration = 100;
@@ -72,7 +72,7 @@ public class CastTaunt extends ActiveCast implements CommandInterface, Listener
 			{
 				if (warmup.getDuration() > 0)
 				{
-					warmup.start(Main.getInstance(), caster, name);
+					warmup.start(caster, name);
 				}
 
 				new BukkitRunnable()
