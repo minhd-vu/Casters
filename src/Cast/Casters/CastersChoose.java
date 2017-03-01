@@ -24,7 +24,30 @@ public class CastersChoose implements CommandInterface
 
 			if (args.length != 2)
 			{
-				return false;
+				player.sendMessage(header + ChatColor.GRAY + "Correct Usage: " + ChatColor.DARK_AQUA + "/caster"
+						+ ChatColor.AQUA + " choose <class/race/job>");
+				return true;
+			}
+
+			if (caster.getType().getName().equalsIgnoreCase(args[1]))
+			{
+				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Class: " + ChatColor.WHITE
+						+ caster.getType().getName() + ChatColor.GRAY + ".");
+				return true;
+			}
+
+			else if (caster.getRace().getName().equalsIgnoreCase(args[1]))
+			{
+				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Race: " + ChatColor.WHITE
+						+ caster.getRace().getName() + ChatColor.GRAY + ".");
+				return true;
+			}
+
+			else if (caster.getJob().getName().equalsIgnoreCase(args[1]))
+			{
+				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Job: " + ChatColor.WHITE
+						+ caster.getJob().getName() + ChatColor.GRAY + ".");
+				return true;
 			}
 
 			for (Type type : Main.getClasses())

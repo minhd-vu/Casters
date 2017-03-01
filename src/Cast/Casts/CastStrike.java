@@ -95,7 +95,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 							cast(player, target);
 
-							bleed.start(Main.getInstance(), caster, target, name);
+							bleed.start(caster, target, name);
 
 							cooldown.start(player.getName());
 						}

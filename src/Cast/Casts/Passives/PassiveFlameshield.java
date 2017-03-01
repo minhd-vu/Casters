@@ -20,9 +20,9 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 	{
 		super(name, description);
 
-		percentage = 50;
+		percentage = 50.0;
 
-		info.add(ChatColor.DARK_AQUA + "Fire Damage Reduction: " + percentage + "%");
+		info.add(ChatColor.DARK_AQUA + "Fire Damage Reduction: " + ChatColor.GRAY + percentage + "%");
 
 		pages.setPage(info);
 	}
@@ -36,7 +36,8 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 
 			if (caster.hasCast(name))
 			{
-				if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK))
+				if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK)
+						|| event.getCause().equals(DamageCause.LAVA))
 				{
 					event.setDamage(event.getDamage() * percentage / 100.0);
 				}

@@ -10,6 +10,10 @@ import org.bukkit.entity.Player;
 
 import Cast.CommandInterface;
 import Cast.Main;
+import Cast.Casts.Types.ActiveCast;
+import Cast.Casts.Types.Cast;
+import Cast.Casts.Types.Passive;
+import Cast.Casts.Types.TargettedCast;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Type;
 import Cast.Essentials.Chat.Pages;
@@ -66,10 +70,30 @@ public class CastList implements CommandInterface
 			{
 				commands.add(ChatColor.DARK_AQUA + "All Collective Casts:");
 
-				for (String cast : Main.getCasts().keySet())
+				for (Cast cast : Main.getCasts().values())
 				{
-					commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase()
-							+ ChatColor.GRAY + " - " + Main.getCasts().get(cast).getDescription());
+					String casttype = "";
+
+					if (cast instanceof ActiveCast)
+					{
+						casttype =
+								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY + "]";
+					}
+
+					else if (cast instanceof TargettedCast)
+					{
+						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted" + ChatColor.DARK_GRAY
+								+ "]";
+					}
+
+					else if (cast instanceof Passive)
+					{
+						casttype =
+								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY + "]";
+					}
+
+					commands.add(casttype + ChatColor.AQUA + " " + cast.getName() + ChatColor.GRAY + " - "
+							+ cast.getDescription());
 				}
 
 				pages.setCommand("cast list all");
@@ -127,11 +151,41 @@ public class CastList implements CommandInterface
 		{
 			if (c.getName().equalsIgnoreCase(name))
 			{
-				for (String cast : c.getCasts().keySet())
+				/*-for (String cast : c.getCasts().keySet())
 				{
 					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
 							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
 							+ " - " + Main.getCasts().get(cast).getDescription() + ".");
+				}*/
+
+				for (Cast cast : Main.getCasts().values())
+				{
+					if (c.getCasts().containsKey(cast.getName()))
+					{
+						String casttype = "";
+
+						if (cast instanceof ActiveCast)
+						{
+							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
+									+ "]";
+						}
+
+						else if (cast instanceof TargettedCast)
+						{
+							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted"
+									+ ChatColor.DARK_GRAY + "]";
+						}
+
+						else if (cast instanceof Passive)
+						{
+							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY
+									+ "]";
+						}
+
+						commands.add(casttype + ChatColor.AQUA + " " + cast.getName() + ChatColor.GRAY + " - "
+								+ ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast.getName())
+								+ " - " + cast.getDescription());
+					}
 				}
 
 				break;

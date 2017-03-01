@@ -109,13 +109,12 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 
 							if (target instanceof Player)
 							{
-								siphon.start(Main.getInstance(), caster, Main.getCasters().get(target.getUniqueId()),
-										name);
+								siphon.start(caster, Main.getCasters().get(target.getUniqueId()), name);
 							}
 
 							else
 							{
-								siphon.start(Main.getInstance(), caster, target, name);
+								siphon.start(caster, target, name);
 							}
 
 							cast(player, target);

@@ -136,6 +136,8 @@ public class Caster
 		effects.put("Taunting", new Effect());
 		effects.put("Invisible", new Effect());
 		effects.put("Backstabbing", new Effect());
+		effects.put("Poisoning", new Effect());
+		effects.put("Poisoned", new Effect());
 
 		new BukkitRunnable()
 		{

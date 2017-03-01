@@ -8,9 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import Cast.Main;
 import Cast.Essentials.Caster;
 
 public class Bleed
@@ -31,7 +31,7 @@ public class Bleed
 		period = 0;
 	}
 
-	public void start(Plugin plugin, Caster caster, LivingEntity target, String name)
+	public void start(Caster caster, LivingEntity target, String name)
 	{
 		bleeds.put(target.getUniqueId(), System.currentTimeMillis());
 
@@ -69,7 +69,7 @@ public class Bleed
 				}
 			}
 
-		}.runTaskTimer(plugin, period, period);
+		}.runTaskTimer(Main.getInstance(), period, period);
 
 		new BukkitRunnable()
 		{
@@ -95,10 +95,10 @@ public class Bleed
 
 				caster.setCasting(name, false);
 			}
-		}.runTaskLater(plugin, duration);
+		}.runTaskLater(Main.getInstance(), duration);
 	}
 
-	public void start(Plugin plugin, Caster caster, Caster tcaster, String name)
+	public void start(Caster caster, Caster tcaster, String name)
 	{
 		Player target = tcaster.getPlayer();
 
@@ -139,7 +139,7 @@ public class Bleed
 				}
 			}
 
-		}.runTaskTimer(plugin, period, period);
+		}.runTaskTimer(Main.getInstance(), period, period);
 
 		new BukkitRunnable()
 		{
@@ -165,7 +165,7 @@ public class Bleed
 
 				caster.setCasting(name, false);
 			}
-		}.runTaskLater(plugin, duration);
+		}.runTaskLater(Main.getInstance(), duration);
 	}
 
 	public void setDamage(double damage)
