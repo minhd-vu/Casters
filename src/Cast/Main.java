@@ -36,7 +36,6 @@ import Cast.Casters.CastersRecipes;
 import Cast.Casters.CastersStats;
 import Cast.Casters.CastersWeapon;
 import Cast.Casters.CastersWhoIs;
-import Cast.Casts.CastBackstab;
 import Cast.Casts.CastBandage;
 import Cast.Casts.CastBeasts;
 import Cast.Casts.CastBolt;
@@ -154,7 +153,6 @@ public class Main extends JavaPlugin implements Listener
 	private static CastLightningStorm castlightningstorm;
 	private static CastChainLightning castchainlightning;
 	private static CastReflect castreflect;
-	private static CastBackstab castbackstab;
 	private static CastSiphon castsiphon;
 	private static CastTaunt casttaunt;
 	private static CastVanish castvanish;
@@ -259,6 +257,7 @@ public class Main extends JavaPlugin implements Listener
 		assassin.getWeapon().put(Material.WOOD_SWORD, 5);
 		assassin.getCasts().put("Vanish", 1);
 		assassin.getCasts().put("Backstab", 1);
+		assassin.getCasts().put("Poison", 1);
 
 		Type duelist = new Type("Duelist", "Description");
 		duelist.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -525,7 +524,6 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("ChainLightning",
 				castchainlightning = new CastChainLightning("ChainLightning", "Consecutively Strikes Opponenets"));
 		casts.put("Reflect", castreflect = new CastReflect("Reflect", "Relects All Incoming Damage"));
-		casts.put("Backstab", castbackstab = new CastBackstab("Backstab", "Attacks From The Back Deal More"));
 		casts.put("Siphon", castsiphon = new CastSiphon("Siphon", "Siphons Health From Your Opponent"));
 		casts.put("Taunt", casttaunt = new CastTaunt("Taunt", "Taunt All Nearby Opponents"));
 		casts.put("Vanish", castvanish = new CastVanish("Vanish", "Vanish In A Cloud Of Smoke"));
@@ -572,8 +570,7 @@ public class Main extends JavaPlugin implements Listener
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
 				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castbackstab, castsiphon, castvanish, castbomb, castmount, castpoison, passivebackstab,
-				passiveflameshield);
+				castsiphon, castvanish, castbomb, castmount, castpoison, passivebackstab, passiveflameshield);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
@@ -657,7 +654,6 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("lightningstorm", castlightningstorm);
 		casthandler.register("chainlightning", castchainlightning);
 		casthandler.register("reflect", castreflect);
-		casthandler.register("backstab", castbackstab);
 		casthandler.register("siphon", castsiphon);
 		casthandler.register("taunt", casttaunt);
 		casthandler.register("vanish", castvanish);
@@ -665,7 +661,7 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("mount", castmount);
 		casthandler.register("poison", castpoison);
 
-		// casthandler.register("backstab", passivebackstab);
+		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
 
 		chathandler.register("chat", chat);
