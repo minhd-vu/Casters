@@ -66,7 +66,7 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
 					&& caster.hasMana(manacost, name))
 			{
-				LivingEntity target = getTarget(player, range);
+				LivingEntity target = getTarget(player, range, false);
 
 				if (target != null && !target.equals(player))
 				{

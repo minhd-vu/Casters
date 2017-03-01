@@ -29,9 +29,9 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 		cooldown.setCooldown(40);
 		manacost = 3;
 
-		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
-		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
+		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		heal = 1;
 		range = 8;
@@ -61,7 +61,7 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
 					&& caster.hasMana(manacost, name))
 			{
-				LivingEntity target = getTarget(player, range);
+				LivingEntity target = getTarget(player, range, true);
 
 				if (warmup.getDuration() > 0)
 				{

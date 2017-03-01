@@ -78,7 +78,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 					&& caster.hasMana(manacost, name))
 			{
 
-				LivingEntity target = getTarget(player, range);
+				LivingEntity target = getTarget(player, range, false);
 
 				if (target != null && !target.equals(player))
 				{

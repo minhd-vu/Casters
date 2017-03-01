@@ -75,7 +75,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
 					&& caster.hasMana(manacost, name))
 			{
-				LivingEntity target = getTarget(player, playerrange);
+				LivingEntity target = getTarget(player, playerrange, false);
 
 				if (target != null && !target.equals(player))
 				{
