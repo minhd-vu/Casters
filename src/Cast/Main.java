@@ -378,7 +378,7 @@ public class Main extends JavaPlugin implements Listener
 		monk.getWeapon().put(Material.STONE_SPADE, 5);
 		monk.getWeapon().put(Material.WOOD_SPADE, 4);
 
-		Type cleric = new Type("Cleric", "Description", 2, 3, 3, 2, 3);
+		Type cleric = new Type("Cleric", "Description");
 		cleric.getArmor().add(Material.LEATHER_HELMET);
 		cleric.getArmor().add(Material.LEATHER_CHESTPLATE);
 		cleric.getArmor().add(Material.IRON_LEGGINGS);
@@ -392,6 +392,7 @@ public class Main extends JavaPlugin implements Listener
 
 		classes.add(paladin);
 		classes.add(cavalier);
+		classes.add(barbarian);
 		classes.add(blackguard);
 		classes.add(assassin);
 		classes.add(duelist);
@@ -406,30 +407,30 @@ public class Main extends JavaPlugin implements Listener
 		classes.add(monk);
 		classes.add(cleric);
 
-		Type dwarf = new Type("Dwarf", "Description", 3, 4, 0, -3, -2);
+		Type dwarf = new Type("Dwarf", "Description");
 		dwarf.getArmor().add(Material.DIAMOND_HELMET);
 		dwarf.getWeapon().put(Material.DIAMOND_PICKAXE, 5);
 
-		Type human = new Type("Human", "Description", 2, 1, 1, 2, 1);
+		Type human = new Type("Human", "Description");
 		human.getCasts().put("Bandage", 1);
 
-		Type elf = new Type("Elf", "Description", -3, -2, 3, 4, 3);
+		Type elf = new Type("Elf", "Description");
 		elf.getArmor().add(Material.GOLD_HELMET);
 		elf.getWeapon().put(Material.BOW, 3);
 
-		Type troll = new Type("Troll", "Description", 4, 5, -4, -4, -2);
+		Type troll = new Type("Troll", "Description");
 		troll.getArmor().add(Material.IRON_LEGGINGS);
 
-		Type goblin = new Type("Goblin", "Description", 1, 2, 4, -2, 0);
+		Type goblin = new Type("Goblin", "Description");
 		goblin.getArmor().add(Material.LEATHER_CHESTPLATE);
 
-		Type giant = new Type("Giant", "Description", 2, 5, -5, -3, 2);
+		Type giant = new Type("Giant", "Description");
 		giant.getArmor().add(Material.IRON_CHESTPLATE);
 
-		Type undead = new Type("Undead", "Description", 0, 3, -2, 3, 2);
+		Type undead = new Type("Undead", "Description");
 		undead.getArmor().add(Material.GOLD_HELMET);
 
-		Type demon = new Type("Demon", "Description", 5, -2, 2, 4, -5);
+		Type demon = new Type("Demon", "Description");
 		demon.getArmor().add(Material.GOLD_HELMET);
 
 		races.add(dwarf);
@@ -441,25 +442,25 @@ public class Main extends JavaPlugin implements Listener
 		races.add(demon);
 		races.add(undead);
 
-		Type alchemist = new Type("Alchemist", "Description", 0, 3, -2, 3, 2);
+		Type alchemist = new Type("Alchemist", "Description");
 		alchemist.getArmor().add(Material.GOLD_HELMET);
 
-		Type enchanter = new Type("Enchanter", "Description", 0, 3, -2, 3, 2);
+		Type enchanter = new Type("Enchanter", "Description");
 		enchanter.getArmor().add(Material.GOLD_HELMET);
 
-		Type blacksmith = new Type("Blacksmith", "Description", 0, 3, -2, 3, 2);
+		Type blacksmith = new Type("Blacksmith", "Description");
 		blacksmith.getArmor().add(Material.GOLD_HELMET);
 
-		Type engineer = new Type("Engineer", "Description", 0, 3, -2, 3, 2);
+		Type engineer = new Type("Engineer", "Description");
 		engineer.getArmor().add(Material.GOLD_HELMET);
 
-		Type artisan = new Type("Artisan", "Description", 0, 3, -2, 3, 2);
+		Type artisan = new Type("Artisan", "Description");
 		artisan.getArmor().add(Material.GOLD_HELMET);
 
-		Type farmer = new Type("Farmer", "Description", 0, 3, -2, 3, 2);
+		Type farmer = new Type("Farmer", "Description");
 		farmer.getArmor().add(Material.GOLD_HELMET);
 
-		Type miner = new Type("Miner", "Description", 0, 3, -2, 3, 2);
+		Type miner = new Type("Miner", "Description");
 		miner.getArmor().add(Material.GOLD_HELMET);
 
 		jobs.add(alchemist);

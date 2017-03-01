@@ -25,6 +25,8 @@ public class CastersInfo implements CommandInterface
 
 			if (args.length != 2)
 			{
+				player.sendMessage(header + ChatColor.GRAY + "Correct Usage: " + ChatColor.DARK_AQUA + "/caster"
+						+ ChatColor.AQUA + " info <type>");
 				return false;
 			}
 

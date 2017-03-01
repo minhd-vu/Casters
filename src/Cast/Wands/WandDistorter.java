@@ -75,7 +75,7 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 
 			material = player.getInventory().getItemInMainHand().getType();
 
-			if (caster.getType().equalsIgnoreCase(name) && !cooldown.hasCooldown(player.getName())
+			if (caster.getType().getName().equalsIgnoreCase(name) && !cooldown.hasCooldown(player.getName())
 					&& !caster.isCasting(name) && !caster.isWarmingUp() && !caster.isSilenced(name)
 					&& !caster.isStunned(name) && caster.hasMana(manacost, name))
 			{

@@ -7,8 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionType;
 
 import Cast.Main;
 
@@ -30,23 +28,26 @@ public class Regen implements Listener
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerItemConsumeEvent(PlayerItemConsumeEvent event)
 	{
 		if (event.getItem().getType().equals(Material.POTION))
 		{
+			@SuppressWarnings("unused")
 			Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
 
-			// event.getItem().getItemMeta().equals(obj)
-
-			if (Potion.fromItemStack(event.getItem()).getType().equals(PotionType.INSTANT_HEAL))
+			/*-
+			Potion potion = Potion.fromItemStack(event.getItem());
+			
+			if (potion.getEffects().contains(PotionEffectType.))
 			{
-				if (Potion.fromItemStack(event.getItem()).getLevel() == 1)
+				if (Potion.fromItemStack(event.getItem()).getLevel())
 				{
-
+					event.setCancelled(true);
+					caster.setHealth(caster.getHealth() + potion.getEffects());
 				}
 			}
+			*/
 		}
 	}
 }
