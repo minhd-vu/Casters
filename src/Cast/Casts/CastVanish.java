@@ -2,7 +2,6 @@ package Cast.Casts;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -128,7 +127,7 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		if (event.getDamager() instanceof LivingEntity && event.getEntity() instanceof Player)
+		if (event.getEntity() instanceof Player)
 		{
 			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
 
