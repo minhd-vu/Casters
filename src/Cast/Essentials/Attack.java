@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -31,6 +32,16 @@ public class Attack implements Listener
 
 			if (event.getCause().equals(DamageCause.ENTITY_ATTACK))
 			{
+				if (event.getEntity() instanceof Player)
+				{
+					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
+
+					if (caster.getParty().getMembers().contains(target))
+					{
+						event.setCancelled(true);
+					}
+				}
+
 				if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
 						&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
 				{
@@ -68,6 +79,26 @@ public class Attack implements Listener
 				event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow)
 						+ caster.getDexterity() * caster.getType().getBowDamageScale());
 				arrows.remove(arrow);
+			}
+		}
+
+		else if (event.getDamager() instanceof Projectile)
+		{
+			Projectile projectile = (Projectile) event.getDamager();
+
+			if (projectile.getShooter() instanceof Player)
+			{
+				Caster caster = Main.getCasters().get(((Player) projectile.getShooter()).getUniqueId());
+
+				if (event.getEntity() instanceof Player)
+				{
+					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
+
+					if (caster.getParty().getMembers().contains(target))
+					{
+						event.setCancelled(true);
+					}
+				}
 			}
 		}
 	}

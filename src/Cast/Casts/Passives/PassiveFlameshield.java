@@ -1,7 +1,5 @@
 package Cast.Casts.Passives;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,31 +25,6 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 		info.add(ChatColor.DARK_AQUA + "Fire Damage Reduction: " + percentage + "%");
 
 		pages.setPage(info);
-	}
-
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
-	{
-		if (sender instanceof Player)
-		{
-			Player player = (Player) sender;
-			@SuppressWarnings("unused")
-			Caster caster = Main.getCasters().get(player.getUniqueId());
-
-			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
-			{
-				pages.display(player, args, 2);
-
-				return true;
-			}
-
-			else if (args.length == 1)
-			{
-				player.sendMessage(header + " You Cannot Cast Passives! They Are Always Active.");
-			}
-		}
-
-		return true;
 	}
 
 	@EventHandler

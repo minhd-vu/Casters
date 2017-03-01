@@ -1,9 +1,42 @@
 package Cast.Casts.Types;
 
-public class Passive extends Cast
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import Cast.CommandInterface;
+import Cast.Main;
+import Cast.Essentials.Caster;
+
+public class Passive extends Cast implements CommandInterface
 {
 	public Passive(String name, String description)
 	{
 		super(name, description);
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
+	{
+		if (sender instanceof Player)
+		{
+			Player player = (Player) sender;
+			@SuppressWarnings("unused")
+			Caster caster = Main.getCasters().get(player.getUniqueId());
+
+			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
+			{
+				pages.display(player, args, 2);
+
+				return true;
+			}
+
+			else if (args.length == 1)
+			{
+				player.sendMessage(header + " You Cannot Cast Passives! They Are Always Active.");
+			}
+		}
+
+		return true;
 	}
 }
