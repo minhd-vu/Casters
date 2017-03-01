@@ -21,9 +21,9 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 	private int percentage;
 	private int sneaking;
 
-	public PassiveBackstab(String name)
+	public PassiveBackstab(String name, String description)
 	{
-		super(name);
+		super(name, description);
 
 		percentage = 150;
 		sneaking = 200;
@@ -66,7 +66,7 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 
 			if (caster.hasCast(name))
 			{
-				if (event.getEntity().getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
+				if (target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
 				{
 					if (player.isSneaking())
 					{

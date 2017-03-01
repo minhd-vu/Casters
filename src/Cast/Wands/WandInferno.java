@@ -9,16 +9,15 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -29,6 +28,9 @@ import Cast.Essentials.Caster;
 public class WandInferno extends Wand implements CommandInterface, Listener
 {
 	private List<SmallFireball> fireballs = new ArrayList<SmallFireball>();
+
+	private int targetfireticks;
+	private int explosion;
 
 	public WandInferno(String name)
 	{
@@ -44,6 +46,8 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 		areaofeffect = 1;
 		singletarget = true;
 		incendiary = false;
+		targetfireticks = 1;
+		explosion = 0;
 
 		info.add(ChatColor.DARK_AQUA + name + " Wand:");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
@@ -134,18 +138,18 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	/*-@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{
 		Projectile projectile = event.getEntity();
-
+	
 		if (projectile instanceof SmallFireball && fireballs.contains(projectile))
 		{
 			SmallFireball fireball = (SmallFireball) projectile;
-
+	
 			List<Entity> e = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
+	
 			for (Entity target : e)
 			{
 				if (fireball.getShooter() instanceof Player && !target.equals(fireball.getShooter()))
@@ -153,19 +157,65 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 					if (target instanceof LivingEntity)
 					{
 						((Damageable) target).damage(damage);
-
+	
 						target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 1.0D, 0.0D), Effect.FLAME,
 								0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 						target.getWorld().playSound(target.getLocation(), Sound.ENTITY_BLAZE_HURT, 8.0F, 1.0F);
-
+	
 						fireballs.remove(fireball);
 						fireball.remove();
-
+	
 						if (singletarget)
 						{
 							return;
 						}
 					}
+				}
+			}
+		}
+	}*/
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof Fireball)
+		{
+			Fireball fireball = (Fireball) event.getDamager();
+
+			if (fireballs.contains(fireball))
+			{
+				List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : entities)
+				{
+					if (fireball.getShooter() instanceof Player && !target.equals(fireball.getShooter()))
+					{
+						if (target instanceof LivingEntity)
+						{
+							event.setDamage(damage);
+							target.setFireTicks(targetfireticks);
+
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
+									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
+
+							fireballs.remove(fireball);
+							fireball.remove();
+
+							if (singletarget)
+							{
+								return;
+							}
+						}
+					}
+				}
+
+				if (explosion > 0)
+				{
+					fireball.getWorld().createExplosion(fireball.getLocation(), explosion, incendiary);
+
+					return;
 				}
 			}
 		}

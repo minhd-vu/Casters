@@ -7,15 +7,14 @@ import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
@@ -27,6 +26,7 @@ import net.md_5.bungee.api.ChatColor;
 public class CastFireCharge extends ActiveCast implements CommandInterface, Listener
 {
 	private List<SmallFireball> firecharges = new ArrayList<SmallFireball>();
+
 	private double seconds;
 	private double damage;
 	private boolean gravity;
@@ -51,13 +51,13 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
 
 		seconds = 5;
-		damage = 10;
+		damage = 2;
 		gravity = false;
 		firechargefireticks = 100;
 		targetfireticks = 50;
-		areaofeffect = 5;
-		explosion = 3;
-		incendiary = true;
+		areaofeffect = 3;
+		explosion = 0;
+		incendiary = false;
 		singletarget = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
@@ -135,18 +135,18 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
+	/*-@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{
 		Projectile projectile = event.getEntity();
-
+	
 		if (projectile instanceof SmallFireball && firecharges.contains(projectile))
 		{
 			SmallFireball firecharge = (SmallFireball) projectile;
-
+	
 			List<Entity> e = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
+	
 			for (Entity target : e)
 			{
 				if (firecharge.getShooter() instanceof Player && !target.equals(firecharge.getShooter()))
@@ -155,14 +155,14 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 					{
 						((Damageable) target).damage(damage);
 						target.setFireTicks(targetfireticks);
-
+	
 						target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D), Effect.FLAME,
 								0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-
+	
 						firecharges.remove(firecharge);
 						firecharge.remove();
-
+	
 						if (singletarget)
 						{
 							return;
@@ -170,12 +170,58 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 					}
 				}
 			}
-
+	
 			if (explosion > 0)
 			{
 				firecharge.getWorld().createExplosion(firecharge.getLocation(), explosion, incendiary);
-
+	
 				return;
+			}
+		}
+	}*/
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof Fireball)
+		{
+			Fireball firecharge = (Fireball) event.getDamager();
+
+			if (firecharges.contains(firecharge))
+			{
+				List<Entity> entities = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : entities)
+				{
+					if (firecharge.getShooter() instanceof Player && !target.equals(firecharge.getShooter()))
+					{
+						if (target instanceof LivingEntity)
+						{
+							event.setDamage(damage);
+							target.setFireTicks(targetfireticks);
+
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
+									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
+
+							firecharges.remove(firecharge);
+							firecharge.remove();
+
+							if (singletarget)
+							{
+								return;
+							}
+						}
+					}
+				}
+
+				if (explosion > 0)
+				{
+					firecharge.getWorld().createExplosion(firecharge.getLocation(), explosion, incendiary);
+
+					return;
+				}
 			}
 		}
 	}

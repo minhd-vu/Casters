@@ -194,6 +194,8 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 				event.getEntity().getWorld().spigot().playEffect(event.getEntity().getLocation(),
 						Effect.EXPLOSION_LARGE);
 			}
+
+			darkbombs.remove(event.getEntity());
 		}
 	}
 }
