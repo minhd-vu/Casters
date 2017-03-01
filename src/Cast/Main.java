@@ -58,6 +58,7 @@ import Cast.Casts.CastTaunt;
 import Cast.Casts.CastVanish;
 import Cast.Casts.Casts;
 import Cast.Casts.Passives.PassiveBackstab;
+import Cast.Casts.Passives.PassiveFlameshield;
 import Cast.Casts.Types.Cast;
 import Cast.Configs.ConfigManager;
 import Cast.Essentials.Armor;
@@ -159,8 +160,8 @@ public class Main extends JavaPlugin implements Listener
 	private static CastBomb castbomb;
 	private static CastMount castmount;
 
-	@SuppressWarnings("unused")
 	private static PassiveBackstab passivebackstab;
+	private static PassiveFlameshield passiveflameshield;
 
 	private static List<Party> parties;
 
@@ -320,6 +321,7 @@ public class Main extends JavaPlugin implements Listener
 		inferno.getCasts().put("Fireball", 1);
 		inferno.getCasts().put("FireCharge", 1);
 		inferno.getCasts().put("FireBomb", 1);
+		inferno.getCasts().put("Flameshield", 1);
 
 		Type shaman = new Type("Shaman", "Description");
 		shaman.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -480,6 +482,7 @@ public class Main extends JavaPlugin implements Listener
 		types.addAll(jobs);
 
 		mobs = new ArrayList<Mob>();
+
 		mobs.add(new Mob(EntityType.ZOMBIE, 20, 2));
 		mobs.add(new Mob(EntityType.ENDERMAN, 20, 10));
 		mobs.add(new Mob(EntityType.SKELETON, 20, 10));
@@ -487,6 +490,7 @@ public class Main extends JavaPlugin implements Listener
 		mobs.add(new Mob(EntityType.CAVE_SPIDER, 20, 10));
 
 		casters = new HashMap<UUID, Caster>();
+
 		casterscmd = new Casters();
 		castersinfo = new CastersInfo();
 		casterslevel = new CastersLevel();
@@ -503,6 +507,7 @@ public class Main extends JavaPlugin implements Listener
 		cast = new Casts();
 		castlist = new CastList();
 		casts = new HashMap<String, Cast>();
+
 		casts.put("Fireball", castfireball = new CastFireball("Fireball", "Casts A Fireball"));
 		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "Casts A Dark Bomb"));
 		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Casts A Bolt"));
@@ -525,7 +530,9 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
 		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 
-		// passivebackstab = new PassiveBackstab("Backstab");
+		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More."));
+		casts.put("Flameshield",
+				passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You."));
 
 		experience = new Experience();
 		enchant = new Enchant();
@@ -562,7 +569,7 @@ public class Main extends JavaPlugin implements Listener
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
 				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castbackstab, castsiphon, castvanish, castbomb, castmount);
+				castbackstab, castsiphon, castvanish, castbomb, castmount, passivebackstab, passiveflameshield);
 
 		/*-
 		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
@@ -652,6 +659,8 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("vanish", castvanish);
 		casthandler.register("bomb", castbomb);
 		casthandler.register("mount", castmount);
+		// casthandler.register("backstab", passivebackstab);
+		casthandler.register("flameshield", passiveflameshield);
 
 		chathandler.register("chat", chat);
 		chathandler.register("titles", chattitles);

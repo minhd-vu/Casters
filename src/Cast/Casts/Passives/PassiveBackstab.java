@@ -18,8 +18,8 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PassiveBackstab extends Passive implements CommandInterface, Listener
 {
-	private int percentage;
-	private int sneaking;
+	private double percentage;
+	private double sneaking;
 
 	public PassiveBackstab(String name, String description)
 	{
@@ -49,6 +49,11 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 
 				return true;
 			}
+
+			else if (args.length == 1)
+			{
+				player.sendMessage(header + " You Cannot Cast Passives! They Are Always Active.");
+			}
 		}
 
 		return true;
@@ -70,12 +75,12 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 				{
 					if (player.isSneaking())
 					{
-						target.damage(event.getDamage() * (sneaking / 100));
+						target.damage(event.getDamage() * (sneaking / 100.0));
 					}
 
 					else
 					{
-						target.damage(event.getDamage() * (percentage / 100));
+						target.damage(event.getDamage() * (percentage / 100.0));
 					}
 
 					target.getWorld().spigot().playEffect(target.getLocation(), Effect.COLOURED_DUST, 0, 0, 0.2F, 1.0F,
