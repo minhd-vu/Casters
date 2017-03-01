@@ -21,14 +21,15 @@ public class Type
 	private int intellect;
 	private int wisdom;
 
-	private int strengthscale;
-	private int constitutionscale;
-	private int dexterityscale;
-	private int intellectscale;
-	private int wisdomscale;
+	private double meleedamagescale;
+	private double bowdamagescale;
+	private double movementspeedscale;
+	private double maxhealthscale;
+	private double healthregenscale;
+	private double maxmanascale;
+	private double manaregenscale;
 
-	public Type(String name, String description, int strength, int constitution, int dexterity, int intellect,
-			int wisdom)
+	public Type(String name, String description)
 	{
 		this.name = name;
 		this.description = description;
@@ -36,36 +37,6 @@ public class Type
 		armor = new ArrayList<Material>();
 		weapon = new HashMap<Material, Integer>();
 		casts = new HashMap<String, Integer>();
-
-		this.strength = strength;
-		this.constitution = constitution;
-		this.dexterity = dexterity;
-		this.intellect = intellect;
-		this.wisdom = wisdom;
-	}
-
-	public Type(String name, String description, int strength, int constitution, int dexterity, int intellect,
-			int wisdom, int strengthscale, int constitutionscale, int dexterityscale, int intellectscale,
-			int wisdomscale)
-	{
-		this.name = name;
-		this.description = description;
-
-		armor = new ArrayList<Material>();
-		weapon = new HashMap<Material, Integer>();
-		casts = new HashMap<String, Integer>();
-
-		this.strength = strength;
-		this.constitution = constitution;
-		this.dexterity = dexterity;
-		this.intellect = intellect;
-		this.wisdom = wisdom;
-
-		this.strengthscale = strengthscale;
-		this.constitutionscale = constitutionscale;
-		this.dexterityscale = dexterityscale;
-		this.intellectscale = intellectscale;
-		this.wisdomscale = wisdomscale;
 	}
 
 	public String getName()
@@ -98,9 +69,19 @@ public class Type
 		return strength;
 	}
 
+	public void setStrength(int strength)
+	{
+		this.strength = strength;
+	}
+
 	public int getConstitution()
 	{
 		return constitution;
+	}
+
+	public void setConstitution(int constitution)
+	{
+		this.constitution = constitution;
 	}
 
 	public int getDexterity()
@@ -108,9 +89,19 @@ public class Type
 		return dexterity;
 	}
 
+	public void setDexterity(int dexterity)
+	{
+		this.dexterity = dexterity;
+	}
+
 	public int getIntellect()
 	{
 		return intellect;
+	}
+
+	public void setIntellect(int intellect)
+	{
+		this.intellect = intellect;
 	}
 
 	public int getWisdom()
@@ -118,28 +109,84 @@ public class Type
 		return wisdom;
 	}
 
-	public int getStrengthScale()
+	public void setWisdom(int wisdom)
 	{
-		return strengthscale;
+		this.wisdom = wisdom;
 	}
 
-	public int getConstitutionScale()
+	public double getMeleeDamageScale()
 	{
-		return constitutionscale;
+		return meleedamagescale;
 	}
 
-	public int getDexterityScale()
+	public void setMeleeDamageScale(double meleedamagescale)
 	{
-		return dexterityscale;
+		this.meleedamagescale = meleedamagescale;
 	}
 
-	public int getIntellectScale()
+	public double getBowDamageScale()
 	{
-		return intellectscale;
+		return bowdamagescale;
 	}
 
-	public int getWisdomScale()
+	public void setBowDamageScale(double bowdamagescale)
 	{
-		return wisdomscale;
+		this.bowdamagescale = bowdamagescale;
+	}
+
+	public double getMovementSpeedScale()
+	{
+		return movementspeedscale;
+	}
+
+	public void setMovementSpeedScale(double movementspeedscale)
+	{
+		this.movementspeedscale = movementspeedscale;
+	}
+
+	public double getMaxHealthScale()
+	{
+		return maxhealthscale;
+	}
+
+	public void setMaxhealthscale(double maxhealthscale)
+	{
+		this.maxhealthscale = maxhealthscale;
+	}
+
+	public double getHealthRegenScale()
+	{
+		return healthregenscale;
+	}
+
+	public void setHealthregenscale(double healthregenscale)
+	{
+		this.healthregenscale = healthregenscale;
+	}
+
+	public double getMaxManaScale()
+	{
+		return maxmanascale;
+	}
+
+	public void setMaxManaScale(double maxmanascale)
+	{
+		this.maxmanascale = maxmanascale;
+	}
+
+	public double getManaRegenScale()
+	{
+		return manaregenscale;
+	}
+
+	public void setManaRegenScale(double manaregenscale)
+	{
+		this.manaregenscale = manaregenscale;
+	}
+
+	@Override
+	public String toString()
+	{
+		return name;
 	}
 }

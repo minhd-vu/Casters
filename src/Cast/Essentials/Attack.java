@@ -34,13 +34,13 @@ public class Attack implements Listener
 				if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
 						&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
 				{
-					event.setDamage(caster.getStrength() * caster.getStrengthScale()
+					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
 							+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
 				}
 
 				else
 				{
-					event.setDamage(caster.getStrength() * caster.getStrengthScale());
+					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
 				}
 			}
 		}
@@ -65,7 +65,8 @@ public class Attack implements Listener
 				Player player = (Player) arrow.getShooter();
 				Caster caster = Main.getCasters().get(player.getUniqueId());
 
-				event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow));
+				event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow)
+						+ caster.getDexterity() * caster.getType().getBowDamageScale());
 				arrows.remove(arrow);
 			}
 		}

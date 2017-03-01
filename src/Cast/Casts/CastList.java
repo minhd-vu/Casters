@@ -46,9 +46,9 @@ public class CastList implements CommandInterface
 						Integer.parseInt(args[1]);
 					}
 
-					setCommands(caster.getType());
-					setCommands(caster.getRace());
-					setCommands(caster.getJob());
+					setCommands(caster.getType().getName());
+					setCommands(caster.getRace().getName());
+					setCommands(caster.getJob().getName());
 
 					pages.setCommand("cast list");
 					pages.display(player, args, 1);

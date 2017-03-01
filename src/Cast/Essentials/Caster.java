@@ -40,9 +40,9 @@ public class Caster
 	private String title;
 	private String channel;
 
-	private String type;
-	private String race;
-	private String job;
+	private Type type;
+	private Type race;
+	private Type job;
 
 	private int typelevel;
 	private int typemaxlevel;
@@ -83,13 +83,6 @@ public class Caster
 	private int dexterity;
 	private int intellect;
 	private int wisdom;
-
-	private double strengthscale;
-	private double constitutionscale;
-	private double dexterityscale;
-	private double intellectscale;
-	private double wisdomscale;
-	private double wisdomregenscale;
 
 	private Set<Material> armor = new HashSet<Material>();
 	private HashMap<Material, Integer> weapon = new HashMap<Material, Integer>();
@@ -266,22 +259,15 @@ public class Caster
 
 	private void getConfigType()
 	{
-		type = config.getString("Type");
-
-		for (Type c : Main.getClasses())
+		for (Type type : Main.getClasses())
 		{
-			if (c.getName().equals(type))
+			if (type.getName().equals(config.getString("Type")))
 			{
-				strengthscale = c.getStrengthScale();
-				constitutionscale = c.getConstitutionScale();
-				dexterityscale = c.getDexterityScale();
-				intellectscale = c.getIntellectScale();
-				wisdomscale = c.getWisdomScale();
-				wisdomregenscale = c.getWisdomScale();
+				this.type = type;
 
-				armor.addAll(c.getArmor());
-				weapon.putAll(c.getWeapon());
-				casts.putAll(c.getCasts());
+				armor.addAll(type.getArmor());
+				weapon.putAll(type.getWeapon());
+				casts.putAll(type.getCasts());
 
 				break;
 			}
@@ -290,15 +276,15 @@ public class Caster
 
 	private void getConfigRace()
 	{
-		race = config.getString("Race");
-
-		for (Type c : Main.getRaces())
+		for (Type race : Main.getRaces())
 		{
-			if (c.getName().equals(race))
+			if (race.getName().equals(config.getString("Race")))
 			{
-				armor.addAll(c.getArmor());
-				weapon.putAll(c.getWeapon());
-				casts.putAll(c.getCasts());
+				this.race = race;
+
+				armor.addAll(race.getArmor());
+				weapon.putAll(race.getWeapon());
+				casts.putAll(race.getCasts());
 
 				break;
 			}
@@ -307,15 +293,15 @@ public class Caster
 
 	private void getConfigJob()
 	{
-		job = config.getString("Job");
-
-		for (Type c : Main.getJobs())
+		for (Type job : Main.getJobs())
 		{
-			if (c.getName().equals(job))
+			if (job.getName().equals(config.getString("Job")))
 			{
-				armor.addAll(c.getArmor());
-				weapon.putAll(c.getWeapon());
-				casts.putAll(c.getCasts());
+				this.job = job;
+
+				armor.addAll(job.getArmor());
+				weapon.putAll(job.getWeapon());
+				casts.putAll(job.getCasts());
 
 				break;
 			}
@@ -363,7 +349,9 @@ public class Caster
 	{
 		health = config.getDouble("Health.Current");
 		basemaxhealth = config.getDouble("Health.Max");
-		maxhealth = basemaxhealth + constitution * constitutionscale;
+		maxhealth = basemaxhealth + constitution * type.getMaxHealthScale();
+		basehealthregen = config.getDouble("Health.Regen");
+		healthregen = basehealthregen + constitution * type.getHealthRegenScale();
 
 		if (health > maxhealth)
 		{
@@ -379,10 +367,10 @@ public class Caster
 	{
 		mana = config.getDouble("Mana.Current");
 		basemaxmana = config.getDouble("Mana.Max");
-		maxmana = basemaxmana + wisdom * wisdomscale;
+		maxmana = basemaxmana + wisdom * type.getMaxManaScale();
 
 		basemanaregen = config.getDouble("Mana.Regen");
-		manaregen = basemanaregen + wisdom * wisdomregenscale;
+		manaregen = basemanaregen + wisdom * type.getManaRegenScale();
 		manatimer = config.getDouble("Mana.Timer");
 
 		if (mana > maxmana)
@@ -401,17 +389,17 @@ public class Caster
 		return title;
 	}
 
-	public String getType()
+	public Type getType()
 	{
 		return type;
 	}
 
-	public String getRace()
+	public Type getRace()
 	{
 		return race;
 	}
 
-	public String getJob()
+	public Type getJob()
 	{
 		return job;
 	}
@@ -496,6 +484,11 @@ public class Caster
 		return maxhealth;
 	}
 
+	public double getHealthRegen()
+	{
+		return healthregen;
+	}
+
 	public boolean hasMana(double manacost, String name)
 	{
 		if (mana >= manacost)
@@ -541,31 +534,6 @@ public class Caster
 	public int getWisdom()
 	{
 		return wisdom;
-	}
-
-	public double getStrengthScale()
-	{
-		return strengthscale;
-	}
-
-	public double getConstitutionScale()
-	{
-		return constitutionscale;
-	}
-
-	public double getDexterityScale()
-	{
-		return dexterityscale;
-	}
-
-	public double getIntellectScale()
-	{
-		return intellectscale;
-	}
-
-	public double getWisdomScale()
-	{
-		return wisdomscale;
 	}
 
 	public Set<Material> getArmor()
@@ -780,34 +748,34 @@ public class Caster
 		getConfigType();
 	}
 
-	public void setType(String type)
+	public void setType(Type type)
 	{
 		this.type = type;
-		config.set("Type", this.type);
+		config.set("Type", this.type.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type
-				+ ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.type.getName() + ChatColor.GRAY + "!");
 	}
 
-	public void setRace(String race)
+	public void setRace(Type race)
 	{
 		this.race = race;
-		config.set("Race", this.race);
+		config.set("Race", this.race.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race
-				+ ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.race.getName() + ChatColor.GRAY + "!");
 	}
 
-	public void setJob(String job)
+	public void setJob(Type job)
 	{
 		this.job = job;
-		config.set("Job", this.job);
+		config.set("Job", this.job.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job
-				+ ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.job.getName() + ChatColor.GRAY + "!");
 	}
 
 	public void setTypeLevel(int typelevel)

@@ -31,7 +31,7 @@ public class CastersChoose implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(type.getName()))
 				{
-					caster.setType(type.getName());
+					caster.setType(type);
 					return true;
 				}
 			}
@@ -40,7 +40,7 @@ public class CastersChoose implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(race.getName()))
 				{
-					caster.setRace(race.getName());
+					caster.setRace(race);
 					return true;
 				}
 			}
@@ -49,7 +49,7 @@ public class CastersChoose implements CommandInterface
 			{
 				if (args[1].equalsIgnoreCase(job.getName()))
 				{
-					caster.setJob(job.getName());
+					caster.setJob(job);
 					return true;
 				}
 			}

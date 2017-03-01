@@ -184,7 +184,12 @@ public class Main extends JavaPlugin implements Listener
 		races = new ArrayList<Type>();
 		jobs = new ArrayList<Type>();
 
-		Type paladin = new Type("Paladin", "Description", 3, 10, 0, 3, 4);
+		Type paladin = new Type("Paladin", "Description");
+		paladin.setStrength(1);
+		paladin.setConstitution(1);
+		paladin.setDexterity(1);
+		paladin.setIntellect(1);
+		paladin.setWisdom(1);
 		paladin.getArmor().add(Material.DIAMOND_HELMET);
 		paladin.getArmor().add(Material.DIAMOND_CHESTPLATE);
 		paladin.getArmor().add(Material.DIAMOND_LEGGINGS);
@@ -198,7 +203,7 @@ public class Main extends JavaPlugin implements Listener
 		paladin.getCasts().put("Reflect", 1);
 		paladin.getCasts().put("Bandage", 1);
 
-		Type cavalier = new Type("Cavalier", "Description", 5, 6, 5, 1, 3);
+		Type cavalier = new Type("Cavalier", "Description");
 		cavalier.getArmor().add(Material.IRON_HELMET);
 		cavalier.getArmor().add(Material.DIAMOND_CHESTPLATE);
 		cavalier.getArmor().add(Material.CHAINMAIL_LEGGINGS);
@@ -211,7 +216,7 @@ public class Main extends JavaPlugin implements Listener
 		cavalier.getCasts().put("Charge", 1);
 		cavalier.getCasts().put("Mount", 1);
 
-		Type barbarian = new Type("Barbarian", "Description", 14, 4, 2, 0, 0);
+		Type barbarian = new Type("Barbarian", "Description");
 		barbarian.getArmor().add(Material.DIAMOND_HELMET);
 		barbarian.getArmor().add(Material.IRON_CHESTPLATE);
 		barbarian.getArmor().add(Material.CHAINMAIL_LEGGINGS);
@@ -223,7 +228,7 @@ public class Main extends JavaPlugin implements Listener
 		barbarian.getWeapon().put(Material.WOOD_AXE, 5);
 		barbarian.getCasts().put("Taunt", 1);
 
-		Type blackguard = new Type("Blackguard", "Description", 6, 8, 2, 2, 2);
+		Type blackguard = new Type("Blackguard", "Description");
 		blackguard.getArmor().add(Material.CHAINMAIL_HELMET);
 		blackguard.getArmor().add(Material.IRON_CHESTPLATE);
 		blackguard.getArmor().add(Material.IRON_LEGGINGS);
@@ -235,7 +240,7 @@ public class Main extends JavaPlugin implements Listener
 		blackguard.getWeapon().put(Material.WOOD_SWORD, 5);
 		blackguard.getCasts().put("Strike", 1);
 
-		Type assassin = new Type("Assassin", "Description", 8, 2, 8, 1, 1);
+		Type assassin = new Type("Assassin", "Description");
 		assassin.getArmor().add(Material.GOLD_HELMET);
 		assassin.getArmor().add(Material.LEATHER_CHESTPLATE);
 		assassin.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -248,7 +253,7 @@ public class Main extends JavaPlugin implements Listener
 		assassin.getCasts().put("Vanish", 1);
 		assassin.getCasts().put("Backstab", 1);
 
-		Type duelist = new Type("Duelist", "Description", 3, 1, 4, -2, -2);
+		Type duelist = new Type("Duelist", "Description");
 		duelist.getArmor().add(Material.CHAINMAIL_HELMET);
 		duelist.getArmor().add(Material.LEATHER_CHESTPLATE);
 		duelist.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -260,7 +265,7 @@ public class Main extends JavaPlugin implements Listener
 		duelist.getWeapon().put(Material.WOOD_SWORD, 5);
 		duelist.getCasts().put("Strike", 1);
 
-		Type fletcher = new Type("Fletcher", "Description", 2, 1, 4, -2, -2);
+		Type fletcher = new Type("Fletcher", "Description");
 		fletcher.getArmor().add(Material.GOLD_HELMET);
 		fletcher.getArmor().add(Material.LEATHER_CHESTPLATE);
 		fletcher.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -272,7 +277,7 @@ public class Main extends JavaPlugin implements Listener
 		fletcher.getWeapon().put(Material.WOOD_SWORD, 5);
 		fletcher.getCasts().put("Beasts", 1);
 
-		Type musketeer = new Type("Musketeer", "Description", 1, 2, 3, 1, 1);
+		Type musketeer = new Type("Musketeer", "Description");
 		musketeer.getArmor().add(Material.IRON_HELMET);
 		musketeer.getArmor().add(Material.CHAINMAIL_CHESTPLATE);
 		musketeer.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -286,7 +291,7 @@ public class Main extends JavaPlugin implements Listener
 		musketeer.getWeapon().put(Material.WOOD_SWORD, 5);
 		musketeer.getCasts().put("Bomb", 1);
 
-		Type distorter = new Type("Distorter", "Description", -3, 1, 2, 4, 5);
+		Type distorter = new Type("Distorter", "Description");
 		distorter.getArmor().add(Material.LEATHER_HELMET);
 		distorter.getArmor().add(Material.LEATHER_CHESTPLATE);
 		distorter.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -298,7 +303,7 @@ public class Main extends JavaPlugin implements Listener
 		distorter.getWeapon().put(Material.WOOD_HOE, 5);
 		distorter.getCasts().put("DarkBomb", 1);
 
-		Type inferno = new Type("Inferno", "Description", 0, -2, 1, 5, 4);
+		Type inferno = new Type("Inferno", "Description");
 		inferno.getArmor().add(Material.LEATHER_HELMET);
 		inferno.getArmor().add(Material.LEATHER_CHESTPLATE);
 		inferno.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -312,7 +317,7 @@ public class Main extends JavaPlugin implements Listener
 		inferno.getCasts().put("FireCharge", 1);
 		inferno.getCasts().put("FireBomb", 1);
 
-		Type shaman = new Type("Shaman", "Description", 3, 1, 3, 3, 2);
+		Type shaman = new Type("Shaman", "Description");
 		shaman.getArmor().add(Material.CHAINMAIL_HELMET);
 		shaman.getArmor().add(Material.CHAINMAIL_CHESTPLATE);
 		shaman.getArmor().add(Material.LEATHER_LEGGINGS);
@@ -326,7 +331,7 @@ public class Main extends JavaPlugin implements Listener
 		shaman.getCasts().put("LightningStorm", 1);
 		shaman.getCasts().put("ChainLightning", 1);
 
-		Type warlock = new Type("Warlock", "Description", -2, 4, -2, 4, 4);
+		Type warlock = new Type("Warlock", "Description");
 		warlock.getArmor().add(Material.LEATHER_HELMET);
 		warlock.getArmor().add(Material.LEATHER_CHESTPLATE);
 		warlock.getArmor().add(Material.IRON_LEGGINGS);
@@ -339,7 +344,7 @@ public class Main extends JavaPlugin implements Listener
 		warlock.getCasts().put("DarkBomb", 1);
 		warlock.getCasts().put("Siphon", 1);
 
-		Type oracle = new Type("Oracle", "Description", 0, 1, 1, 3, 4);
+		Type oracle = new Type("Oracle", "Description");
 		oracle.getArmor().add(Material.LEATHER_HELMET);
 		oracle.getArmor().add(Material.LEATHER_CHESTPLATE);
 		oracle.getArmor().add(Material.IRON_LEGGINGS);
@@ -350,7 +355,7 @@ public class Main extends JavaPlugin implements Listener
 		oracle.getWeapon().put(Material.STONE_SPADE, 5);
 		oracle.getWeapon().put(Material.WOOD_SPADE, 4);
 
-		Type bloodmage = new Type("Bloodmage", "Description", -4, 4, -3, 5, 3);
+		Type bloodmage = new Type("Bloodmage", "Description");
 		bloodmage.getArmor().add(Material.LEATHER_HELMET);
 		bloodmage.getArmor().add(Material.LEATHER_CHESTPLATE);
 		bloodmage.getArmor().add(Material.IRON_LEGGINGS);
@@ -362,7 +367,7 @@ public class Main extends JavaPlugin implements Listener
 		bloodmage.getWeapon().put(Material.WOOD_SPADE, 4);
 		bloodmage.getCasts().put("Siphon", 1);
 
-		Type monk = new Type("Monk", "Description", 2, 3, 3, 2, 3);
+		Type monk = new Type("Monk", "Description");
 		monk.getArmor().add(Material.LEATHER_HELMET);
 		monk.getArmor().add(Material.LEATHER_CHESTPLATE);
 		monk.getArmor().add(Material.IRON_LEGGINGS);
