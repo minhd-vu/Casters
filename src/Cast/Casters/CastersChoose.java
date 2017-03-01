@@ -31,21 +31,21 @@ public class CastersChoose implements CommandInterface
 
 			if (caster.getType().getName().equalsIgnoreCase(args[1]))
 			{
-				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Class: " + ChatColor.WHITE
+				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Class: " + ChatColor.WHITE
 						+ caster.getType().getName() + ChatColor.GRAY + ".");
 				return true;
 			}
 
 			else if (caster.getRace().getName().equalsIgnoreCase(args[1]))
 			{
-				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Race: " + ChatColor.WHITE
+				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Race: " + ChatColor.WHITE
 						+ caster.getRace().getName() + ChatColor.GRAY + ".");
 				return true;
 			}
 
 			else if (caster.getJob().getName().equalsIgnoreCase(args[1]))
 			{
-				player.sendMessage(header + ChatColor.GRAY + " You Are Already The Job: " + ChatColor.WHITE
+				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Job: " + ChatColor.WHITE
 						+ caster.getJob().getName() + ChatColor.GRAY + ".");
 				return true;
 			}

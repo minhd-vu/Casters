@@ -1,5 +1,6 @@
 package Cast.Casts.Types;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class Passive extends Cast implements CommandInterface
 
 			else if (args.length == 1)
 			{
-				player.sendMessage(header + " You Cannot Cast Passives! They Are Always Active.");
+				player.sendMessage(header + ChatColor.GRAY + " You Cannot Cast Passives! They Are Always Active.");
 			}
 		}
 
