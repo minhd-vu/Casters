@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -711,6 +713,16 @@ public class Main extends JavaPlugin implements Listener
 		event.setLeaveMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY
 				+ "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY
 				+ " Was Kicked From The Server.");
+	}
+
+	@EventHandler
+	public void onPlayerDeathEvent(PlayerDeathEvent event)
+	{
+		event.setDeathMessage(
+				ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Death" + ChatColor.DARK_GRAY + "]" + ChatColor.GRAY + " "
+						+ WordUtils.capitalize(event.getDeathMessage().replaceFirst(event.getEntity().getName(),
+								ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY))
+						+ ".");
 	}
 
 	public static Main getInstance()
