@@ -1,11 +1,14 @@
 package Cast.Casts;
 
+import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
@@ -85,7 +88,7 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 							}
 						}
 
-						player.getWorld().playEffect(player.getLocation(), org.bukkit.Effect.SMOKE, 4);
+						player.getWorld().playEffect(player.getLocation(), Effect.SMOKE, 4);
 
 						player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Have "
 								+ ChatColor.WHITE + "Vanished" + ChatColor.GRAY + "!");
@@ -97,21 +100,23 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 							@Override
 							public void run()
 							{
-								for (Player p : player.getServer().getOnlinePlayers())
+								player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, duration, 1));
+
+								/*-for (Player p : player.getServer().getOnlinePlayers())
 								{
 									p.showPlayer(player);
-
+								
 									if (player.getNearbyEntities(range, range, range).contains(p))
 									{
 										p.sendMessage(header + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
 												+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
 									}
 								}
-
+								
 								player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are Now "
 										+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
-
-								caster.setCasting(name, false);
+								
+								caster.setCasting(name, false);*/
 							}
 
 						}.runTaskLater(Main.getInstance(), duration);
@@ -138,6 +143,38 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 					caster.setEffect("Invisible", 0);
 
 					p.showPlayer((Player) event.getEntity());
+
+					p.removePotionEffect(PotionEffectType.INVISIBILITY);
+
+					// p.showPlayer((Player) event.getEntity());
+
+					if (event.getEntity().getNearbyEntities(range, range, range).contains(p))
+					{
+						p.sendMessage(header + ChatColor.WHITE + " " + event.getEntity().getName() + ChatColor.GRAY
+								+ " Has " + ChatColor.WHITE + "Reappeared" + ChatColor.GRAY + "!");
+					}
+				}
+
+				caster.getPlayer().sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are Now "
+						+ ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
+
+				caster.setCasting(name, false);
+			}
+		}
+
+		if (event.getDamager() instanceof Player)
+		{
+			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+
+			if (caster.hasEffect("Invisible"))
+			{
+				for (Player p : event.getEntity().getServer().getOnlinePlayers())
+				{
+					caster.setEffect("Invisible", 0);
+
+					p.removePotionEffect(PotionEffectType.INVISIBILITY);
+
+					// p.showPlayer((Player) event.getEntity());
 
 					if (event.getEntity().getNearbyEntities(range, range, range).contains(p))
 					{

@@ -92,8 +92,8 @@ public class Caster
 	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
-	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
-			+ ChatColor.WHITE + " ";
+	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY
+			+ "]" + ChatColor.WHITE + " ";
 
 	public Caster(Player player)
 	{
@@ -649,9 +649,9 @@ public class Caster
 
 	public void setConfig()
 	{
-		config.set("Type", type);
-		config.set("Race", race);
-		config.set("Job", job);
+		config.set("Type", type.getName());
+		config.set("Race", race.getName());
+		config.set("Job", job.getName());
 		config.set("Channel", channel);
 		config.set("Title", title);
 		config.set("Level.Type.Current", typelevel);

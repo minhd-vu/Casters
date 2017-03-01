@@ -80,6 +80,7 @@ import Cast.Party.PartyInvite;
 import Cast.Party.PartyLeader;
 import Cast.Party.PartyLeave;
 import Cast.Party.PartyMembers;
+import Cast.Party.PartyRemove;
 import Cast.Wands.WandDistorter;
 import Cast.Wands.WandInferno;
 import Cast.Wands.WandList;
@@ -165,6 +166,7 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyCreate partycreate;
 	private static PartyMembers partymembers;
 	private static PartyInvite partyinvite;
+	private static PartyRemove partyremove;
 	private static PartyAccept partyaccept;
 	private static PartyDecline partydecline;
 	private static PartyChat partychat;
@@ -545,6 +547,7 @@ public class Main extends JavaPlugin implements Listener
 		partycreate = new PartyCreate();
 		partymembers = new PartyMembers();
 		partyinvite = new PartyInvite();
+		partyremove = new PartyRemove();
 		partyaccept = new PartyAccept();
 		partydecline = new PartyDecline();
 		partychat = new PartyChat();
@@ -656,6 +659,7 @@ public class Main extends JavaPlugin implements Listener
 		partyhandler.register("create", partycreate);
 		partyhandler.register("members", partymembers);
 		partyhandler.register("invite", partyinvite);
+		partyhandler.register("remove", partyremove);
 		partyhandler.register("accept", partyaccept);
 		partyhandler.register("decline", partydecline);
 		partyhandler.register("chat", partychat);
