@@ -1,0 +1,23 @@
+Casters To Do List:
+1.  DEFERED - Make A Config File For Each Of The Classes Which Include Their Base Stats Along With Scale.
+2.  DEFERED - Create An Experience Class File Or Rename The Levels Class To It. Might have been done.
+3.  DEFERED - Make Class Files For Each Class So That You Can Set Base Cast Levels.
+4.  DEFERED - Make The Values of Wand Adjustable In Classes Config.
+5.  COMPLETED - Make Classes That Aren't Just Mages Along With More Skills.
+6.  COMPLTED - Add In Casters' Command.
+7.  COMPLTED - Configure Custom Chat.
+8.  TODO - Incorporate Stats Into Skills.
+9.  PROGRESS - Make Multiple Types of Experience.
+10. TODO - Make It So That Attributes Do Something.
+11. COMPLETED - Make It So When Hitting With A Non Type Weapon It Deals No Damage.
+12. PROGRESS - Make It So Changing Classes Resets Stats.
+13. TODO - Add In Messaging System.
+14. PROGRESS - Add In Party System.
+15. DEFERED - Make It So That Things In Main Are Static And No Need To Pass Into The Casters.
+16. COMPLETED - Make All Configs Local And Make The Only Config Files Be Player Saves.
+17. TODO - Add In More Health Without Scaling As In Allow For Health An Damage Numbers To Be In The 100s.
+18. COMPLETED - Test Out Custom Recipes.
+19. PROGRESS - Add In Passives.
+20. TODO - Make It So That If You Hit Or Is Cancelled During WarmUp It Cancels It.
+21. TODO - Make Schedulers Cancellable.
+22. TODO - Implement Currency System.
