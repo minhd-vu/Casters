@@ -17,8 +17,8 @@ public class CastersJobs implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String fill = "--------------------";
-	private String header =
-			ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Jobs" + ChatColor.DARK_GRAY + "]";
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Jobs" + ChatColor.DARK_GRAY
+			+ "]";
 
 	private List<String> jobs = new ArrayList<String>();
 

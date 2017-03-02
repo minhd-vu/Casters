@@ -18,8 +18,8 @@ public class CastersArmor implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String fill = "-------------------";
-	private String header =
-			ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Armor" + ChatColor.DARK_GRAY + "]";
+	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Armor" + ChatColor.DARK_GRAY
+			+ "]";
 
 	private List<String> armor = new ArrayList<String>();
 

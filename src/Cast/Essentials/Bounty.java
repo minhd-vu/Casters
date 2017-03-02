@@ -16,11 +16,11 @@ public class Bounty implements Listener
 		if (event.getEntity().getKiller() instanceof Player)
 		{
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM);
-	        SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
-	        skullmeta.setOwner(event.getEntity().getName());
-	        skull.setItemMeta(skullmeta);
-	        
-	        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), skull);
+			SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
+			skullmeta.setOwner(event.getEntity().getName());
+			skull.setItemMeta(skullmeta);
+
+			event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), skull);
 		}
 	}
 }

@@ -76,8 +76,8 @@ public class CastList implements CommandInterface
 
 					if (cast instanceof ActiveCast)
 					{
-						casttype =
-								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY + "]";
+						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
+								+ "]";
 					}
 
 					else if (cast instanceof TargettedCast)
@@ -88,8 +88,8 @@ public class CastList implements CommandInterface
 
 					else if (cast instanceof Passive)
 					{
-						casttype =
-								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY + "]";
+						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY
+								+ "]";
 					}
 
 					commands.add(casttype + ChatColor.AQUA + " " + cast.getName() + ChatColor.GRAY + " - "

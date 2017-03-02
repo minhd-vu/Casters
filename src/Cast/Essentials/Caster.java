@@ -159,9 +159,9 @@ public class Caster
 
 		Scoreboard scoreboard = ScoreboardLib.createScoreboard(player).setHandler(new ScoreboardHandler()
 		{
-			private final HighlightedString casterstext =
-					new HighlightedString("Casters", ChatColor.DARK_AQUA.toString() + ChatColor.BOLD.toString(),
-							ChatColor.AQUA.toString() + ChatColor.BOLD.toString());
+			private final HighlightedString casterstext = new HighlightedString("Casters",
+					ChatColor.DARK_AQUA.toString() + ChatColor.BOLD.toString(),
+					ChatColor.AQUA.toString() + ChatColor.BOLD.toString());
 			private final HighlightedString nametext = new HighlightedString(player.getName(), "&6", "&e");
 
 			@Override

@@ -17,8 +17,8 @@ public class CastersRaces implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String fill = "-------------------";
-	private String header =
-			ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Races" + ChatColor.DARK_GRAY + "]";
+	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Races" + ChatColor.DARK_GRAY
+			+ "]";
 
 	private List<String> races = new ArrayList<String>();
 

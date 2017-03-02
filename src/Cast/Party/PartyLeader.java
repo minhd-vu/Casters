@@ -21,7 +21,8 @@ public class PartyLeader implements CommandInterface
 
 			if (args.length != 2)
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " Correct Usage: " + ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " leader <name>");
+				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " Correct Usage: " + ChatColor.DARK_AQUA
+						+ "/party" + ChatColor.AQUA + " leader <name>");
 				return false;
 			}
 
@@ -31,19 +32,22 @@ public class PartyLeader implements CommandInterface
 				{
 					if (caster.getPlayer().getName().equals(args[1]))
 					{
-						caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Are Already The Party Leader.");
+						caster.getPlayer()
+								.sendMessage(Party.header + ChatColor.GRAY + " You Are Already The Party Leader.");
 						return false;
 					}
 
 					for (Caster c : Main.getCasters().values())
 					{
-						if (!c.equals(caster) && c.getPlayer().getName().equals(args[1]) && caster.getParty().getMembers().contains(c))
+						if (!c.equals(caster) && c.getPlayer().getName().equals(args[1])
+								&& caster.getParty().getMembers().contains(c))
 						{
 							caster.getParty().setLeader(c);
 
 							for (Caster i : caster.getParty().getMembers())
 							{
-								i.getPlayer().sendMessage(Party.header + " " + ChatColor.WHITE + i.getPlayer().getName() + ChatColor.GRAY + " Is Now The Party Leader");
+								i.getPlayer().sendMessage(Party.header + " " + ChatColor.WHITE + i.getPlayer().getName()
+										+ ChatColor.GRAY + " Is Now The Party Leader");
 								return true;
 							}
 						}
@@ -54,14 +58,16 @@ public class PartyLeader implements CommandInterface
 
 				else
 				{
-					player.sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Set The Party Leader.");
+					player.sendMessage(
+							Party.header + ChatColor.GRAY + " You Must Be The Leader To Set The Party Leader.");
 					return false;
 				}
 			}
 
 			else
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Set The Leader.");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Set The Leader.");
 			}
 		}
 

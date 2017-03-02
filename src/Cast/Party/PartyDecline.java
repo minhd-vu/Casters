@@ -21,14 +21,17 @@ public class PartyDecline implements CommandInterface
 
 			if (caster.hasInvite() && !caster.hasParty())
 			{
-				caster.getInvite().getSender().getPlayer().sendMessage(Party.header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Has Declined The Party Invitation.");
+				caster.getInvite().getSender().getPlayer().sendMessage(Party.header + ChatColor.WHITE
+						+ caster.getPlayer().getName() + ChatColor.GRAY + " Has Declined The Party Invitation.");
 				caster.setInvite(null);
-				caster.getPlayer().sendMessage(Party.header + ChatColor.RED + "You Have Declined The Party Invitation.");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.RED + "You Have Declined The Party Invitation.");
 			}
 
 			else
 			{
-				caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Do Not Have A Pending Party Invitation!");
+				caster.getPlayer()
+						.sendMessage(Party.header + ChatColor.GRAY + " You Do Not Have A Pending Party Invitation!");
 			}
 		}
 

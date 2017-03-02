@@ -30,25 +30,30 @@ public class CastersLevel implements CommandInterface
 			{
 				return false;
 			}
-			
+
 			String message = "\n" + ChatColor.DARK_GRAY + fill + header + fill + ChatColor.DARK_AQUA;
-			
+
 			/*
-			player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + header + fill + ChatColor.DARK_AQUA + "\n"
-					+ caster.getType() + ": " + ChatColor.GRAY + caster.getTypeLevel() + "/" + caster.getTypeMaxLevel()
-					+ " - "
-					+ Double.parseDouble(new DecimalFormat("##.#").format(caster.getTypeExp() / caster.getTypeMaxExp() * 100))
-					+ "%" + ChatColor.DARK_AQUA + "\n" + caster.getRace() + ": " + ChatColor.GRAY
-					+ caster.getRaceLevel() + "/" + caster.getRaceMaxLevel() + " - "
-					+ Double.parseDouble(new DecimalFormat("##.#").format(caster.getRaceExp() / caster.getRaceMaxExp() * 100))
-					+ "%" + ChatColor.DARK_AQUA + "\n" + caster.getJob() + ": " + ChatColor.GRAY + caster.getJobLevel()
-					+ "/" + caster.getJobMaxLevel() + " - "
-					+ Double.parseDouble(new DecimalFormat("##.#").format(caster.getJobExp() / caster.getJobMaxExp() * 100))
-					+ "%\n" + ChatColor.DARK_GRAY + bar);
-			*/
-			
-			message += caster.getType() + ": " + ChatColor.GRAY + caster.getTypeLevel() + "/"
-					+ caster.getTypeMaxLevel() + " - ";
+			 * player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + header +
+			 * fill + ChatColor.DARK_AQUA + "\n" + caster.getType() + ": " +
+			 * ChatColor.GRAY + caster.getTypeLevel() + "/" +
+			 * caster.getTypeMaxLevel() + " - " + Double.parseDouble(new
+			 * DecimalFormat("##.#").format(caster.getTypeExp() /
+			 * caster.getTypeMaxExp() * 100)) + "%" + ChatColor.DARK_AQUA + "\n"
+			 * + caster.getRace() + ": " + ChatColor.GRAY +
+			 * caster.getRaceLevel() + "/" + caster.getRaceMaxLevel() + " - " +
+			 * Double.parseDouble(new
+			 * DecimalFormat("##.#").format(caster.getRaceExp() /
+			 * caster.getRaceMaxExp() * 100)) + "%" + ChatColor.DARK_AQUA + "\n"
+			 * + caster.getJob() + ": " + ChatColor.GRAY + caster.getJobLevel()
+			 * + "/" + caster.getJobMaxLevel() + " - " + Double.parseDouble(new
+			 * DecimalFormat("##.#").format(caster.getJobExp() /
+			 * caster.getJobMaxExp() * 100)) + "%\n" + ChatColor.DARK_GRAY +
+			 * bar);
+			 */
+
+			message += caster.getType() + ": " + ChatColor.GRAY + caster.getTypeLevel() + "/" + caster.getTypeMaxLevel()
+					+ " - ";
 
 			if (caster.getTypeLevel() != caster.getTypeMaxLevel())
 			{
@@ -70,26 +75,27 @@ public class CastersLevel implements CommandInterface
 						new DecimalFormat("##.#").format(caster.getRaceExp() / caster.getRaceMaxExp() * 100)) + "%";
 			}
 
-			else 
-			{
-				message += "100%";
-			}
-			
-			message += ChatColor.DARK_AQUA + "\n" + caster.getJob() + ": " + ChatColor.GRAY + caster.getJobLevel()
-			+ "/" + caster.getJobMaxLevel() + " - ";
-			
-			if (caster.getJobLevel() != caster.getJobMaxLevel())
-			{
-				message += Double.parseDouble(new DecimalFormat("##.#").format(caster.getJobExp() / caster.getJobMaxExp() * 100)) + "%";
-			}
-			
 			else
 			{
 				message += "100%";
 			}
-			
+
+			message += ChatColor.DARK_AQUA + "\n" + caster.getJob() + ": " + ChatColor.GRAY + caster.getJobLevel() + "/"
+					+ caster.getJobMaxLevel() + " - ";
+
+			if (caster.getJobLevel() != caster.getJobMaxLevel())
+			{
+				message += Double.parseDouble(
+						new DecimalFormat("##.#").format(caster.getJobExp() / caster.getJobMaxExp() * 100)) + "%";
+			}
+
+			else
+			{
+				message += "100%";
+			}
+
 			message += "\n" + ChatColor.DARK_GRAY + bar;
-			
+
 			player.sendMessage(message);
 		}
 

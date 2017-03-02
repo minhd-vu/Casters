@@ -69,7 +69,8 @@ public class ConfigManager
 				configFile = new File(plugin.getDataFolder() + file.replace("/", File.separator));
 			else
 				configFile = new File(plugin.getDataFolder() + File.separator + file.replace("/", File.separator));
-		} else
+		}
+		else
 			configFile = new File(plugin.getDataFolder(), file);
 
 		return configFile;
@@ -91,7 +92,8 @@ public class ConfigManager
 				if (!resource.isEmpty())
 					this.copyResource(plugin.getResource(resource), file);
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -124,7 +126,8 @@ public class ConfigManager
 					addLine = currentLine.replaceFirst("#", pluginName + "_COMMENT_" + commentNum + ":");
 					whole.append(addLine + "\n");
 					commentNum++;
-				} else
+				}
+				else
 					whole.append(currentLine + "\n");
 			}
 
@@ -133,7 +136,8 @@ public class ConfigManager
 
 			reader.close();
 			return configStream;
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			return null;
@@ -157,7 +161,8 @@ public class ConfigManager
 
 			reader.close();
 			return comments;
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			return 0;
@@ -190,13 +195,15 @@ public class ConfigManager
 						config.append(comment + "\n");
 						lastLine = 0;
 						headerLine = 1;
-					} else if (headerLine == 1)
+					}
+					else if (headerLine == 1)
 					{
 						config.append(comment + "\n\n");
 						lastLine = 0;
 						headerLine = 0;
 					}
-				} else
+				}
+				else
 				{
 					String normalComment;
 					if (comment.startsWith("# ' "))
@@ -211,7 +218,8 @@ public class ConfigManager
 
 					lastLine = 0;
 				}
-			} else
+			}
+			else
 			{
 				config.append(line + "\n");
 				lastLine = 1;
@@ -231,7 +239,8 @@ public class ConfigManager
 			writer.flush();
 			writer.close();
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -256,7 +265,8 @@ public class ConfigManager
 
 			out.close();
 			resource.close();
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

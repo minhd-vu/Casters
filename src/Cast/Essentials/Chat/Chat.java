@@ -90,77 +90,76 @@ public class Chat implements CommandInterface, Listener
 
 		switch (caster.getChannel())
 		{
-			case "Global":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "GBL" + ChatColor.DARK_GRAY + "] ";
-				break;
+		case "Global":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "GBL" + ChatColor.DARK_GRAY + "] ";
+			break;
 
-			case "Local":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "LOC" + ChatColor.DARK_GRAY + "] ";
+		case "Local":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "LOC" + ChatColor.DARK_GRAY + "] ";
 
-				for (Player player : Bukkit.getOnlinePlayers())
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player))
 				{
-					if (!caster.getPlayer().getNearbyEntities(localrange, localrange, localrange).contains(player))
-					{
-						event.getRecipients().remove(player);
-					}
+					event.getRecipients().remove(player);
 				}
+			}
 
-				break;
+			break;
 
-			case "Shout":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.RED + "SHO" + ChatColor.DARK_GRAY + "] ";
+		case "Shout":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.RED + "SHO" + ChatColor.DARK_GRAY + "] ";
 
-				for (Player player : Bukkit.getOnlinePlayers())
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player))
 				{
-					if (!caster.getPlayer().getNearbyEntities(shoutrange, shoutrange, shoutrange).contains(player))
-					{
-						event.getRecipients().remove(player);
-					}
+					event.getRecipients().remove(player);
 				}
+			}
 
-				break;
+			break;
 
-			case "Roleplay":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "RPG" + ChatColor.DARK_GRAY + "] ";
+		case "Roleplay":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "RPG" + ChatColor.DARK_GRAY + "] ";
 
-				for (Player player : Bukkit.getOnlinePlayers())
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange).contains(player))
 				{
-					if (!caster.getPlayer().getNearbyEntities(roleplayrange, roleplayrange, roleplayrange)
-							.contains(player))
-					{
-						event.getRecipients().remove(player);
-					}
+					event.getRecipients().remove(player);
 				}
+			}
 
-				break;
+			break;
 
-			case "Looking For Group":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + "LFG" + ChatColor.DARK_GRAY + "] ";
-				break;
+		case "Looking For Group":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + "LFG" + ChatColor.DARK_GRAY + "] ";
+			break;
 
-			case "Trade":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "TRD" + ChatColor.DARK_GRAY + "] ";
-				break;
+		case "Trade":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "TRD" + ChatColor.DARK_GRAY + "] ";
+			break;
 
-			case "Help":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "HLP" + ChatColor.DARK_GRAY + "] ";
-				break;
+		case "Help":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "HLP" + ChatColor.DARK_GRAY + "] ";
+			break;
 
-			case "Party":
-				message += ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "PTY" + ChatColor.DARK_GRAY + "] ";
+		case "Party":
+			message += ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "PTY" + ChatColor.DARK_GRAY + "] ";
 
-				for (Caster player : Main.getCasters().values())
+			for (Caster player : Main.getCasters().values())
+			{
+				if (!caster.getParty().getMembers().contains(player))
 				{
-					if (!caster.getParty().getMembers().contains(player))
-					{
-						event.getRecipients().remove(player.getPlayer());
-					}
+					event.getRecipients().remove(player.getPlayer());
 				}
+			}
 
-				break;
+			break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 
 		if (!event.getRecipients().contains(caster.getPlayer()))

@@ -53,7 +53,7 @@ public class CommandHandler implements CommandExecutor
 
 				catch (NumberFormatException e)
 				{
-					
+
 				}
 
 				if (exists(args[0].toLowerCase()))

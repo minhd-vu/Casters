@@ -28,29 +28,29 @@ public class Armor implements Listener
 	{
 		switch (material)
 		{
-			case DIAMOND_HELMET:
-			case GOLD_HELMET:
-			case IRON_HELMET:
-			case CHAINMAIL_HELMET:
-			case LEATHER_HELMET:
-			case DIAMOND_CHESTPLATE:
-			case GOLD_CHESTPLATE:
-			case IRON_CHESTPLATE:
-			case CHAINMAIL_CHESTPLATE:
-			case LEATHER_CHESTPLATE:
-			case DIAMOND_LEGGINGS:
-			case GOLD_LEGGINGS:
-			case IRON_LEGGINGS:
-			case CHAINMAIL_LEGGINGS:
-			case LEATHER_LEGGINGS:
-			case DIAMOND_BOOTS:
-			case GOLD_BOOTS:
-			case IRON_BOOTS:
-			case CHAINMAIL_BOOTS:
-			case LEATHER_BOOTS:
-				return true;
-			default:
-				return false;
+		case DIAMOND_HELMET:
+		case GOLD_HELMET:
+		case IRON_HELMET:
+		case CHAINMAIL_HELMET:
+		case LEATHER_HELMET:
+		case DIAMOND_CHESTPLATE:
+		case GOLD_CHESTPLATE:
+		case IRON_CHESTPLATE:
+		case CHAINMAIL_CHESTPLATE:
+		case LEATHER_CHESTPLATE:
+		case DIAMOND_LEGGINGS:
+		case GOLD_LEGGINGS:
+		case IRON_LEGGINGS:
+		case CHAINMAIL_LEGGINGS:
+		case LEATHER_LEGGINGS:
+		case DIAMOND_BOOTS:
+		case GOLD_BOOTS:
+		case IRON_BOOTS:
+		case CHAINMAIL_BOOTS:
+		case LEATHER_BOOTS:
+			return true;
+		default:
+			return false;
 		}
 	}
 

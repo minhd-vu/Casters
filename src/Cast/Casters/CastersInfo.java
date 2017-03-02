@@ -11,8 +11,8 @@ import Cast.Essentials.Type;
 
 public class CastersInfo implements CommandInterface
 {
-	private String header =
-			ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Info" + ChatColor.DARK_GRAY + "] ";
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Info" + ChatColor.DARK_GRAY
+			+ "] ";
 	private String fill = "--------------------";
 	private String bar = "-----------------------------------------------------";
 
