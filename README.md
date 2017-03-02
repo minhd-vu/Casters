@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-Casters is a plugin developed for the soul purpose for those RPG enthusiasts to have a home in Minecraft. The Casters Plugins provides key RPG elements such as classes, secondary classes (professions), spells/casts, and much more to come.
+Casters is a plugin developed for the sole purpose for those RPG enthusiasts to have a home in Minecraft. The Casters Plugins provides key RPG elements such as classes, secondary classes (professions), spells/casts, and much more to come.
 
 ### About the Author
 
