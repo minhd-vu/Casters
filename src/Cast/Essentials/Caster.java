@@ -14,6 +14,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -102,8 +103,12 @@ public class Caster
 	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
 
-	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY
-			+ "]" + ChatColor.WHITE + " ";
+	private static final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters"
+			+ ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
+
+	private static final String tabheader = ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA
+			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
+	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
 
 	private final DecimalFormat decimalformat = new DecimalFormat("##.#");
 
@@ -234,6 +239,8 @@ public class Caster
 
 		scoreboard.activate();
 
+		Main.getTabManager().setHeader(tabheader);
+
 		new BukkitRunnable()
 		{
 			@Override
@@ -244,6 +251,8 @@ public class Caster
 								+ "/" + Double.parseDouble(decimalformat.format(player.getMaxHealth())) + "        "
 								+ ChatColor.BLUE + "✦ " + Double.parseDouble(decimalformat.format(mana)) + "/"
 								+ Double.parseDouble(decimalformat.format(maxmana)));
+				Main.getTabManager().setFooter(
+						tabfooter + ChatColor.GRAY + "\nPING: " + ((CraftPlayer) player).getHandle().ping + "\n");
 
 				Main.getActionBarManager().send(player);
 				Main.getTabManager().send(player);

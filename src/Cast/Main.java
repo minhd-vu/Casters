@@ -189,11 +189,7 @@ public class Main extends JavaPlugin implements Listener
 
 		actionbarmanager = new ActionBarManager();
 		titlemanager = new TitleManager();
-
-		String message = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA + ChatColor.BOLD
-				+ "CASTERCRAFT" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
-
-		tabmanager = new TabManager(message, ChatColor.YELLOW + "\nTOO MUCH SAUCE!");
+		tabmanager = new TabManager();
 
 		types = new ArrayList<Type>();
 		classes = new ArrayList<Type>();
