@@ -1,9 +1,12 @@
-package Cast.Casts;
+package Cast.Casts.Targetted;
 
+import org.bukkit.Effect;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
@@ -12,13 +15,12 @@ import Cast.Casts.Types.TargettedCast;
 import Cast.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 
-public class CastMute extends TargettedCast implements CommandInterface
+public class CastBandage extends TargettedCast implements CommandInterface, Listener
 {
-	private double damage;
+	private double heal;
 	private int range;
-	private int duration;
 
-	public CastMute(String name, String description)
+	public CastBandage(String name, String description)
 	{
 		super(name, description);
 
@@ -31,13 +33,11 @@ public class CastMute extends TargettedCast implements CommandInterface
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		damage = 3;
-		range = 4;
-		duration = 80;
+		heal = 1;
+		range = 8;
 
-		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
-		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Heal:" + heal + " HP");
+		info.add(ChatColor.DARK_AQUA + "Range:" + range + " Blocks");
 
 		pages.setPage(info);
 	}
@@ -59,39 +59,41 @@ public class CastMute extends TargettedCast implements CommandInterface
 
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				LivingEntity target = getTarget(player, range, false);
+				LivingEntity target = getTarget(player, range, true);
 
-				if (target != null && !target.equals(player))
+				warmup.start(caster, target, name);
+
+				new BukkitRunnable()
 				{
-					warmup.start(caster, target, name);
-
-					new BukkitRunnable()
+					@SuppressWarnings("deprecation")
+					@Override
+					public void run()
 					{
-						@Override
-						public void run()
+						caster.setCasting(name, true);
+						caster.setMana(manacost);
+
+						if (target.getHealth() + heal > target.getMaxHealth())
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							target.damage(damage);
-
-							if (target instanceof Player)
-							{
-								Caster tcaster = Main.getCasters().get(target.getUniqueId());
-
-								tcaster.setEffect("Silenced", duration);
-								caster.setEffect("Silencing", duration);
-							}
-
-							caster.setCasting(name, false);
-
-							cast(player, target);
-
-							cooldown.start(player.getName());
+							target.setHealth(target.getMaxHealth());
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
-				}
+						else
+						{
+							target.setHealth(target.getHealth() + heal);
+						}
+
+						target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.HEART, 0, 0,
+								0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
+						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_PLACE, 4.0F, 1.0F);
+
+						cast(player, target);
+
+						cooldown.start(player.getName());
+
+						caster.setCasting(name, false);
+					}
+
+				}.runTaskLater(Main.getInstance(), warmup.getDuration());
 			}
 		}
 

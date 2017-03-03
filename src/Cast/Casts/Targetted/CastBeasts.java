@@ -1,11 +1,14 @@
-package Cast.Casts;
+package Cast.Casts.Targetted;
 
-import org.bukkit.Effect;
-import org.bukkit.Sound;
+import java.util.ArrayList;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
+import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
@@ -14,28 +17,32 @@ import Cast.Casts.Types.TargettedCast;
 import Cast.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 
-public class CastBash extends TargettedCast implements CommandInterface
+public class CastBeasts extends TargettedCast implements CommandInterface, Listener
 {
-	private double damage;
+	private double duration;
+	private int amount;
 	private int range;
 
-	public CastBash(String name, String description)
+	public CastBeasts(String name, String description)
 	{
 		super(name, description);
 
-		warmup.setDuration(0);
-		warmup.setAmplifier(0);
-		cooldown.setCooldown(40);
+		warmup.setDuration(20);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
 		manacost = 3;
 
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		damage = 3;
-		range = 4;
+		duration = 0;
+		amount = 3;
+		range = 10;
 
-		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
+		info.add(duration == 0 ? ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + "Forever"
+				: ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Amount: " + ChatColor.GRAY + amount + " Wolves");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 
 		pages.setPage(info);
@@ -60,33 +67,52 @@ public class CastBash extends TargettedCast implements CommandInterface
 			{
 				LivingEntity target = getTarget(player, range, false);
 
-				if (target != null && !target.equals(player))
+				if (target != null && !target.equals(player) && !(target instanceof Wolf))
 				{
 					warmup.start(caster, target, name);
 
 					new BukkitRunnable()
 					{
-						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							caster.interruptCasts(target);
+							ArrayList<Wolf> wolves = new ArrayList<Wolf>();
 
-							target.damage(damage);
+							for (int i = 0; i < amount; ++i)
+							{
+								wolves.add((Wolf) player.getWorld().spawnEntity(player.getLocation(), EntityType.WOLF));
+							}
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
-									1.0F);
+							for (Wolf wolf : wolves)
+							{
+								wolf.setOwner(player);
+								wolf.setTarget(target);
+							}
 
 							cast(player, target);
 
 							cooldown.start(player.getName());
 
 							caster.setCasting(name, false);
+
+							if (duration > 0)
+							{
+								new BukkitRunnable()
+								{
+									@Override
+									public void run()
+									{
+										for (Wolf wolf : wolves)
+										{
+											wolf.remove();
+										}
+									}
+
+								}.runTaskLater(Main.getInstance(), (long) duration);
+							}
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());

@@ -1,4 +1,4 @@
-package Cast.Casts;
+package Cast.Casts.Targetted;
 
 import java.util.ArrayList;
 import java.util.List;
