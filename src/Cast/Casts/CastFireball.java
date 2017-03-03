@@ -27,6 +27,7 @@ import net.md_5.bungee.api.ChatColor;
 public class CastFireball extends ActiveCast implements CommandInterface, Listener
 {
 	private List<Snowball> fireballs = new ArrayList<Snowball>();
+
 	private double timer;
 	private double damage;
 	private double velocity;
@@ -53,7 +54,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 
 		timer = 100;
 		damage = 2;
-		velocity = 1;
+		velocity = 1.5;
 		gravity = true;
 		fireballfireticks = 100;
 		targetfireticks = 50;
@@ -83,14 +84,9 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 				return true;
 			}
 
-			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
-					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
-					&& caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				if (warmup.getDuration() > 0)
-				{
-					warmup.start(caster, name);
-				}
+				warmup.start(caster, name);
 
 				new BukkitRunnable()
 				{
@@ -155,8 +151,20 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 			{
 				if (fireball.getShooter() instanceof Player && !target.equals(fireball.getShooter()))
 				{
+					Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
+
 					if (target instanceof LivingEntity)
 					{
+						if (target instanceof Player)
+						{
+							Caster ctarget = Main.getCasters().get(target.getUniqueId());
+
+							if (caster.sameParty(ctarget))
+							{
+								return;
+							}
+						}
+
 						((Damageable) target).damage(damage);
 						target.setFireTicks(targetfireticks);
 

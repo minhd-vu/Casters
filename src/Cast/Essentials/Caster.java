@@ -22,6 +22,7 @@ import org.bukkit.scheduler.BukkitTask;
 import Cast.Main;
 import Cast.Configs.Config;
 import Cast.Essentials.Effects.Effect;
+import Cast.Essentials.Schedulers.Cooldown;
 import Cast.Party.Invite;
 import Cast.Party.Party;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
@@ -36,7 +37,8 @@ public class Caster
 	private Player player;
 
 	private BossBar bossbar;
-	private BukkitTask attackrunnable;
+	@SuppressWarnings("unused")
+	private BukkitTask attacktask;
 	private int bossbarremovetimer;
 
 	private Party party;
@@ -250,10 +252,10 @@ public class Caster
 		}.runTaskTimer(Main.getInstance(), 0, 2);
 	}
 
-	public boolean canCast()
+	public boolean canCast(String name, Cooldown cooldown, double manacost)
 	{
-
-		return false;
+		return hasCast(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name)
+				&& !cooldown.hasCooldown(player, name) && hasMana(manacost, name);
 	}
 
 	public Caster(UUID uuid)
@@ -296,7 +298,7 @@ public class Caster
 
 				bossbar.setVisible(true);
 
-				attackrunnable = new BukkitRunnable()
+				attacktask = new BukkitRunnable()
 				{
 					@Override
 					public void run()
@@ -318,6 +320,11 @@ public class Caster
 	public boolean hasParty()
 	{
 		return party != null;
+	}
+
+	public boolean sameParty(Caster caster)
+	{
+		return hasParty() && party.getMembers().contains(caster);
 	}
 
 	public Invite getInvite()

@@ -10,7 +10,7 @@ import Cast.Configs.Config;
 
 public class Cooldown
 {
-	private HashMap<String, Long> cooldown = new HashMap<String, Long>();
+	private HashMap<String, Long> cooldown;
 
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
@@ -19,6 +19,7 @@ public class Cooldown
 
 	public Cooldown()
 	{
+		cooldown = new HashMap<String, Long>();
 		seconds = 0;
 	}
 

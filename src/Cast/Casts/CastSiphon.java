@@ -69,9 +69,7 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 				return true;
 			}
 
-			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
-					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
-					&& caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false);
 

@@ -71,9 +71,7 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 
 						if (target.isDead())
 						{
-							if (caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
-									&& !caster.isSilenced(name) && !caster.isStunned(name)
-									&& !cooldown.hasCooldown(player, name) && caster.hasMana(manacost, name))
+							if (caster.canCast(name, cooldown, manacost))
 							{
 								if (warmup.getDuration() > 0)
 								{

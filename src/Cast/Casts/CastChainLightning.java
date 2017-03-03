@@ -71,9 +71,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 				return true;
 			}
 
-			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
-					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
-					&& caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, playerrange, false);
 
@@ -108,6 +106,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 										this.cancel();
 									}
 								}
+
 							}.runTaskTimer(Main.getInstance(), 0, period);
 
 							cast(player, target);

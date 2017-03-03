@@ -16,7 +16,7 @@ import Cast.Essentials.Caster;
 
 public class WarmUp
 {
-	private HashMap<String, Long> warmups = new HashMap<String, Long>();
+	private HashMap<String, Long> warmups;
 
 	private int duration;
 	private int amplifier;
@@ -26,6 +26,7 @@ public class WarmUp
 
 	public WarmUp()
 	{
+		warmups = new HashMap<String, Long>();
 		duration = 0;
 		amplifier = 0;
 	}
@@ -45,33 +46,37 @@ public class WarmUp
 
 	public void start(Caster caster, String name)
 	{
-		caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
-		caster.setWarmingUp(name, true);
-
-		new BukkitRunnable()
+		if (duration > 0)
 		{
-			@Override
-			public void run()
+			caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
+			caster.setWarmingUp(name, true);
+
+			new BukkitRunnable()
 			{
-				caster.setWarmingUp(name, false);
-			}
-		}.runTaskLater(Main.getInstance(), duration);
+				@Override
+				public void run()
+				{
+					caster.setWarmingUp(name, false);
+				}
 
-		warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
+			}.runTaskLater(Main.getInstance(), duration);
 
-		List<Entity> e = caster.getPlayer().getNearbyEntities(16, 16, 16);
+			warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
 
-		for (Entity reciever : e)
-		{
-			if (reciever instanceof Player)
+			List<Entity> e = caster.getPlayer().getNearbyEntities(16, 16, 16);
+
+			for (Entity reciever : e)
 			{
-				reciever.sendMessage(header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY
-						+ " Begins To Casts " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+				if (reciever instanceof Player)
+				{
+					reciever.sendMessage(header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY
+							+ " Begins To Casts " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+				}
 			}
+
+			caster.getPlayer().sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast "
+					+ ChatColor.WHITE + name + ChatColor.GRAY + "!");
 		}
-
-		caster.getPlayer().sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast "
-				+ ChatColor.WHITE + name + ChatColor.GRAY + "!");
 	}
 
 	public void start(Caster caster, LivingEntity target, String name)

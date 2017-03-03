@@ -6,16 +6,14 @@ import java.util.List;
 import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -90,9 +88,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 				return true;
 			}
 
-			else if (args.length == 1 && caster.hasCast(name) && !caster.isCasting(name) && !caster.isWarmingUp()
-					&& !caster.isSilenced(name) && !caster.isStunned(name) && !cooldown.hasCooldown(player, name)
-					&& caster.hasMana(manacost, name))
+			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				if (warmup.getDuration() > 0)
 				{
@@ -147,17 +143,17 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
-	@EventHandler
+	/*-@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event)
 	{
 		Projectile projectile = event.getEntity();
-
+	
 		if (projectile instanceof WitherSkull && darkbombs.contains(projectile))
 		{
 			WitherSkull darkbomb = (WitherSkull) projectile;
-
+	
 			List<Entity> e = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
+	
 			for (Entity target : e)
 			{
 				if (darkbomb.getShooter() instanceof Player && !target.equals(darkbomb.getShooter()))
@@ -168,10 +164,48 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 						target.setFireTicks(targetfireticks);
 						((LivingEntity) target)
 								.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
-
+	
 						darkbombs.remove(darkbomb);
 						darkbomb.remove();
 					}
+	
+					return;
+				}
+			}
+		}
+	}*/
+
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof WitherSkull)
+		{
+			WitherSkull darkbomb = (WitherSkull) event.getDamager();
+
+			if (darkbombs.contains(darkbomb))
+			{
+				List<Entity> entities = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : entities)
+				{
+					if (darkbomb.getShooter() instanceof Player && !target.equals(darkbomb.getShooter()))
+					{
+						if (target instanceof LivingEntity)
+						{
+							event.setDamage(damage);
+							target.setFireTicks(targetfireticks);
+							((LivingEntity) target)
+									.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+
+							darkbombs.remove(darkbomb);
+							darkbomb.remove();
+						}
+					}
+				}
+
+				if (explosion > 0)
+				{
+					darkbomb.getWorld().createExplosion(darkbomb.getLocation(), explosion, incendiary);
 
 					return;
 				}
