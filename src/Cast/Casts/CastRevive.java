@@ -73,10 +73,7 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 						{
 							if (caster.canCast(name, cooldown, manacost))
 							{
-								if (warmup.getDuration() > 0)
-								{
-									warmup.start(caster, target, name);
-								}
+								warmup.start(caster, target, name);
 
 								new BukkitRunnable()
 								{

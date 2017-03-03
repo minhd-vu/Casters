@@ -69,10 +69,7 @@ public class CastBeasts extends TargettedCast implements CommandInterface, Liste
 
 				if (target != null && !target.equals(player) && !(target instanceof Wolf))
 				{
-					if (warmup.getDuration() > 0)
-					{
-						warmup.start(caster, target, name);
-					}
+					warmup.start(caster, target, name);
 
 					new BukkitRunnable()
 					{

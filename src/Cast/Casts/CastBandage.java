@@ -61,10 +61,7 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 			{
 				LivingEntity target = getTarget(player, range, true);
 
-				if (warmup.getDuration() > 0)
-				{
-					warmup.start(caster, target, name);
-				}
+				warmup.start(caster, target, name);
 
 				new BukkitRunnable()
 				{

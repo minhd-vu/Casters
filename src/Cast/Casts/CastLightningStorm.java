@@ -70,10 +70,7 @@ public class CastLightningStorm extends ActiveCast implements CommandInterface, 
 			{
 				List<Entity> targets = player.getNearbyEntities(range, range, range);
 
-				if (warmup.getDuration() > 0)
-				{
-					warmup.start(caster, name);
-				}
+				warmup.start(caster, name);
 
 				if (targets.size() > 0)
 				{

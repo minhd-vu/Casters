@@ -80,10 +80,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 
 				if (target != null && !target.equals(player))
 				{
-					if (warmup.getDuration() > 0)
-					{
-						warmup.start(caster, name);
-					}
+					warmup.start(caster, name);
 
 					new BukkitRunnable()
 					{

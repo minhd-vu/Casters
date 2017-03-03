@@ -69,10 +69,7 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 
 				if (target != null && !target.equals(player))
 				{
-					if (warmup.getDuration() > 0)
-					{
-						warmup.start(caster, target, name);
-					}
+					warmup.start(caster, target, name);
 
 					new BukkitRunnable()
 					{

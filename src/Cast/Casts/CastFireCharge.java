@@ -83,10 +83,7 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				if (warmup.getDuration() > 0)
-				{
-					warmup.start(caster, name);
-				}
+				warmup.start(caster, name);
 
 				new BukkitRunnable()
 				{

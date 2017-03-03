@@ -77,10 +77,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 
 				if (target != null && !target.equals(player))
 				{
-					if (warmup.getDuration() > 0)
-					{
-						warmup.start(caster, target, name);
-					}
+					warmup.start(caster, target, name);
 
 					new BukkitRunnable()
 					{

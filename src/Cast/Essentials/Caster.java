@@ -1,6 +1,7 @@
 package Cast.Essentials;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Damageable;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -267,21 +269,20 @@ public class Caster
 				&& !cooldown.hasCooldown(player, name) && hasMana(manacost, name);
 	}
 
-	public void interrupCasts(Player player)
+	public void interruptCasts(LivingEntity target)
 	{
-		for (String cast : warmingup.keySet())
+		if (target instanceof Player)
 		{
-			if (warmingup.get(cast))
-			{
-				Main.getCasts().get(cast).interrupCast(player, this);
-			}
-		}
+			Caster caster = Main.getCasters().get(target.getUniqueId());
 
-		for (String cast : casting.keySet())
-		{
-			if (casting.get(cast))
+			for (String cast : caster.getWarmingUp())
 			{
-				Main.getCasts().get(cast).interrupCast(player, this);
+				Main.getCasts().get(cast).interrupCast(player, caster);
+			}
+
+			for (String cast : caster.getCasting())
+			{
+				Main.getCasts().get(cast).interrupCast(player, caster);
 			}
 		}
 	}
@@ -704,6 +705,21 @@ public class Caster
 		return false;
 	}
 
+	public List<String> getCasting()
+	{
+		List<String> castings = new ArrayList<String>();
+
+		for (String cast : casting.keySet())
+		{
+			if (casting.get(cast))
+			{
+				castings.add(cast);
+			}
+		}
+
+		return castings;
+	}
+
 	public boolean isWarmingUp()
 	{
 		for (boolean bool : warmingup.values())
@@ -725,6 +741,21 @@ public class Caster
 		}
 
 		return false;
+	}
+
+	public List<String> getWarmingUp()
+	{
+		List<String> warmups = new ArrayList<String>();
+
+		for (String cast : warmingup.keySet())
+		{
+			if (warmingup.get(cast))
+			{
+				warmups.add(cast);
+			}
+		}
+
+		return warmups;
 	}
 
 	public boolean isStunned(String name)

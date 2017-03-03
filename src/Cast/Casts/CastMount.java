@@ -69,10 +69,7 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 					return false;
 				}
 
-				else if (warmup.getDuration() > 0)
-				{
-					warmup.start(caster, name);
-				}
+				warmup.start(caster, name);
 
 				new BukkitRunnable()
 				{

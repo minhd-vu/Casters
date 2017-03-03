@@ -70,10 +70,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 
 				if (target != null && !target.equals(player))
 				{
-					if (warmup.getDuration() > 0)
-					{
-						warmup.start(caster, target, name);
-					}
+					warmup.start(caster, target, name);
 
 					new BukkitRunnable()
 					{
