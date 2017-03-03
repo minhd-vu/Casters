@@ -1,7 +1,5 @@
 package Cast.Casts;
 
-import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
@@ -14,12 +12,13 @@ import Cast.Casts.Types.TargettedCast;
 import Cast.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 
-public class CastBash extends TargettedCast implements CommandInterface
+public class CastMute extends TargettedCast implements CommandInterface
 {
 	private double damage;
 	private int range;
+	private int duration;
 
-	public CastBash(String name, String description)
+	public CastMute(String name, String description)
 	{
 		super(name, description);
 
@@ -34,9 +33,11 @@ public class CastBash extends TargettedCast implements CommandInterface
 
 		damage = 3;
 		range = 4;
+		duration = 80;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
+		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 
 		pages.setPage(info);
 	}
@@ -66,21 +67,23 @@ public class CastBash extends TargettedCast implements CommandInterface
 
 					new BukkitRunnable()
 					{
-						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							caster.interruptCasts(target);
-
 							target.damage(damage);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
-									1.0F);
+							if (target instanceof Player)
+							{
+								Caster tcaster = Main.getCasters().get(target.getUniqueId());
+
+								tcaster.setEffect("Silenced", duration);
+								caster.setEffect("Silencing", duration);
+							}
+
+							caster.setCasting(name, false);
 
 							cast(player, target);
 

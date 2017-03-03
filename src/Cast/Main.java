@@ -37,6 +37,7 @@ import Cast.Casters.CastersStats;
 import Cast.Casters.CastersWeapon;
 import Cast.Casters.CastersWhoIs;
 import Cast.Casts.CastBandage;
+import Cast.Casts.CastBash;
 import Cast.Casts.CastBeasts;
 import Cast.Casts.CastBolt;
 import Cast.Casts.CastBomb;
@@ -49,6 +50,7 @@ import Cast.Casts.CastFireball;
 import Cast.Casts.CastLightningStorm;
 import Cast.Casts.CastList;
 import Cast.Casts.CastMount;
+import Cast.Casts.CastMute;
 import Cast.Casts.CastPoison;
 import Cast.Casts.CastReflect;
 import Cast.Casts.CastRevive;
@@ -162,6 +164,8 @@ public class Main extends JavaPlugin implements Listener
 	private static CastBomb castbomb;
 	private static CastMount castmount;
 	private static CastPoison castpoison;
+	private static CastBash castbash;
+	private static CastMute castmute;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -239,6 +243,8 @@ public class Main extends JavaPlugin implements Listener
 		barbarian.getWeapon().put(Material.STONE_AXE, 5);
 		barbarian.getWeapon().put(Material.WOOD_AXE, 5);
 		barbarian.getCasts().put("Taunt", 1);
+		barbarian.getCasts().put("Bash", 1);
+		barbarian.getCasts().put("Mute", 1);
 
 		Type blackguard = new Type("Blackguard", "Description");
 		blackguard.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -537,6 +543,8 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
 		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
+		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));
+		casts.put("Mute", castmute = new CastMute("Mute", "Silence Your Opponent"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield",
@@ -636,6 +644,8 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("bomb", castbomb);
 		casthandler.register("mount", castmount);
 		casthandler.register("poison", castpoison);
+		casthandler.register("bash", castbash);
+		casthandler.register("mute", castmute);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
