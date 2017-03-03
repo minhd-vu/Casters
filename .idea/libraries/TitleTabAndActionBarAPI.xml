@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TitleTabAndActionBarAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Minecraft Server/Spigot 1.11.2/plugins/TitleTabAndActionBarAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
