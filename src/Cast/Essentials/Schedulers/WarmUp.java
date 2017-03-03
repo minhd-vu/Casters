@@ -1,8 +1,7 @@
 package Cast.Essentials.Schedulers;
 
-import java.util.HashMap;
-import java.util.List;
-
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -11,8 +10,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.HashMap;
+import java.util.List;
 
 public class WarmUp
 {
@@ -117,7 +116,6 @@ public class WarmUp
 								+ ChatColor.WHITE + name + ChatColor.GRAY + " On " + ChatColor.WHITE + "Yourself"
 								+ ChatColor.GRAY + "!");
 			}
-
 			else
 			{
 				caster.getPlayer()
@@ -133,14 +131,14 @@ public class WarmUp
 		return duration;
 	}
 
-	public int getAmplifier()
-	{
-		return amplifier;
-	}
-
 	public void setDuration(int duration)
 	{
 		this.duration = duration;
+	}
+
+	public int getAmplifier()
+	{
+		return amplifier;
 	}
 
 	public void setAmplifier(int amplifier)

@@ -1,28 +1,22 @@
 package Cast.Essentials;
 
-import java.util.HashMap;
-
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
-import Cast.Main;
+import java.util.HashMap;
 
 public class Attack implements Listener
 {
+	private static HashMap<Arrow, Double> arrows = new HashMap<Arrow, Double>();
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
-
-	private static HashMap<Arrow, Double> arrows = new HashMap<Arrow, Double>();
 
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
@@ -52,7 +46,6 @@ public class Attack implements Listener
 					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
 							+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
 				}
-
 				else
 				{
 					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
@@ -61,7 +54,6 @@ public class Attack implements Listener
 				caster.setBossBarProgress(entity);
 			}
 		}
-
 		else if (event.getDamager() instanceof Creature)
 		{
 			for (Mob mob : Main.getMobs())
@@ -72,7 +64,6 @@ public class Attack implements Listener
 				}
 			}
 		}
-
 		else if (event.getDamager() instanceof Projectile)
 		{
 			Projectile projectile = (Projectile) event.getDamager();
@@ -124,7 +115,6 @@ public class Attack implements Listener
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Use A Bow.");
 				event.setCancelled(true);
 			}
-
 			else
 			{
 				arrows.put((Arrow) event.getProjectile(), (double) event.getForce());

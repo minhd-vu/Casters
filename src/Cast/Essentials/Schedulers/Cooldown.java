@@ -1,12 +1,11 @@
 package Cast.Essentials.Schedulers;
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
-
+import Cast.Configs.Config;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import Cast.Configs.Config;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class Cooldown
 {
@@ -65,14 +64,14 @@ public class Cooldown
 		return seconds * 20;
 	}
 
-	public void start(String name)
-	{
-		cooldowns.put(name, System.currentTimeMillis());
-	}
-
 	public void setCooldown(double duration)
 	{
 		seconds = duration / 20;
+	}
+
+	public void start(String name)
+	{
+		cooldowns.put(name, System.currentTimeMillis());
 	}
 
 	public void setCooldown(Config config, String path)

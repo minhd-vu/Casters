@@ -1,5 +1,11 @@
 package Cast.Casts.Targetted;
 
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Essentials.Effects.Siphon;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -8,13 +14,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
-import Cast.Essentials.Effects.Siphon;
-import net.md_5.bungee.api.ChatColor;
 
 public class CastSiphon extends TargettedCast implements CommandInterface, Listener
 {
@@ -68,7 +67,6 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false);
@@ -96,7 +94,6 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 							{
 								player.setHealth(player.getMaxHealth());
 							}
-
 							else
 							{
 								player.setHealth(player.getHealth() + damage * (percentage / 100));
@@ -106,7 +103,6 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 							{
 								siphon.start(caster, Main.getCasters().get(target.getUniqueId()), name);
 							}
-
 							else
 							{
 								siphon.start(caster, target, name);

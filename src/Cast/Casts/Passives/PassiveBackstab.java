@@ -1,5 +1,10 @@
 package Cast.Casts.Passives;
 
+import Cast.Casts.Types.Passive;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -7,12 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.Passive;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
 
 public class PassiveBackstab extends Passive implements CommandInterface, Listener
 {
@@ -52,7 +51,6 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 						{
 							target.damage(event.getDamage() * (sneaking / 100.0));
 						}
-
 						else
 						{
 							target.damage(event.getDamage() * (percentage / 100.0));

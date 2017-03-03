@@ -1,17 +1,16 @@
 package Cast.Casters;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Chat.Pages;
+import Cast.Essentials.Type;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Type;
-import Cast.Essentials.Chat.Pages;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastersJobs implements CommandInterface
 {

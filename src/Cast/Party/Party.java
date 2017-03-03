@@ -1,11 +1,10 @@
 package Cast.Party;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Essentials.Caster;
 import org.bukkit.ChatColor;
 
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Party
 {
@@ -20,14 +19,14 @@ public class Party
 		members.add(leader);
 	}
 
-	public void setLeader(Caster leader)
-	{
-		this.leader = leader;
-	}
-
 	public Caster getLeader()
 	{
 		return leader;
+	}
+
+	public void setLeader(Caster leader)
+	{
+		this.leader = leader;
 	}
 
 	public List<Caster> getMembers()

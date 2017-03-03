@@ -1,8 +1,10 @@
 package Cast.Casts.Targetted;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,11 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastChainLightning extends TargettedCast implements CommandInterface, Listener
 {
@@ -70,7 +69,6 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, playerrange, false);

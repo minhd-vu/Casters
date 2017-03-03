@@ -1,8 +1,9 @@
 package Cast.Casts.Actives;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Casts.Types.ActiveCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -17,10 +18,8 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastMount extends ActiveCast implements CommandInterface, Listener
 {
@@ -58,7 +57,6 @@ public class CastMount extends ActiveCast implements CommandInterface, Listener
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				if (player.isInsideVehicle())

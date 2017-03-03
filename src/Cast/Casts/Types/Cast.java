@@ -1,8 +1,9 @@
 package Cast.Casts.Types;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Essentials.Caster;
+import Cast.Essentials.Chat.Pages;
+import Cast.Essentials.Schedulers.Cooldown;
+import Cast.Essentials.Schedulers.WarmUp;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -10,10 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 
-import Cast.Essentials.Caster;
-import Cast.Essentials.Chat.Pages;
-import Cast.Essentials.Schedulers.Cooldown;
-import Cast.Essentials.Schedulers.WarmUp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cast
 {
@@ -140,7 +139,6 @@ public class Cast
 			player.sendMessage(header + " " + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cast " + ChatColor.WHITE
 					+ name + ChatColor.GRAY + " On " + ChatColor.WHITE + "Yourself!");
 		}
-
 		else
 		{
 			player.sendMessage(header + " " + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cast " + ChatColor.WHITE

@@ -1,8 +1,9 @@
 package Cast.Casts.Targetted;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -18,10 +19,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastPoison extends TargettedCast implements CommandInterface, Listener
 {
@@ -72,7 +71,6 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 
@@ -166,7 +164,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageEvent event)
 	{
-		/*-if (event.getCause().equals(DamageCause.POISON))
+	    /*-if (event.getCause().equals(DamageCause.POISON))
 		{
 			if (event.getEntity() instanceof LivingEntity)
 			{

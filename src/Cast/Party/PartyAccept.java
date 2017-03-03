@@ -1,13 +1,12 @@
 package Cast.Party;
 
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
 
 public class PartyAccept implements CommandInterface
 {
@@ -34,7 +33,6 @@ public class PartyAccept implements CommandInterface
 						.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Joined The Party.");
 				caster.setInvite(null);
 			}
-
 			else
 			{
 				caster.getPlayer()

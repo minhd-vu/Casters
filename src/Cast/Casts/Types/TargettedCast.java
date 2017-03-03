@@ -1,8 +1,7 @@
 package Cast.Casts.Types;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -10,8 +9,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TargettedCast extends Cast
 {
@@ -128,7 +127,6 @@ public class TargettedCast extends Cast
 									return entity;
 								}
 							}
-
 							else
 							{
 								if (caster.getParty().getMembers()

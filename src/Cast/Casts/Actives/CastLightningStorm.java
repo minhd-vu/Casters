@@ -1,7 +1,10 @@
 package Cast.Casts.Actives;
 
-import java.util.List;
-
+import Cast.Casts.Types.ActiveCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,11 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
+import java.util.List;
 
 public class CastLightningStorm extends ActiveCast implements CommandInterface, Listener
 {
@@ -65,7 +64,6 @@ public class CastLightningStorm extends ActiveCast implements CommandInterface, 
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				List<Entity> targets = player.getNearbyEntities(range, range, range);
@@ -105,7 +103,6 @@ public class CastLightningStorm extends ActiveCast implements CommandInterface, 
 						}
 					}
 				}
-
 				else
 				{
 					new BukkitRunnable()

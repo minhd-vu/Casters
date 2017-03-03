@@ -1,8 +1,7 @@
 package Cast.Casts.Types;
 
-import org.bukkit.entity.Player;
-
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.entity.Player;
 
 public class ActiveCast extends Cast
 {

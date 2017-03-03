@@ -1,10 +1,10 @@
 package Cast.Essentials;
 
+import org.bukkit.Material;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import org.bukkit.Material;
 
 public class Type
 {

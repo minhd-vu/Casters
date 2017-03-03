@@ -1,19 +1,14 @@
 package Cast.Wands;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -22,9 +17,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WandWarlock extends Wand implements CommandInterface, Listener
 {
@@ -107,7 +101,6 @@ public class WandWarlock extends Wand implements CommandInterface, Listener
 								player.getWorld().spigot().playEffect(witherskull.getLocation().add(0, 0.2, 0),
 										Effect.WITCH_MAGIC, 0, 0, 0.2F, 0.2F, 0.2F, 0, 4, 128);
 							}
-
 							else
 							{
 								this.cancel();

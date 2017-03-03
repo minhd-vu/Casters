@@ -1,15 +1,14 @@
 package Cast.Casters;
 
-import java.text.DecimalFormat;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.text.DecimalFormat;
 
 public class CastersLevel implements CommandInterface
 {
@@ -60,7 +59,6 @@ public class CastersLevel implements CommandInterface
 				message += Double.parseDouble(
 						new DecimalFormat("##.#").format(caster.getTypeExp() / caster.getTypeMaxExp() * 100)) + "%";
 			}
-
 			else
 			{
 				message += "100%";
@@ -74,7 +72,6 @@ public class CastersLevel implements CommandInterface
 				message += Double.parseDouble(
 						new DecimalFormat("##.#").format(caster.getRaceExp() / caster.getRaceMaxExp() * 100)) + "%";
 			}
-
 			else
 			{
 				message += "100%";
@@ -88,7 +85,6 @@ public class CastersLevel implements CommandInterface
 				message += Double.parseDouble(
 						new DecimalFormat("##.#").format(caster.getJobExp() / caster.getJobMaxExp() * 100)) + "%";
 			}
-
 			else
 			{
 				message += "100%";

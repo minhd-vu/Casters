@@ -1,14 +1,13 @@
 package Cast.Wands;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-
 import Cast.Essentials.Chat.Pages;
 import Cast.Essentials.Schedulers.Cooldown;
 import Cast.Essentials.Schedulers.WarmUp;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wand
 {

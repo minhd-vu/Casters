@@ -1,11 +1,10 @@
 package Cast.Essentials.Chat;
 
+import Cast.CommandInterface;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
 
 public class ChatTitles extends Chat implements CommandInterface
 {

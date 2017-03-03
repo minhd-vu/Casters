@@ -1,8 +1,10 @@
 package Cast.Casts.Actives;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Casts.Types.ActiveCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -16,11 +18,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastFireBomb extends ActiveCast implements CommandInterface, Listener
 {
@@ -79,7 +78,6 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);

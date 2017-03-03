@@ -1,7 +1,7 @@
 package Cast.Essentials.Effects;
 
-import java.util.List;
-
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -10,8 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.List;
 
 public class Siphon extends Bleed
 {
@@ -54,7 +53,6 @@ public class Siphon extends Bleed
 				{
 					this.cancel();
 				}
-
 				else
 				{
 					target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.WITCH_MAGIC, 0, 0,
@@ -66,7 +64,6 @@ public class Siphon extends Bleed
 					{
 						player.setHealth(player.getMaxHealth());
 					}
-
 					else
 					{
 						player.setHealth(player.getHealth() + damage * (percentage / 100));
@@ -143,7 +140,6 @@ public class Siphon extends Bleed
 				{
 					this.cancel();
 				}
-
 				else
 				{
 					target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.WITCH_MAGIC, 0, 0,
@@ -155,7 +151,6 @@ public class Siphon extends Bleed
 					{
 						player.setHealth(player.getMaxHealth());
 					}
-
 					else
 					{
 						player.setHealth(player.getHealth() + damage * (percentage / 100));

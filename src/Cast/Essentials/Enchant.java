@@ -1,11 +1,10 @@
 package Cast.Essentials;
 
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
-
-import Cast.Main;
 
 public class Enchant implements Listener
 {
@@ -23,14 +22,12 @@ public class Enchant implements Listener
 					+ "Enchanter" + ChatColor.GRAY + " To Use That!");
 			event.setCancelled(true);
 		}
-
 		else if (event.getExpLevelCost() > caster.getJobLevel())
 		{
 			caster.getPlayer().sendMessage(header + "You" + ChatColor.GRAY + " Do Not Have Enough " + ChatColor.WHITE
 					+ "Levels" + ChatColor.GRAY + "!");
 			event.setCancelled(true);
 		}
-
 		else
 		{
 			caster.setJobLevel(caster.getJobLevel() - event.getExpLevelCost());

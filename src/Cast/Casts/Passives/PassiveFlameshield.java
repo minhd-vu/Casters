@@ -1,16 +1,15 @@
 package Cast.Casts.Passives;
 
+import Cast.Casts.Types.Passive;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.Passive;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
 
 public class PassiveFlameshield extends Passive implements CommandInterface, Listener
 {

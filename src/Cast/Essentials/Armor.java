@@ -1,5 +1,6 @@
 package Cast.Essentials;
 
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,8 +18,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Main;
-
 public class Armor implements Listener
 {
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"
@@ -28,29 +27,29 @@ public class Armor implements Listener
 	{
 		switch (material)
 		{
-		case DIAMOND_HELMET:
-		case GOLD_HELMET:
-		case IRON_HELMET:
-		case CHAINMAIL_HELMET:
-		case LEATHER_HELMET:
-		case DIAMOND_CHESTPLATE:
-		case GOLD_CHESTPLATE:
-		case IRON_CHESTPLATE:
-		case CHAINMAIL_CHESTPLATE:
-		case LEATHER_CHESTPLATE:
-		case DIAMOND_LEGGINGS:
-		case GOLD_LEGGINGS:
-		case IRON_LEGGINGS:
-		case CHAINMAIL_LEGGINGS:
-		case LEATHER_LEGGINGS:
-		case DIAMOND_BOOTS:
-		case GOLD_BOOTS:
-		case IRON_BOOTS:
-		case CHAINMAIL_BOOTS:
-		case LEATHER_BOOTS:
-			return true;
-		default:
-			return false;
+			case DIAMOND_HELMET:
+			case GOLD_HELMET:
+			case IRON_HELMET:
+			case CHAINMAIL_HELMET:
+			case LEATHER_HELMET:
+			case DIAMOND_CHESTPLATE:
+			case GOLD_CHESTPLATE:
+			case IRON_CHESTPLATE:
+			case CHAINMAIL_CHESTPLATE:
+			case LEATHER_CHESTPLATE:
+			case DIAMOND_LEGGINGS:
+			case GOLD_LEGGINGS:
+			case IRON_LEGGINGS:
+			case CHAINMAIL_LEGGINGS:
+			case LEATHER_LEGGINGS:
+			case DIAMOND_BOOTS:
+			case GOLD_BOOTS:
+			case IRON_BOOTS:
+			case CHAINMAIL_BOOTS:
+			case LEATHER_BOOTS:
+				return true;
+			default:
+				return false;
 		}
 	}
 
@@ -141,7 +140,6 @@ public class Armor implements Listener
 			event.setCancelled(true);
 			((Player) event.getWhoClicked()).updateInventory();
 		}
-
 		else if (numberkey)
 		{
 			if (!getArmor(event.getClickedInventory().getItem(event.getHotbarButton()).getType()))
@@ -158,7 +156,6 @@ public class Armor implements Listener
 			event.setCancelled(true);
 			((Player) event.getWhoClicked()).updateInventory();
 		}
-
 		else if (event.getSlotType().equals(SlotType.ARMOR))
 		{
 			if (!getArmor(event.getCursor().getType()))

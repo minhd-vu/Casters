@@ -1,5 +1,10 @@
 package Cast.Casts.Actives;
 
+import Cast.Casts.Types.ActiveCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,12 +16,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
 
 public class CastVanish extends ActiveCast implements CommandInterface, Listener
 {
@@ -61,7 +60,6 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);

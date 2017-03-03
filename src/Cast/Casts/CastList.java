@@ -1,22 +1,21 @@
 package Cast.Casts;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.Casts.Types.ActiveCast;
+import Cast.Casts.Types.Cast;
+import Cast.Casts.Types.Passive;
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Essentials.Chat.Pages;
+import Cast.Essentials.Type;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Casts.Types.Cast;
-import Cast.Casts.Types.Passive;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
-import Cast.Essentials.Type;
-import Cast.Essentials.Chat.Pages;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CastList implements CommandInterface
 {
@@ -59,7 +58,6 @@ public class CastList implements CommandInterface
 
 					return true;
 				}
-
 				catch (NumberFormatException e)
 				{
 
@@ -79,13 +77,11 @@ public class CastList implements CommandInterface
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
 								+ "]";
 					}
-
 					else if (cast instanceof TargettedCast)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted" + ChatColor.DARK_GRAY
 								+ "]";
 					}
-
 					else if (cast instanceof Passive)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY
@@ -151,7 +147,7 @@ public class CastList implements CommandInterface
 		{
 			if (c.getName().equalsIgnoreCase(name))
 			{
-				/*-for (String cast : c.getCasts().keySet())
+			    /*-for (String cast : c.getCasts().keySet())
 				{
 					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
 							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
@@ -169,13 +165,11 @@ public class CastList implements CommandInterface
 							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
 									+ "]";
 						}
-
 						else if (cast instanceof TargettedCast)
 						{
 							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted"
 									+ ChatColor.DARK_GRAY + "]";
 						}
-
 						else if (cast instanceof Passive)
 						{
 							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY

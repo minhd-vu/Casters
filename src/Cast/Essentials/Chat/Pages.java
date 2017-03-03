@@ -1,16 +1,15 @@
 package Cast.Essentials.Chat;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class Pages
 {
@@ -147,7 +146,6 @@ public class Pages
 		{
 			page = 1;
 		}
-
 		else if (args.length == base + 1)
 		{
 			try
@@ -160,7 +158,6 @@ public class Pages
 					return;
 				}
 			}
-
 			catch (NumberFormatException e)
 			{
 				player.sendMessage(error + ChatColor.GRAY + "You Must Input A Number!");
@@ -184,7 +181,6 @@ public class Pages
 		{
 			message.addExtra("\n" + bar);
 		}
-
 		else
 		{
 			message.addExtra("\n" + fill + "-");

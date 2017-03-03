@@ -1,17 +1,16 @@
 package Cast.Essentials.Effects;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class Bleed
 {
@@ -62,7 +61,6 @@ public class Bleed
 				{
 					this.cancel();
 				}
-
 				else
 				{
 					target.damage(damage);
@@ -132,7 +130,6 @@ public class Bleed
 				{
 					this.cancel();
 				}
-
 				else
 				{
 					target.damage(damage);
@@ -168,16 +165,6 @@ public class Bleed
 		}.runTaskLater(Main.getInstance(), duration);
 	}
 
-	public void setDamage(double damage)
-	{
-		this.damage = damage;
-	}
-
-	public void setDuration(int duration)
-	{
-		this.duration = duration;
-	}
-
 	public void setPeriod(int period)
 	{
 		this.period = period;
@@ -188,8 +175,18 @@ public class Bleed
 		return damage;
 	}
 
+	public void setDamage(double damage)
+	{
+		this.damage = damage;
+	}
+
 	public int getDuration()
 	{
 		return duration;
+	}
+
+	public void setDuration(int duration)
+	{
+		this.duration = duration;
 	}
 }

@@ -1,17 +1,16 @@
 package Cast.Essentials.Chat;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import Cast.Party.Party;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
-import Cast.Party.Party;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatChannel implements CommandInterface
 {
@@ -53,74 +52,73 @@ public class ChatChannel implements CommandInterface
 			{
 				switch (args[1].toLowerCase())
 				{
-				case "g":
-				case "gbl":
-				case "global":
-					caster.setChannel("Global");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Global Channel!");
-					break;
+					case "g":
+					case "gbl":
+					case "global":
+						caster.setChannel("Global");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Global Channel!");
+						break;
 
-				case "l":
-				case "loc":
-				case "local":
-					caster.setChannel("Local");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Local Channel!");
-					break;
+					case "l":
+					case "loc":
+					case "local":
+						caster.setChannel("Local");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Local Channel!");
+						break;
 
-				case "s":
-				case "sho":
-				case "shout":
-					caster.setChannel("Shout");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Shout Channel!");
-					break;
+					case "s":
+					case "sho":
+					case "shout":
+						caster.setChannel("Shout");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Shout Channel!");
+						break;
 
-				case "rp":
-				case "rpg":
-				case "roleplay":
-					caster.setChannel("Roleplay");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Roleplay Channel!");
-					break;
+					case "rp":
+					case "rpg":
+					case "roleplay":
+						caster.setChannel("Roleplay");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Roleplay Channel!");
+						break;
 
-				case "lfg":
-				case "lookingforgroup":
-					caster.setChannel("Looking For Group");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Looking For Group Channel!");
-					break;
+					case "lfg":
+					case "lookingforgroup":
+						caster.setChannel("Looking For Group");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Looking For Group Channel!");
+						break;
 
-				case "t":
-				case "trd":
-				case "trade":
-					caster.setChannel("Trade");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Trade Channel!");
-					break;
+					case "t":
+					case "trd":
+					case "trade":
+						caster.setChannel("Trade");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Trade Channel!");
+						break;
 
-				case "h":
-				case "hlp":
-				case "help":
-					caster.setChannel("Help");
-					player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Help Channel!");
-					break;
+					case "h":
+					case "hlp":
+					case "help":
+						caster.setChannel("Help");
+						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Help Channel!");
+						break;
 
-				case "p":
-				case "pty":
-				case "party":
-					if (caster.hasParty())
-					{
-						caster.setChannel("Party");
-						player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Party Channel!");
-					}
+					case "p":
+					case "pty":
+					case "party":
+						if (caster.hasParty())
+						{
+							caster.setChannel("Party");
+							player.sendMessage(header + ChatColor.GRAY + " You Have Joined The Party Channel!");
+						}
+						else
+						{
+							caster.getPlayer().sendMessage(
+									Party.header + ChatColor.GRAY + " You Must Be In A Party To Join This Channel!");
+						}
 
-					else
-					{
-						caster.getPlayer().sendMessage(
-								Party.header + ChatColor.GRAY + " You Must Be In A Party To Join This Channel!");
-					}
+						break;
 
-					break;
-
-				default:
-					player.sendMessage(header + ChatColor.GRAY + " That Is Not A Valid Channel!");
-					break;
+					default:
+						player.sendMessage(header + ChatColor.GRAY + " That Is Not A Valid Channel!");
+						break;
 				}
 
 				return true;

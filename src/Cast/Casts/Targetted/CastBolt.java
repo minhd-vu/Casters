@@ -1,7 +1,10 @@
 package Cast.Casts.Targetted;
 
-import java.util.Set;
-
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -12,11 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
+import java.util.Set;
 
 public class CastBolt extends TargettedCast implements CommandInterface, Listener
 {
@@ -63,7 +62,6 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false);
@@ -99,7 +97,6 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());
 				}
-
 				else if (explode)
 				{
 					warmup.start(caster, name);

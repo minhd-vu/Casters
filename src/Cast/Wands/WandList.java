@@ -1,11 +1,10 @@
 package Cast.Wands;
 
+import Cast.CommandInterface;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
 
 public class WandList implements CommandInterface
 {
@@ -25,7 +24,6 @@ public class WandList implements CommandInterface
 						+ "Distorter\n" + ChatColor.DARK_RED + "Inferno\n" + ChatColor.AQUA + "Shaman\n"
 						+ ChatColor.DARK_PURPLE + "Warlock\n");
 			}
-
 			else
 			{
 				return false;

@@ -1,12 +1,12 @@
 package Cast;
 
-import java.util.HashMap;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 public class CommandHandler implements CommandExecutor
 {
@@ -50,7 +50,6 @@ public class CommandHandler implements CommandExecutor
 						return true;
 					}
 				}
-
 				catch (NumberFormatException e)
 				{
 
@@ -62,7 +61,6 @@ public class CommandHandler implements CommandExecutor
 
 					return true;
 				}
-
 				else
 				{
 					sender.sendMessage(ChatColor.RED + "That Command Does Not Exist!");
@@ -71,7 +69,6 @@ public class CommandHandler implements CommandExecutor
 				}
 			}
 		}
-
 		else
 		{
 			sender.sendMessage(ChatColor.RED + "Player Sender Required.");

@@ -1,5 +1,10 @@
 package Cast.Casts.Targetted;
 
+import Cast.Casts.Types.TargettedCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
@@ -7,12 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.TargettedCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
 
 public class CastBomb extends TargettedCast implements CommandInterface, Listener
 {
@@ -61,7 +60,6 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 
 				return true;
 			}
-
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false);
@@ -85,7 +83,6 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 								tnt = player.getWorld().spawn(player.getLocation(), TNTPrimed.class);
 								tnt.setVelocity(player.getLocation().getDirection().normalize().multiply(velocity));
 							}
-
 							else
 							{
 								tnt = player.getWorld().spawn(target.getLocation(), TNTPrimed.class);

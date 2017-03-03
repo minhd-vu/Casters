@@ -1,13 +1,12 @@
 package Cast.Casters;
 
+import Cast.CommandInterface;
+import Cast.Essentials.Type;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Type;
 
 public class CastersInfo implements CommandInterface
 {

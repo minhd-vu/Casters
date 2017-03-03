@@ -1,10 +1,23 @@
 package Cast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
+import Cast.Casters.*;
+import Cast.Casts.Actives.*;
+import Cast.Casts.CastList;
+import Cast.Casts.Casts;
+import Cast.Casts.Passives.PassiveBackstab;
+import Cast.Casts.Passives.PassiveFlameshield;
+import Cast.Casts.Targetted.*;
+import Cast.Casts.Types.Cast;
+import Cast.Configs.ConfigManager;
+import Cast.Essentials.*;
+import Cast.Essentials.Chat.Chat;
+import Cast.Essentials.Chat.ChatChannel;
+import Cast.Essentials.Chat.ChatTitles;
+import Cast.Party.*;
+import Cast.Wands.*;
+import com.dbsoftware.titletabandbarapi.barapi.ActionBarManager;
+import com.dbsoftware.titletabandbarapi.tabapi.TabManager;
+import com.dbsoftware.titletabandbarapi.titleapi.TitleManager;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,78 +33,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.dbsoftware.titletabandbarapi.barapi.ActionBarManager;
-import com.dbsoftware.titletabandbarapi.tabapi.TabManager;
-import com.dbsoftware.titletabandbarapi.titleapi.TitleManager;
-
-import Cast.Casters.Casters;
-import Cast.Casters.CastersArmor;
-import Cast.Casters.CastersChoose;
-import Cast.Casters.CastersClasses;
-import Cast.Casters.CastersInfo;
-import Cast.Casters.CastersJobs;
-import Cast.Casters.CastersLevel;
-import Cast.Casters.CastersRaces;
-import Cast.Casters.CastersRecipes;
-import Cast.Casters.CastersStats;
-import Cast.Casters.CastersWeapon;
-import Cast.Casters.CastersWhoIs;
-import Cast.Casts.Targetted.CastBandage;
-import Cast.Casts.Targetted.CastBash;
-import Cast.Casts.Targetted.CastBeasts;
-import Cast.Casts.Targetted.CastBolt;
-import Cast.Casts.Targetted.CastBomb;
-import Cast.Casts.Targetted.CastChainLightning;
-import Cast.Casts.Targetted.CastCharge;
-import Cast.Casts.Actives.CastDarkBomb;
-import Cast.Casts.Actives.CastFireBomb;
-import Cast.Casts.Actives.CastFireCharge;
-import Cast.Casts.Actives.CastFireball;
-import Cast.Casts.Actives.CastLightningStorm;
-import Cast.Casts.CastList;
-import Cast.Casts.Actives.CastMount;
-import Cast.Casts.Targetted.CastMute;
-import Cast.Casts.Targetted.CastPoison;
-import Cast.Casts.Actives.CastReflect;
-import Cast.Casts.Actives.CastRevive;
-import Cast.Casts.Targetted.CastSiphon;
-import Cast.Casts.Targetted.CastStrike;
-import Cast.Casts.Actives.CastTaunt;
-import Cast.Casts.Actives.CastVanish;
-import Cast.Casts.Casts;
-import Cast.Casts.Passives.PassiveBackstab;
-import Cast.Casts.Passives.PassiveFlameshield;
-import Cast.Casts.Types.Cast;
-import Cast.Configs.ConfigManager;
-import Cast.Essentials.Armor;
-import Cast.Essentials.Attack;
-import Cast.Essentials.Caster;
-import Cast.Essentials.Enchant;
-import Cast.Essentials.Experience;
-import Cast.Essentials.Mob;
-import Cast.Essentials.Regen;
-import Cast.Essentials.Type;
-import Cast.Essentials.Chat.Chat;
-import Cast.Essentials.Chat.ChatChannel;
-import Cast.Essentials.Chat.ChatTitles;
-import Cast.Party.Parties;
-import Cast.Party.Party;
-import Cast.Party.PartyAccept;
-import Cast.Party.PartyChat;
-import Cast.Party.PartyCreate;
-import Cast.Party.PartyDecline;
-import Cast.Party.PartyDisband;
-import Cast.Party.PartyInvite;
-import Cast.Party.PartyLeader;
-import Cast.Party.PartyLeave;
-import Cast.Party.PartyMembers;
-import Cast.Party.PartyRemove;
-import Cast.Wands.WandDistorter;
-import Cast.Wands.WandInferno;
-import Cast.Wands.WandList;
-import Cast.Wands.WandShaman;
-import Cast.Wands.WandWarlock;
-import Cast.Wands.Wands;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class Main extends JavaPlugin implements Listener
 {
@@ -183,6 +128,79 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyLeader partyleader;
 	private static PartyLeave partyleave;
 	private static PartyDisband partydisband;
+
+	public static void registerEvents(Plugin plugin, Listener... listeners)
+	{
+		for (Listener listener : listeners)
+		{
+			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
+		}
+	}
+
+	public static Main getInstance()
+	{
+		return instance;
+	}
+
+	public static ActionBarManager getActionBarManager()
+	{
+		return actionbarmanager;
+	}
+
+	public static TitleManager getTitleManager()
+	{
+		return titlemanager;
+	}
+
+	public static TabManager getTabManager()
+	{
+		return tabmanager;
+	}
+
+	public static List<Type> getTypes()
+	{
+		return types;
+	}
+
+	public static List<Type> getClasses()
+	{
+		return classes;
+	}
+
+	public static List<Type> getRaces()
+	{
+		return races;
+	}
+
+	public static List<Type> getJobs()
+	{
+		return jobs;
+	}
+
+	public static List<Mob> getMobs()
+	{
+		return mobs;
+	}
+
+	public static HashMap<UUID, Caster> getCasters()
+	{
+		return casters;
+	}
+
+	public static HashMap<String, Cast> getCasts()
+	{
+		return casts;
+	}
+
+	public static ConfigManager getConfigManager()
+	{
+		return manager;
+	}
+
+	public static List<Party> getParties()
+	{
+		return parties;
+	}
 
 	@Override
 	public void onEnable()
@@ -673,14 +691,6 @@ public class Main extends JavaPlugin implements Listener
 		getCommand("party").setExecutor(partyhandler);
 	}
 
-	public static void registerEvents(Plugin plugin, Listener... listeners)
-	{
-		for (Listener listener : listeners)
-		{
-			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
-		}
-	}
-
 	@EventHandler
 	public void onPlayerJoinEvent(PlayerJoinEvent event)
 	{
@@ -718,72 +728,7 @@ public class Main extends JavaPlugin implements Listener
 		event.setDeathMessage(
 				ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Death" + ChatColor.DARK_GRAY + "]" + ChatColor.GRAY + " "
 						+ WordUtils.capitalize(event.getDeathMessage().replaceFirst(event.getEntity().getName(),
-								ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY))
+						ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY))
 						+ ".");
-	}
-
-	public static Main getInstance()
-	{
-		return instance;
-	}
-
-	public static ActionBarManager getActionBarManager()
-	{
-		return actionbarmanager;
-	}
-
-	public static TitleManager getTitleManager()
-	{
-		return titlemanager;
-	}
-
-	public static TabManager getTabManager()
-	{
-		return tabmanager;
-	}
-
-	public static List<Type> getTypes()
-	{
-		return types;
-	}
-
-	public static List<Type> getClasses()
-	{
-		return classes;
-	}
-
-	public static List<Type> getRaces()
-	{
-		return races;
-	}
-
-	public static List<Type> getJobs()
-	{
-		return jobs;
-	}
-
-	public static List<Mob> getMobs()
-	{
-		return mobs;
-	}
-
-	public static HashMap<UUID, Caster> getCasters()
-	{
-		return casters;
-	}
-
-	public static HashMap<String, Cast> getCasts()
-	{
-		return casts;
-	}
-
-	public static ConfigManager getConfigManager()
-	{
-		return manager;
-	}
-
-	public static List<Party> getParties()
-	{
-		return parties;
 	}
 }

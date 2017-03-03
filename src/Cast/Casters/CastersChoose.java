@@ -1,14 +1,13 @@
 package Cast.Casters;
 
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Essentials.Type;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
-import Cast.Essentials.Type;
 
 public class CastersChoose implements CommandInterface
 {
@@ -35,14 +34,12 @@ public class CastersChoose implements CommandInterface
 						+ caster.getType().getName() + ChatColor.GRAY + ".");
 				return true;
 			}
-
 			else if (caster.getRace().getName().equalsIgnoreCase(args[1]))
 			{
 				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Race: " + ChatColor.WHITE
 						+ caster.getRace().getName() + ChatColor.GRAY + ".");
 				return true;
 			}
-
 			else if (caster.getJob().getName().equalsIgnoreCase(args[1]))
 			{
 				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Job: " + ChatColor.WHITE

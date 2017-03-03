@@ -1,20 +1,15 @@
 package Cast.Wands;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.EnderPearl;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -24,9 +19,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WandDistorter extends Wand implements CommandInterface, Listener
 {
@@ -106,7 +100,6 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 								player.getWorld().spigot().playEffect(enderpearl.getLocation().add(0, 0.1, 0),
 										Effect.MAGIC_CRIT, 0, 0, 0.2F, 0.2F, 0.2F, 0, 4, 128);
 							}
-
 							else
 							{
 								this.cancel();

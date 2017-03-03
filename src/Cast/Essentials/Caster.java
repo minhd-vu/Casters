@@ -1,13 +1,17 @@
 package Cast.Essentials;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import Cast.Configs.Config;
+import Cast.Essentials.Effects.Effect;
+import Cast.Essentials.Schedulers.Cooldown;
+import Cast.Main;
+import Cast.Party.Invite;
+import Cast.Party.Party;
+import me.tigerhix.lib.scoreboard.ScoreboardLib;
+import me.tigerhix.lib.scoreboard.common.EntryBuilder;
+import me.tigerhix.lib.scoreboard.common.animate.HighlightedString;
+import me.tigerhix.lib.scoreboard.type.Entry;
+import me.tigerhix.lib.scoreboard.type.Scoreboard;
+import me.tigerhix.lib.scoreboard.type.ScoreboardHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,97 +26,67 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import Cast.Main;
-import Cast.Configs.Config;
-import Cast.Essentials.Effects.Effect;
-import Cast.Essentials.Schedulers.Cooldown;
-import Cast.Party.Invite;
-import Cast.Party.Party;
-import me.tigerhix.lib.scoreboard.ScoreboardLib;
-import me.tigerhix.lib.scoreboard.common.EntryBuilder;
-import me.tigerhix.lib.scoreboard.common.animate.HighlightedString;
-import me.tigerhix.lib.scoreboard.type.Entry;
-import me.tigerhix.lib.scoreboard.type.Scoreboard;
-import me.tigerhix.lib.scoreboard.type.ScoreboardHandler;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class Caster
 {
+	private static final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters"
+			+ ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
+	private static final String tabheader = ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA
+			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
+	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
+	private final DecimalFormat decimalformat = new DecimalFormat("##.#");
 	private Player player;
-
 	private BossBar bossbar;
 	@SuppressWarnings("unused")
 	private BukkitTask attacktask;
 	private int bossbarremovetimer;
-
 	private Party party;
 	private Invite invite;
-
 	private Config config;
-
 	private String channel;
 	private String chattitle;
 	private String tabtitle;
-
 	private Type type;
 	private Type race;
 	private Type job;
-
 	private int typelevel;
 	private int typemaxlevel;
-
 	private int racelevel;
 	private int racemaxlevel;
-
 	private int joblevel;
 	private int jobmaxlevel;
-
 	private double scale;
-
 	private float typeexp;
 	private float typemaxexp;
-
 	private float raceexp;
 	private float racemaxexp;
-
 	private float jobexp;
 	private float jobmaxexp;
-
 	private double health;
 	private double maxhealth;
 	private double basemaxhealth;
 	private double healthregen;
 	private double basehealthregen;
-
 	private double mana;
 	private double maxmana;
 	private double basemaxmana;
 	private double manaregen;
 	private double basemanaregen;
 	private double manatimer;
-
 	private int points;
 	private int strength;
 	private int constitution;
 	private int dexterity;
 	private int intellect;
 	private int wisdom;
-
 	private Set<Material> armor = new HashSet<Material>();
 	private HashMap<Material, Integer> weapon = new HashMap<Material, Integer>();
-
 	private HashMap<String, Boolean> casting = new HashMap<String, Boolean>();
 	private HashMap<String, Boolean> warmingup = new HashMap<String, Boolean>();
 	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
 	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
-
-	private static final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters"
-			+ ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
-
-	private static final String tabheader = ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA
-			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
-	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
-
-	private final DecimalFormat decimalformat = new DecimalFormat("##.#");
 
 	@SuppressWarnings("deprecation")
 	public Caster(Player player)
@@ -132,13 +106,12 @@ public class Caster
 		if (!Main.getConfigManager().getFileExists(this.player.getName() + ".yml"))
 		{
 			config = Main.getConfigManager().getNewConfig(this.player.getName() + ".yml",
-					new String[] { this.player.getName() + " Config File." });
+					new String[]{this.player.getName() + " Config File."});
 			setNewConfig();
 
 			Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Welcome " + ChatColor.WHITE + player.getName()
 					+ ChatColor.DARK_AQUA + " To CasterCraft!");
 		}
-
 		else
 		{
 			config = Main.getConfigManager().getConfig(this.player.getName() + ".yml");
@@ -175,7 +148,6 @@ public class Caster
 				{
 					mana += manaregen;
 				}
-
 				else
 				{
 					mana = maxmana;
@@ -263,6 +235,11 @@ public class Caster
 		}.runTaskTimer(Main.getInstance(), 0, 2);
 	}
 
+	public Caster(UUID uuid)
+	{
+		this.player = Bukkit.getPlayer(uuid);
+	}
+
 	public boolean canCast(String name, Cooldown cooldown, double manacost)
 	{
 		return hasCast(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name)
@@ -285,11 +262,6 @@ public class Caster
 				Main.getCasts().get(cast).interrupCast(player, caster);
 			}
 		}
-	}
-
-	public Caster(UUID uuid)
-	{
-		this.player = Bukkit.getPlayer(uuid);
 	}
 
 	public Player getPlayer()
@@ -318,7 +290,6 @@ public class Caster
 							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
 							+ "]");
 				}
-
 				else
 				{
 					bossbar.setProgress(0.0);
@@ -346,6 +317,11 @@ public class Caster
 		return party;
 	}
 
+	public void setParty(Party party)
+	{
+		this.party = party;
+	}
+
 	public boolean hasParty()
 	{
 		return party != null;
@@ -359,6 +335,11 @@ public class Caster
 	public Invite getInvite()
 	{
 		return invite;
+	}
+
+	public void setInvite(Invite invite)
+	{
+		this.invite = invite;
 	}
 
 	public boolean hasInvite()
@@ -494,6 +475,11 @@ public class Caster
 		return channel;
 	}
 
+	public void setChannel(String channel)
+	{
+		this.channel = channel;
+	}
+
 	public String getChatTitle()
 	{
 		return chattitle;
@@ -509,14 +495,44 @@ public class Caster
 		return type;
 	}
 
+	public void setType(Type type)
+	{
+		this.type = type;
+		config.set("Type", this.type.getName());
+		getConfigs();
+
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.type.getName() + ChatColor.GRAY + "!");
+	}
+
 	public Type getRace()
 	{
 		return race;
 	}
 
+	public void setRace(Type race)
+	{
+		this.race = race;
+		config.set("Race", this.race.getName());
+		getConfigs();
+
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.race.getName() + ChatColor.GRAY + "!");
+	}
+
 	public Type getJob()
 	{
 		return job;
+	}
+
+	public void setJob(Type job)
+	{
+		this.job = job;
+		config.set("Job", this.job.getName());
+		getConfigs();
+
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
+				+ this.job.getName() + ChatColor.GRAY + "!");
 	}
 
 	public boolean hasEffect(String name)
@@ -534,6 +550,11 @@ public class Caster
 		return typelevel;
 	}
 
+	public void setTypeLevel(int typelevel)
+	{
+		this.typelevel = typelevel;
+	}
+
 	public int getTypeMaxLevel()
 	{
 		return typemaxlevel;
@@ -542,6 +563,11 @@ public class Caster
 	public float getTypeExp()
 	{
 		return typeexp;
+	}
+
+	public void setTypeExp(float typeexp)
+	{
+		this.typeexp = typeexp;
 	}
 
 	public float getTypeMaxExp()
@@ -554,6 +580,11 @@ public class Caster
 		return racelevel;
 	}
 
+	public void setRaceLevel(int racelevel)
+	{
+		this.racelevel = racelevel;
+	}
+
 	public int getRaceMaxLevel()
 	{
 		return racemaxlevel;
@@ -562,6 +593,11 @@ public class Caster
 	public float getRaceExp()
 	{
 		return raceexp;
+	}
+
+	public void setRaceExp(float raceexp)
+	{
+		this.raceexp = raceexp;
 	}
 
 	public float getRaceMaxExp()
@@ -574,6 +610,11 @@ public class Caster
 		return joblevel;
 	}
 
+	public void setJobLevel(int joblevel)
+	{
+		this.joblevel = joblevel;
+	}
+
 	public int getJobMaxLevel()
 	{
 		return jobmaxlevel;
@@ -582,6 +623,11 @@ public class Caster
 	public float getJobExp()
 	{
 		return jobexp;
+	}
+
+	public void setJobExp(float jobexp)
+	{
+		this.jobexp = jobexp;
 	}
 
 	public float getJobMaxExp()
@@ -594,9 +640,19 @@ public class Caster
 		return health;
 	}
 
+	public void setHealth(double health)
+	{
+		this.health = health;
+	}
+
 	public double getMaxHealth()
 	{
 		return maxhealth;
+	}
+
+	public void setMaxHealth(double maxhealth)
+	{
+		this.maxhealth = maxhealth;
 	}
 
 	public double getHealthRegen()
@@ -621,9 +677,19 @@ public class Caster
 		return maxmana;
 	}
 
+	public void setMaxMana(double maxmana)
+	{
+		this.maxmana = maxmana;
+	}
+
 	public int getPoints()
 	{
 		return points;
+	}
+
+	public void setPoints(int points)
+	{
+		this.points = points;
 	}
 
 	public int getStrength()
@@ -631,9 +697,19 @@ public class Caster
 		return strength;
 	}
 
+	public void setStrength(int strength)
+	{
+		this.strength = strength;
+	}
+
 	public int getConstitution()
 	{
 		return constitution;
+	}
+
+	public void setConstitution(int constitution)
+	{
+		this.constitution = constitution;
 	}
 
 	public int getDexterity()
@@ -641,14 +717,29 @@ public class Caster
 		return dexterity;
 	}
 
+	public void setDexterity(int dexterity)
+	{
+		this.dexterity = dexterity;
+	}
+
 	public int getIntellect()
 	{
 		return intellect;
 	}
 
+	public void setIntellect(int intellect)
+	{
+		this.intellect = intellect;
+	}
+
 	public int getWisdom()
 	{
 		return wisdom;
+	}
+
+	public void setWisdom(int wisdom)
+	{
+		this.wisdom = wisdom;
 	}
 
 	public Set<Material> getArmor()
@@ -674,7 +765,6 @@ public class Caster
 					header + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
-
 		else if (casts.get(name) > typelevel)
 		{
 			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
@@ -782,16 +872,6 @@ public class Caster
 		return false;
 	}
 
-	public void setParty(Party party)
-	{
-		this.party = party;
-	}
-
-	public void setInvite(Invite invite)
-	{
-		this.invite = invite;
-	}
-
 	public void setConfig()
 	{
 		config.set("Type", type.getName());
@@ -879,11 +959,6 @@ public class Caster
 		}
 	}
 
-	public void setChannel(String channel)
-	{
-		this.channel = channel;
-	}
-
 	public void getConfigs()
 	{
 		armor.clear();
@@ -897,74 +972,14 @@ public class Caster
 		player.leaveVehicle();
 	}
 
-	public void setType(Type type)
-	{
-		this.type = type;
-		config.set("Type", this.type.getName());
-		getConfigs();
-
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.type.getName() + ChatColor.GRAY + "!");
-	}
-
-	public void setRace(Type race)
-	{
-		this.race = race;
-		config.set("Race", this.race.getName());
-		getConfigs();
-
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.race.getName() + ChatColor.GRAY + "!");
-	}
-
-	public void setJob(Type job)
-	{
-		this.job = job;
-		config.set("Job", this.job.getName());
-		getConfigs();
-
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.job.getName() + ChatColor.GRAY + "!");
-	}
-
-	public void setTypeLevel(int typelevel)
-	{
-		this.typelevel = typelevel;
-	}
-
-	public void setTypeExp(float typeexp)
-	{
-		this.typeexp = typeexp;
-	}
-
 	public void setTypeMaxExp()
 	{
 		typemaxexp = (float) (typelevel * scale + scale);
 	}
 
-	public void setRaceLevel(int racelevel)
-	{
-		this.racelevel = racelevel;
-	}
-
-	public void setRaceExp(float raceexp)
-	{
-		this.raceexp = raceexp;
-	}
-
 	public void setRaceMaxExp()
 	{
 		racemaxexp = (float) (typelevel * scale + scale);
-	}
-
-	public void setJobLevel(int joblevel)
-	{
-		this.joblevel = joblevel;
-	}
-
-	public void setJobExp(float jobexp)
-	{
-		this.jobexp = jobexp;
 	}
 
 	public void setJobMaxExp()
@@ -977,53 +992,8 @@ public class Caster
 		this.scale = scale;
 	}
 
-	public void setHealth(double health)
-	{
-		this.health = health;
-	}
-
-	public void setMaxHealth(double maxhealth)
-	{
-		this.maxhealth = maxhealth;
-	}
-
 	public void setMana(double manacost)
 	{
 		mana -= manacost;
-	}
-
-	public void setMaxMana(double maxmana)
-	{
-		this.maxmana = maxmana;
-	}
-
-	public void setPoints(int points)
-	{
-		this.points = points;
-	}
-
-	public void setStrength(int strength)
-	{
-		this.strength = strength;
-	}
-
-	public void setConstitution(int constitution)
-	{
-		this.constitution = constitution;
-	}
-
-	public void setDexterity(int dexterity)
-	{
-		this.dexterity = dexterity;
-	}
-
-	public void setIntellect(int intellect)
-	{
-		this.intellect = intellect;
-	}
-
-	public void setWisdom(int wisdom)
-	{
-		this.wisdom = wisdom;
 	}
 }

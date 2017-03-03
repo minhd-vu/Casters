@@ -1,5 +1,10 @@
 package Cast.Casts.Actives;
 
+import Cast.Casts.Types.ActiveCast;
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -7,12 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Casts.Types.ActiveCast;
-import Cast.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
 
 public class CastRevive extends ActiveCast implements CommandInterface, Listener
 {
@@ -93,21 +92,19 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 							}.runTaskLater(Main.getInstance(), warmup.getDuration());
 						}
 					}
-
 					else
 					{
 						player.sendMessage(header + ChatColor.WHITE + " " + args[0] + ChatColor.GRAY
 								+ " Must Be Dead In Order To Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 					}
 				}
-
 				else
 				{
 					player.sendMessage(header + ChatColor.WHITE + " " + args[0] + ChatColor.GRAY + " Is Not Online!");
 				}
 
 				/*-List<Entity> e = player.getNearbyEntities(range, range, range);
-				
+
 				for (Entity t : e)
 				{
 					if (t instanceof Player && t.getName().equalsIgnoreCase(args[1]))

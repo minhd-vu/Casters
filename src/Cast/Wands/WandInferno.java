@@ -1,19 +1,15 @@
 package Cast.Wands;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.SmallFireball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -21,9 +17,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WandInferno extends Wand implements CommandInterface, Listener
 {
@@ -110,7 +105,6 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 								player.getWorld().spigot().playEffect(fireball.getLocation().add(0, 0.2, 0),
 										Effect.COLOURED_DUST, 0, 0, 0.2F, 0.2F, 0.2F, 0, 4, 128);
 							}
-
 							else
 							{
 								this.cancel();

@@ -1,14 +1,13 @@
 package Cast.Casters;
 
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
 
 public class CastersWhoIs implements CommandInterface
 {
@@ -33,7 +32,6 @@ public class CastersWhoIs implements CommandInterface
 				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY
 						+ "]" + ChatColor.GRAY + "That Player Is Not Online!");
 			}
-
 			else
 			{
 				Caster caster = Main.getCasters().get(Bukkit.getPlayer(args[1]).getUniqueId());

@@ -1,8 +1,5 @@
 package Cast.Essentials.Effects;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -12,6 +9,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class Stun
 {
@@ -58,7 +58,6 @@ public class Stun
 					{
 						target.teleport(location);
 					}
-
 					else
 					{
 						target.sendMessage(header + "You" + ChatColor.GRAY + " Are No Longer " + ChatColor.WHITE
@@ -82,7 +81,6 @@ public class Stun
 
 			}.runTaskTimer(plugin, 0L, 100L);
 		}
-
 		else if (target instanceof LivingEntity)
 		{
 			target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 7));
@@ -121,13 +119,13 @@ public class Stun
 		}
 	}
 
-	public void setDuration(int duration)
-	{
-		this.duration = duration;
-	}
-
 	public int getDuration()
 	{
 		return duration;
+	}
+
+	public void setDuration(int duration)
+	{
+		this.duration = duration;
 	}
 }

@@ -1,13 +1,12 @@
 package Cast.Party;
 
+import Cast.CommandInterface;
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import Cast.CommandInterface;
-import Cast.Main;
-import Cast.Essentials.Caster;
 
 public class PartyRemove implements CommandInterface
 {
@@ -61,7 +60,6 @@ public class PartyRemove implements CommandInterface
 													+ ChatColor.RED + " Has Been Removed From The Party.");
 								}
 							}
-
 							else
 							{
 								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " "
@@ -74,14 +72,12 @@ public class PartyRemove implements CommandInterface
 
 					caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " That Player Is Not Online!");
 				}
-
 				else
 				{
 					caster.getPlayer()
 							.sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Remove People!");
 				}
 			}
-
 			else
 			{
 				caster.getPlayer()
