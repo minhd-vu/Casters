@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -18,11 +19,10 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
+
+import com.dbsoftware.titletabandbarapi.barapi.ActionBarManager;
+import com.dbsoftware.titletabandbarapi.tabapi.TabManager;
+import com.dbsoftware.titletabandbarapi.titleapi.TitleManager;
 
 import Cast.Casters.Casters;
 import Cast.Casters.CastersArmor;
@@ -90,13 +90,16 @@ import Cast.Wands.WandList;
 import Cast.Wands.WandShaman;
 import Cast.Wands.WandWarlock;
 import Cast.Wands.Wands;
-import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin implements Listener
 {
 	private static Main instance;
 
 	private static ConfigManager manager;
+
+	private static ActionBarManager actionbarmanager;
+	private static TitleManager titlemanager;
+	private static TabManager tabmanager;
 
 	private static List<Type> types;
 	private static List<Type> classes;
@@ -183,6 +186,14 @@ public class Main extends JavaPlugin implements Listener
 		instance = this;
 
 		manager = new ConfigManager(this);
+
+		actionbarmanager = new ActionBarManager();
+		titlemanager = new TitleManager();
+
+		String message = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA + ChatColor.BOLD
+				+ "CASTERCRAFT" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
+
+		tabmanager = new TabManager(message, ChatColor.YELLOW + "\nTOO MUCH SAUCE!");
 
 		types = new ArrayList<Type>();
 		classes = new ArrayList<Type>();
@@ -572,38 +583,6 @@ public class Main extends JavaPlugin implements Listener
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
 				castsiphon, castvanish, castbomb, castmount, castpoison, passivebackstab, passiveflameshield);
 
-		/*-
-		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
-		Scoreboard scoreboard = scoreboardmanager.getNewScoreboard();
-		
-		Objective objective = scoreboard.registerNewObjective("showhealth", "health");
-		objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-		
-		for (Player player : Bukkit.getOnlinePlayers())
-		{
-			objective.setDisplayName(ChatColor.DARK_GRAY + "/" + ChatColor.RED + " " + (int) player.getMaxHealth());
-			player.setScoreboard(scoreboard);
-			player.setHealth(player.getHealth());
-		}
-		*/
-
-		ScoreboardManager scoreboardmanager = Bukkit.getScoreboardManager();
-		Scoreboard scoreboard = scoreboardmanager.getNewScoreboard();
-
-		Objective objective = scoreboard.registerNewObjective("showhealth", "health");
-		objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-		objective.setDisplayName("Health:");
-
-		for (Player player : Bukkit.getOnlinePlayers())
-		{
-			Score score = objective.getScore(player.getName());
-			score.setScore((int) player.getHealth());
-		}
-
-		for (Player player : Bukkit.getOnlinePlayers())
-		{
-			player.setScoreboard(scoreboard);
-		}
 	}
 
 	@Override
@@ -611,7 +590,8 @@ public class Main extends JavaPlugin implements Listener
 	{
 		for (Player player : Bukkit.getOnlinePlayers())
 		{
-			player.kickPlayer("Server Is Restarting!");
+			player.kickPlayer(
+					ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
 		}
 	}
 
@@ -739,6 +719,21 @@ public class Main extends JavaPlugin implements Listener
 	public static Main getInstance()
 	{
 		return instance;
+	}
+
+	public static ActionBarManager getActionBarManager()
+	{
+		return actionbarmanager;
+	}
+
+	public static TitleManager getTitleManager()
+	{
+		return titlemanager;
+	}
+
+	public static TabManager getTabManager()
+	{
+		return tabmanager;
 	}
 
 	public static List<Type> getTypes()

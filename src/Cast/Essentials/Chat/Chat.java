@@ -41,7 +41,7 @@ public class Chat implements CommandInterface, Listener
 		commands.add(ChatColor.DARK_AQUA + "/chat" + ChatColor.AQUA + " channel <channel>" + ChatColor.GRAY
 				+ " - Join A Chat Channel.");
 
-		titles.put("Guardian", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Guardian" + ChatColor.DARK_GRAY + "]");
+		titles.put("Guardian", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Paladin" + ChatColor.DARK_GRAY + "]");
 		titles.put("Cavalier", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Cavalier" + ChatColor.DARK_GRAY + "]");
 		titles.put("Barbarian", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Barbarian" + ChatColor.DARK_GRAY + "]");
 		titles.put("Blackguard", ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Blackguard" + ChatColor.DARK_GRAY + "]");
@@ -56,7 +56,7 @@ public class Chat implements CommandInterface, Listener
 		titles.put("Oracle", ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Oracle" + ChatColor.DARK_GRAY + "]");
 		titles.put("Bloodmage", ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Bloodmage" + ChatColor.DARK_GRAY + "]");
 		titles.put("Monk", ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Monk" + ChatColor.DARK_GRAY + "]");
-		titles.put("Templar", ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Templar" + ChatColor.DARK_GRAY + "]");
+		titles.put("Templar", ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "Cleric" + ChatColor.DARK_GRAY + "]");
 
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
 		pages.setError("Chat");
@@ -167,9 +167,9 @@ public class Chat implements CommandInterface, Listener
 			event.getRecipients().add(caster.getPlayer());
 		}
 
-		if (titles.containsKey(caster.getTitle()))
+		if (titles.containsKey(caster.getChatTitle()))
 		{
-			message += titles.get(caster.getTitle()) + " ";
+			message += titles.get(caster.getChatTitle()) + " ";
 		}
 
 		event.setFormat(message + ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + " >> "

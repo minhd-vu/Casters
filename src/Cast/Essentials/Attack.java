@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Creature;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -30,13 +31,15 @@ public class Attack implements Listener
 		{
 			Caster caster = Main.getCasters().get(event.getDamager().getUniqueId());
 
-			if (event.getCause().equals(DamageCause.ENTITY_ATTACK))
+			if (event.getCause().equals(DamageCause.ENTITY_ATTACK) && event.getEntity() instanceof Damageable)
 			{
-				if (event.getEntity() instanceof Player)
-				{
-					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
+				Damageable entity = (Damageable) event.getEntity();
 
-					if (caster.getParty().getMembers().contains(target))
+				if (entity instanceof Player)
+				{
+					Caster target = Main.getCasters().get(entity.getUniqueId());
+
+					if (caster.hasParty() && caster.getParty().getMembers().contains(target))
 					{
 						event.setCancelled(true);
 					}
@@ -53,6 +56,8 @@ public class Attack implements Listener
 				{
 					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
 				}
+
+				caster.setBossBarProgress(entity);
 			}
 		}
 
@@ -67,21 +72,6 @@ public class Attack implements Listener
 			}
 		}
 
-		else if (event.getDamager() instanceof Arrow)
-		{
-			Arrow arrow = (Arrow) event.getDamager();
-
-			if (arrows.containsKey(arrow) && arrow.getShooter() instanceof Player)
-			{
-				Player player = (Player) arrow.getShooter();
-				Caster caster = Main.getCasters().get(player.getUniqueId());
-
-				event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow)
-						+ caster.getDexterity() * caster.getType().getBowDamageScale());
-				arrows.remove(arrow);
-			}
-		}
-
 		else if (event.getDamager() instanceof Projectile)
 		{
 			Projectile projectile = (Projectile) event.getDamager();
@@ -90,14 +80,32 @@ public class Attack implements Listener
 			{
 				Caster caster = Main.getCasters().get(((Player) projectile.getShooter()).getUniqueId());
 
+				if (projectile instanceof Arrow)
+				{
+					Arrow arrow = (Arrow) event.getDamager();
+
+					if (arrows.containsKey(arrow))
+					{
+						event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow)
+								+ caster.getDexterity() * caster.getType().getBowDamageScale());
+						arrows.remove(arrow);
+					}
+				}
+
 				if (event.getEntity() instanceof Player)
 				{
 					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
 
-					if (caster.getParty().getMembers().contains(target))
+					if (caster.hasParty() && caster.getParty().getMembers().contains(target))
 					{
 						event.setCancelled(true);
+						return;
 					}
+				}
+
+				if (event.getEntity() instanceof Damageable)
+				{
+					caster.setBossBarProgress((Damageable) event.getEntity());
 				}
 			}
 		}

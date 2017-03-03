@@ -11,10 +11,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
+import org.bukkit.scheduler.BukkitTask;
 
 import Cast.Main;
 import Cast.Configs.Config;
@@ -32,13 +35,18 @@ public class Caster
 {
 	private Player player;
 
+	private BossBar bossbar;
+	private BukkitTask attackrunnable;
+	private int bossbarremovetimer;
+
 	private Party party;
 	private Invite invite;
 
 	private Config config;
 
-	private String title;
 	private String channel;
+	private String chattitle;
+	private String tabtitle;
 
 	private Type type;
 	private Type race;
@@ -95,9 +103,19 @@ public class Caster
 	private final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY
 			+ "]" + ChatColor.WHITE + " ";
 
+	private final DecimalFormat decimalformat = new DecimalFormat("##.#");
+
+	@SuppressWarnings("deprecation")
 	public Caster(Player player)
 	{
 		this.player = player;
+
+		bossbar = this.player.getServer().createBossBar(
+				ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED,
+				BarStyle.SEGMENTED_6);
+		bossbar.addPlayer(player);
+		bossbar.setVisible(false);
+		bossbarremovetimer = 100;
 
 		party = null;
 		invite = null;
@@ -216,19 +234,26 @@ public class Caster
 
 		new BukkitRunnable()
 		{
-			@SuppressWarnings("deprecation")
 			@Override
 			public void run()
 			{
-				ActionBarAPI.sendActionBar(player,
-						ChatColor.RED + "❤ " + Double.parseDouble(new DecimalFormat("##.#").format(player.getHealth()))
-								+ "/" + Double.parseDouble(new DecimalFormat("##.#").format(player.getMaxHealth()))
-								+ "        " + ChatColor.BLUE + "✦ "
-								+ Double.parseDouble(new DecimalFormat("##.#").format(mana)) + "/"
-								+ Double.parseDouble(new DecimalFormat("##.#").format(maxmana)));
+				Main.getActionBarManager()
+						.setBar(ChatColor.RED + "❤ " + Double.parseDouble(decimalformat.format(player.getHealth()))
+								+ "/" + Double.parseDouble(decimalformat.format(player.getMaxHealth())) + "        "
+								+ ChatColor.BLUE + "✦ " + Double.parseDouble(decimalformat.format(mana)) + "/"
+								+ Double.parseDouble(decimalformat.format(maxmana)));
+
+				Main.getActionBarManager().send(player);
+				Main.getTabManager().send(player);
 			}
 
 		}.runTaskTimer(Main.getInstance(), 0, 2);
+	}
+
+	public boolean canCast()
+	{
+
+		return false;
 	}
 
 	public Caster(UUID uuid)
@@ -239,6 +264,50 @@ public class Caster
 	public Player getPlayer()
 	{
 		return player;
+	}
+
+	public BossBar getBossBar()
+	{
+		return bossbar;
+	}
+
+	@SuppressWarnings("deprecation")
+	public void setBossBarProgress(Damageable entity)
+	{
+		new BukkitRunnable()
+		{
+			@Override
+			public void run()
+			{
+				if (!entity.isDead())
+				{
+					bossbar.setProgress(entity.getHealth() / entity.getMaxHealth());
+					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "" + entity.getName() + ChatColor.DARK_GRAY
+							+ " [" + ChatColor.GRAY + Double.parseDouble(decimalformat.format(entity.getHealth())) + "/"
+							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
+							+ "]");
+				}
+
+				else
+				{
+					bossbar.setProgress(0.0);
+					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "RIP RIP POTATO CHIP");
+				}
+
+				bossbar.setVisible(true);
+
+				attackrunnable = new BukkitRunnable()
+				{
+					@Override
+					public void run()
+					{
+						bossbar.setVisible(false);
+					}
+				}.runTaskLater(Main.getInstance(), bossbarremovetimer);
+			}
+
+		}.runTaskLater(Main.getInstance(), 1);
+
 	}
 
 	public Party getParty()
@@ -315,7 +384,8 @@ public class Caster
 	private void getConfigChat()
 	{
 		channel = config.getString("Channel");
-		title = config.getString("Title");
+		chattitle = config.getString("Title.Chat");
+		tabtitle = config.getString("Title.Tab");
 	}
 
 	private void getConfigExperience()
@@ -388,9 +458,14 @@ public class Caster
 		return channel;
 	}
 
-	public String getTitle()
+	public String getChatTitle()
 	{
-		return title;
+		return chattitle;
+	}
+
+	public String getTabTitle()
+	{
+		return tabtitle;
 	}
 
 	public Type getType()
@@ -657,7 +732,8 @@ public class Caster
 		config.set("Race", race.getName());
 		config.set("Job", job.getName());
 		config.set("Channel", channel);
-		config.set("Title", title);
+		config.set("Title.Chat", chattitle);
+		config.set("Title.Tab", tabtitle);
 		config.set("Level.Type.Current", typelevel);
 		config.set("Level.Type.Max", typemaxlevel);
 		config.set("Level.Race.Current", racelevel);
@@ -686,17 +762,18 @@ public class Caster
 
 	private void setNewConfig()
 	{
-		config.set("Type", "Peasant");
-		config.set("Race", "Soul");
-		config.set("Job", "Wanderer");
+		config.set("Type", "None");
+		config.set("Race", "None");
+		config.set("Job", "None");
 		config.set("Channel", "Global");
-		config.set("Title", null);
+		config.set("Title.Chat", "");
+		config.set("Title.Tab", "");
 		config.set("Level.Type.Current", 1);
-		config.set("Level.Type.Max", 50);
+		config.set("Level.Type.Max", 20);
 		config.set("Level.Race.Current", 1);
-		config.set("Level.Race.Max", 50);
+		config.set("Level.Race.Max", 20);
 		config.set("Level.Job.Current", 1);
-		config.set("Level.Job.Max", 50);
+		config.set("Level.Job.Max", 20);
 		config.set("Health.Current", 20.0D);
 		config.set("Health.Max", 20.0D);
 		config.set("Mana.Current", 20.0D);
@@ -750,6 +827,8 @@ public class Caster
 		getConfigJob();
 		getConfigRace();
 		getConfigType();
+
+		player.leaveVehicle();
 	}
 
 	public void setType(Type type)
