@@ -1,15 +1,9 @@
 package Cast.Casts;
 
-import java.util.List;
-
-import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import Cast.CommandInterface;
 import Cast.Main;
@@ -61,20 +55,25 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 					return true;
 				}
 
-				List<Entity> e = player.getNearbyEntities(range, range, range);
+				if (player.getServer().getPlayer(args[0]) != null)
+				{
 
+				}
+
+				/*-List<Entity> e = player.getNearbyEntities(range, range, range);
+				
 				for (Entity t : e)
 				{
 					if (t instanceof Player && t.getName().equalsIgnoreCase(args[1]))
 					{
 						Player target = (Player) t;
-
+				
 						if (target.isDead())
 						{
 							if (caster.canCast(name, cooldown, manacost))
 							{
 								warmup.start(caster, target, name);
-
+				
 								new BukkitRunnable()
 								{
 									@SuppressWarnings("deprecation")
@@ -83,37 +82,38 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 									{
 										caster.setCasting(name, true);
 										caster.setMana(manacost);
-
+				
 										target.setHealth(target.getMaxHealth() * (percentage / 100));
 										target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0,
 												0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 										target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT,
 												8.0F, 1.0F);
-
+				
 										cast(player, target);
-
+				
 										cooldown.start(player.getName());
-
+				
 										caster.setCasting(name, false);
 									}
-
+				
 								}.runTaskLater(Main.getInstance(), warmup.getDuration());
 							}
 						}
-
+				
 						else
 						{
 							player.sendMessage(target + " Is Not Dead!");
 						}
-
+				
 						break;
 					}
-				}
+				}*/
 
 				return true;
 			}
 
-			player.sendMessage("Correct Usage: /Cast Revive <Player>");
+			player.sendMessage(header + ChatColor.GRAY + " Correct Usage: " + ChatColor.DARK_AQUA + "/cast"
+					+ ChatColor.AQUA + " revive <player>");
 		}
 
 		return false;
