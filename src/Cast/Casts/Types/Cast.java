@@ -7,7 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitTask;
 
+import Cast.Essentials.Caster;
 import Cast.Essentials.Chat.Pages;
 import Cast.Essentials.Schedulers.Cooldown;
 import Cast.Essentials.Schedulers.WarmUp;
@@ -23,6 +26,9 @@ public class Cast
 
 	protected WarmUp warmup;
 	protected Cooldown cooldown;
+
+	protected BukkitTask warmuptask;
+	protected BukkitTask casttask;
 
 	protected double manacost;
 
@@ -64,6 +70,38 @@ public class Cast
 	public Cooldown getCooldown()
 	{
 		return cooldown;
+	}
+
+	public void interrupCast(Player interrupter, Caster interrupted)
+	{
+		if (interrupted.isWarmingUp())
+		{
+			warmuptask.cancel();
+			interrupted.getPlayer().removePotionEffect(PotionEffectType.SLOW);
+			interrupted.setWarmingUp(name, false);
+		}
+
+		if (interrupted.isCasting(name))
+		{
+			casttask.cancel();
+			interrupted.setCasting(name, false);
+		}
+
+		List<Entity> entities = interrupter.getNearbyEntities(16, 16, 16);
+
+		for (Entity entity : entities)
+		{
+			if (entity instanceof Player)
+			{
+				entity.sendMessage(header + " " + ChatColor.WHITE + interrupter.getName() + ChatColor.GRAY
+						+ " Interupts " + ChatColor.WHITE + interrupted.getPlayer().getName() + "'s" + ChatColor.GRAY
+						+ "Casting Of " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+			}
+		}
+
+		interrupter.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
+				+ interrupted.getPlayer().getName() + "'s" + ChatColor.GRAY + "Casting Of " + ChatColor.WHITE + name
+				+ ChatColor.GRAY + "!");
 	}
 
 	public void cast(Player player)

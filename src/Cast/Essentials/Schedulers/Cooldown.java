@@ -10,7 +10,7 @@ import Cast.Configs.Config;
 
 public class Cooldown
 {
-	private HashMap<String, Long> cooldown;
+	private HashMap<String, Long> cooldowns;
 
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
@@ -19,13 +19,13 @@ public class Cooldown
 
 	public Cooldown()
 	{
-		cooldown = new HashMap<String, Long>();
+		cooldowns = new HashMap<String, Long>();
 		seconds = 0;
 	}
 
 	public boolean hasCooldown(String name)
 	{
-		if (cooldown.containsKey(name))
+		if (cooldowns.containsKey(name))
 		{
 			double secondsleft = getCooldown(name);
 
@@ -40,7 +40,7 @@ public class Cooldown
 
 	public boolean hasCooldown(Player player, String name)
 	{
-		if (cooldown.containsKey(player.getName()))
+		if (cooldowns.containsKey(player.getName()))
 		{
 			double secondsleft = getCooldown(player.getName());
 
@@ -57,7 +57,7 @@ public class Cooldown
 	public double getCooldown(String name)
 	{
 		return Double.parseDouble(new DecimalFormat("##.#")
-				.format(((cooldown.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0)));
+				.format(((cooldowns.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0)));
 	}
 
 	public double getCooldown()
@@ -67,7 +67,7 @@ public class Cooldown
 
 	public void start(String name)
 	{
-		cooldown.put(name, System.currentTimeMillis());
+		cooldowns.put(name, System.currentTimeMillis());
 	}
 
 	public void setCooldown(double duration)

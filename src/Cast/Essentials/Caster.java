@@ -267,6 +267,25 @@ public class Caster
 				&& !cooldown.hasCooldown(player, name) && hasMana(manacost, name);
 	}
 
+	public void interrupCasts(Player player)
+	{
+		for (String cast : warmingup.keySet())
+		{
+			if (warmingup.get(cast))
+			{
+				Main.getCasts().get(cast).interrupCast(player, this);
+			}
+		}
+
+		for (String cast : casting.keySet())
+		{
+			if (casting.get(cast))
+			{
+				Main.getCasts().get(cast).interrupCast(player, this);
+			}
+		}
+	}
+
 	public Caster(UUID uuid)
 	{
 		this.player = Bukkit.getPlayer(uuid);
