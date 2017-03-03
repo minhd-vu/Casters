@@ -81,46 +81,50 @@ public class WarmUp
 
 	public void start(Caster caster, LivingEntity target, String name)
 	{
-		caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
-		caster.setWarmingUp(name, true);
-
-		new BukkitRunnable()
+		if (duration > 0)
 		{
-			@Override
-			public void run()
+			caster.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
+			caster.setWarmingUp(name, true);
+
+			new BukkitRunnable()
 			{
-				caster.setWarmingUp(name, false);
+				@Override
+				public void run()
+				{
+					caster.setWarmingUp(name, false);
+				}
+
+			}.runTaskLater(Main.getInstance(), duration);
+
+			warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
+
+			List<Entity> e = caster.getPlayer().getNearbyEntities(16, 16, 16);
+
+			for (Entity reciever : e)
+			{
+				if (reciever instanceof Player)
+				{
+					reciever.sendMessage(header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY
+							+ " Begins To Casts " + ChatColor.WHITE + name + ChatColor.GRAY + " On " + ChatColor.WHITE
+							+ target.getName() + ChatColor.GRAY + "!");
+				}
 			}
 
-		}.runTaskLater(Main.getInstance(), duration);
-
-		warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
-
-		List<Entity> e = caster.getPlayer().getNearbyEntities(16, 16, 16);
-
-		for (Entity reciever : e)
-		{
-			if (reciever instanceof Player)
+			if (caster.getPlayer().equals(target))
 			{
-				reciever.sendMessage(header + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY
-						+ " Begins To Casts " + ChatColor.WHITE + name + ChatColor.GRAY + " On " + ChatColor.WHITE
-						+ target.getName() + ChatColor.GRAY + "!");
+				caster.getPlayer()
+						.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast "
+								+ ChatColor.WHITE + name + ChatColor.GRAY + " On " + ChatColor.WHITE + "Yourself"
+								+ ChatColor.GRAY + "!");
 			}
-		}
 
-		if (caster.getPlayer().equals(target))
-		{
-			caster.getPlayer()
-					.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast " + ChatColor.WHITE
-							+ name + ChatColor.GRAY + " On " + ChatColor.WHITE + "Yourself" + ChatColor.GRAY + "!");
-		}
-
-		else
-		{
-			caster.getPlayer()
-					.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast " + ChatColor.WHITE
-							+ name + ChatColor.GRAY + " On " + ChatColor.WHITE + target.getName() + ChatColor.GRAY
-							+ "!");
+			else
+			{
+				caster.getPlayer()
+						.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Begin To Cast "
+								+ ChatColor.WHITE + name + ChatColor.GRAY + " On " + ChatColor.WHITE + target.getName()
+								+ ChatColor.GRAY + "!");
+			}
 		}
 	}
 

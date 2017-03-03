@@ -121,7 +121,7 @@ public class Attack implements Listener
 
 			if (!caster.getWeapon().containsKey(Material.BOW))
 			{
-				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " Your Class Cannot Use A Bow.");
+				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Use A Bow.");
 				event.setCancelled(true);
 			}
 

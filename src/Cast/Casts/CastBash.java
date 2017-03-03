@@ -82,6 +82,7 @@ public class CastBash extends TargettedCast implements CommandInterface
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
 									1.0F);
 
+							caster.setCasting(name, false);
 							cast(player, target);
 
 							cooldown.start(player.getName());
