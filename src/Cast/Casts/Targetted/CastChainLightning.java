@@ -71,7 +71,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 			}
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				LivingEntity target = getTarget(player, playerrange, false);
+				LivingEntity target = getTarget(player, playerrange, false, false);
 
 				if (target != null && !target.equals(player))
 				{

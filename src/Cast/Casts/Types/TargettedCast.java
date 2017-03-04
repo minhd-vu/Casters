@@ -72,7 +72,7 @@ public class TargettedCast extends Cast
 	}
 	*/
 
-	public LivingEntity getTarget(Player player, int range, boolean targetpartymembers)
+	public LivingEntity getTarget(Player player, int range, boolean targetself, boolean targetpartymembers)
 	{
 		List<Entity> entities = player.getNearbyEntities(range, range, range);
 		ArrayList<LivingEntity> livingentities = new ArrayList<LivingEntity>();
@@ -95,6 +95,7 @@ public class TargettedCast extends Cast
 		int bx, by, bz;
 		double ex, ey, ez;
 
+		outerloop:
 		while (blockiterator.hasNext())
 		{
 			block = blockiterator.next();
@@ -110,37 +111,41 @@ public class TargettedCast extends Cast
 				ey = loc.getY();
 				ez = loc.getZ();
 
-				if ((bx - .75 <= ex && ex <= bx + 1.75) && (bz - .75 <= ez && ez <= bz + 1.75)
-						&& (by - 1 <= ey && ey <= by + 2.5))
+				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5))
 				{
 					if (entity instanceof Player)
 					{
 						Caster caster = Main.getCasters().get(player.getUniqueId());
 
-						if (caster.hasParty())
+						if (targetpartymembers)
 						{
-							if (targetpartymembers)
+							if (caster.hasParty() && caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
 							{
-								if (caster.getParty().getMembers()
-										.contains(Main.getCasters().get(entity.getUniqueId())))
-								{
-									return entity;
-								}
+								return entity;
 							}
-							else
-							{
-								if (caster.getParty().getMembers()
-										.contains(Main.getCasters().get(entity.getUniqueId())))
-								{
-									return null;
-								}
-							}
+
+							return null;
 						}
+					}
+
+					else if (targetpartymembers)
+					{
+						if (targetself)
+						{
+							return player;
+						}
+
+						return null;
 					}
 
 					return entity;
 				}
 			}
+		}
+
+		if (targetself)
+		{
+			return player;
 		}
 
 		return null;

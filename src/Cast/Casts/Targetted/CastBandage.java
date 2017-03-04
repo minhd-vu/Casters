@@ -55,9 +55,10 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				LivingEntity target = getTarget(player, range, true);
+				LivingEntity target = getTarget(player, range, true, true);
 
 				warmup.start(caster, target, name);
 

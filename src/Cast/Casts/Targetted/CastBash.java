@@ -56,7 +56,7 @@ public class CastBash extends TargettedCast implements CommandInterface
 			}
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				LivingEntity target = getTarget(player, range, false);
+				LivingEntity target = getTarget(player, range, false, false);
 
 				if (target != null && !target.equals(player))
 				{
