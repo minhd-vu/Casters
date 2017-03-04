@@ -7,9 +7,12 @@ import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.List;
 
 public class CastMute extends TargettedCast implements CommandInterface
 {
@@ -79,13 +82,39 @@ public class CastMute extends TargettedCast implements CommandInterface
 
 								tcaster.setEffect("Silenced", duration);
 								caster.setEffect("Silencing", duration);
-							}
 
-							caster.setCasting(name, false);
+								new BukkitRunnable()
+								{
+									@Override
+									public void run()
+									{
+										if (target instanceof Player)
+										{
+											target.sendMessage(header + org.bukkit.ChatColor.WHITE + " You" + org.bukkit.ChatColor.GRAY
+													+ " Have Stopped Being " + org.bukkit.ChatColor.WHITE + "Muted" + org.bukkit.ChatColor.GRAY
+													+ "!");
+										}
+
+										List<Entity> e = target.getNearbyEntities(16, 16, 16);
+
+										for (Entity player : e)
+										{
+											if (player instanceof Player)
+											{
+												player.sendMessage(header + org.bukkit.ChatColor.WHITE + " " + target.getName()
+														+ org.bukkit.ChatColor.GRAY + " Has Stopped Being " + org.bukkit.ChatColor.WHITE
+														+ "Muted" + org.bukkit.ChatColor.GRAY + "!");
+											}
+										}
+									}
+								}.runTaskLater(Main.getInstance(), duration);
+							}
 
 							cast(player, target);
 
 							cooldown.start(player.getName());
+
+							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());

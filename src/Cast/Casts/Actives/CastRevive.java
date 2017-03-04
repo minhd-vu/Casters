@@ -6,21 +6,32 @@ import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class CastRevive extends ActiveCast implements CommandInterface, Listener
 {
+	private HashMap<UUID, Location> deaths;
+
 	private int range;
 	private int percentage;
 
 	public CastRevive(String name, String description)
 	{
 		super(name, description);
+
+		deaths = new HashMap<UUID, Location>();
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
@@ -57,9 +68,9 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 					return true;
 				}
 
-				if (player.getServer().getPlayer(args[0]) != null)
+				if (player.getServer().getPlayer(args[1]) != null)
 				{
-					Player target = player.getServer().getPlayer(args[0]);
+					Player target = player.getServer().getPlayer(args[1]);
 
 					if (target.isDead())
 					{
@@ -92,65 +103,18 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 							}.runTaskLater(Main.getInstance(), warmup.getDuration());
 						}
 					}
+
 					else
 					{
-						player.sendMessage(header + ChatColor.WHITE + " " + args[0] + ChatColor.GRAY
+						player.sendMessage(header + ChatColor.WHITE + " " + args[1] + ChatColor.GRAY
 								+ " Must Be Dead In Order To Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 					}
 				}
+
 				else
 				{
-					player.sendMessage(header + ChatColor.WHITE + " " + args[0] + ChatColor.GRAY + " Is Not Online!");
+					player.sendMessage(header + ChatColor.WHITE + " " + args[1] + ChatColor.GRAY + " Is Not Online!");
 				}
-
-				/*-List<Entity> e = player.getNearbyEntities(range, range, range);
-
-				for (Entity t : e)
-				{
-					if (t instanceof Player && t.getName().equalsIgnoreCase(args[1]))
-					{
-						Player target = (Player) t;
-				
-						if (target.isDead())
-						{
-							if (caster.canCast(name, cooldown, manacost))
-							{
-								warmup.start(caster, target, name);
-				
-								new BukkitRunnable()
-								{
-									@SuppressWarnings("deprecation")
-									@Override
-									public void run()
-									{
-										caster.setCasting(name, true);
-										caster.setMana(manacost);
-				
-										target.setHealth(target.getMaxHealth() * (percentage / 100));
-										target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0,
-												0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-										target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT,
-												8.0F, 1.0F);
-				
-										cast(player, target);
-				
-										cooldown.start(player.getName());
-				
-										caster.setCasting(name, false);
-									}
-				
-								}.runTaskLater(Main.getInstance(), warmup.getDuration());
-							}
-						}
-				
-						else
-						{
-							player.sendMessage(target + " Is Not Dead!");
-						}
-				
-						break;
-					}
-				}*/
 
 				return true;
 			}
@@ -160,5 +124,11 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 		}
 
 		return false;
+	}
+
+	@EventHandler
+	public void onPlayerDeathEvent(PlayerDeathEvent event)
+	{
+		deaths.put(event.getEntity().getUniqueId(), event.getEntity().getLocation());
 	}
 }

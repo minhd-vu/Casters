@@ -130,6 +130,7 @@ public class Caster
 		effects.put("Bleeding", new Effect());
 		effects.put("Siphoning", new Effect());
 		effects.put("Siphoned", new Effect());
+		effects.put("Silencing", new Effect());
 		effects.put("Silenced", new Effect());
 		effects.put("Reflecting", new Effect());
 		effects.put("Taunted", new Effect());
@@ -762,7 +763,7 @@ public class Caster
 		if (!casts.containsKey(name))
 		{
 			player.sendMessage(
-					header + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+					ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
 		else if (casts.get(name) > typelevel)

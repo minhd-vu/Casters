@@ -144,13 +144,13 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 													+ "Poisoned" + ChatColor.GRAY + "!");
 										}
 									}
-
-									caster.setCasting(name, false);
 								}
 
 							}.runTaskLater(Main.getInstance(), duration);
 
 							cooldown.start(player.getName());
+
+							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());
