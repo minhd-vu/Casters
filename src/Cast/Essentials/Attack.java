@@ -36,6 +36,7 @@ public class Attack implements Listener
 					if (caster.sameParty(target))
 					{
 						event.setCancelled(true);
+
 						return;
 					}
 				}

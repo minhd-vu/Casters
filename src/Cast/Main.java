@@ -111,6 +111,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastPoison castpoison;
 	private static CastBash castbash;
 	private static CastMute castmute;
+	private static CastDefensiveStance castdefensivestance;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -417,6 +418,7 @@ public class Main extends JavaPlugin implements Listener
 		monk.getWeapon().put(Material.GOLD_SPADE, 6);
 		monk.getWeapon().put(Material.STONE_SPADE, 5);
 		monk.getWeapon().put(Material.WOOD_SPADE, 4);
+		monk.getCasts().put("DefensiveStance", 1);
 
 		Type cleric = new Type("Cleric", "Description");
 		cleric.getArmor().add(Material.LEATHER_HELMET);
@@ -565,6 +567,8 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
 		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));
 		casts.put("Mute", castmute = new CastMute("Mute", "Silence Your Opponent"));
+		casts.put("DefensiveStance",
+				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield",
@@ -656,6 +660,7 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("poison", castpoison);
 		casthandler.register("bash", castbash);
 		casthandler.register("mute", castmute);
+		casthandler.register("defensivestance", castdefensivestance);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

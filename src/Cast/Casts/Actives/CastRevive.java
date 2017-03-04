@@ -91,10 +91,12 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 											caster.setCasting(name, true);
 											caster.setMana(manacost);
 
-											target.setHealth(target.getMaxHealth() * (percentage / 100));
-											target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-											target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 8.0F, 1.0F);
+											target.teleport(death.getLocation());
 
+											deaths.remove(death);
+
+											target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+											target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 8.0F, 1.0F);
 											cast(player, target);
 
 											cooldown.start(player.getName());

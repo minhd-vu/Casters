@@ -36,6 +36,11 @@ public class PartyLeave implements CommandInterface
 						Main.getParties().remove(caster.getParty());
 					}
 
+					for (Caster member : caster.getParty().getMembers())
+					{
+						member.getPlayer().sendMessage(Party.header + ChatColor.RED + " " + caster.getPlayer().getName() + " Has Left The Party.");
+					}
+
 					caster.setParty(null);
 
 					if (caster.getChannel().equals("Party"))
@@ -45,6 +50,7 @@ public class PartyLeave implements CommandInterface
 
 					caster.getPlayer().sendMessage(Party.header + ChatColor.RED + " You Have Left The Party.");
 				}
+
 				else
 				{
 					caster.getPlayer()

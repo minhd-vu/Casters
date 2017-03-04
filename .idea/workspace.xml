@@ -7,22 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4621a64-84e6-4618-8296-b5e699f342e3" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/casters.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBolt.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBolt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastChainLightning.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastChainLightning.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastCharge.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastCharge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastMute.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastMute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPoison.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPoison.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" afterPath="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" afterPath="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Main.java" afterPath="$PROJECT_DIR$/src/Cast/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Party/PartyLeave.java" afterPath="$PROJECT_DIR$/src/Cast/Party/PartyLeave.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,27 +32,111 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CastBandage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+            <state relative-caret-position="540">
+              <caret line="420" column="50" lean-forward="false" selection-start-line="420" selection-start-column="50" selection-end-line="420" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TargettedCast.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java">
+      <file leaf-file-name="Caster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="130" column="48" lean-forward="true" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
+            <state relative-caret-position="330">
+              <caret line="142" column="47" lean-forward="false" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
+              <folding>
+                <element signature="e#2768#2778#0" expanded="false" />
+                <element signature="e#2838#2857#0" expanded="false" />
+                <element signature="e#2916#2933#0" expanded="false" />
+                <element signature="e#2994#3011#0" expanded="false" />
+                <element signature="e#3142#3159#0" expanded="false" />
+                <element signature="e#14556#14564#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastFireBomb.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="631">
+              <caret line="210" column="34" lean-forward="false" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastDefensiveStance.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastVanish.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastVanish.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="71" column="54" lean-forward="true" selection-start-line="71" selection-start-column="54" selection-end-line="71" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastFireball.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireball.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastReflect.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PartyLeave.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Party/PartyLeave.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Attack.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Attack.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -80,9 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Cast/Main.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java" />
@@ -95,6 +167,13 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Party/PartyLeave.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Main.java" />
       </list>
     </option>
   </component>
@@ -149,6 +228,46 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Casters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spigot-1.11.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spigot-1.11.2.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Casters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spigot-1.11.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spigot-1.11.2.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -383,9 +502,9 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="castba&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBandage.java" />
+    <property name="SearchEverywhereHistoryKey" value="main&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Main.java&#10;partyleav&#9;PSI&#9;JAVA://Cast.Party.PartyLeave&#10;castfireb&#9;PSI&#9;JAVA://Cast.Casts.Actives.CastFireBomb&#10;castre&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;attack&#9;PSI&#9;JAVA://Cast.Essentials.Attack&#10;caster&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Caster.java&#10;castrev&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;castba&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBandage.java" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -623,7 +742,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -633,7 +752,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5042644" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.21055438" sideWeight="0.25460455" order="6" side_tool="true" content_ui="tabs" x="92" y="92" width="1736" height="856" />
+      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21055438" sideWeight="0.32502708" order="8" side_tool="true" content_ui="tabs" x="661" y="570" width="250" height="135" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.496208" order="2" side_tool="false" content_ui="tabs" />
@@ -641,9 +760,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21055438" sideWeight="0.7453954" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21055438" sideWeight="0.6749729" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21055438" sideWeight="0.7833153" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21055438" sideWeight="0.6868906" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -672,69 +791,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4403#4404#0" expanded="false" />
-            <element signature="e#4425#4426#0" expanded="false" />
-            <element signature="e#4483#4484#0" expanded="false" />
-            <element signature="e#4513#4514#0" expanded="false" />
-            <element signature="e#4563#4564#0" expanded="false" />
-            <element signature="e#4589#4590#0" expanded="false" />
-            <element signature="e#4635#4636#0" expanded="false" />
-            <element signature="e#4659#4660#0" expanded="false" />
-            <element signature="e#4700#4701#0" expanded="false" />
-            <element signature="e#4719#4720#0" expanded="false" />
-            <element signature="e#4762#4763#0" expanded="false" />
-            <element signature="e#4783#4784#0" expanded="false" />
-            <element signature="e#4824#4825#0" expanded="false" />
-            <element signature="e#4843#4844#0" expanded="false" />
-            <element signature="e#4883#4884#0" expanded="false" />
-            <element signature="e#4901#4902#0" expanded="false" />
-            <element signature="e#4940#4941#0" expanded="false" />
-            <element signature="e#4958#4959#0" expanded="false" />
-            <element signature="e#5012#5013#0" expanded="false" />
-            <element signature="e#5033#5034#0" expanded="false" />
-            <element signature="e#5085#5086#0" expanded="false" />
-            <element signature="e#5104#5105#0" expanded="false" />
-            <element signature="e#5156#5157#0" expanded="false" />
-            <element signature="e#5177#5178#0" expanded="false" />
-            <element signature="e#5221#5222#0" expanded="false" />
-            <element signature="e#5242#5243#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="68" column="45" lean-forward="false" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
-          <folding>
-            <element signature="e#4403#4404#0" expanded="false" />
-            <element signature="e#4425#4426#0" expanded="false" />
-            <element signature="e#4483#4484#0" expanded="false" />
-            <element signature="e#4513#4514#0" expanded="false" />
-            <element signature="e#4563#4564#0" expanded="false" />
-            <element signature="e#4589#4590#0" expanded="false" />
-            <element signature="e#4635#4636#0" expanded="false" />
-            <element signature="e#4659#4660#0" expanded="false" />
-            <element signature="e#4700#4701#0" expanded="false" />
-            <element signature="e#4719#4720#0" expanded="false" />
-            <element signature="e#4762#4763#0" expanded="false" />
-            <element signature="e#4783#4784#0" expanded="false" />
-            <element signature="e#4824#4825#0" expanded="false" />
-            <element signature="e#4843#4844#0" expanded="false" />
-            <element signature="e#4883#4884#0" expanded="false" />
-            <element signature="e#4901#4902#0" expanded="false" />
-            <element signature="e#4940#4941#0" expanded="false" />
-            <element signature="e#4958#4959#0" expanded="false" />
-            <element signature="e#5012#5013#0" expanded="false" />
-            <element signature="e#5033#5034#0" expanded="false" />
-            <element signature="e#5085#5086#0" expanded="false" />
-            <element signature="e#5104#5105#0" expanded="false" />
-            <element signature="e#5156#5157#0" expanded="false" />
-            <element signature="e#5177#5178#0" expanded="false" />
-            <element signature="e#5221#5222#0" expanded="false" />
-            <element signature="e#5242#5243#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,14 +807,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -786,16 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/casters.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -809,138 +848,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
-          <folding>
-            <element signature="e#1636#1663#0" expanded="false" />
-            <element signature="e#2748#2758#0" expanded="false" />
-            <element signature="e#2818#2837#0" expanded="false" />
-            <element signature="e#2896#2913#0" expanded="false" />
-            <element signature="e#2974#2991#0" expanded="false" />
-            <element signature="e#3122#3139#0" expanded="false" />
-            <element signature="e#5429#5430#0" expanded="false" />
-            <element signature="e#5451#5452#0" expanded="false" />
-            <element signature="e#6918#7580#0" expanded="false" />
-            <element signature="e#7579#7580#0" expanded="false" />
-            <element signature="e#10827#10859#0" expanded="false" />
-            <element signature="e#11837#11838#0" expanded="false" />
-            <element signature="e#11880#11881#0" expanded="false" />
-            <element signature="e#14501#14509#0" expanded="false" />
-            <element signature="e#14673#14674#0" expanded="false" />
-            <element signature="e#14693#14694#0" expanded="false" />
-            <element signature="e#14726#14727#0" expanded="false" />
-            <element signature="e#14747#14748#0" expanded="false" />
-            <element signature="e#14751#14783#0" expanded="false" />
-            <element signature="e#15761#15762#0" expanded="false" />
-            <element signature="e#15780#15781#0" expanded="false" />
-            <element signature="e#15819#15820#0" expanded="false" />
-            <element signature="e#15844#15845#0" expanded="false" />
-            <element signature="e#15889#15890#0" expanded="false" />
-            <element signature="e#15952#15953#0" expanded="false" />
-            <element signature="e#15983#15984#0" expanded="false" />
-            <element signature="e#16010#16011#0" expanded="false" />
-            <element signature="e#16041#16042#0" expanded="false" />
-            <element signature="e#16061#16062#0" expanded="false" />
-            <element signature="e#16103#16104#0" expanded="false" />
-            <element signature="e#16130#16131#0" expanded="false" />
-            <element signature="e#16162#16163#0" expanded="false" />
-            <element signature="e#16190#16191#0" expanded="false" />
-            <element signature="e#16406#16407#0" expanded="false" />
-            <element signature="e#16428#16429#0" expanded="false" />
-            <element signature="e#16455#16456#0" expanded="false" />
-            <element signature="e#16473#16474#0" expanded="false" />
-            <element signature="e#16938#16939#0" expanded="false" />
-            <element signature="e#16956#16957#0" expanded="false" />
-            <element signature="e#17252#17253#0" expanded="false" />
-            <element signature="e#17269#17270#0" expanded="false" />
-            <element signature="e#17706#17707#0" expanded="false" />
-            <element signature="e#17729#17730#0" expanded="false" />
-            <element signature="e#17774#17775#0" expanded="false" />
-            <element signature="e#17807#17808#0" expanded="false" />
-            <element signature="e#17841#17842#0" expanded="false" />
-            <element signature="e#17867#17868#0" expanded="false" />
-            <element signature="e#17898#17899#0" expanded="false" />
-            <element signature="e#17919#17920#0" expanded="false" />
-            <element signature="e#17962#17963#0" expanded="false" />
-            <element signature="e#17991#17992#0" expanded="false" />
-            <element signature="e#18025#18026#0" expanded="false" />
-            <element signature="e#18049#18050#0" expanded="false" />
-            <element signature="e#18080#18081#0" expanded="false" />
-            <element signature="e#18103#18104#0" expanded="false" />
-            <element signature="e#18148#18149#0" expanded="false" />
-            <element signature="e#18181#18182#0" expanded="false" />
-            <element signature="e#18215#18216#0" expanded="false" />
-            <element signature="e#18241#18242#0" expanded="false" />
-            <element signature="e#18272#18273#0" expanded="false" />
-            <element signature="e#18293#18294#0" expanded="false" />
-            <element signature="e#18336#18337#0" expanded="false" />
-            <element signature="e#18365#18366#0" expanded="false" />
-            <element signature="e#18399#18400#0" expanded="false" />
-            <element signature="e#18423#18424#0" expanded="false" />
-            <element signature="e#18453#18454#0" expanded="false" />
-            <element signature="e#18475#18476#0" expanded="false" />
-            <element signature="e#18518#18519#0" expanded="false" />
-            <element signature="e#18549#18550#0" expanded="false" />
-            <element signature="e#18582#18583#0" expanded="false" />
-            <element signature="e#18607#18608#0" expanded="false" />
-            <element signature="e#18637#18638#0" expanded="false" />
-            <element signature="e#18657#18658#0" expanded="false" />
-            <element signature="e#18698#18699#0" expanded="false" />
-            <element signature="e#18725#18726#0" expanded="false" />
-            <element signature="e#18758#18759#0" expanded="false" />
-            <element signature="e#18781#18782#0" expanded="false" />
-            <element signature="e#18812#18813#0" expanded="false" />
-            <element signature="e#18832#18833#0" expanded="false" />
-            <element signature="e#18874#18875#0" expanded="false" />
-            <element signature="e#18901#18902#0" expanded="false" />
-            <element signature="e#18935#18936#0" expanded="false" />
-            <element signature="e#18958#18959#0" expanded="false" />
-            <element signature="e#19006#19007#0" expanded="false" />
-            <element signature="e#19039#19040#0" expanded="false" />
-            <element signature="e#19075#19076#0" expanded="false" />
-            <element signature="e#19100#19101#0" expanded="false" />
-            <element signature="e#19132#19133#0" expanded="false" />
-            <element signature="e#19153#19154#0" expanded="false" />
-            <element signature="e#19197#19198#0" expanded="false" />
-            <element signature="e#19226#19227#0" expanded="false" />
-            <element signature="e#19254#19255#0" expanded="false" />
-            <element signature="e#19274#19275#0" expanded="false" />
-            <element signature="e#19313#19314#0" expanded="false" />
-            <element signature="e#19340#19341#0" expanded="false" />
-            <element signature="e#19370#19371#0" expanded="false" />
-            <element signature="e#19392#19393#0" expanded="false" />
-            <element signature="e#19435#19436#0" expanded="false" />
-            <element signature="e#19466#19467#0" expanded="false" />
-            <element signature="e#19500#19501#0" expanded="false" />
-            <element signature="e#19526#19527#0" expanded="false" />
-            <element signature="e#19577#19578#0" expanded="false" />
-            <element signature="e#19616#19617#0" expanded="false" />
-            <element signature="e#19647#19648#0" expanded="false" />
-            <element signature="e#19670#19671#0" expanded="false" />
-            <element signature="e#19715#19716#0" expanded="false" />
-            <element signature="e#19748#19749#0" expanded="false" />
-            <element signature="e#19779#19780#0" expanded="false" />
-            <element signature="e#19802#19803#0" expanded="false" />
-            <element signature="e#19847#19848#0" expanded="false" />
-            <element signature="e#19880#19881#0" expanded="false" />
-            <element signature="e#19908#19909#0" expanded="false" />
-            <element signature="e#19928#19929#0" expanded="false" />
-            <element signature="e#19967#19968#0" expanded="false" />
-            <element signature="e#19994#19995#0" expanded="false" />
-            <element signature="e#20031#20032#0" expanded="false" />
-            <element signature="e#20050#20051#0" expanded="false" />
-            <element signature="e#20101#20102#0" expanded="false" />
-            <element signature="e#20121#20122#0" expanded="false" />
-            <element signature="e#20169#20170#0" expanded="false" />
-            <element signature="e#20188#20189#0" expanded="false" />
-            <element signature="e#21875#21876#0" expanded="false" />
-            <element signature="e#21917#21918#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1026,18 +933,131 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casters/CastersWeapon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
-          <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+          <caret line="60" column="44" lean-forward="false" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="130" column="48" lean-forward="true" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
+        <state relative-caret-position="405">
+          <caret line="128" column="21" lean-forward="true" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../Minecraft Server/Spigot 1.11.2/spigot-1.11.2.jar!/org/bukkit/entity/Entity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Party/PartyLeave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Attack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="54" column="33" lean-forward="false" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="210" column="34" lean-forward="false" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireball.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastVanish.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="71" column="54" lean-forward="true" selection-start-line="71" selection-start-column="54" selection-end-line="71" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Party/Party.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="420" column="50" lean-forward="false" selection-start-line="420" selection-start-column="50" selection-end-line="420" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="142" column="47" lean-forward="false" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
+          <folding>
+            <element signature="e#2768#2778#0" expanded="false" />
+            <element signature="e#2838#2857#0" expanded="false" />
+            <element signature="e#2916#2933#0" expanded="false" />
+            <element signature="e#2994#3011#0" expanded="false" />
+            <element signature="e#3142#3159#0" expanded="false" />
+            <element signature="e#14556#14564#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding />
         </state>
       </provider>

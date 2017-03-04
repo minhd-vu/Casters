@@ -41,7 +41,8 @@ public class Caster
 	private BossBar bossbar;
 	@SuppressWarnings("unused")
 	private BukkitTask attacktask;
-	private int bossbarremovetimer;
+	private int removetimer;
+	private long combattimer;
 	private Party party;
 	private Invite invite;
 	private Config config;
@@ -98,7 +99,7 @@ public class Caster
 				BarStyle.SEGMENTED_6);
 		bossbar.addPlayer(player);
 		bossbar.setVisible(false);
-		bossbarremovetimer = 100;
+		removetimer = 100;
 
 		party = null;
 		invite = null;
@@ -139,6 +140,7 @@ public class Caster
 		effects.put("Backstabbing", new Effect());
 		effects.put("Poisoning", new Effect());
 		effects.put("Poisoned", new Effect());
+		effects.put("Defending", new Effect());
 
 		new BukkitRunnable()
 		{
@@ -542,6 +544,8 @@ public class Caster
 	@SuppressWarnings("deprecation")
 	public void setBossBarProgress(Damageable entity)
 	{
+		combattimer = System.currentTimeMillis();
+
 		new BukkitRunnable()
 		{
 			@Override
@@ -555,6 +559,7 @@ public class Caster
 							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
 							+ "]");
 				}
+
 				else
 				{
 					bossbar.setProgress(0.0);
@@ -563,18 +568,18 @@ public class Caster
 
 				bossbar.setVisible(true);
 
-				attacktask = new BukkitRunnable()
+
+				new BukkitRunnable()
 				{
 					@Override
 					public void run()
 					{
-						bossbar.setVisible(false);
+						// TODO IMPLEMENT CORRECT JOINT.
 					}
-				}.runTaskLater(Main.getInstance(), bossbarremovetimer);
+				}.runTaskTimer(Main.getInstance(), 0, 20);
 			}
 
 		}.runTaskLater(Main.getInstance(), 1);
-
 	}
 
 	public Party getParty()
