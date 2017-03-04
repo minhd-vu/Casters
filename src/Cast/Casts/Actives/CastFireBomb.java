@@ -23,8 +23,6 @@ import java.util.List;
 
 public class CastFireBomb extends ActiveCast implements CommandInterface, Listener
 {
-	private static List<LargeFireball> firebombs = new ArrayList<LargeFireball>();
-
 	private static double seconds;
 	private static double damage;
 	private static boolean gravity;
@@ -95,7 +93,6 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 						firebomb.setFireTicks(firebombfireticks);
 						firebomb.setGravity(gravity);
 						firebomb.setShooter(player);
-						firebombs.add(firebomb);
 
 						cast(player);
 
@@ -112,7 +109,6 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 							{
 								if (!firebomb.isDead())
 								{
-									firebombs.remove(firebomb);
 									firebomb.remove();
 								}
 							}
@@ -127,51 +123,6 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
-	/*-@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event)
-	{
-		Projectile projectile = event.getEntity();
-	
-		if (projectile instanceof LargeFireball && firebombs.contains(projectile))
-		{
-			LargeFireball firebomb = (LargeFireball) projectile;
-	
-			List<Entity> e = firebomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-	
-			for (Entity target : e)
-			{
-				if (firebomb.getShooter() instanceof Player && !target.equals(firebomb.getShooter()))
-				{
-					if (target instanceof LivingEntity)
-					{
-						((Damageable) target).damage(damage);
-						target.setFireTicks(targetfireticks);
-	
-						target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D), Effect.FLAME,
-								0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-	
-						firebombs.remove(firebomb);
-						firebomb.remove();
-	
-						if (singletarget)
-						{
-							return;
-						}
-					}
-				}
-			}
-	
-			if (explosion > 0)
-			{
-				firebomb.getWorld().createExplosion(firebomb.getLocation(), explosion, incendiary);
-	
-				return;
-			}
-		}
-	}*/
-
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
@@ -180,13 +131,13 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		{
 			LargeFireball firebomb = (LargeFireball) event.getDamager();
 
-			if (firebombs.contains(firebomb))
+			if (firebomb.getShooter() instanceof Player)
 			{
 				List<Entity> entities = firebomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
 				for (Entity target : entities)
 				{
-					if (firebomb.getShooter() instanceof Player && !target.equals(firebomb.getShooter()))
+					if (!target.equals(firebomb.getShooter()))
 					{
 						if (target instanceof LivingEntity)
 						{
@@ -197,7 +148,6 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
 
-							firebombs.remove(firebomb);
 							firebomb.remove();
 
 							if (singletarget)
@@ -206,13 +156,13 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 							}
 						}
 					}
-				}
 
-				if (explosion > 0)
-				{
-					firebomb.getWorld().createExplosion(firebomb.getLocation(), explosion, incendiary);
+					if (explosion > 0)
+					{
+						firebomb.getWorld().createExplosion(firebomb.getLocation(), explosion, incendiary);
 
-					return;
+						return;
+					}
 				}
 			}
 		}

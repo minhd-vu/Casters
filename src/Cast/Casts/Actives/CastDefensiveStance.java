@@ -75,7 +75,7 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 						caster.setEffect("Defending", duration);
 						caster.setMana(manacost);
 
-						if (caster.getParty() != null)
+						if (caster.hasParty())
 						{
 							for (Caster member : caster.getParty().getMembers())
 							{
