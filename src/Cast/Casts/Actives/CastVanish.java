@@ -128,6 +128,20 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 		return true;
 	}
 
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getEntity() instanceof Player)
+		{
+			cancelInvisibility((Player) event.getEntity());
+		}
+
+		if (event.getDamager() instanceof Player)
+		{
+			cancelInvisibility((Player) event.getDamager());
+		}
+	}
+
 	private void cancelInvisibility(Player player)
 	{
 		Caster caster = Main.getCasters().get(player.getUniqueId());
@@ -154,20 +168,6 @@ public class CastVanish extends ActiveCast implements CommandInterface, Listener
 			caster.setCasting(name, false);
 
 			reappeartask.cancel();
-		}
-	}
-
-	@EventHandler
-	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
-	{
-		if (event.getEntity() instanceof Player)
-		{
-			cancelInvisibility((Player) event.getEntity());
-		}
-
-		if (event.getDamager() instanceof Player)
-		{
-			cancelInvisibility((Player) event.getDamager());
 		}
 	}
 }

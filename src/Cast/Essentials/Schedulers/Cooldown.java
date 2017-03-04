@@ -37,6 +37,12 @@ public class Cooldown
 		return false;
 	}
 
+	public double getCooldown(String name)
+	{
+		return Double.parseDouble(new DecimalFormat("##.#")
+				.format(((cooldowns.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0)));
+	}
+
 	public boolean hasCooldown(Player player, String name)
 	{
 		if (cooldowns.containsKey(player.getName()))
@@ -51,12 +57,6 @@ public class Cooldown
 		}
 
 		return false;
-	}
-
-	public double getCooldown(String name)
-	{
-		return Double.parseDouble(new DecimalFormat("##.#")
-				.format(((cooldowns.get(name) / 1000.0) + seconds) - (System.currentTimeMillis() / 1000.0)));
 	}
 
 	public double getCooldown()

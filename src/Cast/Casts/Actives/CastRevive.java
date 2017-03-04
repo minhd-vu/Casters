@@ -25,6 +25,7 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 	private int range;
 	private int percentage;
 	private int timer;
+
 	public CastRevive(String name, String description)
 	{
 		super(name, description);

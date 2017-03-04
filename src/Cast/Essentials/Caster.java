@@ -236,116 +236,39 @@ public class Caster
 		}.runTaskTimer(Main.getInstance(), 0, 2);
 	}
 
-	public Caster(UUID uuid)
+	private void setNewConfig()
 	{
-		this.player = Bukkit.getPlayer(uuid);
-	}
-
-	public boolean canCast(String name, Cooldown cooldown, double manacost)
-	{
-		return hasCast(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name)
-				&& !cooldown.hasCooldown(player, name) && hasMana(manacost, name);
-	}
-
-	public void interruptCasts(LivingEntity target)
-	{
-		if (target instanceof Player)
-		{
-			Caster caster = Main.getCasters().get(target.getUniqueId());
-
-			for (String cast : caster.getWarmingUp())
-			{
-				Main.getCasts().get(cast).interrupCast(player, caster);
-			}
-
-			for (String cast : caster.getCasting())
-			{
-				Main.getCasts().get(cast).interrupCast(player, caster);
-			}
-		}
-	}
-
-	public Player getPlayer()
-	{
-		return player;
-	}
-
-	public BossBar getBossBar()
-	{
-		return bossbar;
-	}
-
-	@SuppressWarnings("deprecation")
-	public void setBossBarProgress(Damageable entity)
-	{
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (!entity.isDead())
-				{
-					bossbar.setProgress(entity.getHealth() / entity.getMaxHealth());
-					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "" + entity.getName() + ChatColor.DARK_GRAY
-							+ " [" + ChatColor.GRAY + Double.parseDouble(decimalformat.format(entity.getHealth())) + "/"
-							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
-							+ "]");
-				}
-				else
-				{
-					bossbar.setProgress(0.0);
-					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "RIP RIP POTATO CHIP");
-				}
-
-				bossbar.setVisible(true);
-
-				attacktask = new BukkitRunnable()
-				{
-					@Override
-					public void run()
-					{
-						bossbar.setVisible(false);
-					}
-				}.runTaskLater(Main.getInstance(), bossbarremovetimer);
-			}
-
-		}.runTaskLater(Main.getInstance(), 1);
-
-	}
-
-	public Party getParty()
-	{
-		return party;
-	}
-
-	public void setParty(Party party)
-	{
-		this.party = party;
-	}
-
-	public boolean hasParty()
-	{
-		return party != null;
-	}
-
-	public boolean sameParty(Caster caster)
-	{
-		return hasParty() && party.getMembers().contains(caster);
-	}
-
-	public Invite getInvite()
-	{
-		return invite;
-	}
-
-	public void setInvite(Invite invite)
-	{
-		this.invite = invite;
-	}
-
-	public boolean hasInvite()
-	{
-		return invite != null;
+		config.set("Type", "None");
+		config.set("Race", "None");
+		config.set("Job", "None");
+		config.set("Channel", "Global");
+		config.set("Title.Chat", "");
+		config.set("Title.Tab", "");
+		config.set("Level.Type.Current", 1);
+		config.set("Level.Type.Max", 20);
+		config.set("Level.Race.Current", 1);
+		config.set("Level.Race.Max", 20);
+		config.set("Level.Job.Current", 1);
+		config.set("Level.Job.Max", 20);
+		config.set("Health.Current", 20.0D);
+		config.set("Health.Max", 20.0D);
+		config.set("Mana.Current", 20.0D);
+		config.set("Mana.Max", 20.0D);
+		config.set("Mana.Regen", 1.0D);
+		config.set("Mana.Timer", 20.0D);
+		config.set("Exp.Type.Current", 0);
+		config.set("Exp.Type.Max", 100);
+		config.set("Exp.Race.Current", 0);
+		config.set("Exp.Race.Max", 100);
+		config.set("Exp.Job.Current", 0);
+		config.set("Exp.Job.Max", 100);
+		config.set("Stats.Points", 0);
+		config.set("Stats.Strength", 0);
+		config.set("Stats.Constitution", 0);
+		config.set("Stats.Dexterity", 0);
+		config.set("Stats.Intellect", 0);
+		config.set("Stats.Wisdom", 0);
+		config.save();
 	}
 
 	private void getConfigType()
@@ -471,6 +394,225 @@ public class Caster
 		}
 	}
 
+	public Caster(UUID uuid)
+	{
+		this.player = Bukkit.getPlayer(uuid);
+	}
+
+	public boolean canCast(String name, Cooldown cooldown, double manacost)
+	{
+		return hasCast(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name)
+				&& !cooldown.hasCooldown(player, name) && hasMana(manacost, name);
+	}
+
+	public boolean hasCast(String name)
+	{
+		if (!casts.containsKey(name))
+		{
+			player.sendMessage(
+					ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+			return false;
+		}
+		else if (casts.get(name) > typelevel)
+		{
+			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
+					+ ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean isCasting(String name)
+	{
+		if (casting.containsKey(name))
+		{
+			return casting.get(name);
+		}
+
+		return false;
+	}
+
+	public boolean isWarmingUp()
+	{
+		for (boolean bool : warmingup.values())
+		{
+			if (bool)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isSilenced(String name)
+	{
+		if (effects.get("Silenced").hasTime())
+		{
+			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+					+ name + ChatColor.GRAY + " While Silenced!");
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isStunned(String name)
+	{
+		if (effects.get("Stunned").hasTime())
+		{
+			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+					+ name + ChatColor.GRAY + " While Stunned!");
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean hasMana(double manacost, String name)
+	{
+		if (mana >= manacost)
+		{
+			return true;
+		}
+
+		player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + ": Not Enough Mana!");
+
+		return false;
+	}
+
+	public void interruptCasts(LivingEntity target)
+	{
+		if (target instanceof Player)
+		{
+			Caster caster = Main.getCasters().get(target.getUniqueId());
+
+			for (String cast : caster.getWarmingUp())
+			{
+				Main.getCasts().get(cast).interrupCast(player, caster);
+			}
+
+			for (String cast : caster.getCasting())
+			{
+				Main.getCasts().get(cast).interrupCast(player, caster);
+			}
+		}
+	}
+
+	public List<String> getWarmingUp()
+	{
+		List<String> warmups = new ArrayList<String>();
+
+		for (String cast : warmingup.keySet())
+		{
+			if (warmingup.get(cast))
+			{
+				warmups.add(cast);
+			}
+		}
+
+		return warmups;
+	}
+
+	public List<String> getCasting()
+	{
+		List<String> castings = new ArrayList<String>();
+
+		for (String cast : casting.keySet())
+		{
+			if (casting.get(cast))
+			{
+				castings.add(cast);
+			}
+		}
+
+		return castings;
+	}
+
+	public Player getPlayer()
+	{
+		return player;
+	}
+
+	public BossBar getBossBar()
+	{
+		return bossbar;
+	}
+
+	@SuppressWarnings("deprecation")
+	public void setBossBarProgress(Damageable entity)
+	{
+		new BukkitRunnable()
+		{
+			@Override
+			public void run()
+			{
+				if (!entity.isDead())
+				{
+					bossbar.setProgress(entity.getHealth() / entity.getMaxHealth());
+					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "" + entity.getName() + ChatColor.DARK_GRAY
+							+ " [" + ChatColor.GRAY + Double.parseDouble(decimalformat.format(entity.getHealth())) + "/"
+							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
+							+ "]");
+				}
+				else
+				{
+					bossbar.setProgress(0.0);
+					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "RIP RIP POTATO CHIP");
+				}
+
+				bossbar.setVisible(true);
+
+				attacktask = new BukkitRunnable()
+				{
+					@Override
+					public void run()
+					{
+						bossbar.setVisible(false);
+					}
+				}.runTaskLater(Main.getInstance(), bossbarremovetimer);
+			}
+
+		}.runTaskLater(Main.getInstance(), 1);
+
+	}
+
+	public Party getParty()
+	{
+		return party;
+	}
+
+	public void setParty(Party party)
+	{
+		this.party = party;
+	}
+
+	public boolean sameParty(Caster caster)
+	{
+		return hasParty() && party.getMembers().contains(caster);
+	}
+
+	public boolean hasParty()
+	{
+		return party != null;
+	}
+
+	public Invite getInvite()
+	{
+		return invite;
+	}
+
+	public void setInvite(Invite invite)
+	{
+		this.invite = invite;
+	}
+
+	public boolean hasInvite()
+	{
+		return invite != null;
+	}
+
 	public String getChannel()
 	{
 		return channel;
@@ -504,6 +646,19 @@ public class Caster
 
 		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
 				+ this.type.getName() + ChatColor.GRAY + "!");
+	}
+
+	public void getConfigs()
+	{
+		armor.clear();
+		weapon.clear();
+		casts.clear();
+
+		getConfigJob();
+		getConfigRace();
+		getConfigType();
+
+		player.leaveVehicle();
 	}
 
 	public Type getRace()
@@ -661,18 +816,6 @@ public class Caster
 		return healthregen;
 	}
 
-	public boolean hasMana(double manacost, String name)
-	{
-		if (mana >= manacost)
-		{
-			return true;
-		}
-
-		player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + ": Not Enough Mana!");
-
-		return false;
-	}
-
 	public double getMaxMana()
 	{
 		return maxmana;
@@ -758,24 +901,6 @@ public class Caster
 		return casts;
 	}
 
-	public boolean hasCast(String name)
-	{
-		if (!casts.containsKey(name))
-		{
-			player.sendMessage(
-					ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
-			return false;
-		}
-		else if (casts.get(name) > typelevel)
-		{
-			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
-					+ ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
-			return false;
-		}
-
-		return true;
-	}
-
 	public int getCastLevel(String name)
 	{
 		if (casts.containsKey(name))
@@ -786,88 +911,11 @@ public class Caster
 		return 0;
 	}
 
-	public boolean isCasting(String name)
-	{
-		if (casting.containsKey(name))
-		{
-			return casting.get(name);
-		}
-
-		return false;
-	}
-
-	public List<String> getCasting()
-	{
-		List<String> castings = new ArrayList<String>();
-
-		for (String cast : casting.keySet())
-		{
-			if (casting.get(cast))
-			{
-				castings.add(cast);
-			}
-		}
-
-		return castings;
-	}
-
-	public boolean isWarmingUp()
-	{
-		for (boolean bool : warmingup.values())
-		{
-			if (bool)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	public boolean isWarmingUp(String name)
 	{
 		if (warmingup.containsKey(name))
 		{
 			return warmingup.get(name);
-		}
-
-		return false;
-	}
-
-	public List<String> getWarmingUp()
-	{
-		List<String> warmups = new ArrayList<String>();
-
-		for (String cast : warmingup.keySet())
-		{
-			if (warmingup.get(cast))
-			{
-				warmups.add(cast);
-			}
-		}
-
-		return warmups;
-	}
-
-	public boolean isStunned(String name)
-	{
-		if (effects.get("Stunned").hasTime())
-		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
-					+ name + ChatColor.GRAY + " While Stunned!");
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean isSilenced(String name)
-	{
-		if (effects.get("Silenced").hasTime())
-		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
-					+ name + ChatColor.GRAY + " While Silenced!");
-			return true;
 		}
 
 		return false;
@@ -907,41 +955,6 @@ public class Caster
 		config.save();
 	}
 
-	private void setNewConfig()
-	{
-		config.set("Type", "None");
-		config.set("Race", "None");
-		config.set("Job", "None");
-		config.set("Channel", "Global");
-		config.set("Title.Chat", "");
-		config.set("Title.Tab", "");
-		config.set("Level.Type.Current", 1);
-		config.set("Level.Type.Max", 20);
-		config.set("Level.Race.Current", 1);
-		config.set("Level.Race.Max", 20);
-		config.set("Level.Job.Current", 1);
-		config.set("Level.Job.Max", 20);
-		config.set("Health.Current", 20.0D);
-		config.set("Health.Max", 20.0D);
-		config.set("Mana.Current", 20.0D);
-		config.set("Mana.Max", 20.0D);
-		config.set("Mana.Regen", 1.0D);
-		config.set("Mana.Timer", 20.0D);
-		config.set("Exp.Type.Current", 0);
-		config.set("Exp.Type.Max", 100);
-		config.set("Exp.Race.Current", 0);
-		config.set("Exp.Race.Max", 100);
-		config.set("Exp.Job.Current", 0);
-		config.set("Exp.Job.Max", 100);
-		config.set("Stats.Points", 0);
-		config.set("Stats.Strength", 0);
-		config.set("Stats.Constitution", 0);
-		config.set("Stats.Dexterity", 0);
-		config.set("Stats.Intellect", 0);
-		config.set("Stats.Wisdom", 0);
-		config.save();
-	}
-
 	public void setCasting(String name, boolean casting)
 	{
 		this.casting.put(name, casting);
@@ -958,19 +971,6 @@ public class Caster
 		{
 			effects.get(name).setDuration(duration);
 		}
-	}
-
-	public void getConfigs()
-	{
-		armor.clear();
-		weapon.clear();
-		casts.clear();
-
-		getConfigJob();
-		getConfigRace();
-		getConfigType();
-
-		player.leaveVehicle();
 	}
 
 	public void setTypeMaxExp()

@@ -23,30 +23,6 @@ public class ConfigManager
 		return config;
 	}
 
-	public Config getNewConfig(String fileName, String[] header)
-	{
-		File file = this.getConfigFile(fileName);
-
-		if (!file.exists())
-		{
-			this.prepareFile(fileName);
-		}
-
-		Config config = new Config(this.getConfigContent(fileName), file, this.getCommentsNum(file), plugin);
-
-		return config;
-	}
-
-	public boolean getFileExists(String fileName)
-	{
-		return this.getConfigFile(fileName).exists();
-	}
-
-	public Config getNewConfig(String fileName)
-	{
-		return this.getNewConfig(fileName, null);
-	}
-
 	private File getConfigFile(String file)
 	{
 		if (file.isEmpty() || file == null)
@@ -67,32 +43,34 @@ public class ConfigManager
 		return configFile;
 	}
 
-	public void prepareFile(String filePath, String resource)
+	public InputStream getConfigContent(String filePath)
 	{
-		File file = this.getConfigFile(filePath);
+		return this.getConfigContent(this.getConfigFile(filePath));
+	}
 
-		if (file.exists())
-			return;
-
+	private int getCommentsNum(File file)
+	{
+		if (!file.exists())
+			return 0;
 		try
 		{
-			file.getParentFile().mkdirs();
-			file.createNewFile();
+			int comments = 0;
+			String currentLine;
 
-			if (resource != null)
-				if (!resource.isEmpty())
-					this.copyResource(plugin.getResource(resource), file);
+			BufferedReader reader = new BufferedReader(new FileReader(file));
 
+			while ((currentLine = reader.readLine()) != null)
+				if (currentLine.startsWith("#"))
+					comments++;
+
+			reader.close();
+			return comments;
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
+			return 0;
 		}
-	}
-
-	public void prepareFile(String filePath)
-	{
-		this.prepareFile(filePath, null);
 	}
 
 	public InputStream getConfigContent(File file)
@@ -135,34 +113,100 @@ public class ConfigManager
 		}
 	}
 
-	private int getCommentsNum(File file)
+	public String getPluginName()
 	{
+		return plugin.getDescription().getName();
+	}
+
+	public boolean getFileExists(String fileName)
+	{
+		return this.getConfigFile(fileName).exists();
+	}
+
+	public Config getNewConfig(String fileName)
+	{
+		return this.getNewConfig(fileName, null);
+	}
+
+	public Config getNewConfig(String fileName, String[] header)
+	{
+		File file = this.getConfigFile(fileName);
+
 		if (!file.exists())
-			return 0;
+		{
+			this.prepareFile(fileName);
+		}
+
+		Config config = new Config(this.getConfigContent(fileName), file, this.getCommentsNum(file), plugin);
+
+		return config;
+	}
+
+	public void prepareFile(String filePath)
+	{
+		this.prepareFile(filePath, null);
+	}
+
+	public void prepareFile(String filePath, String resource)
+	{
+		File file = this.getConfigFile(filePath);
+
+		if (file.exists())
+			return;
+
 		try
 		{
-			int comments = 0;
-			String currentLine;
+			file.getParentFile().mkdirs();
+			file.createNewFile();
 
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			if (resource != null)
+				if (!resource.isEmpty())
+					this.copyResource(plugin.getResource(resource), file);
 
-			while ((currentLine = reader.readLine()) != null)
-				if (currentLine.startsWith("#"))
-					comments++;
-
-			reader.close();
-			return comments;
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			return 0;
 		}
 	}
 
-	public InputStream getConfigContent(String filePath)
+	private void copyResource(InputStream resource, File file)
 	{
-		return this.getConfigContent(this.getConfigFile(filePath));
+		try
+		{
+			OutputStream out = new FileOutputStream(file);
+
+			int length;
+			byte[] buf = new byte[1024];
+
+			while ((length = resource.read(buf)) > 0)
+				out.write(buf, 0, length);
+
+			out.close();
+			resource.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void save(String configString, File file)
+	{
+		String configuration = this.prepareConfigString(configString);
+
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(configuration);
+			writer.flush();
+			writer.close();
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private String prepareConfigString(String configString)
@@ -217,49 +261,5 @@ public class ConfigManager
 			}
 		}
 		return config.toString();
-	}
-
-	public void save(String configString, File file)
-	{
-		String configuration = this.prepareConfigString(configString);
-
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			writer.write(configuration);
-			writer.flush();
-			writer.close();
-
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public String getPluginName()
-	{
-		return plugin.getDescription().getName();
-	}
-
-	private void copyResource(InputStream resource, File file)
-	{
-		try
-		{
-			OutputStream out = new FileOutputStream(file);
-
-			int length;
-			byte[] buf = new byte[1024];
-
-			while ((length = resource.read(buf)) > 0)
-				out.write(buf, 0, length);
-
-			out.close();
-			resource.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 }

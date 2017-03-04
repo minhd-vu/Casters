@@ -23,6 +23,32 @@ public class Armor implements Listener
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
 
+	@EventHandler
+	public void onPlayerInteractEvent(PlayerInteractEvent event)
+	{
+		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+
+		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+		{
+			if (!getArmor(event.getPlayer().getInventory().getItemInMainHand().getType()))
+			{
+				return;
+			}
+
+			for (Material material : caster.getArmor())
+			{
+				if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(material))
+				{
+					return;
+				}
+			}
+
+			event.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
+			event.setCancelled(true);
+			event.getPlayer().updateInventory();
+		}
+	}
+
 	private boolean getArmor(Material material)
 	{
 		switch (material)
@@ -50,32 +76,6 @@ public class Armor implements Listener
 				return true;
 			default:
 				return false;
-		}
-	}
-
-	@EventHandler
-	public void onPlayerInteractEvent(PlayerInteractEvent event)
-	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
-
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
-		{
-			if (!getArmor(event.getPlayer().getInventory().getItemInMainHand().getType()))
-			{
-				return;
-			}
-
-			for (Material material : caster.getArmor())
-			{
-				if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(material))
-				{
-					return;
-				}
-			}
-
-			event.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Wear That.");
-			event.setCancelled(true);
-			event.getPlayer().updateInventory();
 		}
 	}
 

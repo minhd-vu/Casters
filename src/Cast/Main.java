@@ -129,14 +129,6 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyLeave partyleave;
 	private static PartyDisband partydisband;
 
-	public static void registerEvents(Plugin plugin, Listener... listeners)
-	{
-		for (Listener listener : listeners)
-		{
-			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
-		}
-	}
-
 	public static Main getInstance()
 	{
 		return instance;
@@ -200,6 +192,16 @@ public class Main extends JavaPlugin implements Listener
 	public static List<Party> getParties()
 	{
 		return parties;
+	}
+
+	@Override
+	public void onDisable()
+	{
+		for (Player player : Bukkit.getOnlinePlayers())
+		{
+			player.kickPlayer(
+					ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
+		}
 	}
 
 	@Override
@@ -607,16 +609,6 @@ public class Main extends JavaPlugin implements Listener
 
 	}
 
-	@Override
-	public void onDisable()
-	{
-		for (Player player : Bukkit.getOnlinePlayers())
-		{
-			player.kickPlayer(
-					ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
-		}
-	}
-
 	public void registerCommands()
 	{
 		CommandHandler castershandler = new CommandHandler();
@@ -689,6 +681,14 @@ public class Main extends JavaPlugin implements Listener
 		getCommand("cast").setExecutor(casthandler);
 		getCommand("chat").setExecutor(chathandler);
 		getCommand("party").setExecutor(partyhandler);
+	}
+
+	public static void registerEvents(Plugin plugin, Listener... listeners)
+	{
+		for (Listener listener : listeners)
+		{
+			Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
+		}
 	}
 
 	@EventHandler

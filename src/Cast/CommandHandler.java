@@ -17,16 +17,6 @@ public class CommandHandler implements CommandExecutor
 		commands.put(name, cmd);
 	}
 
-	public boolean exists(String name)
-	{
-		return commands.containsKey(name);
-	}
-
-	public CommandInterface getExecutor(String name)
-	{
-		return commands.get(name);
-	}
-
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -77,5 +67,15 @@ public class CommandHandler implements CommandExecutor
 		}
 
 		return false;
+	}
+
+	public CommandInterface getExecutor(String name)
+	{
+		return commands.get(name);
+	}
+
+	public boolean exists(String name)
+	{
+		return commands.containsKey(name);
 	}
 }
