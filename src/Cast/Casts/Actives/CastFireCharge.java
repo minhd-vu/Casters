@@ -15,13 +15,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CastFireCharge extends ActiveCast implements CommandInterface, Listener
 {
-	private List<SmallFireball> firecharges = new ArrayList<SmallFireball>();
-
 	private double seconds;
 	private double damage;
 	private boolean gravity;
@@ -92,7 +89,6 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 						firecharge.setFireTicks(firechargefireticks);
 						firecharge.setGravity(gravity);
 						firecharge.setShooter(player);
-						firecharges.add(firecharge);
 
 						cast(player);
 
@@ -109,7 +105,6 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 							{
 								if (!firecharge.isDead())
 								{
-									firecharges.remove(firecharge);
 									firecharge.remove();
 								}
 							}
@@ -124,51 +119,6 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 		return true;
 	}
 
-	/*-@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event)
-	{
-		Projectile projectile = event.getEntity();
-	
-		if (projectile instanceof SmallFireball && firecharges.contains(projectile))
-		{
-			SmallFireball firecharge = (SmallFireball) projectile;
-	
-			List<Entity> e = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-	
-			for (Entity target : e)
-			{
-				if (firecharge.getShooter() instanceof Player && !target.equals(firecharge.getShooter()))
-				{
-					if (target instanceof LivingEntity)
-					{
-						((Damageable) target).damage(damage);
-						target.setFireTicks(targetfireticks);
-	
-						target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D), Effect.FLAME,
-								0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-	
-						firecharges.remove(firecharge);
-						firecharge.remove();
-	
-						if (singletarget)
-						{
-							return;
-						}
-					}
-				}
-			}
-	
-			if (explosion > 0)
-			{
-				firecharge.getWorld().createExplosion(firecharge.getLocation(), explosion, incendiary);
-	
-				return;
-			}
-		}
-	}*/
-
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
@@ -177,13 +127,13 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 		{
 			Fireball firecharge = (Fireball) event.getDamager();
 
-			if (firecharges.contains(firecharge))
+			if (firecharge.getShooter() instanceof Player)
 			{
 				List<Entity> entities = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
 				for (Entity target : entities)
 				{
-					if (firecharge.getShooter() instanceof Player && !target.equals(firecharge.getShooter()))
+					if (!target.equals(firecharge.getShooter()))
 					{
 						if (target instanceof LivingEntity)
 						{
@@ -194,7 +144,6 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
 
-							firecharges.remove(firecharge);
 							firecharge.remove();
 
 							if (singletarget)

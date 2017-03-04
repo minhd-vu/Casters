@@ -20,8 +20,6 @@ import java.util.List;
 
 public class CastFireball extends ActiveCast implements CommandInterface, Listener
 {
-	private List<Snowball> fireballs = new ArrayList<Snowball>();
-
 	private double timer;
 	private double damage;
 	private double velocity;
@@ -96,8 +94,6 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 						fireball.setGravity(gravity);
 						fireball.setShooter(player);
 
-						fireballs.add(fireball);
-
 						cast(player);
 
 						player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
@@ -113,7 +109,6 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 							{
 								if (!fireball.isDead())
 								{
-									fireballs.remove(fireball);
 									fireball.remove();
 								}
 							}
@@ -134,52 +129,55 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 	{
 		Projectile projectile = event.getEntity();
 
-		if (projectile instanceof Snowball && fireballs.contains(projectile))
+		if (projectile instanceof Snowball)
 		{
 			Snowball fireball = (Snowball) projectile;
 
-			List<Entity> e = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-			for (Entity target : e)
+			if (fireball.getShooter() instanceof Player)
 			{
-				if (fireball.getShooter() instanceof Player && !target.equals(fireball.getShooter()))
+				List<Entity> e = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : e)
 				{
-					Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
-
-					if (target instanceof LivingEntity)
+					if (!target.equals(fireball.getShooter()))
 					{
-						if (target instanceof Player)
-						{
-							Caster ctarget = Main.getCasters().get(target.getUniqueId());
+						Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
 
-							if (caster.sameParty(ctarget))
+						if (target instanceof LivingEntity)
+						{
+							if (target instanceof Player)
+							{
+								Caster ctarget = Main.getCasters().get(target.getUniqueId());
+
+								if (caster.sameParty(ctarget))
+								{
+									return;
+								}
+							}
+
+							((Damageable) target).damage(damage);
+							target.setFireTicks(targetfireticks);
+
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 1.0D, 0.0D), Effect.FLAME,
+									0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
+
+							fireball.remove();
+
+							if (singletarget)
 							{
 								return;
 							}
 						}
-
-						((Damageable) target).damage(damage);
-						target.setFireTicks(targetfireticks);
-
-						target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 1.0D, 0.0D), Effect.FLAME,
-								0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
-
-						fireball.remove();
-
-						if (singletarget)
-						{
-							return;
-						}
 					}
 				}
-			}
 
-			if (explosion > 0)
-			{
-				fireball.getWorld().createExplosion(fireball.getLocation(), explosion, incendiary);
+				if (explosion > 0)
+				{
+					fireball.getWorld().createExplosion(fireball.getLocation(), explosion, incendiary);
 
-				return;
+					return;
+				}
 			}
 		}
 	}

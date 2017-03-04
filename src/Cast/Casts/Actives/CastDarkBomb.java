@@ -138,38 +138,6 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
-	/*-@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event)
-	{
-		Projectile projectile = event.getEntity();
-	
-		if (projectile instanceof WitherSkull && darkbombs.contains(projectile))
-		{
-			WitherSkull darkbomb = (WitherSkull) projectile;
-	
-			List<Entity> e = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-	
-			for (Entity target : e)
-			{
-				if (darkbomb.getShooter() instanceof Player && !target.equals(darkbomb.getShooter()))
-				{
-					if (target instanceof LivingEntity)
-					{
-						((Damageable) target).damage(damage);
-						target.setFireTicks(targetfireticks);
-						((LivingEntity) target)
-								.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
-	
-						darkbombs.remove(darkbomb);
-						darkbomb.remove();
-					}
-	
-					return;
-				}
-			}
-		}
-	}*/
-
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
