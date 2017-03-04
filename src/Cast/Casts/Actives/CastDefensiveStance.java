@@ -38,7 +38,7 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		duration = 60;
+		duration = 100;
 		amplitude = 100;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
@@ -80,15 +80,17 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 							for (Caster member : caster.getParty().getMembers())
 							{
 								member.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
+								member.setEffect("Defending", duration);
 							}
 						}
 
 						else
 						{
-							player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, duration, 0));
+							player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
 						}
 
-						player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 3);
+						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), Effect.IRON_DOOR_CLOSE, 0, 0,
+								0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
 						player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
 
 						cast(player);

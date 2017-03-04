@@ -99,7 +99,7 @@ public class Caster
 				BarStyle.SEGMENTED_6);
 		bossbar.addPlayer(player);
 		bossbar.setVisible(false);
-		removetimer = 100;
+		removetimer = 10000;
 
 		party = null;
 		invite = null;
@@ -222,6 +222,11 @@ public class Caster
 			@Override
 			public void run()
 			{
+				if (System.currentTimeMillis() - combattimer > removetimer)
+				{
+					bossbar.setVisible(false);
+				}
+
 				Main.getActionBarManager()
 						.setBar(ChatColor.RED + "❤ " + Double.parseDouble(decimalformat.format(player.getHealth()))
 								+ "/" + Double.parseDouble(decimalformat.format(player.getMaxHealth())) + "        "
@@ -567,16 +572,7 @@ public class Caster
 				}
 
 				bossbar.setVisible(true);
-
-
-				new BukkitRunnable()
-				{
-					@Override
-					public void run()
-					{
-						// TODO IMPLEMENT CORRECT JOINT.
-					}
-				}.runTaskTimer(Main.getInstance(), 0, 20);
+				combattimer = System.currentTimeMillis();
 			}
 
 		}.runTaskLater(Main.getInstance(), 1);
