@@ -83,6 +83,8 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 									1.0F);
 							target.damage(damage);
 
+							caster.setBossBarEntity(target);
+
 							if (explode)
 							{
 								target.getWorld().createExplosion(target.getLocation(), explosion, incendiary);

@@ -1,6 +1,5 @@
 package Cast.Casts.Types;
 
-import Cast.Essentials.Caster;
 import Cast.Essentials.Chat.Pages;
 import Cast.Essentials.Schedulers.Cooldown;
 import Cast.Essentials.Schedulers.WarmUp;
@@ -8,8 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;

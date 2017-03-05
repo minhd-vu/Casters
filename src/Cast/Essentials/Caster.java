@@ -40,6 +40,7 @@ public class Caster
 	private static final DecimalFormat decimalformat = new DecimalFormat("##.#");
 	private Player player;
 	private BossBar bossbar;
+	private Damageable bossbarentity;
 	private int removetimer;
 	private long combattimer;
 	private Party party;
@@ -102,9 +103,7 @@ public class Caster
 		casts = new HashMap<String, Integer>();
 		tasks = new ArrayList<BukkitTask>();
 
-		bossbar = this.player.getServer().createBossBar(
-				ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED,
-				BarStyle.SEGMENTED_6);
+		bossbar = this.player.getServer().createBossBar(ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED, BarStyle.SEGMENTED_6);
 		bossbar.addPlayer(player);
 		bossbar.setVisible(false);
 		removetimer = 10000;
@@ -230,9 +229,31 @@ public class Caster
 			@Override
 			public void run()
 			{
-				if (System.currentTimeMillis() - combattimer > removetimer)
+				if (bossbarentity != null)
 				{
-					bossbar.setVisible(false);
+					if (System.currentTimeMillis() - combattimer > removetimer)
+					{
+						bossbar.setVisible(false);
+					}
+
+					else
+					{
+						if (!bossbarentity.isDead())
+						{
+							bossbar.setProgress(bossbarentity.getHealth() / bossbarentity.getMaxHealth());
+							bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + bossbarentity.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.GRAY +
+									Double.parseDouble(decimalformat.format(bossbarentity.getHealth())) + "/" +
+									Double.parseDouble(decimalformat.format(bossbarentity.getMaxHealth())) + ChatColor.DARK_GRAY + "]");
+						}
+
+						else
+						{
+							bossbar.setProgress(0.0);
+							bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "RIP RIP POTATO CHIP");
+						}
+
+						bossbar.setVisible(true);
+					}
 				}
 
 				Main.getActionBarManager()
@@ -527,46 +548,15 @@ public class Caster
 		return castings;
 	}
 
-	public Player getPlayer()
-	{
-		return player;
-	}
-
 	public BossBar getBossBar()
 	{
 		return bossbar;
 	}
 
-	@SuppressWarnings("deprecation")
-	public void setBossBarProgress(Damageable entity)
+	public void setBossBarEntity(Damageable entity)
 	{
+		bossbarentity = entity;
 		combattimer = System.currentTimeMillis();
-
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (!entity.isDead())
-				{
-					bossbar.setProgress(entity.getHealth() / entity.getMaxHealth());
-					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "" + entity.getName() + ChatColor.DARK_GRAY
-							+ " [" + ChatColor.GRAY + Double.parseDouble(decimalformat.format(entity.getHealth())) + "/"
-							+ Double.parseDouble(decimalformat.format(entity.getMaxHealth())) + ChatColor.DARK_GRAY
-							+ "]");
-				}
-
-				else
-				{
-					bossbar.setProgress(0.0);
-					bossbar.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "RIP RIP POTATO CHIP");
-				}
-
-				bossbar.setVisible(true);
-				combattimer = System.currentTimeMillis();
-			}
-
-		}.runTaskLater(Main.getInstance(), 1);
 	}
 
 	public Party getParty()
@@ -902,11 +892,6 @@ public class Caster
 		return 0;
 	}
 
-	public List<BukkitTask> getActiveCasts()
-	{
-		return tasks;
-	}
-
 	public void interruptCasts(LivingEntity target)
 	{
 		if (target instanceof Player)
@@ -937,6 +922,16 @@ public class Caster
 						+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + "Casting!");
 			}
 		}
+	}
+
+	public List<BukkitTask> getActiveCasts()
+	{
+		return tasks;
+	}
+
+	public Player getPlayer()
+	{
+		return player;
 	}
 
 	public boolean isWarmingUp(String name)

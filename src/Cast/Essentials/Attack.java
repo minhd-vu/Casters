@@ -25,36 +25,40 @@ public class Attack implements Listener
 		{
 			Caster caster = Main.getCasters().get(event.getDamager().getUniqueId());
 
-			if (event.getCause().equals(DamageCause.ENTITY_ATTACK) && event.getEntity() instanceof Damageable)
+			if (event.getEntity() instanceof Damageable)
 			{
 				Damageable entity = (Damageable) event.getEntity();
 
-				if (entity instanceof Player)
+				if (event.getCause().equals(DamageCause.ENTITY_ATTACK))
 				{
-					Caster target = Main.getCasters().get(entity.getUniqueId());
-
-					if (caster.sameParty(target))
+					if (entity instanceof Player)
 					{
-						event.setCancelled(true);
+						Caster target = Main.getCasters().get(entity.getUniqueId());
 
-						return;
+						if (caster.sameParty(target))
+						{
+							event.setCancelled(true);
+
+							return;
+						}
+					}
+
+					if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
+							&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
+					{
+						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
+								+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
+					}
+					else
+					{
+						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
 					}
 				}
 
-				if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
-						&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
-				{
-					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
-							+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
-				}
-				else
-				{
-					event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
-				}
-
-				caster.setBossBarProgress(entity);
+				caster.setBossBarEntity(entity);
 			}
 		}
+
 		else if (event.getDamager() instanceof Creature)
 		{
 			for (Mob mob : Main.getMobs())
@@ -98,7 +102,7 @@ public class Attack implements Listener
 
 				if (event.getEntity() instanceof Damageable)
 				{
-					caster.setBossBarProgress((Damageable) event.getEntity());
+					caster.setBossBarEntity((Damageable) event.getEntity());
 				}
 			}
 		}

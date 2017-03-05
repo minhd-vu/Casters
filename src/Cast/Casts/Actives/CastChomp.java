@@ -8,10 +8,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.EvokerFangs;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -129,8 +126,14 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 						if (caster.getParty().getMembers().contains(target))
 						{
 							event.setCancelled(true);
+							return;
 						}
 					}
+				}
+
+				if (event.getEntity() instanceof Damageable)
+				{
+					caster.setBossBarEntity((Damageable) event.getEntity());
 				}
 			}
 		}

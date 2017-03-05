@@ -75,6 +75,8 @@ public class CastBash extends TargettedCast implements CommandInterface
 
 							target.damage(damage);
 
+							caster.setBossBarEntity(target);
+
 							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
 									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
@@ -85,7 +87,7 @@ public class CastBash extends TargettedCast implements CommandInterface
 							cooldown.start(player.getName());
 
 							caster.setCasting(name, false);
-							
+
 							caster.getActiveCasts().remove(this);
 						}
 
