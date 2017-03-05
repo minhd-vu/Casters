@@ -113,6 +113,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastMute castmute;
 	private static CastDefensiveStance castdefensivestance;
 	private static CastChomp castchomp;
+	private static CastSeeker castseeker;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -397,6 +398,7 @@ public class Main extends JavaPlugin implements Listener
 		oracle.getWeapon().put(Material.STONE_SPADE, 5);
 		oracle.getWeapon().put(Material.WOOD_SPADE, 4);
 		oracle.getCasts().put("Chomp", 1);
+		oracle.getCasts().put("Seeker", 1);
 
 		Type bloodmage = new Type("Bloodmage", "Description");
 		bloodmage.getArmor().add(Material.LEATHER_HELMET);
@@ -572,6 +574,7 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("DefensiveStance",
 				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
 		casts.put("Chomp", castchomp = new CastChomp("Chomp", "Eat Up Your Opponent"));
+		casts.put("Seeker", castseeker = new CastSeeker("Seeker", "Send A Shulker Bullet Onto Your Opponent"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield",
@@ -612,7 +615,7 @@ public class Main extends JavaPlugin implements Listener
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
 				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, passivebackstab, passiveflameshield);
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield);
 
 	}
 
@@ -665,6 +668,7 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("mute", castmute);
 		casthandler.register("defensivestance", castdefensivestance);
 		casthandler.register("chomp", castchomp);
+		casthandler.register("seeker", castseeker);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

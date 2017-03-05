@@ -1,31 +1,27 @@
-package Cast.Casts.Actives;
+package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.ActiveCast;
+import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.EvokerFangs;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.BlockIterator;
 
-public class CastChomp extends ActiveCast implements CommandInterface, Listener
+public class CastSeeker extends TargettedCast implements CommandInterface, Listener
 {
-	private double range;
 	private double damage;
+	private int range;
+	private int deletiontimer;
 
-	public CastChomp(String name, String description)
+	public CastSeeker(String name, String description)
 	{
-		super(name, description);
+		super(name ,description);
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
@@ -38,6 +34,7 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 
 		range = 10;
 		damage = 10;
+		deletiontimer = 600;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -50,73 +47,73 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 	{
 		if (sender instanceof Player)
 		{
-			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Main.getCasters().get(((Player) sender).getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
-				pages.display(player, args, 2);
+				pages.display(caster.getPlayer(), args, 2);
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				warmup.start(caster, name);
+				LivingEntity target = getTarget(caster.getPlayer(), range, false, false);
 
-				new BukkitRunnable()
+				if (target != null && !target.equals(caster.getPlayer()))
 				{
-					@SuppressWarnings("deprecation")
-					@Override
-					public void run()
+					warmup.start(caster, name);
+
+					new BukkitRunnable()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
-
-						BlockIterator iter = new BlockIterator((LivingEntity) player, (int) range);
-
-						new BukkitRunnable()
+						@SuppressWarnings("deprecation")
+						@Override
+						public void run()
 						{
-							@Override
-							public void run()
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
+
+							ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getLocation(), EntityType.SHULKER_BULLET);
+							seeker.setShooter(caster.getPlayer());
+							seeker.setTarget(target);
+
+							new BukkitRunnable()
 							{
-								if (iter.hasNext())
+								@Override
+								public void run()
 								{
-									Block block = iter.next();
-
-									((EvokerFangs) player.getWorld().spawnEntity(block.getLocation().clone().add(0, -1, 0), EntityType.EVOKER_FANGS)).setOwner(player);
-
-									if (block.getType().isSolid())
+									if (!seeker.isDead())
 									{
-										cancel();
+										seeker.remove();
 									}
 								}
-							}
-						}.runTaskTimer(Main.getInstance(), 0, 2);
+							}.runTaskLater(Main.getInstance(), deletiontimer);
 
-						cast(player);
+							cast(caster.getPlayer());
 
-						cooldown.start(player.getName());
+							cooldown.start(caster.getPlayer().getName());
 
-						caster.setCasting(name, false);
-					}
+							caster.setCasting(name, false);
+						}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		if (event.getDamager() instanceof EvokerFangs)
+		if (event.getDamager() instanceof ShulkerBullet)
 		{
-			EvokerFangs chomp = (EvokerFangs) event.getDamager();
+			ShulkerBullet seeker = (ShulkerBullet) event.getDamager();
 
-			if (chomp.getOwner() instanceof Player)
+			if (seeker.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(chomp.getOwner().getUniqueId());
+				Caster caster = Main.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
 
 				event.setDamage(damage);
 

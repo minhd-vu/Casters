@@ -117,25 +117,20 @@ public class TargettedCast extends Cast
 					{
 						Caster caster = Main.getCasters().get(player.getUniqueId());
 
-						if (targetpartymembers)
+						if (caster.hasParty() && caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
 						{
-							if (caster.hasParty() && caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
+							if (targetpartymembers)
 							{
 								return entity;
 							}
 
-							return null;
+							break outerloop;
 						}
 					}
 
 					else if (targetpartymembers)
 					{
-						if (targetself)
-						{
-							return player;
-						}
-
-						return null;
+						break outerloop;
 					}
 
 					return entity;
