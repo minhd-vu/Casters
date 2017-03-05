@@ -21,6 +21,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -36,11 +37,9 @@ public class Caster
 	private static final String tabheader = ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA
 			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
 	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
-	private final DecimalFormat decimalformat = new DecimalFormat("##.#");
+	private static final DecimalFormat decimalformat = new DecimalFormat("##.#");
 	private Player player;
 	private BossBar bossbar;
-	@SuppressWarnings("unused")
-	private BukkitTask attacktask;
 	private int removetimer;
 	private long combattimer;
 	private Party party;
@@ -82,17 +81,26 @@ public class Caster
 	private int dexterity;
 	private int intellect;
 	private int wisdom;
-	private Set<Material> armor = new HashSet<Material>();
-	private HashMap<Material, Integer> weapon = new HashMap<Material, Integer>();
-	private HashMap<String, Boolean> casting = new HashMap<String, Boolean>();
-	private HashMap<String, Boolean> warmingup = new HashMap<String, Boolean>();
-	private HashMap<String, Effect> effects = new HashMap<String, Effect>();
-	private HashMap<String, Integer> casts = new HashMap<String, Integer>();
+	private Set<Material> armor;
+	private HashMap<Material, Integer> weapon;
+	private HashMap<String, Boolean> casting;
+	private HashMap<String, Boolean> warmingup;
+	private HashMap<String, Effect> effects;
+	private HashMap<String, Integer> casts;
+	private List<BukkitTask> tasks;
 
 	@SuppressWarnings("deprecation")
 	public Caster(Player player)
 	{
 		this.player = player;
+
+		armor = new HashSet<Material>();
+		weapon = new HashMap<Material, Integer>();
+		casting = new HashMap<String, Boolean>();
+		warmingup = new HashMap<String, Boolean>();
+		effects = new HashMap<String, Effect>();
+		casts = new HashMap<String, Integer>();
+		tasks = new ArrayList<BukkitTask>();
 
 		bossbar = this.player.getServer().createBossBar(
 				ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED,
@@ -487,24 +495,6 @@ public class Caster
 		player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + ": Not Enough Mana!");
 
 		return false;
-	}
-
-	public void interruptCasts(LivingEntity target)
-	{
-		if (target instanceof Player)
-		{
-			Caster caster = Main.getCasters().get(target.getUniqueId());
-
-			for (String cast : caster.getWarmingUp())
-			{
-				Main.getCasts().get(cast).interrupCast(player, caster);
-			}
-
-			for (String cast : caster.getCasting())
-			{
-				Main.getCasts().get(cast).interrupCast(player, caster);
-			}
-		}
 	}
 
 	public List<String> getWarmingUp()
@@ -910,6 +900,43 @@ public class Caster
 		}
 
 		return 0;
+	}
+
+	public List<BukkitTask> getActiveCasts()
+	{
+		return tasks;
+	}
+
+	public void interruptCasts(LivingEntity target)
+	{
+		if (target instanceof Player)
+		{
+			Caster caster = Main.getCasters().get(target.getUniqueId());
+
+			if (caster.getActiveCasts().size() > 0)
+			{
+				for (BukkitTask task : caster.getActiveCasts())
+				{
+					task.cancel();
+					caster.getActiveCasts().remove(task);
+				}
+
+				List<Entity> entities = player.getNearbyEntities(16, 16, 16);
+
+				for (Entity entity : entities)
+				{
+					if (entity instanceof Player)
+					{
+						entity.sendMessage(header + " " + ChatColor.WHITE + player.getName() + ChatColor.GRAY
+								+ " Interupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
+								+ "Casting!");
+					}
+				}
+
+				player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
+						+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + "Casting!");
+			}
+		}
 	}
 
 	public boolean isWarmingUp(String name)

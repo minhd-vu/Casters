@@ -26,9 +26,6 @@ public class Cast
 	protected WarmUp warmup;
 	protected Cooldown cooldown;
 
-	protected BukkitTask warmuptask;
-	protected BukkitTask casttask;
-
 	protected double manacost;
 
 	protected String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]";
@@ -69,38 +66,6 @@ public class Cast
 	public Cooldown getCooldown()
 	{
 		return cooldown;
-	}
-
-	public void interrupCast(Player interrupter, Caster interrupted)
-	{
-		if (interrupted.isWarmingUp())
-		{
-			warmuptask.cancel();
-			interrupted.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-			interrupted.setWarmingUp(name, false);
-		}
-
-		if (interrupted.isCasting(name))
-		{
-			casttask.cancel();
-			interrupted.setCasting(name, false);
-		}
-
-		List<Entity> entities = interrupter.getNearbyEntities(16, 16, 16);
-
-		for (Entity entity : entities)
-		{
-			if (entity instanceof Player)
-			{
-				entity.sendMessage(header + " " + ChatColor.WHITE + interrupter.getName() + ChatColor.GRAY
-						+ " Interupts " + ChatColor.WHITE + interrupted.getPlayer().getName() + "'s" + ChatColor.GRAY
-						+ "Casting Of " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
-			}
-		}
-
-		interrupter.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
-				+ interrupted.getPlayer().getName() + "'s" + ChatColor.GRAY + "Casting Of " + ChatColor.WHITE + name
-				+ ChatColor.GRAY + "!");
 	}
 
 	public void cast(Player player)

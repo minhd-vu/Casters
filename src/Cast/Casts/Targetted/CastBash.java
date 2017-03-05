@@ -62,7 +62,7 @@ public class CastBash extends TargettedCast implements CommandInterface
 				{
 					warmup.start(caster, target, name);
 
-					new BukkitRunnable()
+					caster.getActiveCasts().add(new BukkitRunnable()
 					{
 						@SuppressWarnings("deprecation")
 						@Override
@@ -85,9 +85,11 @@ public class CastBash extends TargettedCast implements CommandInterface
 							cooldown.start(player.getName());
 
 							caster.setCasting(name, false);
+							
+							caster.getActiveCasts().remove(this);
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Main.getInstance(), warmup.getDuration()));
 				}
 			}
 		}
