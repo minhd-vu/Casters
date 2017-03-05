@@ -123,7 +123,7 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 					{
 						Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
 
-						if (caster.getParty().getMembers().contains(target))
+						if (caster.sameParty(target))
 						{
 							event.setCancelled(true);
 							return;

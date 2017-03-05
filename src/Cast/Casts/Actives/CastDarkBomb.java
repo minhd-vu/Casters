@@ -157,8 +157,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 						{
 							event.setDamage(damage);
 							target.setFireTicks(targetfireticks);
-							((LivingEntity) target)
-									.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+							((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
 
 							darkbombs.remove(darkbomb);
 							darkbomb.remove();

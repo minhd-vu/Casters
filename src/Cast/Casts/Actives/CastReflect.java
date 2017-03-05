@@ -9,8 +9,6 @@ import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -107,19 +105,24 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		Entity defender = event.getEntity();
-		Entity attacker = event.getDamager();
-
-		Caster caster = Main.getCasters().get(defender.getUniqueId());
-
-		if (attacker instanceof LivingEntity && defender instanceof Player && caster.isCasting(name))
+		if (event.getEntity() instanceof LivingEntity && event.getDamager() instanceof Player)
 		{
-			if ((System.currentTimeMillis() / 1000.0) - (reflects.get(defender.getName()) / 1000.0) < duration / 20)
-			{
-				((Damageable) attacker).damage(event.getDamage() * (percentage / 100));
+			Caster caster = Main.getCasters().get(event.getDamager().getUniqueId());
+			LivingEntity target = (LivingEntity) event.getEntity();
 
-				event.setCancelled(true);
-				return;
+			if (caster.isCasting(name))
+			{
+				if ((System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getName()) / 1000.0) < duration / 20.0)
+				{
+					((LivingEntity) target).damage(event.getDamage() * (percentage / 100));
+
+					// TODO: make sure that there are party checks.
+
+					caster.setBossBarEntity((LivingEntity) target);
+
+					event.setCancelled(true);
+					return;
+				}
 			}
 		}
 	}

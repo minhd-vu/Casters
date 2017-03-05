@@ -94,6 +94,7 @@ public class CastChainLightning extends TargettedCast implements CommandInterfac
 								public void run()
 								{
 									le = StrikeLightning(player, le, oldtargets);
+									caster.setBossBarEntity(le);
 
 									if (le == null)
 									{

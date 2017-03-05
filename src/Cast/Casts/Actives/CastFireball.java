@@ -134,14 +134,14 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 
 			if (fireball.getShooter() instanceof Player)
 			{
+				Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
+
 				List<Entity> e = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
 				for (Entity target : e)
 				{
 					if (!target.equals(fireball.getShooter()))
 					{
-						Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
-
 						if (target instanceof LivingEntity)
 						{
 							if (target instanceof Player)

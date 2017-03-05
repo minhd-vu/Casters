@@ -60,38 +60,41 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 			{
 				LivingEntity target = getTarget(player, range, true, true);
 
-				warmup.start(caster, target, name);
-
-				new BukkitRunnable()
+				if (target != null)
 				{
-					@SuppressWarnings("deprecation")
-					@Override
-					public void run()
+					warmup.start(caster, target, name);
+
+					new BukkitRunnable()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
-
-						if (target.getHealth() + heal > target.getMaxHealth())
+						@SuppressWarnings("deprecation")
+						@Override
+						public void run()
 						{
-							target.setHealth(target.getMaxHealth());
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
+
+							if (target.getHealth() + heal > target.getMaxHealth())
+							{
+								target.setHealth(target.getMaxHealth());
+							}
+							else
+							{
+								target.setHealth(target.getHealth() + heal);
+							}
+
+							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.HEART, 0, 0,
+									0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_PLACE, 4.0F, 1.0F);
+
+							cast(player, target);
+
+							cooldown.start(player.getName());
+
+							caster.setCasting(name, false);
 						}
-						else
-						{
-							target.setHealth(target.getHealth() + heal);
-						}
 
-						target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.HEART, 0, 0,
-								0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
-						target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_PLACE, 4.0F, 1.0F);
-
-						cast(player, target);
-
-						cooldown.start(player.getName());
-
-						caster.setCasting(name, false);
-					}
-
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}
 			}
 		}
 

@@ -8,7 +8,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -87,7 +86,8 @@ public class CastLightningStorm extends ActiveCast implements CommandInterface, 
 									target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
 									target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER,
 											1.0F, 1.0F);
-									((Damageable) target).damage(damage);
+									((LivingEntity) target).damage(damage);
+									caster.setBossBarEntity((LivingEntity) target);
 
 									if (explode)
 									{

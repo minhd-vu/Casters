@@ -75,6 +75,7 @@ public class CastMute extends TargettedCast implements CommandInterface
 							caster.setMana(manacost);
 
 							target.damage(damage);
+							caster.setBossBarEntity(target);
 
 							if (target instanceof Player)
 							{

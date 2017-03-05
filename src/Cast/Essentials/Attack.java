@@ -93,7 +93,7 @@ public class Attack implements Listener
 				{
 					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
 
-					if (caster.hasParty() && caster.getParty().getMembers().contains(target))
+					if (caster.sameParty(target))
 					{
 						event.setCancelled(true);
 						return;

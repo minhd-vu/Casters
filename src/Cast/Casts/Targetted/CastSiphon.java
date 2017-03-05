@@ -89,6 +89,7 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_WITCH_DRINK, 8.0F, 1.0F);
 
 							target.damage(damage);
+							caster.setBossBarEntity(target);
 
 							if (player.getHealth() + damage * (percentage / 100) > player.getMaxHealth())
 							{

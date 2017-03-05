@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,6 +97,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_FALL, 1.0F, 1.0F);
 
 							poisons.add(target);
+							caster.setBossBarEntity(target);
 
 							cast(player, target);
 
@@ -164,7 +166,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageEvent event)
 	{
-	    /*-if (event.getCause().equals(DamageCause.POISON))
+		if (event.getCause().equals(DamageCause.POISON))
 		{
 			if (event.getEntity() instanceof LivingEntity)
 			{
@@ -173,6 +175,6 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 					event.setDamage(damagepertick);
 				}
 			}
-		}*/
+		}
 	}
 }

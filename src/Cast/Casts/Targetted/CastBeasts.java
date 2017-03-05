@@ -11,7 +11,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class CastBeasts extends TargettedCast implements CommandInterface, Liste
 	private double duration;
 	private int amount;
 	private int range;
+	private double wolfdamage;
 
 	public CastBeasts(String name, String description)
 	{
@@ -38,11 +41,13 @@ public class CastBeasts extends TargettedCast implements CommandInterface, Liste
 		duration = 0;
 		amount = 3;
 		range = 10;
+		wolfdamage = 3;
 
 		info.add(duration == 0 ? ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + "Forever"
 				: ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Amount: " + ChatColor.GRAY + amount + " Wolves");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
+		info.add(ChatColor.DARK_AQUA + "Wolf Damage: " + ChatColor.GRAY + wolfdamage + " HP");
 
 		pages.setPage(info);
 	}
@@ -119,5 +124,33 @@ public class CastBeasts extends TargettedCast implements CommandInterface, Liste
 		}
 
 		return true;
+	}
+
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof Wolf)
+		{
+			Wolf wolf = (Wolf) event.getDamager();
+
+			if (wolf.getOwner() instanceof Player)
+			{
+				Caster caster = Main.getCasters().get(wolf.getOwner().getUniqueId());
+
+				if (event.getEntity() instanceof LivingEntity)
+				{
+					if (event.getEntity() instanceof Player)
+					{
+						if (caster.sameParty(Main.getCasters().get(event.getEntity().getUniqueId())))
+						{
+							event.setCancelled(true);
+						}
+					}
+
+					event.setDamage(wolfdamage);
+					caster.setBossBarEntity((LivingEntity) event.getEntity());
+				}
+			}
+		}
 	}
 }

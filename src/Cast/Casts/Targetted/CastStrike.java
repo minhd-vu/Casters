@@ -73,7 +73,6 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
-						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{
@@ -81,6 +80,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 							caster.setMana(manacost);
 
 							target.damage(damage);
+							caster.setBossBarEntity(target);
 
 							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
 									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);

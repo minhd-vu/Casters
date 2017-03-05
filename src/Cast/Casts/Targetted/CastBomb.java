@@ -92,6 +92,16 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 							tnt.setFuseTicks(fuse);
 							tnt.setIsIncendiary(incendiary);
 
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									caster.setBossBarEntity(target);
+								}
+
+							}.runTaskLater(Main.getInstance(), fuse);
+
 							cast(player, target);
 
 							cooldown.start(player.getName());

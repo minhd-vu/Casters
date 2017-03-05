@@ -559,6 +559,16 @@ public class Caster
 		combattimer = System.currentTimeMillis();
 	}
 
+	public boolean sameParty(Caster caster)
+	{
+		return hasParty() && (party.getMembers().contains(caster) || party.equals(caster.getParty()));
+	}
+
+	public boolean hasParty()
+	{
+		return party != null;
+	}
+
 	public Party getParty()
 	{
 		return party;
@@ -567,16 +577,6 @@ public class Caster
 	public void setParty(Party party)
 	{
 		this.party = party;
-	}
-
-	public boolean sameParty(Caster caster)
-	{
-		return hasParty() && party.getMembers().contains(caster);
-	}
-
-	public boolean hasParty()
-	{
-		return party != null;
 	}
 
 	public Invite getInvite()

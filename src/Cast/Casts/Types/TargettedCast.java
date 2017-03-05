@@ -126,6 +126,11 @@ public class TargettedCast extends Cast
 
 							break outerloop;
 						}
+
+						if (targetpartymembers)
+						{
+							return null;
+						}
 					}
 
 					else if (targetpartymembers)

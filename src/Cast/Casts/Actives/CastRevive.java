@@ -71,6 +71,14 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 				if (player.getServer().getPlayer(args[1]) != null)
 				{
 					Player target = player.getServer().getPlayer(args[1]);
+					Caster ctarget = Main.getCasters().get(target.getUniqueId());
+
+					if (!caster.sameParty(ctarget))
+					{
+						caster.getPlayer().sendMessage(header + ChatColor.WHITE + " You " +
+								ChatColor.GRAY + "Must Be In The Same Party To" + ChatColor.WHITE + " Revive " + ChatColor.GRAY + "Someone!");
+						return false;
+					}
 
 					if (caster.canCast(name, cooldown, manacost))
 					{
@@ -88,20 +96,30 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 									{
 										if (System.currentTimeMillis() - death.getTime() <= timer)
 										{
-											caster.setCasting(name, true);
-											caster.setMana(manacost);
+											if (player.getLocation().distance(death.getLocation()) < range)
+											{
+												caster.setCasting(name, true);
+												caster.setMana(manacost);
 
-											target.teleport(death.getLocation());
+												target.teleport(death.getLocation());
 
-											deaths.remove(death);
+												deaths.remove(death);
 
-											target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-											target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 8.0F, 1.0F);
-											cast(player, target);
+												target.getWorld().spigot().playEffect(target.getLocation(), Effect.HEART, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+												target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 8.0F, 1.0F);
+												cast(player, target);
 
-											cooldown.start(player.getName());
+												cooldown.start(player.getName());
 
-											caster.setCasting(name, false);
+												caster.setCasting(name, false);
+											}
+
+											else
+											{
+												player.sendMessage(
+														header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Must Be Closer To Where " + ChatColor.WHITE + target.getName() +
+																" Died!");
+											}
 										}
 
 										else
@@ -143,6 +161,14 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 	@EventHandler
 	public void onPlayerDeathEvent(PlayerDeathEvent event)
 	{
+		for (Death death : deaths)
+		{
+			if (death.getPlayer().equals(event.getEntity()))
+			{
+				deaths.remove(death);
+			}
+		}
+
 		deaths.add(new Death(event.getEntity(), event.getEntity().getLocation(), System.currentTimeMillis()));
 	}
 
