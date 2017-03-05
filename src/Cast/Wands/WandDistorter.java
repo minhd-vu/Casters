@@ -3,8 +3,10 @@ package Cast.Wands;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
@@ -16,7 +18,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.BlockIterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,7 +169,9 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 		{
 			if (!Material.ENDER_PEARL.equals(material)
 					|| !Material.ENDER_PEARL.equals(event.getPlayer().getInventory().getItemInMainHand()))
+			{
 				;
+			}
 			{
 				event.setCancelled(true);
 			}

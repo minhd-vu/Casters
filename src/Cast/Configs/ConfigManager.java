@@ -26,19 +26,27 @@ public class ConfigManager
 	private File getConfigFile(String file)
 	{
 		if (file.isEmpty() || file == null)
+		{
 			return null;
+		}
 
 		File configFile;
 
 		if (file.contains("/"))
 		{
 			if (file.startsWith("/"))
+			{
 				configFile = new File(plugin.getDataFolder() + file.replace("/", File.separator));
+			}
 			else
+			{
 				configFile = new File(plugin.getDataFolder() + File.separator + file.replace("/", File.separator));
+			}
 		}
 		else
+		{
 			configFile = new File(plugin.getDataFolder(), file);
+		}
 
 		return configFile;
 	}
@@ -51,7 +59,9 @@ public class ConfigManager
 	private int getCommentsNum(File file)
 	{
 		if (!file.exists())
+		{
 			return 0;
+		}
 		try
 		{
 			int comments = 0;
@@ -60,8 +70,12 @@ public class ConfigManager
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 
 			while ((currentLine = reader.readLine()) != null)
+			{
 				if (currentLine.startsWith("#"))
+				{
 					comments++;
+				}
+			}
 
 			reader.close();
 			return comments;
@@ -76,7 +90,9 @@ public class ConfigManager
 	public InputStream getConfigContent(File file)
 	{
 		if (!file.exists())
+		{
 			return null;
+		}
 		try
 		{
 			int commentNum = 0;
@@ -97,7 +113,9 @@ public class ConfigManager
 					commentNum++;
 				}
 				else
+				{
 					whole.append(currentLine + "\n");
+				}
 			}
 
 			String config = whole.toString();
@@ -152,7 +170,9 @@ public class ConfigManager
 		File file = this.getConfigFile(filePath);
 
 		if (file.exists())
+		{
 			return;
+		}
 
 		try
 		{
@@ -160,8 +180,12 @@ public class ConfigManager
 			file.createNewFile();
 
 			if (resource != null)
+			{
 				if (!resource.isEmpty())
+				{
 					this.copyResource(plugin.getResource(resource), file);
+				}
+			}
 
 		}
 		catch (IOException e)
@@ -180,7 +204,9 @@ public class ConfigManager
 			byte[] buf = new byte[1024];
 
 			while ((length = resource.read(buf)) > 0)
+			{
 				out.write(buf, 0, length);
+			}
 
 			out.close();
 			resource.close();
@@ -242,14 +268,22 @@ public class ConfigManager
 				{
 					String normalComment;
 					if (comment.startsWith("# ' "))
+					{
 						normalComment = comment.substring(0, comment.length() - 1).replaceFirst("# ' ", "# ");
+					}
 					else
+					{
 						normalComment = comment;
+					}
 
 					if (lastLine == 0)
+					{
 						config.append(normalComment + "\n");
+					}
 					else if (lastLine == 1)
+					{
 						config.append("\n" + normalComment + "\n");
+					}
 
 					lastLine = 0;
 				}

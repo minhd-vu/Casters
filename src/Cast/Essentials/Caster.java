@@ -416,7 +416,8 @@ public class Caster
 		if (!casts.containsKey(name))
 		{
 			player.sendMessage(
-					ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
+					ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Cannot Cast " +
+							ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
 		else if (casts.get(name) > typelevel)
