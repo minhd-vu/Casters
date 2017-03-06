@@ -21,6 +21,7 @@ public class CastSeeker extends TargettedCast implements CommandInterface, Liste
 	private double damage;
 	private int range;
 	private int deletiontimer;
+	private double velocity;
 
 	public CastSeeker(String name, String description)
 	{
@@ -38,6 +39,7 @@ public class CastSeeker extends TargettedCast implements CommandInterface, Liste
 		range = 10;
 		damage = 10;
 		deletiontimer = 600;
+		velocity = 2.0;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -79,6 +81,10 @@ public class CastSeeker extends TargettedCast implements CommandInterface, Liste
 							ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getLocation(), EntityType.SHULKER_BULLET);
 							seeker.setShooter(caster.getPlayer());
 							seeker.setTarget(target);
+
+							// TODO: Try To Not Set Target And Set Just Velocity (Skill Shot?).
+
+							seeker.setVelocity(seeker.getVelocity().normalize().multiply(velocity));
 
 							new BukkitRunnable()
 							{

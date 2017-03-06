@@ -22,18 +22,18 @@ public class Stun
 
 	private int duration;
 
-	public Stun()
+	public Stun(int duration)
 	{
-		duration = 0;
+		this.duration = duration;
 	}
 
 	public void start(Plugin plugin, LivingEntity target)
 	{
-		if (target instanceof Player)
+		if (target instanceof Player) // TODO: Check If Stun Is Fixed For Players.
 		{
 			stuns.put(target.getName(), System.currentTimeMillis());
 
-			Location location = target.getLocation();
+			Location location = target.getLocation().getBlock().getLocation();
 
 			target.sendMessage(header + "You" + ChatColor.GRAY + " Have Been " + ChatColor.WHITE + "Stunned"
 					+ ChatColor.GRAY + "!");
@@ -79,7 +79,7 @@ public class Stun
 					}
 				}
 
-			}.runTaskTimer(plugin, 0L, 100L);
+			}.runTaskTimer(plugin, 0, 1);
 		}
 		else if (target instanceof LivingEntity)
 		{
@@ -117,15 +117,5 @@ public class Stun
 
 			}.runTaskLater(plugin, duration);
 		}
-	}
-
-	public int getDuration()
-	{
-		return duration;
-	}
-
-	public void setDuration(int duration)
-	{
-		this.duration = duration;
 	}
 }

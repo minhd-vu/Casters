@@ -19,7 +19,9 @@ import org.bukkit.util.Vector;
 
 public class CastCharge extends TargettedCast implements CommandInterface, Listener
 {
-	private Stun stun = new Stun();
+	private Stun stun;
+
+	private int duration;
 	private double damage;
 	private int range;
 
@@ -36,11 +38,13 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		stun.setDuration(60);
+		duration = 60;
 		damage = 4;
 		range = 8;
 
-		info.add(ChatColor.DARK_AQUA + "Stun: " + ChatColor.GRAY + stun.getDuration() / 20.0 + " Seconds");
+		stun = new Stun(duration);
+
+		info.add(ChatColor.DARK_AQUA + "Stun: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 

@@ -3,51 +3,49 @@ package Cast.Casts.Targetted;
 import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
-import Cast.Essentials.Effects.Bleed;
+import Cast.Essentials.Effects.Stun;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
-public class CastStrike extends TargettedCast implements CommandInterface, Listener
+public class CastPressurePoint extends TargettedCast implements CommandInterface, Listener
 {
-	private Bleed bleed;
+	private Stun stun;
 
-	private double damage;
-	private double damagepertick;
 	private int duration;
-	private int period;
+	private double damage;
 	private int range;
 
-	public CastStrike(String name, String description)
+	public CastPressurePoint(String name, String description)
 	{
 		super(name, description);
 
-		warmup.setDuration(0);
-		warmup.setAmplifier(0);
-		cooldown.setCooldown(40);
+		warmup.setDuration(40);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
 		manacost = 3;
 
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		damage = 3;
-		range = 4;
-		damagepertick = 1;
-		duration = 100;
-		period = 20;
+		duration = 60;
+		damage = 4;
+		range = 8;
 
-		bleed = new Bleed(damage, duration, period);
+		stun = new Stun(duration);
 
-		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
-		info.add(ChatColor.DARK_AQUA + "Bleed: " + ChatColor.GRAY + damagepertick + " HP");
+		info.add(ChatColor.DARK_AQUA + "Stun: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 
@@ -68,6 +66,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
@@ -78,7 +77,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
-						@Deprecated
+						@SuppressWarnings("deprecation")
 						@Override
 						public void run()
 						{
@@ -88,15 +87,15 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 							target.damage(damage);
 							caster.setBossBarEntity(target);
 
-							// TODO: Test To See If Cast Strike Display
+							stun.start(Main.getInstance(), target);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0F, 1.0F);
+//							player.getWorld().spigot().playEffect(player.getLocation(), Effect.SNOW_SHOVEL, 0, 0, 0.0F, 0.1F,
+//									0.0F, 0.5F, 25, 12);
+							player.getWorld().spawnParticle(Particle.END_ROD, player.getLocation(), 25, 0.5, 1.0F, 0.5F); // TODO: Try To See If This Particle Acts Correctly.
+							player.getWorld().playSound(player.getLocation(), Sound.BLOCK_CLOTH_BREAK, 8.0F,
+									1.0F);
 
 							cast(player, target);
-
-							bleed.start(caster, target, name);
 
 							caster.setCasting(name, false);
 

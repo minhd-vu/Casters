@@ -23,11 +23,11 @@ public class Bleed
 	protected int duration;
 	protected int period;
 
-	public Bleed()
+	public Bleed(double damage, int duration, int period)
 	{
-		damage = 0;
-		duration = 0;
-		period = 0;
+		this.damage = damage;
+		this.duration = duration;
+		this.period = period;
 	}
 
 	public void start(Caster caster, LivingEntity target, String name)
@@ -36,13 +36,14 @@ public class Bleed
 
 		if (target instanceof Player)
 		{
+			Main.getCasters().get(target.getUniqueId()).setEffect("Bleeding", duration);
 			target.sendMessage(
 					header + "You" + ChatColor.GRAY + " Are " + ChatColor.WHITE + "Bleeding" + ChatColor.GRAY + "!");
 		}
 
-		List<Entity> e = target.getNearbyEntities(16, 16, 16);
+		List<Entity> entities = target.getNearbyEntities(16, 16, 16);
 
-		for (Entity player : e)
+		for (Entity player : entities)
 		{
 			if (player instanceof Player)
 			{
@@ -56,11 +57,31 @@ public class Bleed
 			@Override
 			public void run()
 			{
-				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20
-						|| target.isDead())
+				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20 || target.isDead())
 				{
+					bleeds.remove(target.getUniqueId());
+
+					if (target instanceof Player)
+					{
+						target.sendMessage(header + "You" + ChatColor.GRAY + " Have Stopped " + ChatColor.WHITE + "Bleeding"
+								+ ChatColor.GRAY + "!");
+					}
+
+					List<Entity> e = target.getNearbyEntities(16, 16, 16);
+
+					for (Entity player : e)
+					{
+						if (player instanceof Player)
+						{
+							player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Stopped "
+									+ ChatColor.WHITE + "Bleeding" + ChatColor.GRAY + "!");
+						}
+					}
+
 					this.cancel();
+					return;
 				}
+
 				else
 				{
 					target.damage(damage);
@@ -68,125 +89,5 @@ public class Bleed
 			}
 
 		}.runTaskTimer(Main.getInstance(), period, period);
-
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (target instanceof Player)
-				{
-					target.sendMessage(header + "You" + ChatColor.GRAY + " Have Stopped " + ChatColor.WHITE + "Bleeding"
-							+ ChatColor.GRAY + "!");
-				}
-
-				List<Entity> e = target.getNearbyEntities(16, 16, 16);
-
-				for (Entity player : e)
-				{
-					if (player instanceof Player)
-					{
-						player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Stopped "
-								+ ChatColor.WHITE + "Bleeding" + ChatColor.GRAY + "!");
-					}
-				}
-
-				caster.setCasting(name, false);
-			}
-		}.runTaskLater(Main.getInstance(), duration);
-	}
-
-	public void start(Caster caster, Caster tcaster, String name)
-	{
-		Player target = tcaster.getPlayer();
-
-		bleeds.put(target.getUniqueId(), System.currentTimeMillis());
-
-		tcaster.setEffect("Bleeding", duration);
-
-		if (target instanceof Player)
-		{
-			target.sendMessage("You Are Bleeding!");
-		}
-
-		List<Entity> e = target.getNearbyEntities(16, 16, 16);
-
-		for (Entity player : e)
-		{
-			if (player instanceof Player)
-			{
-				player.sendMessage(header + target.getName() + ChatColor.WHITE + " Is " + ChatColor.WHITE + "Bleeding"
-						+ ChatColor.GRAY + "!");
-			}
-		}
-
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20
-						|| target.isDead())
-				{
-					this.cancel();
-				}
-				else
-				{
-					target.damage(damage);
-				}
-			}
-
-		}.runTaskTimer(Main.getInstance(), period, period);
-
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (target instanceof Player)
-				{
-					target.sendMessage(header + "You" + ChatColor.GRAY + " Have Stopped " + ChatColor.WHITE + "Bleeding"
-							+ ChatColor.GRAY + "!");
-				}
-
-				List<Entity> e = target.getNearbyEntities(16, 16, 16);
-
-				for (Entity player : e)
-				{
-					if (player instanceof Player)
-					{
-						player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Stopped "
-								+ ChatColor.WHITE + "Bleeding" + ChatColor.GRAY + "!");
-					}
-				}
-
-				caster.setCasting(name, false);
-			}
-		}.runTaskLater(Main.getInstance(), duration);
-	}
-
-	public void setPeriod(int period)
-	{
-		this.period = period;
-	}
-
-	public double getDamage()
-	{
-		return damage;
-	}
-
-	public void setDamage(double damage)
-	{
-		this.damage = damage;
-	}
-
-	public int getDuration()
-	{
-		return duration;
-	}
-
-	public void setDuration(int duration)
-	{
-		this.duration = duration;
 	}
 }

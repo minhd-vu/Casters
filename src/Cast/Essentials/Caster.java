@@ -273,16 +273,18 @@ public class Caster
 
 	private void setNewConfig()
 	{
-		config.set("Type", "None");
-		config.set("Race", "None");
-		config.set("Job", "None");
+		// TODO: Change Theses Values Back And Make A Starting Class.
+
+		config.set("Type", "Inferno");
+		config.set("Race", "Dwarf");
+		config.set("Job", "Alchemist");
 		config.set("Channel", "Global");
-		config.set("Title.Chat", "");
+		config.set("Title.Chat", "Inferno");
 		config.set("Title.Tab", "");
 		config.set("Level.Type.Current", 1);
-		config.set("Level.Type.Max", 20);
+		config.set("Level.Type.Max", 200);
 		config.set("Level.Race.Current", 1);
-		config.set("Level.Race.Max", 20);
+		config.set("Level.Race.Max", 200);
 		config.set("Level.Job.Current", 1);
 		config.set("Level.Job.Max", 20);
 		config.set("Health.Current", 20.0D);
@@ -900,10 +902,10 @@ public class Caster
 
 			if (caster.getActiveCasts().size() > 0)
 			{
-				for (BukkitTask task : caster.getActiveCasts())
+				for (int i = 0; i < tasks.size(); ++i)
 				{
-					task.cancel();
-					caster.getActiveCasts().remove(task);
+					tasks.get(i).cancel(); // TODO: Resolve This Issue Where It Is Not Cancelled.
+					caster.getActiveCasts().remove(tasks.get(i));
 				}
 
 				List<Entity> entities = player.getNearbyEntities(16, 16, 16);
@@ -912,14 +914,14 @@ public class Caster
 				{
 					if (entity instanceof Player)
 					{
-						entity.sendMessage(header + " " + ChatColor.WHITE + player.getName() + ChatColor.GRAY
+						entity.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
 								+ " Interupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
-								+ "Casting!");
+								+ " Casting!");
 					}
 				}
 
-				player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
-						+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + "Casting!");
+				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
+						+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
 			}
 		}
 	}

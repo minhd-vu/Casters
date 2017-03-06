@@ -88,7 +88,7 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 									}
 								}
 							}
-						}.runTaskTimer(Main.getInstance(), 0, 2);
+						}.runTaskTimer(Main.getInstance(), 0, 1);
 
 						cast(player);
 

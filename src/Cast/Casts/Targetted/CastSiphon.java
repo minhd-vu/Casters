@@ -17,10 +17,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CastSiphon extends TargettedCast implements CommandInterface, Listener
 {
-	private Siphon siphon = new Siphon();
+	private Siphon siphon;
 
 	private double damage;
+	private double damagepertick;
 	private int percentage;
+	private int duration;
+	private int period;
 	private int range;
 
 	public CastSiphon(String name, String description)
@@ -36,16 +39,17 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds.");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP.");
 
-		siphon.setDuration(100);
-		siphon.setPeriod(20);
-		siphon.setDamage(1);
-		siphon.setPercentage(100);
+		duration = 100;
+		period = 20;
 		damage = 3;
+		damagepertick = 4;
 		percentage = 50;
 		range = 8;
 
-		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + siphon.getDuration() / 20.0 + " Seconds");
-		info.add(ChatColor.DARK_AQUA + "Siphon: " + ChatColor.GRAY + siphon.getDamage() + " HP");
+		siphon = new Siphon(damagepertick, duration, period, percentage);
+
+		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Siphon: " + ChatColor.GRAY + damagepertick + " HP");
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 		info.add(ChatColor.DARK_AQUA + "Percentage: " + ChatColor.GRAY + percentage + "%");
@@ -100,14 +104,7 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 								player.setHealth(player.getHealth() + damage * (percentage / 100));
 							}
 
-							if (target instanceof Player)
-							{
-								siphon.start(caster, Main.getCasters().get(target.getUniqueId()), name);
-							}
-							else
-							{
-								siphon.start(caster, target, name);
-							}
+							siphon.start(caster, target, name);
 
 							cast(player, target);
 
