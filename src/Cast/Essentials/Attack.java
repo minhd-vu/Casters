@@ -51,7 +51,7 @@ public class Attack implements Listener
 					}
 					else
 					{
-						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale());
+						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale() + 1); // TODO: Remove When Strength Is Implemented.
 					}
 				}
 

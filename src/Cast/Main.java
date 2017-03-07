@@ -617,7 +617,7 @@ public class Main extends JavaPlugin implements Listener
 		registerCommands();
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
-				wandshaman, wandwarlock, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
+				wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
 				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield);
 

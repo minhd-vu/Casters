@@ -12,6 +12,6 @@ public class ActiveCast extends Cast
 
 	public void decast(Player player)
 	{
-		player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + " Is No Longer Active!");
+		player.sendMessage(header + " " + ChatColor.WHITE + name + ChatColor.GRAY + " Is No Longer Active!");
 	}
 }
