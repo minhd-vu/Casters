@@ -2,8 +2,9 @@ package Cast;
 
 import Cast.Casters.*;
 import Cast.Casts.Actives.*;
+import Cast.Casts.CastCommands;
 import Cast.Casts.CastList;
-import Cast.Casts.Casts;
+import Cast.Casts.CastsInventory;
 import Cast.Casts.Passives.PassiveBackstab;
 import Cast.Casts.Passives.PassiveFlameshield;
 import Cast.Casts.Targetted.*;
@@ -56,7 +57,7 @@ public class Main extends JavaPlugin implements Listener
 
 	private static HashMap<UUID, Caster> casters;
 
-	private static Casters casterscmd;
+	private static CasterCommands casterscmd;
 	private static CastersInfo castersinfo;
 	private static CastersLevel casterslevel;
 	private static CastersStats castersstats;
@@ -88,7 +89,7 @@ public class Main extends JavaPlugin implements Listener
 
 	private static HashMap<String, Cast> casts;
 
-	private static Casts cast;
+	private static CastCommands cast;
 	private static CastList castlist;
 	private static CastFireball castfireball;
 	private static CastDarkBomb castdarkbomb;
@@ -118,9 +119,11 @@ public class Main extends JavaPlugin implements Listener
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
 
+	private static CastsInventory castsinventory;
+
 	private static List<Party> parties;
 
-	private static Parties partycmd;
+	private static PartyCommands partycmd;
 	private static PartyCreate partycreate;
 	private static PartyMembers partymembers;
 	private static PartyInvite partyinvite;
@@ -531,7 +534,7 @@ public class Main extends JavaPlugin implements Listener
 
 		casters = new HashMap<UUID, Caster>();
 
-		casterscmd = new Casters();
+		casterscmd = new CasterCommands();
 		castersinfo = new CastersInfo();
 		casterslevel = new CastersLevel();
 		castersstats = new CastersStats();
@@ -544,16 +547,17 @@ public class Main extends JavaPlugin implements Listener
 		casterswhois = new CastersWhoIs();
 		castersrecipes = new CastersRecipes();
 
-		cast = new Casts();
+		cast = new CastCommands();
 		castlist = new CastList();
 		casts = new HashMap<String, Cast>();
+		castsinventory = new CastsInventory();
 
-		casts.put("Fireball", castfireball = new CastFireball("Fireball", "Casts A Fireball"));
-		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "Casts A Dark Bomb"));
-		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Casts A Bolt"));
+		casts.put("Fireball", castfireball = new CastFireball("Fireball", "CastCommands A Fireball"));
+		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "CastCommands A Dark Bomb"));
+		casts.put("Bolt", castbolt = new CastBolt("Bolt", "CastCommands A Bolt"));
 		casts.put("Revive", castrevive = new CastRevive("Revive", "Revive A Player"));
-		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "Casts A Fire Bomb"));
-		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "Casts A Fire Charge"));
+		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "CastCommands A Fire Bomb"));
+		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "CastCommands A Fire Charge"));
 		casts.put("Charge", castcharge = new CastCharge("Charge", "Charge Your Opponent"));
 		casts.put("Strike", caststrike = new CastStrike("Strike", "Strike Your Opponent"));
 		casts.put("Bandage", castbandage = new CastBandage("Bandage", "Bandage Yourself Or An Ally"));
@@ -569,7 +573,7 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
 		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
-		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));
+		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt CastCommands"));
 		casts.put("Mute", castmute = new CastMute("Mute", "Silence Your Opponent"));
 		casts.put("DefensiveStance",
 				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
@@ -598,7 +602,7 @@ public class Main extends JavaPlugin implements Listener
 		wandwarlock = new WandWarlock("Warlock");
 
 		parties = new ArrayList<Party>();
-		partycmd = new Parties();
+		partycmd = new PartyCommands();
 		partycreate = new PartyCreate();
 		partymembers = new PartyMembers();
 		partyinvite = new PartyInvite();
@@ -624,6 +628,7 @@ public class Main extends JavaPlugin implements Listener
 		CommandHandler castershandler = new CommandHandler();
 		CommandHandler wandhandler = new CommandHandler();
 		CommandHandler casthandler = new CommandHandler();
+		CommandHandler castshandler = new CommandHandler();
 		CommandHandler chathandler = new CommandHandler();
 		CommandHandler partyhandler = new CommandHandler();
 
@@ -673,6 +678,8 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
 
+		castshandler.register("casts", castsinventory);
+
 		chathandler.register("chat", chat);
 		chathandler.register("titles", chattitles);
 		chathandler.register("channel", chatchannel);
@@ -692,6 +699,7 @@ public class Main extends JavaPlugin implements Listener
 		getCommand("casters").setExecutor(castershandler);
 		getCommand("wand").setExecutor(wandhandler);
 		getCommand("cast").setExecutor(casthandler);
+		getCommand("casts").setExecutor(castshandler);
 		getCommand("chat").setExecutor(chathandler);
 		getCommand("party").setExecutor(partyhandler);
 	}

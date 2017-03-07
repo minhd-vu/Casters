@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parties implements CommandInterface
+public class PartyCommands implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private List<String> commands = new ArrayList<String>();
@@ -18,7 +18,7 @@ public class Parties implements CommandInterface
 	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Party" + ChatColor.DARK_GRAY + "]";
 	private String fill = ChatColor.DARK_GRAY + "-----------------------";
 
-	public Parties()
+	public PartyCommands()
 	{
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " <page>" + ChatColor.GRAY
 				+ " - Lists All Party Commands.");
@@ -43,7 +43,7 @@ public class Parties implements CommandInterface
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " decline" + ChatColor.GRAY
 				+ " - Declines The Party Invite.");
 		commands.add(ChatColor.DARK_AQUA + "/party" + ChatColor.AQUA + " merge <name>" + ChatColor.GRAY
-				+ " - Invites Another Party Leader To Merge Parties.");
+				+ " - Invites Another Party Leader To Merge PartyCommands.");
 
 		pages.setHeader(fill + header + fill);
 		pages.setError("Party");
