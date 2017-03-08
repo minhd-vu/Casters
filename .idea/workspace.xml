@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4621a64-84e6-4618-8296-b5e699f342e3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Types/ActiveCast.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Types/ActiveCast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" afterPath="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Main.java" afterPath="$PROJECT_DIR$/src/Cast/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,8 +52,8 @@
       <file leaf-file-name="CastsInventory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+            <state relative-caret-position="129">
+              <caret line="40" column="50" lean-forward="true" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,9 +132,6 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDarkBomb.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastLightningStorm.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastChainLightning.java" />
@@ -161,6 +158,9 @@
         <option value="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" />
         <option value="$PROJECT_DIR$/src/Cast/Main.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/ActiveCast.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java" />
       </list>
     </option>
@@ -488,7 +488,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="poison&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Effects/Poison.java&#10;casstr&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastStrike.java&#10;castpoi&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastPoison.java&#10;setboss&#9;PSI&#9;JAVA://Cast.Essentials.Caster#setBossBarEntity&#10;main&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Main.java&#10;partyleav&#9;PSI&#9;JAVA://Cast.Party.PartyLeave&#10;castfireb&#9;PSI&#9;JAVA://Cast.Casts.Actives.CastFireBomb&#10;castre&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;attack&#9;PSI&#9;JAVA://Cast.Essentials.Attack&#10;caster&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Caster.java&#10;castrev&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;castba&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBandage.java" />
+    <property name="SearchEverywhereHistoryKey" value="castre&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;poison&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Effects/Poison.java&#10;casstr&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastStrike.java&#10;castpoi&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastPoison.java&#10;setboss&#9;PSI&#9;JAVA://Cast.Essentials.Caster#setBossBarEntity&#10;main&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Main.java&#10;partyleav&#9;PSI&#9;JAVA://Cast.Party.PartyLeave&#10;castfireb&#9;PSI&#9;JAVA://Cast.Casts.Actives.CastFireBomb&#10;attack&#9;PSI&#9;JAVA://Cast.Essentials.Attack&#10;caster&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Caster.java&#10;castrev&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;castba&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBandage.java" />
     <property name="ToolWindowDocumentation.ShowToolbar" value="false" />
   </component>
   <component name="RunManager">
@@ -728,12 +728,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -746,7 +746,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21443625" sideWeight="0.6641387" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21443625" sideWeight="0.6641387" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21022129" sideWeight="0.53954494" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -842,26 +842,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="131" column="40" lean-forward="false" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-599">
-          <caret line="111" column="81" lean-forward="true" selection-start-line="111" selection-start-column="81" selection-end-line="111" selection-end-column="81" />
           <folding />
         </state>
       </provider>
@@ -1129,14 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="619" column="56" lean-forward="false" selection-start-line="619" selection-start-column="56" selection-end-line="619" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/CastCommands.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1171,16 +1147,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="88" column="35" lean-forward="true" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+        <state relative-caret-position="405">
+          <caret line="43" column="87" lean-forward="false" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="169" column="9" lean-forward="false" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="619" column="56" lean-forward="false" selection-start-line="619" selection-start-column="56" selection-end-line="619" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+        <state relative-caret-position="129">
+          <caret line="40" column="50" lean-forward="true" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

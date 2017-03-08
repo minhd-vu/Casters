@@ -161,11 +161,11 @@ public class CastRevive extends ActiveCast implements CommandInterface, Listener
 	@EventHandler
 	public void onPlayerDeathEvent(PlayerDeathEvent event)
 	{
-		for (Death death : deaths)
+		for (int i = 0; i < deaths.size(); ++i)
 		{
-			if (death.getPlayer().equals(event.getEntity()))
+			if (deaths.get(i).getPlayer().equals(event.getEntity()))
 			{
-				deaths.remove(death);
+				deaths.remove(i);
 			}
 		}
 

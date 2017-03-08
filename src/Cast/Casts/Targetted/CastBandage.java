@@ -35,8 +35,8 @@ public class CastBandage extends TargettedCast implements CommandInterface, List
 		heal = 1;
 		range = 8;
 
-		info.add(ChatColor.DARK_AQUA + "Heal:" + heal + " HP");
-		info.add(ChatColor.DARK_AQUA + "Range:" + range + " Blocks");
+		info.add(ChatColor.DARK_AQUA + "Heal: " + ChatColor.GRAY +  heal + " HP");
+		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 
 		pages.setPage(info);
 	}

@@ -41,7 +41,7 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 		percentage = 100;
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
-		info.add(ChatColor.DARK_AQUA + "Percentage: " + ChatColor.GRAY + percentage + " %");
+		info.add(ChatColor.DARK_AQUA + "Percentage: " + ChatColor.GRAY + percentage + "%");
 
 		pages.setPage(info);
 	}
