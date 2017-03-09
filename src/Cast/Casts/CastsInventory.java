@@ -137,15 +137,19 @@ public class CastsInventory implements CommandInterface, Listener
 		Player player = event.getPlayer();
 		Caster caster = Main.getCasters().get(player.getUniqueId());
 
-		ItemStack item = player.getInventory().getItem(event.getNewSlot());
+		ItemStack newitem = player.getInventory().getItem(event.getNewSlot());
+		ItemStack olditem = player.getInventory().getItem(event.getPreviousSlot());
 
-		if (item != null && item.hasItemMeta() && item.getItemMeta().getDisplayName() != null)
+		if (castitems.containsValue(newitem))
 		{
-			String cast = ChatColor.stripColor(item.getItemMeta().getDisplayName());
+			String cast = ChatColor.stripColor(newitem.getItemMeta().getDisplayName());
 
 			if (caster.getCasts().containsKey(cast))
 			{
-				player.getInventory().setHeldItemSlot(event.getPreviousSlot());
+				if (!castitems.containsValue(olditem))
+				{
+					player.getInventory().setHeldItemSlot(event.getPreviousSlot());
+				}
 
 				player.performCommand("cast " + cast.toLowerCase());
 			}
