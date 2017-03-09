@@ -4,6 +4,7 @@ import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -13,6 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import static org.bukkit.Effect.IRON_DOOR_CLOSE;
 
 public class CastDefensiveStance extends ActiveCast implements CommandInterface
 {
@@ -41,6 +44,7 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 		pages.setPage(info);
 	}
 
+	@SuppressWarnings("deprecated")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -83,7 +87,7 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 							player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
 						}
 
-						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), Effect.IRON_DOOR_CLOSE, 0, 0,
+						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0,
 								0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
 						player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
 

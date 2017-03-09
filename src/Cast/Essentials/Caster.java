@@ -24,8 +24,8 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -88,7 +88,6 @@ public class Caster
 	private HashMap<String, Boolean> warmingup;
 	private HashMap<String, Effect> effects;
 	private HashMap<String, Integer> casts;
-	private List<BukkitTask> tasks;
 
 	@SuppressWarnings("deprecation")
 	public Caster(Player player)
@@ -101,7 +100,6 @@ public class Caster
 		warmingup = new HashMap<String, Boolean>();
 		effects = new HashMap<String, Effect>();
 		casts = new HashMap<String, Integer>();
-		tasks = new ArrayList<BukkitTask>();
 
 		bossbar = this.player.getServer().createBossBar(ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED, BarStyle.SEGMENTED_6);
 		bossbar.addPlayer(player);
@@ -535,7 +533,7 @@ public class Caster
 		return warmups;
 	}
 
-	public List<String> getCasting()
+	public List<String> getCastings()
 	{
 		List<String> castings = new ArrayList<String>();
 
@@ -900,35 +898,41 @@ public class Caster
 		{
 			Caster caster = Main.getCasters().get(target.getUniqueId());
 
-			if (caster.getActiveCasts().size() > 0)
+			if (caster.isWarmingUp() || caster.isCasting())
 			{
-				for (int i = 0; i < tasks.size(); ++i)
+				if (caster.isWarmingUp())
 				{
-					tasks.get(i).cancel(); // TODO: Resolve This Issue Where It Is Not Cancelled.
-					caster.getActiveCasts().remove(tasks.get(i));
+					caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 				}
 
-				List<Entity> entities = player.getNearbyEntities(16, 16, 16);
-
-				for (Entity entity : entities)
+				if (caster.isCasting())
 				{
-					if (entity instanceof Player)
+					List<Entity> entities = player.getNearbyEntities(16, 16, 16);
+
+					for (Entity entity : entities)
 					{
-						entity.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
-								+ " Interupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
-								+ " Casting!");
+						if (entity instanceof Player)
+						{
+							entity.sendMessage(
+									ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
+											+ " Interupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
+											+ " Casting!");
+						}
 					}
-				}
 
-				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " + ChatColor.WHITE
-						+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
+					player.sendMessage(
+							ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " +
+									ChatColor.WHITE
+
+									+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
+				}
 			}
 		}
 	}
 
-	public List<BukkitTask> getActiveCasts()
+	public boolean isCasting()
 	{
-		return tasks;
+		return casting.containsValue(true);
 	}
 
 	public Player getPlayer()

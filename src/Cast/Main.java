@@ -550,20 +550,19 @@ public class Main extends JavaPlugin implements Listener
 		cast = new CastCommands();
 		castlist = new CastList();
 		casts = new HashMap<String, Cast>();
-		castsinventory = new CastsInventory();
 
-		casts.put("Fireball", castfireball = new CastFireball("Fireball", "CastCommands A Fireball"));
-		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "CastCommands A Dark Bomb"));
-		casts.put("Bolt", castbolt = new CastBolt("Bolt", "CastCommands A Bolt"));
+		casts.put("Fireball", castfireball = new CastFireball("Fireball", "Casts A Fireball"));
+		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "Casts A Dark Bomb"));
+		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Casst A Bolt"));
 		casts.put("Revive", castrevive = new CastRevive("Revive", "Revive A Player"));
-		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "CastCommands A Fire Bomb"));
-		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "CastCommands A Fire Charge"));
+		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "Casts A Fire Bomb"));
+		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "Casts A Fire Charge"));
 		casts.put("Charge", castcharge = new CastCharge("Charge", "Charge Your Opponent"));
 		casts.put("Strike", caststrike = new CastStrike("Strike", "Strike Your Opponent"));
 		casts.put("Bandage", castbandage = new CastBandage("Bandage", "Bandage Yourself Or An Ally"));
 		casts.put("Beasts", castbeasts = new CastBeasts("Beasts", "Summon A Pack Of Wolves"));
 		casts.put("LightningStorm",
-				castlightningstorm = new CastLightningStorm("LightningStorm", "Cast A Lightning Storm"));
+				castlightningstorm = new CastLightningStorm("LightningStorm", "Casts A Lightning Storm"));
 		casts.put("ChainLightning",
 				castchainlightning = new CastChainLightning("ChainLightning", "Consecutively Strikes Opponenets"));
 		casts.put("Reflect", castreflect = new CastReflect("Reflect", "Relects All Incoming Damage"));
@@ -573,7 +572,7 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
 		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
-		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt CastCommands"));
+		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));
 		casts.put("Mute", castmute = new CastMute("Mute", "Silence Your Opponent"));
 		casts.put("DefensiveStance",
 				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
@@ -583,6 +582,8 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield",
 				passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
+
+		castsinventory = new CastsInventory();
 
 		experience = new Experience();
 		enchant = new Enchant();

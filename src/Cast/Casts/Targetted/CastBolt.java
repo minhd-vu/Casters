@@ -70,11 +70,13 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 				{
 					warmup.start(caster, target, name);
 
-					caster.getActiveCasts().add(new BukkitRunnable()
+					new BukkitRunnable()
 					{
 						@Override
 						public void run()
 						{
+							// Add In A Check For Being Cancelled Here.
+
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
@@ -97,7 +99,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 							caster.setCasting(name, false);
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration()));
+					}.runTaskLater(Main.getInstance(), warmup.getDuration());
 				}
 
 				else if (explode)

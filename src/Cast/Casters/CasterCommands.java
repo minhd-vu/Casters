@@ -15,7 +15,7 @@ public class CasterCommands implements CommandInterface
 	private Pages pages = new Pages();
 	private List<String> commands = new ArrayList<String>();
 
-	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "CasterCommands" + ChatColor.DARK_GRAY + "]";
+	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]";
 	private String fill = ChatColor.DARK_GRAY + "----------------------";
 
 	public CasterCommands()
