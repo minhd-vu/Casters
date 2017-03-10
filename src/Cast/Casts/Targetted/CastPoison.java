@@ -118,7 +118,7 @@ public class CastPoison extends TargettedCast implements CommandInterface, Liste
 		{
 			if (poison.getAffectedPlayers().contains(event.getEntity().getUniqueId()))
 			{
-				event.setDamage(damagepertick); // TODO: Test To See If Making It Into An Affect Class Works Correctly.
+				event.setDamage(damagepertick);
 			}
 		}
 	}

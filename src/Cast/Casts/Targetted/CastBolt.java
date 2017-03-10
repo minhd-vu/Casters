@@ -75,7 +75,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 						@Override
 						public void run()
 						{
-							// TODO: Add In A Check For Being Cancelled Here. Something Like If(Cancelled) { Return; }
+							// TODO: Find A Way To Make This More Efficient.
 
 							if (!caster.isInterrupted())
 							{

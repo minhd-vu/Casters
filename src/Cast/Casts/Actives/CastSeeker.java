@@ -1,6 +1,6 @@
-package Cast.Casts.Targetted;
+package Cast.Casts.Actives;
 
-import Cast.Casts.Types.TargettedCast;
+import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -8,7 +8,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ShulkerBullet;
 import org.bukkit.event.EventHandler;
@@ -16,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastSeeker extends TargettedCast implements CommandInterface, Listener
+public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 {
 	private double damage;
 	private int range;
@@ -63,50 +62,44 @@ public class CastSeeker extends TargettedCast implements CommandInterface, Liste
 
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-				LivingEntity target = getTarget(caster.getPlayer(), range, false, false);
+				warmup.start(caster, name);
 
-				if (target != null && !target.equals(caster.getPlayer()))
+				new BukkitRunnable()
 				{
-					warmup.start(caster, name);
-
-					new BukkitRunnable()
+					@SuppressWarnings("deprecation")
+					@Override
+					public void run()
 					{
-						@SuppressWarnings("deprecation")
-						@Override
-						public void run()
+						caster.setCasting(name, true);
+						caster.setMana(manacost);
+
+						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getLocation(), EntityType.SHULKER_BULLET);
+						seeker.setShooter(caster.getPlayer());
+
+						// TODO: Try To Not Set Target And Set Just Velocity (Skill Shot?).
+
+						seeker.setVelocity(caster.getPlayer().getEyeLocation().add(0, 1, 0).getDirection().a);
+
+						new BukkitRunnable()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getLocation(), EntityType.SHULKER_BULLET);
-							seeker.setShooter(caster.getPlayer());
-							seeker.setTarget(target);
-
-							// TODO: Try To Not Set Target And Set Just Velocity (Skill Shot?).
-
-							seeker.setVelocity(seeker.getVelocity().normalize().multiply(velocity));
-
-							new BukkitRunnable()
+							@Override
+							public void run()
 							{
-								@Override
-								public void run()
+								if (!seeker.isDead())
 								{
-									if (!seeker.isDead())
-									{
-										seeker.remove();
-									}
+									seeker.remove();
 								}
-							}.runTaskLater(Main.getInstance(), deletiontimer);
+							}
+						}.runTaskLater(Main.getInstance(), deletiontimer);
 
-							cast(caster.getPlayer());
+						cast(caster.getPlayer());
 
-							cooldown.start(caster.getPlayer().getName());
+						cooldown.start(caster.getPlayer().getName());
 
-							caster.setCasting(name, false);
-						}
+						caster.setCasting(name, false);
+					}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
-				}
+				}.runTaskLater(Main.getInstance(), warmup.getDuration());
 			}
 		}
 

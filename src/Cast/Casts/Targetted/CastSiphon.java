@@ -99,7 +99,7 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 							{
 								player.setHealth(player.getMaxHealth());
 							}
-							
+
 							else
 							{
 								player.setHealth(player.getHealth() + damage * percentage / 100.0);
