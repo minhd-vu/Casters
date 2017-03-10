@@ -57,7 +57,13 @@ public class Bleed
 			@Override
 			public void run()
 			{
-				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20 || target.isDead())
+				if (target == null || target.isDead())
+				{
+					cancel();
+					return;
+				}
+
+				else if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20)
 				{
 					bleeds.remove(target.getUniqueId());
 
@@ -78,7 +84,7 @@ public class Bleed
 						}
 					}
 
-					this.cancel();
+					cancel();
 					return;
 				}
 

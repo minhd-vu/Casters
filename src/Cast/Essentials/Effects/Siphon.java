@@ -53,10 +53,15 @@ public class Siphon extends Bleed
 			@Override
 			public void run()
 			{
+				if (target == null || target.isDead())
+				{
+					cancel();
+					return;
+				}
+
 				Player player = caster.getPlayer();
 
-				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20
-						|| target.isDead())
+				if (System.currentTimeMillis() / 1000.0 - bleeds.get(target.getUniqueId()) / 1000.0 > duration / 20)
 				{
 					if (target instanceof Player)
 					{
@@ -75,9 +80,10 @@ public class Siphon extends Bleed
 						}
 					}
 
-					this.cancel();
+					cancel();
 					return;
 				}
+
 				else
 				{
 					target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.WITCH_MAGIC, 0, 0,
@@ -89,12 +95,14 @@ public class Siphon extends Bleed
 					{
 						player.setHealth(player.getMaxHealth());
 					}
+
 					else
 					{
 						player.setHealth(player.getHealth() + damage * (percentage / 100));
 					}
 				}
 			}
+
 		}.runTaskTimer(Main.getInstance(), period, period);
 	}
 }

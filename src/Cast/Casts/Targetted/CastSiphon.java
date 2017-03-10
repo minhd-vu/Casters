@@ -95,13 +95,14 @@ public class CastSiphon extends TargettedCast implements CommandInterface, Liste
 							target.damage(damage);
 							caster.setBossBarEntity(target);
 
-							if (player.getHealth() + damage * (percentage / 100) > player.getMaxHealth())
+							if (player.getHealth() + damage * percentage / 100.0 > player.getMaxHealth())
 							{
 								player.setHealth(player.getMaxHealth());
 							}
+							
 							else
 							{
-								player.setHealth(player.getHealth() + damage * (percentage / 100));
+								player.setHealth(player.getHealth() + damage * percentage / 100.0);
 							}
 
 							siphon.start(caster, target, name);
