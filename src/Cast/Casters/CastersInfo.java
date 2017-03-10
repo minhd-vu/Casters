@@ -34,8 +34,8 @@ public class CastersInfo implements CommandInterface
 				if (c.getName().equalsIgnoreCase(args[1]))
 				{
 					player.sendMessage("\n" + ChatColor.DARK_GRAY + fill + "-"
-							+ header.substring(0, header.length() - 1) + fill + "\n" + ChatColor.DARK_AQUA + c.getName()
-							+ ChatColor.GRAY + " - " + c.getDescription() + "." + ChatColor.DARK_AQUA + "\nBase Stats:"
+							+ header.substring(0, header.length() - 1) + fill + "\n" + ChatColor.DARK_AQUA + ChatColor.BOLD + c.getName()
+							+ ChatColor.GRAY + " - " + c.getDescription() + "." + ChatColor.AQUA + "\nBase Stats:"
 							+ ChatColor.DARK_AQUA + "\nStrength: " + ChatColor.GRAY + c.getStrength()
 							+ ChatColor.DARK_AQUA + "\nConstitution: " + ChatColor.GRAY + c.getConstitution()
 							+ ChatColor.DARK_AQUA + "\nDexterity: " + ChatColor.GRAY + c.getDexterity()
