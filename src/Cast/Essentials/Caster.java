@@ -38,56 +38,73 @@ public class Caster
 			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
 	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
 	private static final DecimalFormat decimalformat = new DecimalFormat("##.#");
+
 	private Player player;
+
 	private BossBar bossbar;
 	private Damageable bossbarentity;
+
 	private int removetimer;
 	private long combattimer;
+
 	private Party party;
 	private Invite invite;
+
 	private Config config;
+
 	private String channel;
 	private String chattitle;
 	private String tabtitle;
+
 	private Type type;
 	private Type race;
 	private Type job;
+
 	private int typelevel;
 	private int typemaxlevel;
 	private int racelevel;
 	private int racemaxlevel;
 	private int joblevel;
 	private int jobmaxlevel;
+
 	private double scale;
+
 	private float typeexp;
 	private float typemaxexp;
 	private float raceexp;
 	private float racemaxexp;
 	private float jobexp;
 	private float jobmaxexp;
+
 	private double health;
 	private double maxhealth;
 	private double basemaxhealth;
 	private double healthregen;
 	private double basehealthregen;
+
 	private double mana;
 	private double maxmana;
 	private double basemaxmana;
 	private double manaregen;
 	private double basemanaregen;
 	private double manatimer;
+
 	private int points;
 	private int strength;
 	private int constitution;
 	private int dexterity;
 	private int intellect;
 	private int wisdom;
+
 	private Set<Material> armor;
+
 	private HashMap<Material, Integer> weapon;
 	private HashMap<String, Boolean> casting;
 	private HashMap<String, Boolean> warmingup;
 	private HashMap<String, Effect> effects;
 	private HashMap<String, Integer> casts;
+
+	private boolean interrupted;
 
 	@SuppressWarnings("deprecation")
 	public Caster(Player player)
@@ -146,6 +163,8 @@ public class Caster
 		effects.put("Poisoning", new Effect());
 		effects.put("Poisoned", new Effect());
 		effects.put("Defending", new Effect());
+
+		interrupted = false;
 
 		new BukkitRunnable()
 		{
@@ -877,11 +896,6 @@ public class Caster
 		return weapon;
 	}
 
-	public HashMap<String, Integer> getCasts()
-	{
-		return casts;
-	}
-
 	public int getCastLevel(String name)
 	{
 		if (casts.containsKey(name))
@@ -905,26 +919,43 @@ public class Caster
 					caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 				}
 
+				List<Entity> entities = player.getNearbyEntities(16, 16, 16);
+
+				for (Entity entity : entities)
+				{
+					if (entity instanceof Player)
+					{
+						entity.sendMessage(
+								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
+										+ " Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
+										+ " Casting!");
+					}
+				}
+
+				player.sendMessage(
+						ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interrupts " +
+								ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
+
 				if (caster.isCasting())
 				{
-					List<Entity> entities = player.getNearbyEntities(16, 16, 16);
-
-					for (Entity entity : entities)
+					for (String cast : caster.getCasts().keySet())
 					{
-						if (entity instanceof Player)
+						if (caster.isCasting(cast))
 						{
-							entity.sendMessage(
-									ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
-											+ " Interupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
-											+ " Casting!");
+							caster.setCasting(cast, false);
+							caster.setInterrupted(true);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									caster.setInterrupted(false);
+								}
+
+							}.runTaskLater(Main.getInstance(), 2);
 						}
 					}
-
-					player.sendMessage(
-							ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interupt " +
-									ChatColor.WHITE
-
-									+ caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
 				}
 			}
 		}
@@ -938,6 +969,26 @@ public class Caster
 	public Player getPlayer()
 	{
 		return player;
+	}
+
+	public HashMap<String, Integer> getCasts()
+	{
+		return casts;
+	}
+
+	public void setCasting(String name, boolean casting)
+	{
+		this.casting.put(name, casting);
+	}
+
+	public void setInterrupted(boolean interrupted)
+	{
+		this.interrupted = interrupted;
+	}
+
+	public boolean isInterrupted()
+	{
+		return interrupted;
 	}
 
 	public boolean isWarmingUp(String name)
@@ -982,11 +1033,6 @@ public class Caster
 		config.set("Stats.Intellect", intellect);
 		config.set("Stats.Wisdom", wisdom);
 		config.save();
-	}
-
-	public void setCasting(String name, boolean casting)
-	{
-		this.casting.put(name, casting);
 	}
 
 	public void setWarmingUp(String name, boolean warmingup)

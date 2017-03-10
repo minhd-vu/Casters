@@ -77,26 +77,29 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 						{
 							// TODO: Add In A Check For Being Cancelled Here. Something Like If(Cancelled) { Return; }
 
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F,
-									1.0F);
-							target.damage(damage);
-
-							caster.setBossBarEntity(target);
-
-							if (explode)
+							if (!caster.isInterrupted())
 							{
-								target.getWorld().createExplosion(target.getLocation(), explosion, incendiary);
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
+
+								target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F,
+										1.0F);
+								target.damage(damage);
+
+								caster.setBossBarEntity(target);
+
+								if (explode)
+								{
+									target.getWorld().createExplosion(target.getLocation(), explosion, incendiary);
+								}
+
+								cast(player, target);
+
+								cooldown.start(player.getName());
+
+								caster.setCasting(name, false);
 							}
-
-							cast(player, target);
-
-							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());

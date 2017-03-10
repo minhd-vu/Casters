@@ -43,6 +43,8 @@ public class Attack implements Listener
 						}
 					}
 
+					// TODO: Recode This So That It Factors In Enchantments.
+
 					if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
 							&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
 					{
