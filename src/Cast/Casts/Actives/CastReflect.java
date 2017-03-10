@@ -105,23 +105,32 @@ public class CastReflect extends ActiveCast implements CommandInterface, Listene
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		if (event.getEntity() instanceof LivingEntity && event.getDamager() instanceof Player)
+		if (event.getEntity() instanceof Player && event.getDamager() instanceof LivingEntity)
 		{
-			Caster caster = Main.getCasters().get(event.getDamager().getUniqueId());
-			LivingEntity target = (LivingEntity) event.getEntity();
+			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+			LivingEntity target = (LivingEntity) event.getDamager();
 
 			if (caster.isCasting(name))
 			{
 				if ((System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getName()) / 1000.0) < duration / 20.0)
 				{
-					((LivingEntity) target).damage(event.getDamage() * (percentage / 100));
+					if (target instanceof Player)
+					{
+						Caster tcaster = Main.getCasters().get(event.getDamager().getUniqueId());
 
-					// TODO: make sure that there are party checks.
+						if (caster.sameParty(tcaster))
+						{
+							event.setCancelled(true);
+
+							return;
+						}
+					}
+
+					((LivingEntity) target).damage(event.getDamage() * (percentage / 100));
 
 					caster.setBossBarEntity((LivingEntity) target);
 
 					event.setCancelled(true);
-					return;
 				}
 			}
 		}
