@@ -2,8 +2,9 @@ package Cast;
 
 import Cast.Casters.*;
 import Cast.Casts.Actives.*;
-import Cast.Casts.CastCommands;
+import Cast.Casts.CastsCommands;
 import Cast.Casts.CastList;
+import Cast.Casts.CastsCommands;
 import Cast.Casts.CastsInventory;
 import Cast.Casts.Passives.PassiveBackstab;
 import Cast.Casts.Passives.PassiveFlameshield;
@@ -89,7 +90,7 @@ public class Main extends JavaPlugin implements Listener
 
 	private static HashMap<String, Cast> casts;
 
-	private static CastCommands cast;
+	private static CastsCommands cast;
 	private static CastList castlist;
 	private static CastFireball castfireball;
 	private static CastDarkBomb castdarkbomb;
@@ -547,7 +548,7 @@ public class Main extends JavaPlugin implements Listener
 		casterswhois = new CastersWhoIs();
 		castersrecipes = new CastersRecipes();
 
-		cast = new CastCommands();
+		cast = new CastsCommands();
 		castlist = new CastList();
 		casts = new HashMap<String, Cast>();
 

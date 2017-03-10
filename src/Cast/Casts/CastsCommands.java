@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastCommands implements CommandInterface
+public class CastsCommands implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]";
 	private String fill = "------------------------";
 	private List<String> commands = new ArrayList<String>();
 
-	public CastCommands()
+	public CastsCommands()
 	{
 		commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " <page>" + ChatColor.GRAY
 				+ " - Lists All Cast Commands.");
@@ -26,9 +26,9 @@ public class CastCommands implements CommandInterface
 		commands.add(ChatColor.DARK_AQUA + "/casts" + ChatColor.AQUA + "info <page>" + ChatColor.GRAY
 				+ " - Instructions For How To Use Binded Casts.");
 		commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " list <page>" + ChatColor.GRAY
-				+ " - List Availiable CastCommands");
+				+ " - List Availiable Casts");
 		commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " list <class> <page>" + ChatColor.GRAY
-				+ " - Shows All CastCommands For That Class.");
+				+ " - Shows All Casts For That Class.");
 		commands.add(ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " <cast> info" + ChatColor.GRAY
 				+ " - Shows Description And Values.");
 
