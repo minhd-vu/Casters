@@ -2,10 +2,10 @@ name: Casters
 version: 1.1
 author: SirGoldenNugget
 main: Cast.Main
-description: CasterCommands Plugin.
+description: Casters Plugin.
 commands:
     casters:
-        description: Lists All CasterCommands Commands.
+        description: Lists All Casters Commands.
     cast:
         description: Lists All Cast Commands.
     casts:

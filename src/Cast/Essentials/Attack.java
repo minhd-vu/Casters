@@ -69,6 +69,7 @@ public class Attack implements Listener
 				}
 			}
 		}
+
 		else if (event.getDamager() instanceof Projectile)
 		{
 			Projectile projectile = (Projectile) event.getDamager();

@@ -4,6 +4,7 @@ import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Chat.Pages;
 import Cast.Main;
+import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -40,10 +41,13 @@ public class CastersWeapon implements CommandInterface
 			weapon.clear();
 			pages.clear();
 
+			weapon.add(ChatColor.GRAY + "Permitted Weapons: ");
+
 			for (Material material : caster.getWeapon().keySet())
 			{
-				weapon.add(ChatColor.DARK_AQUA + material.toString() + ChatColor.GRAY + " - "
-						+ caster.getWeapon().get(material));
+				String weapontext = material.toString().toLowerCase().replace("_", " ");
+
+				weapon.add(ChatColor.DARK_AQUA + WordUtils.capitalize(weapontext) + ChatColor.AQUA + " - " + caster.getWeapon().get(material));
 			}
 
 			pages.setPage(weapon);

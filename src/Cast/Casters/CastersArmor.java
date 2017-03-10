@@ -4,6 +4,7 @@ import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Chat.Pages;
 import Cast.Main;
+import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 public class CastersArmor implements CommandInterface
 {
@@ -40,9 +42,13 @@ public class CastersArmor implements CommandInterface
 			armor.clear();
 			pages.clear();
 
+			armor.add(ChatColor.GRAY + "Permitted Armor:");
+
 			for (Material material : caster.getArmor())
 			{
-				armor.add(ChatColor.DARK_AQUA + material.toString());
+				String armortext = material.toString().toLowerCase().replace("_", " ");
+
+				armor.add(ChatColor.DARK_AQUA + WordUtils.capitalize(armortext));
 			}
 
 			pages.setPage(armor);

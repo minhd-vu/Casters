@@ -57,7 +57,7 @@ public class Main extends JavaPlugin implements Listener
 
 	private static HashMap<UUID, Caster> casters;
 
-	private static CasterCommands casterscmd;
+	private static CastersCommands casterscmd;
 	private static CastersInfo castersinfo;
 	private static CastersLevel casterslevel;
 	private static CastersStats castersstats;
@@ -534,7 +534,7 @@ public class Main extends JavaPlugin implements Listener
 
 		casters = new HashMap<UUID, Caster>();
 
-		casterscmd = new CasterCommands();
+		casterscmd = new CastersCommands();
 		castersinfo = new CastersInfo();
 		casterslevel = new CastersLevel();
 		castersstats = new CastersStats();

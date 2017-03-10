@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasterCommands implements CommandInterface
+public class CastersCommands implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private List<String> commands = new ArrayList<String>();
@@ -18,10 +18,10 @@ public class CasterCommands implements CommandInterface
 	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]";
 	private String fill = ChatColor.DARK_GRAY + "----------------------";
 
-	public CasterCommands()
+	public CastersCommands()
 	{
 		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " <page>" + ChatColor.GRAY
-				+ " - Lists All CasterCommands Commands.");
+				+ " - Lists All Casters Commands.");
 		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " info <type>" + ChatColor.GRAY
 				+ " - Shows Information.");
 		commands.add(
@@ -47,7 +47,7 @@ public class CasterCommands implements CommandInterface
 				+ " - Shows All Custom Craft Recipes.");
 
 		pages.setHeader(fill + header + fill);
-		pages.setError("CasterCommands");
+		pages.setError("Casters");
 		pages.setCommand("casters");
 		pages.setPage(commands);
 	}

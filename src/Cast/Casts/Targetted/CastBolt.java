@@ -75,7 +75,7 @@ public class CastBolt extends TargettedCast implements CommandInterface, Listene
 						@Override
 						public void run()
 						{
-							// Add In A Check For Being Cancelled Here.
+							// TODO: Add In A Check For Being Cancelled Here. Something Like If(Cancelled) { Return; }
 
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
