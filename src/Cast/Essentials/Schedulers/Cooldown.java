@@ -47,13 +47,7 @@ public class Cooldown
 	{
 		if (cooldowns.containsKey(player.getName()))
 		{
-			double secondsleft = getCooldown(player.getName());
-
-			if (secondsleft > 0)
-			{
-				player.sendMessage(header + name + ChatColor.GRAY + ": " + secondsleft + " Seconds Left!");
-				return true;
-			}
+			return getCooldown(player.getName()) > 0;
 		}
 
 		return false;

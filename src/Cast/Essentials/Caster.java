@@ -914,6 +914,8 @@ public class Caster
 
 			if (caster.isWarmingUp() || caster.isCasting())
 			{
+				caster.setInterrupted(true);
+
 				if (caster.isWarmingUp())
 				{
 					caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
@@ -943,17 +945,6 @@ public class Caster
 						if (caster.isCasting(cast))
 						{
 							caster.setCasting(cast, false);
-							caster.setInterrupted(true);
-
-							new BukkitRunnable()
-							{
-								@Override
-								public void run()
-								{
-									caster.setInterrupted(false);
-								}
-
-							}.runTaskLater(Main.getInstance(), 2);
 						}
 					}
 				}
@@ -988,6 +979,15 @@ public class Caster
 
 	public boolean isInterrupted()
 	{
+		new BukkitRunnable()
+		{
+			@Override
+			public void run()
+			{
+				interrupted = false;
+			}
+		}.runTaskLater(Main.getInstance(), 2);
+
 		return interrupted;
 	}
 

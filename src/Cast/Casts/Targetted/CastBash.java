@@ -54,6 +54,7 @@ public class CastBash extends TargettedCast implements CommandInterface
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
@@ -71,8 +72,6 @@ public class CastBash extends TargettedCast implements CommandInterface
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							caster.interruptCasts(target);
-
 							target.damage(damage);
 
 							caster.setBossBarEntity(target);
@@ -83,6 +82,8 @@ public class CastBash extends TargettedCast implements CommandInterface
 									1.0F);
 
 							cast(player, target);
+
+							caster.interruptCasts(target);
 
 							cooldown.start(player.getName());
 
