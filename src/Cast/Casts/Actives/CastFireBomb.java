@@ -75,6 +75,7 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);

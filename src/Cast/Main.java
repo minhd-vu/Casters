@@ -6,6 +6,7 @@ import Cast.Casts.CastsCommands;
 import Cast.Casts.CastList;
 import Cast.Casts.CastsInventory;
 import Cast.Casts.Passives.PassiveBackstab;
+import Cast.Casts.Passives.PassiveFirearms;
 import Cast.Casts.Passives.PassiveFlameshield;
 import Cast.Casts.Targetted.*;
 import Cast.Casts.Types.Cast;
@@ -119,6 +120,7 @@ public class Main extends JavaPlugin implements Listener
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
+	private static PassiveFirearms passivefirearms;
 
 	private static CastsInventory castsinventory;
 
@@ -336,6 +338,7 @@ public class Main extends JavaPlugin implements Listener
 		musketeer.getWeapon().put(Material.STONE_SWORD, 6);
 		musketeer.getWeapon().put(Material.WOOD_SWORD, 5);
 		musketeer.getCasts().put("Bomb", 1);
+		musketeer.getCasts().put("Firearms", 1);
 
 		Type distorter = new Type("Distorter", "Description");
 		distorter.getArmor().add(Material.LEATHER_HELMET);
@@ -582,6 +585,7 @@ public class Main extends JavaPlugin implements Listener
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
+		casts.put("Firearms", passivefirearms = new PassiveFirearms("Firearms", "Allows You To Fire Weapons (Horse Armor)"));
 
 		castsinventory = new CastsInventory();
 
@@ -620,7 +624,7 @@ public class Main extends JavaPlugin implements Listener
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
 				wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield);
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield, passivefirearms);
 
 	}
 
@@ -679,6 +683,7 @@ public class Main extends JavaPlugin implements Listener
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
+		casthandler.register("firearms", passivefirearms);
 
 		castshandler.register("casts", castsinventory);
 
