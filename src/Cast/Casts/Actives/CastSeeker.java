@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 {
@@ -73,12 +74,14 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getLocation(), EntityType.SHULKER_BULLET);
+						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
 						seeker.setShooter(caster.getPlayer());
 
 						// TODO: Try To Not Set Target And Set Just Velocity (Skill Shot?).
 
-						seeker.setVelocity(caster.getPlayer().getEyeLocation().add(0, 1, 0).getDirection().a);
+						//seeker.setVelocity(caster.getPlayer().getEyeLocation().add(0, 1, 0).getDirection().add(new Vector(0, 1, 0)));
+
+						seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 
 						new BukkitRunnable()
 						{
