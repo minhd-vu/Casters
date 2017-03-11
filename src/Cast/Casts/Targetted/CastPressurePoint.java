@@ -89,11 +89,8 @@ public class CastPressurePoint extends TargettedCast implements CommandInterface
 
 							stun.start(Main.getInstance(), target);
 
-//							player.getWorld().spigot().playEffect(player.getLocation(), Effect.SNOW_SHOVEL, 0, 0, 0.0F, 0.1F,
-//									0.0F, 0.5F, 25, 12);
-							player.getWorld().spawnParticle(Particle.END_ROD, player.getLocation(), 25, 0.5, 1.0F, 0.5F); // TODO: Try To See If This Particle Acts Correctly.
-							player.getWorld().playSound(player.getLocation(), Sound.BLOCK_CLOTH_BREAK, 8.0F,
-									1.0F);
+							player.getWorld().spawnParticle(Particle.END_ROD, target.getLocation(), 100, 0.5, 0.2F, 0.5F);
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_HURT, 8.0F, 1.0F);
 
 							cast(player, target);
 
