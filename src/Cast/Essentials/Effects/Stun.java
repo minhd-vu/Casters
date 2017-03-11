@@ -1,5 +1,7 @@
 package Cast.Essentials.Effects;
 
+import Cast.Essentials.Caster;
+import Cast.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -27,13 +29,16 @@ public class Stun
 		this.duration = duration;
 	}
 
-	public void start(Plugin plugin, LivingEntity target)
+	public void start(LivingEntity target)
 	{
-		if (target instanceof Player) // TODO: Check If Stun Is Fixed For Players.
+		if (target instanceof Player)
 		{
+			Caster caster = Main.getCasters().get(target.getUniqueId());
+			caster.setEffect("Stunned", duration);
+
 			stuns.put(target.getName(), System.currentTimeMillis());
 
-			Location location = target.getLocation().getBlock().getLocation();
+			Location location = target.getLocation();
 
 			target.sendMessage(header + "You" + ChatColor.GRAY + " Have Been " + ChatColor.WHITE + "Stunned"
 					+ ChatColor.GRAY + "!");
@@ -58,6 +63,7 @@ public class Stun
 					{
 						target.teleport(location);
 					}
+
 					else
 					{
 						target.sendMessage(header + "You" + ChatColor.GRAY + " Are No Longer " + ChatColor.WHITE
@@ -79,8 +85,9 @@ public class Stun
 					}
 				}
 
-			}.runTaskTimer(plugin, 0, 1);
+			}.runTaskTimer(Main.getInstance(), 0, 1);
 		}
+
 		else if (target instanceof LivingEntity)
 		{
 			target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 7));
@@ -115,7 +122,7 @@ public class Stun
 					return;
 				}
 
-			}.runTaskLater(plugin, duration);
+			}.runTaskLater(Main.getInstance(), duration);
 		}
 	}
 }

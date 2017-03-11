@@ -87,7 +87,7 @@ public class CastPressurePoint extends TargettedCast implements CommandInterface
 							target.damage(damage);
 							caster.setBossBarEntity(target);
 
-							stun.start(Main.getInstance(), target);
+							stun.start(target);
 
 							player.getWorld().spawnParticle(Particle.END_ROD, target.getLocation(), 100, 0.5, 0.2F, 0.5F);
 							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_HURT, 8.0F, 1.0F);

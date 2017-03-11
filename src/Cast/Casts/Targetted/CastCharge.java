@@ -117,7 +117,7 @@ public class CastCharge extends TargettedCast implements CommandInterface, Liste
 											target.damage(damage);
 											caster.setBossBarEntity(target);
 
-											stun.start(Main.getInstance(), target);
+											stun.start(target);
 
 											break;
 										}
