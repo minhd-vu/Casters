@@ -77,10 +77,6 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
 						seeker.setShooter(caster.getPlayer());
 
-						// TODO: Try To Not Set Target And Set Just Velocity (Skill Shot?).
-
-						//seeker.setVelocity(caster.getPlayer().getEyeLocation().add(0, 1, 0).getDirection().add(new Vector(0, 1, 0)));
-
 						seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 
 						new BukkitRunnable()

@@ -115,6 +115,7 @@ public class Main extends JavaPlugin implements Listener
 	private static CastDefensiveStance castdefensivestance;
 	private static CastChomp castchomp;
 	private static CastSeeker castseeker;
+	private static CastPressurePoint castpressurepoint;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -426,6 +427,7 @@ public class Main extends JavaPlugin implements Listener
 		monk.getWeapon().put(Material.STONE_SPADE, 5);
 		monk.getWeapon().put(Material.WOOD_SPADE, 4);
 		monk.getCasts().put("DefensiveStance", 1);
+		monk.getCasts().put("PressurePoint", 1);
 
 		Type cleric = new Type("Cleric", "Description");
 		cleric.getArmor().add(Material.LEATHER_HELMET);
@@ -561,10 +563,8 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Strike", caststrike = new CastStrike("Strike", "Strike Your Opponent"));
 		casts.put("Bandage", castbandage = new CastBandage("Bandage", "Bandage Yourself Or An Ally"));
 		casts.put("Beasts", castbeasts = new CastBeasts("Beasts", "Summon A Pack Of Wolves"));
-		casts.put("LightningStorm",
-				castlightningstorm = new CastLightningStorm("LightningStorm", "Casts A Lightning Storm"));
-		casts.put("ChainLightning",
-				castchainlightning = new CastChainLightning("ChainLightning", "Consecutively Strikes Opponenets"));
+		casts.put("LightningStorm", castlightningstorm = new CastLightningStorm("LightningStorm", "Casts A Lightning Storm"));
+		casts.put("ChainLightning", castchainlightning = new CastChainLightning("ChainLightning", "Consecutively Strikes Opponenets"));
 		casts.put("Reflect", castreflect = new CastReflect("Reflect", "Relects All Incoming Damage"));
 		casts.put("Siphon", castsiphon = new CastSiphon("Siphon", "Siphons Health From Your Opponent"));
 		casts.put("Taunt", casttaunt = new CastTaunt("Taunt", "Taunt All Nearby Opponents"));
@@ -578,10 +578,10 @@ public class Main extends JavaPlugin implements Listener
 				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
 		casts.put("Chomp", castchomp = new CastChomp("Chomp", "Eat Up Your Opponent"));
 		casts.put("Seeker", castseeker = new CastSeeker("Seeker", "Send A Shulker Bullet Onto Your Opponent"));
+		casts.put("PressurePoint", castpressurepoint = new CastPressurePoint("PressurePoint", "Hit A Pressure Point And Stun"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
-		casts.put("Flameshield",
-				passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
+		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
 
 		castsinventory = new CastsInventory();
 
@@ -675,6 +675,7 @@ public class Main extends JavaPlugin implements Listener
 		casthandler.register("defensivestance", castdefensivestance);
 		casthandler.register("chomp", castchomp);
 		casthandler.register("seeker", castseeker);
+		casthandler.register("pressurepoint", castpressurepoint);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

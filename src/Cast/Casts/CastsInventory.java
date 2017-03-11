@@ -180,4 +180,25 @@ public class CastsInventory implements CommandInterface, Listener
 			}
 		}
 	}
+
+
+//
+//	@EventHandler
+//	public void PlayerInteractEvent(PlayerInteractEvent event)
+//	{
+//		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+//		{
+//			event.setCancelled(isCastersItem(event.getPlayer().getInventory().getItemInMainHand()) || isCastersItem(event.getPlayer().getInventory().getItemInOffHand()));
+//		}
+//	}
+//
+//	private boolean isCastersItem(ItemStack item)
+//	{
+//		if (item.getType().equals(Material.SKULL_ITEM) || item.equals(Material.SKULL))
+//		{
+//			// TODO: Need To Fix This.
+//		}
+//
+//		return false;
+//	}
 }

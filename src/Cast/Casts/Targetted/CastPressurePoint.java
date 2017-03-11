@@ -18,7 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class CastPressurePoint extends TargettedCast implements CommandInterface, Listener
+public class CastPressurePoint extends TargettedCast implements CommandInterface
 {
 	private Stun stun;
 
