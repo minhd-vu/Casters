@@ -572,7 +572,7 @@ public class Main extends JavaPlugin implements Listener
 		casts.put("Siphon", castsiphon = new CastSiphon("Siphon", "Siphons Health From Your Opponent"));
 		casts.put("Taunt", casttaunt = new CastTaunt("Taunt", "Taunt All Nearby Opponents"));
 		casts.put("Vanish", castvanish = new CastVanish("Vanish", "Vanish In A Cloud Of Smoke"));
-		casts.put("Bomb", castbomb = new CastBomb("Bomb", " Places A Explosive Device"));
+		casts.put("Bomb", castbomb = new CastBomb("Bomb", "Places A Explosive Device"));
 		casts.put("Mount", castmount = new CastMount("Mount", "Mounts Onto A Horse"));
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
 		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));

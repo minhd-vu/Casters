@@ -78,7 +78,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 
 					new BukkitRunnable()
 					{
-						@Deprecated
+						@SuppressWarnings("deprecated")
 						@Override
 						public void run()
 						{
@@ -88,8 +88,7 @@ public class CastStrike extends TargettedCast implements CommandInterface, Liste
 							target.damage(damage);
 							caster.setBossBarEntity(target);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0F, 1.0F);
 
 							cast(player, target);

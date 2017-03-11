@@ -167,11 +167,12 @@ public class WandDistorter extends Wand implements CommandInterface, Listener
 	{
 		if (event.getCause().equals(TeleportCause.ENDER_PEARL))
 		{
-			if (!Material.ENDER_PEARL.equals(material)
-					|| !Material.ENDER_PEARL.equals(event.getPlayer().getInventory().getItemInMainHand()))
+			if (!Material.ENDER_PEARL.equals(material) || !Material.ENDER_PEARL.equals(event.getPlayer().getInventory().getItemInMainHand()))
 			{
-				;
+				return;
 			}
+
+			else
 			{
 				event.setCancelled(true);
 			}

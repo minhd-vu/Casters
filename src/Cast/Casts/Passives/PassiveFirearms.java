@@ -7,7 +7,6 @@ import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Player;
@@ -17,34 +16,55 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PassiveFirearms extends Passive implements CommandInterface, Listener
 {
+	private List<LlamaSpit> ironbullets;
+	private List<LlamaSpit> goldbullets;
+	private List<LlamaSpit> diamondbullets;
+
 	private double irondamage;
 	private double golddamage;
 	private double diamonddamage;
 
-	private double numberofshots;
+	private double ironnumberofshots;
+	private double goldnumberofshots;
+	private double diamondnumberofshots;
 
-	private double velocity;
+	private double ironvelocity;
+	private double goldvelocity;
+	private double diamondvelocity;
+
+	private double maxironaccuracy;
+	private double minironaccuracy;
 
 	private int timer;
+	private int count;
 
 	public PassiveFirearms(String name, String description)
 	{
 		super(name, description);
 
+		ironbullets = new ArrayList<LlamaSpit>();
+
 		irondamage = 3;
 		golddamage = 2;
 		diamonddamage = 3;
 
-		numberofshots = 5;
-		velocity = 2.0;
+		ironnumberofshots = 10;
+		ironvelocity = 2.0;
+
+		maxironaccuracy = 0.3;
+		minironaccuracy = 0.15;
 
 		timer = 100;
 
-		info.add(ChatColor.DARK_AQUA + "Gold Damage: " + golddamage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Iron Damage: " + irondamage + " HP");
+		info.add(ChatColor.DARK_AQUA + "Gold Damage: " + golddamage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Diamond Damage: " + diamonddamage + " HP");
 
 		pages.setPage(info);
@@ -59,32 +79,79 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 			Player player = event.getPlayer();
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (player.getInventory().getItemInMainHand().getType().equals(Material.IRON_BARDING))
+			if (caster.hasCast(name))
 			{
-				for (int i = 0; i < numberofshots; ++i)
+				if (player.getInventory().getItemInMainHand().getType().equals(Material.IRON_BARDING))
 				{
-					// TODO: Add In Multiple Shots For Shotgun.
-				}
+					count = 0;
 
-				LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
-				bullet.setShooter(player);
-				bullet.setGravity(false);
-				bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
-
-				player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
-
-				new BukkitRunnable()
-				{
-					@Override
-					public void run()
+					new BukkitRunnable()
 					{
-						if (!bullet.isDead())
+						@Override
+						public void run()
 						{
-							bullet.remove();
-						}
-					}
+							++count;
 
-				}.runTaskLater(Main.getInstance(), timer);
+							if (count > ironnumberofshots)
+							{
+								this.cancel();
+								return;
+							}
+
+							LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
+							bullet.setShooter(player);
+							bullet.setGravity(false);
+							//bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(ironvelocity));
+
+							Vector velocity = caster.getPlayer().getLocation().getDirection();
+							velocity.add(new Vector(Math.random() * maxironaccuracy - minironaccuracy, Math.random() * maxironaccuracy - minironaccuracy,
+									Math.random() * maxironaccuracy - minironaccuracy));
+							bullet.setVelocity(velocity);
+
+							ironbullets.add(bullet);
+						}
+
+					}.runTaskTimer(Main.getInstance(), 0, 1);
+
+//					LlamaSpit bullet = player.launchProjectile(LlamaSpit.class);
+//					bullet.setShooter(player);
+//					bullet.setGravity(false);
+//
+//					LlamaSpit bullet1 = player.launchProjectile(LlamaSpit.class);
+//					bullet1.setShooter(player);
+//					bullet1.setGravity(false);
+//
+//					LlamaSpit bullet2 = player.launchProjectile(LlamaSpit.class);
+//					bullet2.setShooter(player);
+//					bullet2.setGravity(false);
+//
+//					LlamaSpit bullet3 = player.launchProjectile(LlamaSpit.class);
+//					bullet3.setShooter(player);
+//					bullet3.setGravity(false);
+//					bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(ironvelocity));
+
+//					ironbullets.add(bullet);
+//					ironbullets.add(bullet1);
+//					ironbullets.add(bullet1);
+//					ironbullets.add(bullet3);
+
+//					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
+//					bullet.setShooter(player);
+//					bullet.setGravity(false);
+//					bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(ironvelocity));
+
+					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
+
+					new BukkitRunnable()
+					{
+						@Override
+						public void run()
+						{
+							ironbullets.clear();
+						}
+
+					}.runTaskLater(Main.getInstance(), timer);
+				}
 			}
 		}
 	}
@@ -97,9 +164,24 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 		{
 			LlamaSpit bullet = (LlamaSpit) event.getDamager();
 
-			if (event.getEntity() instanceof Damageable)
+			if (bullet.getShooter() instanceof Player)
 			{
-				event.setDamage(irondamage);
+				Caster caster = Main.getCasters().get(bullet.getShooter());
+
+				if (ironbullets.contains(bullet))
+				{
+					event.setDamage(irondamage);
+				}
+
+				/*else if (goldbullets.contains(bullet))
+				{
+					event.setDamage(golddamage);
+				}
+
+				else if (diamondbullets.contains(bullet))
+				{
+					event.setDamage(diamonddamage);
+				}*/
 			}
 		}
 	}
