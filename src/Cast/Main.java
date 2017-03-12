@@ -6,7 +6,7 @@ import Cast.Casts.CastsCommands;
 import Cast.Casts.CastList;
 import Cast.Casts.CastsInventory;
 import Cast.Casts.Passives.PassiveBackstab;
-import Cast.Casts.Passives.PassiveFirearms;
+import Cast.Casts.Passives.Firearms.PassiveFirearms;
 import Cast.Casts.Passives.PassiveFlameshield;
 import Cast.Casts.Targetted.*;
 import Cast.Casts.Types.Cast;

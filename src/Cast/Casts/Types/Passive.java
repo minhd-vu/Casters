@@ -8,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Passive extends Cast implements CommandInterface
+public abstract class Passive extends Cast implements CommandInterface
 {
 	public Passive(String name, String description)
 	{

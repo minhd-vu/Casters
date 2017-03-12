@@ -12,7 +12,7 @@ import org.bukkit.util.BlockIterator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TargettedCast extends Cast
+public abstract class TargettedCast extends Cast
 {
 	public TargettedCast(String name, String description)
 	{

@@ -1,4 +1,4 @@
-package Cast.Casts.Passives;
+package Cast.Casts.Passives.Firearms;
 
 import Cast.Casts.Types.Passive;
 import Cast.CommandInterface;
@@ -50,13 +50,16 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 		super(name, description);
 
 		ironbullets = new ArrayList<LlamaSpit>();
+		diamondbullets = new ArrayList<LlamaSpit>();
 
 		irondamage = 3;
 		golddamage = 2;
-		diamonddamage = 3;
+		diamonddamage = 10;
 
 		ironnumberofshots = 10;
 		ironvelocity = 2.0;
+
+		diamondvelocity = 4.0;
 
 		maxironaccuracy = 0.3;
 		minironaccuracy = 0.15;
@@ -113,33 +116,6 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 
 					}.runTaskTimer(Main.getInstance(), 0, 1);
 
-//					LlamaSpit bullet = player.launchProjectile(LlamaSpit.class);
-//					bullet.setShooter(player);
-//					bullet.setGravity(false);
-//
-//					LlamaSpit bullet1 = player.launchProjectile(LlamaSpit.class);
-//					bullet1.setShooter(player);
-//					bullet1.setGravity(false);
-//
-//					LlamaSpit bullet2 = player.launchProjectile(LlamaSpit.class);
-//					bullet2.setShooter(player);
-//					bullet2.setGravity(false);
-//
-//					LlamaSpit bullet3 = player.launchProjectile(LlamaSpit.class);
-//					bullet3.setShooter(player);
-//					bullet3.setGravity(false);
-//					bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(ironvelocity));
-
-//					ironbullets.add(bullet);
-//					ironbullets.add(bullet1);
-//					ironbullets.add(bullet1);
-//					ironbullets.add(bullet3);
-
-//					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
-//					bullet.setShooter(player);
-//					bullet.setGravity(false);
-//					bullet.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(ironvelocity));
-
 					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
 
 					new BukkitRunnable()
@@ -148,6 +124,35 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 						public void run()
 						{
 							ironbullets.clear();
+						}
+
+					}.runTaskLater(Main.getInstance(), timer);
+				}
+
+				else if (player.getInventory().getItemInMainHand().getType().equals(Material.GOLD_BARDING))
+				{
+
+				}
+
+				else if (player.getInventory().getItemInMainHand().getType().equals(Material.DIAMOND_BARDING))
+				{
+					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
+					bullet.setShooter(player);
+					bullet.setGravity(false);
+
+					Vector velocity = caster.getPlayer().getLocation().getDirection();
+					bullet.setVelocity(velocity.normalize().multiply(diamondvelocity));
+
+					diamondbullets.add(bullet);
+
+					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
+
+					new BukkitRunnable()
+					{
+						@Override
+						public void run()
+						{
+							//diamondbullets.clear();
 						}
 
 					}.runTaskLater(Main.getInstance(), timer);
@@ -173,15 +178,15 @@ public class PassiveFirearms extends Passive implements CommandInterface, Listen
 					event.setDamage(irondamage);
 				}
 
-				/*else if (goldbullets.contains(bullet))
-				{
-					event.setDamage(golddamage);
-				}
+//				else if (goldbullets.contains(bullet))
+//				{
+//					event.setDamage(golddamage);
+//				}
 
 				else if (diamondbullets.contains(bullet))
 				{
 					event.setDamage(diamonddamage);
-				}*/
+				}
 			}
 		}
 	}
