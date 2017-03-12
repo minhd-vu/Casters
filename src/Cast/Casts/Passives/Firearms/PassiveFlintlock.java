@@ -46,7 +46,7 @@ public class PassiveFlintlock extends Firearm
 
 			if (caster.hasCast(name))
 			{
-				if (player.getInventory().getItemInMainHand().getType().equals(Material.DIAMOND_BARDING))
+				if (player.getInventory().getItemInMainHand().getType().equals(Material.IRON_BARDING))
 				{
 					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
 					bullet.setShooter(player);
