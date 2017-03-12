@@ -7,8 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-public abstract class Passive extends Cast implements CommandInterface
+public abstract class Passive extends Cast implements CommandInterface, Listener
 {
 	public Passive(String name, String description)
 	{

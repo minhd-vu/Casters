@@ -2,11 +2,13 @@ package Cast;
 
 import Cast.Casters.*;
 import Cast.Casts.Actives.*;
-import Cast.Casts.CastsCommands;
 import Cast.Casts.CastList;
+import Cast.Casts.CastsCommands;
 import Cast.Casts.CastsInventory;
+import Cast.Casts.Passives.Firearms.PassiveBlunderbuss;
+import Cast.Casts.Passives.Firearms.PassiveFlintlock;
+import Cast.Casts.Passives.Firearms.PassiveMusket;
 import Cast.Casts.Passives.PassiveBackstab;
-import Cast.Casts.Passives.Firearms.PassiveFirearms;
 import Cast.Casts.Passives.PassiveFlameshield;
 import Cast.Casts.Targetted.*;
 import Cast.Casts.Types.Cast;
@@ -120,7 +122,9 @@ public class Main extends JavaPlugin implements Listener
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
-	private static PassiveFirearms passivefirearms;
+	private static PassiveFlintlock passiveflintlock;
+	private static PassiveBlunderbuss passiveblunderbuss;
+	private static PassiveMusket passivemusket;
 
 	private static CastsInventory castsinventory;
 
@@ -338,7 +342,9 @@ public class Main extends JavaPlugin implements Listener
 		musketeer.getWeapon().put(Material.STONE_SWORD, 6);
 		musketeer.getWeapon().put(Material.WOOD_SWORD, 5);
 		musketeer.getCasts().put("Bomb", 1);
-		musketeer.getCasts().put("Firearms", 1);
+		musketeer.getCasts().put("Flintlock", 1);
+		musketeer.getCasts().put("Blunderbuss", 1);
+		musketeer.getCasts().put("Musket", 1);
 
 		Type distorter = new Type("Distorter", "Description");
 		distorter.getArmor().add(Material.LEATHER_HELMET);
@@ -585,7 +591,9 @@ public class Main extends JavaPlugin implements Listener
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
-		casts.put("Firearms", passivefirearms = new PassiveFirearms("Firearms", "Allows You To Fire Weapons (Horse Armor)"));
+		casts.put("Flintlock", passiveflintlock = new PassiveFlintlock("Flintlock", "Fire A Flintlock Pistol"));
+		casts.put("Blunderbuss", passiveblunderbuss = new PassiveBlunderbuss("Blunderbuss", "Fire A Blunderbuss Shotgun"));
+		casts.put("Musket", passivemusket = new PassiveMusket("Musket", "Fire A Single Shot Musket"));
 
 		castsinventory = new CastsInventory();
 
@@ -624,7 +632,8 @@ public class Main extends JavaPlugin implements Listener
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
 				wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield, passivefirearms);
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
+				passivemusket);
 
 	}
 
@@ -683,7 +692,9 @@ public class Main extends JavaPlugin implements Listener
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
-		casthandler.register("firearms", passivefirearms);
+		casthandler.register("flintlock", passiveflintlock);
+		casthandler.register("blunderbuss", passiveblunderbuss);
+		casthandler.register("musket", passivemusket);
 
 		castshandler.register("casts", castsinventory);
 
