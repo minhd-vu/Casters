@@ -51,7 +51,7 @@ public class PassiveMusket extends Firearm
 					bullet.setGravity(false);
 
 					Vector velocity = caster.getPlayer().getLocation().getDirection();
-					bullet.setVelocity(velocity.normalize().multiply(velocity));
+					bullet.setVelocity(velocity.normalize().multiply(this.velocity));
 
 					bullets.add(bullet);
 
