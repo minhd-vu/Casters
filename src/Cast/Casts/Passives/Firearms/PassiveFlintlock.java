@@ -21,57 +21,24 @@ public class PassiveFlintlock extends Firearm
 	{
 		super(name, description);
 
-		damage = 5;
+		firearm = Material.IRON_BARDING;
+
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(20);
+
+		damage = 10;
 		shots = 1;
-		velocity = 4.0;
+		velocity = 2.0;
 		maxaccuracy = 0.2;
 		minaccuracy = 0.1;
 		timer = 100;
 		reload = 40;
+		gravity = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Reload: " + reload / 20.0 + " Seconds");
 
 		pages.setPage(info);
-	}
-
-	@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event)
-	{
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
-		{
-			Player player = event.getPlayer();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
-
-			if (caster.hasCast(name))
-			{
-				if (player.getInventory().getItemInMainHand().getType().equals(Material.IRON_BARDING))
-				{
-					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
-					bullet.setShooter(player);
-					bullet.setGravity(false);
-
-					Vector velocity = caster.getPlayer().getLocation().getDirection();
-					velocity.add(new Vector(Math.random() * maxaccuracy - minaccuracy, Math.random() * maxaccuracy - minaccuracy, Math.random() * maxaccuracy - minaccuracy));
-					bullet.setVelocity(velocity);
-
-					bullets.add(bullet);
-
-					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
-
-					new BukkitRunnable()
-					{
-						@Override
-						public void run()
-						{
-							bullets.remove(bullet);
-							bullet.remove();
-						}
-
-					}.runTaskLater(Main.getInstance(), timer);
-				}
-			}
-		}
 	}
 }

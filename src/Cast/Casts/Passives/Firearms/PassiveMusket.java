@@ -21,74 +21,24 @@ public class PassiveMusket extends Firearm
 	{
 		super(name, description);
 
-		damage = 5;
+		firearm = Material.DIAMOND_BARDING;
+
+		warmup.setDuration(0);
+		warmup.setAmplifier(0);
+		cooldown.setCooldown(100);
+
+		damage = 20;
 		shots = 1;
-		velocity = 4.0;
+		velocity = 4.0;;
+		maxaccuracy = 0;
+		minaccuracy = 0;
 		timer = 100;
 		reload = 100;
+		gravity = false;
 
-		info.add(ChatColor.DARK_AQUA + "Damage: " + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "Reload: " + reload / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
+		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + reload / 20.0 + " Seconds");
 
 		pages.setPage(info);
 	}
-
-	@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event)
-	{
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
-		{
-			Player player = event.getPlayer();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
-
-			if (caster.hasCast(name))
-			{
-				if (player.getInventory().getItemInMainHand().getType().equals(Material.DIAMOND_BARDING))
-				{
-					LlamaSpit bullet = (LlamaSpit) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.LLAMA_SPIT);
-					bullet.setShooter(player);
-					bullet.setGravity(false);
-
-					Vector velocity = caster.getPlayer().getLocation().getDirection();
-					bullet.setVelocity(velocity.normalize().multiply(this.velocity));
-
-					bullets.add(bullet);
-
-					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 8.0F, 1.0F);
-
-					new BukkitRunnable()
-					{
-						@Override
-						public void run()
-						{
-							bullets.remove(bullet);
-							bullet.remove();
-						}
-
-					}.runTaskLater(Main.getInstance(), timer);
-				}
-			}
-		}
-	}
-
-//	@SuppressWarnings("deprecation")
-//	@EventHandler
-//	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
-//	{
-//		if (event.getDamager() instanceof LlamaSpit)
-//		{
-//			LlamaSpit bullet = (LlamaSpit) event.getDamager();
-//
-//			if (bullet.getShooter() instanceof Player)
-//			{
-//				Caster caster = Main.getCasters().get(bullet.getShooter());
-//
-//				if (bullets.contains(bullet))
-//				{
-//					event.setDamage(damage);
-//				}
-//			}
-//		}
-//	}
 }

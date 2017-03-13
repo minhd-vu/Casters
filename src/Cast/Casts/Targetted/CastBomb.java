@@ -60,6 +60,7 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
