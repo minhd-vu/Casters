@@ -86,6 +86,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);
@@ -145,31 +146,36 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		{
 			WitherSkull darkbomb = (WitherSkull) event.getDamager();
 
-			if (darkbombs.contains(darkbomb))
+			if (darkbomb.getShooter() instanceof Player)
 			{
-				List<Entity> entities = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-				for (Entity target : entities)
+				if (darkbombs.contains(darkbomb))
 				{
-					if (darkbomb.getShooter() instanceof Player && !target.equals(darkbomb.getShooter()))
-					{
-						if (target instanceof LivingEntity)
-						{
-							event.setDamage(damage);
-							target.setFireTicks(targetfireticks);
-							((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+					List<Entity> entities = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
-							darkbombs.remove(darkbomb);
-							darkbomb.remove();
+					for (Entity target : entities)
+					{
+						if (darkbomb.getShooter() instanceof Player && !target.equals(darkbomb.getShooter()))
+						{
+							if (target instanceof LivingEntity)
+							{
+								event.setCancelled(true);
+
+								((LivingEntity) target).damage(damage);
+								target.setFireTicks(targetfireticks);
+								((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+
+								darkbombs.remove(darkbomb);
+								darkbomb.remove();
+							}
 						}
 					}
-				}
 
-				if (explosion > 0)
-				{
-					darkbomb.getWorld().createExplosion(darkbomb.getLocation(), explosion, incendiary);
+					if (explosion > 0)
+					{
+						darkbomb.getWorld().createExplosion(darkbomb.getLocation(), explosion, incendiary);
 
-					return;
+						return;
+					}
 				}
 			}
 		}

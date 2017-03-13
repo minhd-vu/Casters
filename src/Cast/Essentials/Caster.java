@@ -537,6 +537,12 @@ public class Caster
 		return false;
 	}
 
+	public boolean canCastPassive(String name, Cooldown cooldown, double manacost)
+	{
+		return type.getCasts().containsKey(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name) && !cooldown.hasCooldown(player, name) &&
+				hasMana(manacost, name);
+	}
+
 	public List<String> getWarmingUp()
 	{
 		List<String> warmups = new ArrayList<String>();

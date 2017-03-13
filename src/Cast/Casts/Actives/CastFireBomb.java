@@ -18,10 +18,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CastFireBomb extends ActiveCast implements CommandInterface, Listener
 {
+	private List<LargeFireball> firebombs;
+
 	private static double seconds;
 	private static double damage;
 	private static boolean gravity;
@@ -35,6 +38,8 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 	public CastFireBomb(String name, String description)
 	{
 		super(name, description);
+
+		firebombs = new ArrayList<LargeFireball>();
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
@@ -141,7 +146,9 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 					{
 						if (target instanceof LivingEntity)
 						{
-							event.setDamage(damage);
+							event.setCancelled(true);
+
+							((LivingEntity) target).damage(damage);
 							target.setFireTicks(targetfireticks);
 
 							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),

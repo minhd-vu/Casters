@@ -84,6 +84,7 @@ public class CastBomb extends TargettedCast implements CommandInterface, Listene
 								tnt = player.getWorld().spawn(player.getLocation(), TNTPrimed.class);
 								tnt.setVelocity(player.getLocation().getDirection().normalize().multiply(velocity));
 							}
+
 							else
 							{
 								tnt = player.getWorld().spawn(target.getLocation(), TNTPrimed.class);

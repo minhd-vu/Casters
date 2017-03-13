@@ -67,7 +67,7 @@ public abstract class Firearm extends Passive
 
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			{
-				if (caster.canCast(name, cooldown, 0))
+				if (caster.canCastPassive(name, cooldown, 0))
 				{
 					count = 0;
 
@@ -121,7 +121,7 @@ public abstract class Firearm extends Passive
 			Player player = event.getPlayer();
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (caster.canCast(name, new Cooldown(), 0))
+			if (caster.canCastPassive(name, new Cooldown(), 0))
 			{
 				if (event.isSneaking())
 				{
@@ -141,7 +141,7 @@ public abstract class Firearm extends Passive
 	{
 		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
 
-		if (caster.hasCast(name))
+		if (caster.getType().getCasts().containsKey(name))
 		{
 			if (caster.getPlayer().getInventory().getItem(event.getPreviousSlot()).getType().equals(firearm))
 			{
@@ -164,6 +164,7 @@ public abstract class Firearm extends Passive
 			if (bullet.getShooter() instanceof Player)
 			{
 				Caster caster = Main.getCasters().get(((Player) bullet.getShooter()).getUniqueId());
+
 				if (bullets.contains(bullet))
 				{
 					double projectileheight = bullet.getLocation().getY();

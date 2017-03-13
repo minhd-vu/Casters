@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -124,42 +125,30 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event)
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		Projectile projectile = event.getEntity();
-
-		if (projectile instanceof Snowball)
+		if (event.getDamager() instanceof Snowball)
 		{
-			Snowball fireball = (Snowball) projectile;
+			Snowball fireball = (Snowball) event.getDamager();
 
 			if (fireball.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
+				List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
-				List<Entity> e = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-				for (Entity target : e)
+				for (Entity target : entities)
 				{
 					if (!target.equals(fireball.getShooter()))
 					{
 						if (target instanceof LivingEntity)
 						{
-							if (target instanceof Player)
-							{
-								Caster ctarget = Main.getCasters().get(target.getUniqueId());
+							event.setCancelled(true);
 
-								if (caster.sameParty(ctarget))
-								{
-									return;
-								}
-							}
-
-							((Damageable) target).damage(damage);
+							((LivingEntity) target).damage(damage);
 							target.setFireTicks(targetfireticks);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 1.0D, 0.0D), Effect.FLAME,
-									0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
+									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
 
 							fireball.remove();
 
