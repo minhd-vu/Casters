@@ -38,6 +38,7 @@ public abstract class Firearm extends Passive
 	protected long timer;
 	protected long reload;
 	protected boolean gravity;
+	protected double recoil;
 
 	private int count;
 
@@ -102,6 +103,7 @@ public abstract class Firearm extends Passive
 					}.runTaskTimer(Main.getInstance(), 0, 1);
 
 					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 2.5f); // TODO: Change The Pitch For Unique Effects.
+					player.setVelocity(player.getVelocity().normalize().multiply(recoil));
 
 					cooldown.start(player.getName());
 				}

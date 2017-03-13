@@ -25,7 +25,7 @@ public class PassiveMusket extends Firearm
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
-		cooldown.setCooldown(100);
+		cooldown.setCooldown(85);
 
 		damage = 75;
 		headshot = 1.5;
@@ -36,9 +36,10 @@ public class PassiveMusket extends Firearm
 		timer = 100;
 		reload = 100;
 		gravity = false;
+		recoil = 5.0;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "Headshot: " + headshot * 100 + "%");
+		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + headshot * 100 + "%");
 		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + reload / 20.0 + " Seconds");
 
 		pages.setPage(info);
