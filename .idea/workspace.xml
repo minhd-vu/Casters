@@ -7,13 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4621a64-84e6-4618-8296-b5e699f342e3" name="Default" comment="Added Base Classes For Firearms.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java" afterPath="$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,8 +54,8 @@
       <file leaf-file-name="Firearm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="102" column="108" lean-forward="false" selection-start-line="102" selection-start-column="108" selection-end-line="102" selection-end-column="108" />
+            <state relative-caret-position="-198">
+              <caret line="95" column="52" lean-forward="true" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,8 +66,8 @@
       <file leaf-file-name="PassiveMusket.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+            <state relative-caret-position="462">
+              <caret line="40" column="76" lean-forward="false" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,8 +78,8 @@
       <file leaf-file-name="PassiveBlunderbuss.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+            <state relative-caret-position="450">
+              <caret line="39" column="68" lean-forward="true" selection-start-line="39" selection-start-column="68" selection-end-line="40" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,31 +90,11 @@
       <file leaf-file-name="PassiveFlintlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+            <state relative-caret-position="465">
+              <caret line="39" column="68" lean-forward="true" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WandDistorter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WandInferno.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandInferno.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="77" selection-end-column="81" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -207,11 +184,11 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" />
         <option value="$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java" />
       </list>
     </option>
   </component>
@@ -1223,50 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandInferno.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="77" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="635" column="16" lean-forward="false" selection-start-line="635" selection-start-column="16" selection-end-line="635" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1283,20 +1216,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java">
+    <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandInferno.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        <state relative-caret-position="615">
+          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="77" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveBlunderbuss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="39" column="68" lean-forward="true" selection-start-line="39" selection-start-column="68" selection-end-line="40" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveMusket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="40" column="76" lean-forward="false" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/PassiveFlintlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="39" column="68" lean-forward="true" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="635" column="16" lean-forward="false" selection-start-line="635" selection-start-column="16" selection-end-line="635" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="102" column="108" lean-forward="false" selection-start-line="102" selection-start-column="108" selection-end-line="102" selection-end-column="108" />
+        <state relative-caret-position="-198">
+          <caret line="95" column="52" lean-forward="true" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

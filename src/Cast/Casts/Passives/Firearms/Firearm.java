@@ -30,6 +30,7 @@ public abstract class Firearm extends Passive
 	protected Cooldown cooldown;
 
 	protected double damage;
+	protected double headshot;
 	protected int shots;
 	protected double velocity;
 	protected double maxaccuracy;
@@ -100,7 +101,7 @@ public abstract class Firearm extends Passive
 
 					}.runTaskTimer(Main.getInstance(), 0, 1);
 
-					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 10.0f);
+					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 2.5f); // TODO: Change The Pitch For Unique Effects.
 
 					cooldown.start(player.getName());
 				}
@@ -123,23 +124,21 @@ public abstract class Firearm extends Passive
 				if (bullets.contains(bullet))
 				{
 					double projectileheight = bullet.getLocation().getY();
-					double playerbodyheight = 1.35;
+					double playerbodyheight = event.getEntity().getLocation().getY() + 1.35;
 
 					if (projectileheight > playerbodyheight)
 					{
-						caster.getPlayer().playSound(caster.getPlayer().getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F);
+						caster.getPlayer().playSound(caster.getPlayer().getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F); // TODO: This Needs To Be Fixed.
 
-						event.setDamage(damage * 2);
+						event.setDamage(damage * headshot);
 					}
-
-//					if (Math.abs(bullet.getLocation().getY() - caster.getPlayer().getEyeLocation().getY()) < 0.5)
-//					{
-//					}
 
 					else
 					{
 						event.setDamage(damage);
 					}
+
+					bullets.remove(bullet);
 				}
 			}
 		}

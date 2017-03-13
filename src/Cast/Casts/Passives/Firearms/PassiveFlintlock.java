@@ -28,6 +28,7 @@ public class PassiveFlintlock extends Firearm
 		cooldown.setCooldown(20);
 
 		damage = 25;
+		headshot = 1.25;
 		shots = 1;
 		velocity = 2.0;
 		maxaccuracy = 0.2;
@@ -37,6 +38,7 @@ public class PassiveFlintlock extends Firearm
 		gravity = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + damage + " HP");
+		info.add(ChatColor.DARK_AQUA + "Headshot: " + headshot * 100 + "%");
 		info.add(ChatColor.DARK_AQUA + "Reload: " + reload / 20.0 + " Seconds");
 
 		pages.setPage(info);

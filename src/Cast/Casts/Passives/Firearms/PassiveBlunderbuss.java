@@ -28,6 +28,7 @@ public class PassiveBlunderbuss extends Firearm
 		cooldown.setCooldown(70);
 
 		damage = 50;
+		headshot = 1.1;
 		shots = 10;
 		velocity = 1.0;
 		maxaccuracy = 0.3;
@@ -37,6 +38,7 @@ public class PassiveBlunderbuss extends Firearm
 		gravity = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + damage + " HP");
+		info.add(ChatColor.DARK_AQUA + "Headshot: " + headshot * 100 + "%");
 		info.add(ChatColor.DARK_AQUA + "Reload: " + reload / 20.0 + " Seconds");
 
 		pages.setPage(info);
