@@ -972,11 +972,6 @@ public class Caster
 		this.casting.put(name, casting);
 	}
 
-	public void setInterrupted(boolean interrupted)
-	{
-		this.interrupted = interrupted;
-	}
-
 	public boolean isInterrupted()
 	{
 		new BukkitRunnable()
@@ -989,6 +984,11 @@ public class Caster
 		}.runTaskLater(Main.getInstance(), 2);
 
 		return interrupted;
+	}
+
+	public void setInterrupted(boolean interrupted)
+	{
+		this.interrupted = interrupted;
 	}
 
 	public boolean isWarmingUp(String name)

@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
 
 public class CastersArmor implements CommandInterface
 {

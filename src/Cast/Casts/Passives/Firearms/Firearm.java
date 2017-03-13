@@ -23,10 +23,9 @@ import java.util.List;
 
 public abstract class Firearm extends Passive
 {
+	protected static final DecimalFormat decimalformat = new DecimalFormat("###.#");
 	protected List<LlamaSpit> bullets;
-
 	protected Material firearm;
-
 	protected double damage;
 	protected double headshot;
 	protected int shots;
@@ -37,10 +36,7 @@ public abstract class Firearm extends Passive
 	protected long reload;
 	protected boolean gravity;
 	protected double recoil;
-
 	private int count;
-
-	protected static final DecimalFormat decimalformat = new DecimalFormat("###.#");
 
 	public Firearm(String name, String description)
 	{

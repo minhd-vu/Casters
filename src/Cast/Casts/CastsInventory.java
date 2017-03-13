@@ -72,10 +72,12 @@ public class CastsInventory implements CommandInterface, Listener
 		meta.setAuthor("SirGoldenNugget");
 		meta.setGeneration(BookMeta.Generation.ORIGINAL);
 		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "1:" + ChatColor.BLACK + " In Order To " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast" + ChatColor.BLACK +
-				", Place One Of The " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast Items" + ChatColor.DARK_GRAY + " (Found In The Casts Menu)" + ChatColor.BLACK + " And Place It In Your " +
+				", Place One Of The " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast Items" + ChatColor.DARK_GRAY + " (Found In The Casts Menu)" + ChatColor.BLACK +
+				" And Place It In Your " +
 				ChatColor.DARK_AQUA + ChatColor.BOLD + "Hotbar."); // TODO: Complete This; Add Colors.
 		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "2:" + ChatColor.BLACK +
-				" Next, All You Are Required To Do Is Either Press Your" + ChatColor.DARK_AQUA + ChatColor.BOLD + " Hotbar Keys " + ChatColor.DARK_GRAY + "(Usually 1-9)" + ChatColor.BLACK + " Or " +
+				" Next, All You Are Required To Do Is Either Press Your" + ChatColor.DARK_AQUA + ChatColor.BOLD + " Hotbar Keys " + ChatColor.DARK_GRAY + "(Usually 1-9)" +
+				ChatColor.BLACK + " Or " +
 				ChatColor.DARK_AQUA + ChatColor.BOLD + "Scroll" + ChatColor.BLACK + " Using The Mouse " + ChatColor.DARK_GRAY + "(Not Recommended)" + ChatColor.BLACK + ".");
 		instructions.setItemMeta(meta);
 
