@@ -5,9 +5,11 @@ import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ShulkerBullet;
 import org.bukkit.event.EventHandler;
@@ -75,7 +77,6 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 
 						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
 						seeker.setShooter(caster.getPlayer());
-
 						seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 
 						new BukkitRunnable()
@@ -111,24 +112,27 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 		{
 			ShulkerBullet seeker = (ShulkerBullet) event.getDamager();
 
-			if (seeker.getShooter() instanceof Player)
+			if (seeker.getShooter() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
 				Caster caster = Main.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
-
-				event.setDamage(damage);
+				LivingEntity target = (LivingEntity) event.getEntity();
 
 				if (caster.hasParty())
 				{
 					if (event.getEntity() instanceof Player)
 					{
-						Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
+						Caster tcaster = Main.getCasters().get(event.getEntity().getUniqueId());
 
-						if (caster.getParty().getMembers().contains(target))
+						if (caster.sameParty(tcaster))
 						{
 							event.setCancelled(true);
+							return;
 						}
 					}
 				}
+
+				target.damage(damage);
+				target.getWorld().playSound(target.getLocation(), Sound.ENTITY_SHULKER_BULLET_HIT, 8.0F, 1.0F);
 			}
 		}
 	}

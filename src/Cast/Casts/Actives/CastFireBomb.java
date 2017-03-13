@@ -25,15 +25,15 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 {
 	private List<LargeFireball> firebombs;
 
-	private static double seconds;
-	private static double damage;
-	private static boolean gravity;
-	private static int firebombfireticks;
-	private static int targetfireticks;
-	private static int areaofeffect;
-	private static int explosion;
-	private static boolean incendiary;
-	private static boolean singletarget;
+	private int timer;
+	private double damage;
+	private boolean gravity;
+	private int firebombfireticks;
+	private int targetfireticks;
+	private int areaofeffect;
+	private int explosion;
+	private boolean incendiary;
+	private boolean singletarget;
 
 	public CastFireBomb(String name, String description)
 	{
@@ -50,7 +50,7 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		seconds = 5;
+		timer = 100;
 		damage = 10;
 		gravity = false;
 		firebombfireticks = 100;
@@ -118,7 +118,7 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), (long) (seconds * 20));
+						}.runTaskLater(Main.getInstance(), timer);
 					}
 
 				}.runTaskLater(Main.getInstance(), warmup.getDuration());

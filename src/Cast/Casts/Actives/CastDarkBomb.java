@@ -8,10 +8,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -26,7 +23,8 @@ import java.util.List;
 public class CastDarkBomb extends ActiveCast implements CommandInterface, Listener
 {
 	private List<WitherSkull> darkbombs = new ArrayList<WitherSkull>();
-	private double seconds;
+
+	private int timer;
 	private double damage;
 	private boolean gravity;
 	private boolean charged;
@@ -35,9 +33,11 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 	private int targetfireticks;
 	private int areaofeffect;
 	private float explosion;
+	private int yield;
 	private int duration;
 	private int amplifier;
 	private boolean explode;
+	private double velocity;
 
 	public CastDarkBomb(String name, String description)
 	{
@@ -52,7 +52,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		seconds = 5;
+		timer = 100;
 		damage = 10;
 		gravity = false;
 		charged = false;
@@ -61,9 +61,11 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 		targetfireticks = 0;
 		areaofeffect = 1;
 		explosion = 0;
+		yield = 0;
 		duration = 100;
 		amplifier = 1;
 		explode = false;
+		velocity = 1.0;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
@@ -100,13 +102,14 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						WitherSkull darkbomb = player.launchProjectile(WitherSkull.class);
+						WitherSkull darkbomb = (WitherSkull) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.WITHER_SKULL);
+						darkbomb.setShooter(caster.getPlayer());
+						darkbomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 						darkbomb.setFireTicks(darkbombfireticks);
 						darkbomb.setGravity(gravity);
 						darkbomb.setCharged(charged);
 						darkbomb.setIsIncendiary(incendiary);
-						darkbomb.setYield(explosion);
-						darkbomb.setShooter(player);
+						darkbomb.setYield(yield);
 						darkbombs.add(darkbomb);
 
 						cast(player);
@@ -129,7 +132,7 @@ public class CastDarkBomb extends ActiveCast implements CommandInterface, Listen
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), (long) (seconds * 20));
+						}.runTaskLater(Main.getInstance(), timer);
 					}
 
 				}.runTaskLater(Main.getInstance(), warmup.getDuration());

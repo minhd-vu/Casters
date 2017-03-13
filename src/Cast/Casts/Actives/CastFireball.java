@@ -20,7 +20,7 @@ import java.util.List;
 
 public class CastFireball extends ActiveCast implements CommandInterface, Listener
 {
-	private double timer;
+	private int timer;
 	private double damage;
 	private double velocity;
 	private boolean gravity;
@@ -113,7 +113,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), (long) (timer));
+						}.runTaskLater(Main.getInstance(), timer);
 					}
 
 				}.runTaskLater(Main.getInstance(), warmup.getDuration());
