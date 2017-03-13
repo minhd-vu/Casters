@@ -27,9 +27,6 @@ public abstract class Firearm extends Passive
 
 	protected Material firearm;
 
-	protected WarmUp warmup;
-	protected Cooldown cooldown;
-
 	protected double damage;
 	protected double headshot;
 	protected int shots;
