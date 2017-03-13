@@ -3,6 +3,7 @@ version: 1.1
 author: SirGoldenNugget
 main: Cast.Main
 description: Casters Plugin.
+depend: [ScoreboardLib, TitleTabandBarAPI]
 commands:
     casters:
         description: Lists All Casters Commands.

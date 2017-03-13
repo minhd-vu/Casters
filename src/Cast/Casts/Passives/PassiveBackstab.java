@@ -25,8 +25,8 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 		percentage = 150;
 		sneaking = 200;
 
-		info.add(ChatColor.DARK_AQUA + "Bonus Damage: " + percentage + "%");
-		info.add(ChatColor.DARK_AQUA + "Sneaking Damage: " + sneaking + "%");
+		info.add(ChatColor.DARK_AQUA + "Bonus Damage: " + ChatColor.AQUA + percentage + "%");
+		info.add(ChatColor.DARK_AQUA + "Sneaking Damage: " + ChatColor.AQUA + sneaking + "%");
 
 		pages.setPage(info);
 	}

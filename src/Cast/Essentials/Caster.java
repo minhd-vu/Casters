@@ -1,5 +1,6 @@
 package Cast.Essentials;
 
+import Cast.Casts.Types.Cast;
 import Cast.Configs.Config;
 import Cast.Essentials.Effects.Effect;
 import Cast.Essentials.Schedulers.Cooldown;
@@ -209,12 +210,11 @@ public class Caster
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.DARK_AQUA + "Cooldowns:");
 
-				for (String cast : Main.getCasts().keySet())
+				for (Cast cast : Main.getCasts().values())
 				{
-					if (Main.getCasts().get(cast).getCooldown().hasCooldown(player.getName()))
+					if (cast.getCooldown().hasCooldown(player.getName()))
 					{
-						entrybuilder.next("    " + ChatColor.AQUA + Main.getCasts().get(cast).getName() + ": "
-								+ Main.getCasts().get(cast).getCooldown().getCooldown(player.getName()));
+						entrybuilder.next("    " + ChatColor.AQUA + cast.getName() + ": " + cast.getCooldown().getCooldown(player.getName()));
 					}
 				}
 

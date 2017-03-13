@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public abstract class Firearm extends Passive
 	protected double recoil;
 
 	private int count;
+
+	protected static final DecimalFormat decimalformat = new DecimalFormat("###.#");
 
 	public Firearm(String name, String description)
 	{
@@ -103,7 +106,7 @@ public abstract class Firearm extends Passive
 					}.runTaskTimer(Main.getInstance(), 0, 1);
 
 					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 2.5f); // TODO: Change The Pitch For Unique Effects.
-					player.setVelocity(player.getVelocity().normalize().multiply(recoil));
+					player.setVelocity(player.getEyeLocation().getDirection().setY(0).normalize().multiply(-recoil));
 
 					cooldown.start(player.getName());
 				}
@@ -121,8 +124,7 @@ public abstract class Firearm extends Passive
 
 			if (bullet.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(bullet.getShooter());
-
+				Caster caster = Main.getCasters().get(((Player) bullet.getShooter()).getUniqueId());
 				if (bullets.contains(bullet))
 				{
 					double projectileheight = bullet.getLocation().getY();
@@ -130,7 +132,7 @@ public abstract class Firearm extends Passive
 
 					if (projectileheight > playerbodyheight)
 					{
-						caster.getPlayer().playSound(caster.getPlayer().getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F); // TODO: This Needs To Be Fixed.
+						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F); // TODO: This Needs To Be Fixed.
 
 						event.setDamage(damage * headshot);
 					}

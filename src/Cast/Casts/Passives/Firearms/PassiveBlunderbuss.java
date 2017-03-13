@@ -34,13 +34,12 @@ public class PassiveBlunderbuss extends Firearm
 		maxaccuracy = 0.3;
 		minaccuracy = 0.15;
 		timer = 100;
-		reload = 70;
 		gravity = false;
-		recoil = 3.0;
+		recoil = 1.0;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + headshot * 100 + "%");
-		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + reload / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + decimalformat.format(headshot * 100) + "%");
+		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + cooldown.getCooldown() / 20.0 + " Seconds");
 
 		pages.setPage(info);
 	}

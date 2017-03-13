@@ -36,11 +36,11 @@ public class PassiveFlintlock extends Firearm
 		timer = 100;
 		reload = 40;
 		gravity = false;
-		recoil = 1.0;
+		recoil = 0.5;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + headshot * 100 + "%");
-		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + reload / 20.0 + " Seconds");
+		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + decimalformat.format(headshot * 100) + "%");
+		info.add(ChatColor.DARK_AQUA + "Reload: " + ChatColor.AQUA + cooldown.getCooldown() / 20.0 + " Seconds");
 
 		pages.setPage(info);
 	}
