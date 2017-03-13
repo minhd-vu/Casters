@@ -14,6 +14,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -26,6 +30,7 @@ public abstract class Firearm extends Passive
 	protected static final DecimalFormat decimalformat = new DecimalFormat("###.#");
 	protected List<LlamaSpit> bullets;
 	protected Material firearm;
+
 	protected double damage;
 	protected double headshot;
 	protected int shots;
@@ -38,6 +43,7 @@ public abstract class Firearm extends Passive
 	protected double recoil;
 	protected float volume;
 	protected float pitch;
+	protected int amplitude;
 	private int count;
 
 	public Firearm(String name, String description)
@@ -54,14 +60,14 @@ public abstract class Firearm extends Passive
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+		if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(firearm))
 		{
 			Player player = event.getPlayer();
 			Caster caster = Main.getCasters().get(player.getUniqueId());
 
-			if (caster.canCast(name, cooldown, 0))
+			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			{
-				if (player.getInventory().getItemInMainHand().getType().equals(firearm))
+				if (caster.canCast(name, cooldown, 0))
 				{
 					count = 0;
 
@@ -70,8 +76,6 @@ public abstract class Firearm extends Passive
 						@Override
 						public void run()
 						{
-							// TODO: Add Headshots. Guardian Beams As Sniper. Knockback (Recoil).
-
 							if (++count > shots)
 							{
 								this.cancel();
@@ -109,6 +113,46 @@ public abstract class Firearm extends Passive
 		}
 	}
 
+	@EventHandler
+	public void onPlayerToggleSneakEvent(PlayerToggleSneakEvent event)
+	{
+		if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(firearm))
+		{
+			Player player = event.getPlayer();
+			Caster caster = Main.getCasters().get(player.getUniqueId());
+
+			if (caster.canCast(name, new Cooldown(), 0))
+			{
+				if (event.isSneaking())
+				{
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, amplitude, true, true));
+				}
+
+				else
+				{
+					player.removePotionEffect(PotionEffectType.SLOW);
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerItemHeldEvent(PlayerItemHeldEvent event)
+	{
+		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+
+		if (caster.hasCast(name))
+		{
+			if (caster.getPlayer().getInventory().getItem(event.getPreviousSlot()).getType().equals(firearm))
+			{
+				if (caster.getPlayer().isSneaking())
+				{
+					caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
+				}
+			}
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
@@ -127,8 +171,7 @@ public abstract class Firearm extends Passive
 
 					if (projectileheight > playerbodyheight)
 					{
-						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F); // TODO: This Needs To Be Fixed.
-
+						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F);
 						event.setDamage(damage * headshot);
 					}
 

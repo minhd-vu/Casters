@@ -67,9 +67,4 @@ public class Cooldown
 	{
 		cooldowns.put(name, System.currentTimeMillis());
 	}
-
-	public void setCooldown(Config config, String path)
-	{
-		seconds = config.getDouble(path) / 20;
-	}
 }
