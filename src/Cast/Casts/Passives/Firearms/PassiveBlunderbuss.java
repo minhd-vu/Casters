@@ -24,6 +24,8 @@ public class PassiveBlunderbuss extends Firearm
 		timer = 100;
 		gravity = false;
 		recoil = 1.0;
+		volume = 4.0F;
+		pitch = 1.5F;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + decimalformat.format(headshot * 100) + "%");

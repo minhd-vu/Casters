@@ -85,8 +85,7 @@ public class CastDefensiveStance extends ActiveCast implements CommandInterface
 							player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
 						}
 
-						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0,
-								0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
+						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0, 0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
 						player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
 
 						cast(player);

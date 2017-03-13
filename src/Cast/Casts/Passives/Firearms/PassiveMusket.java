@@ -19,12 +19,13 @@ public class PassiveMusket extends Firearm
 		headshot = 1.5;
 		shots = 1;
 		velocity = 4.0;
-		;
 		maxaccuracy = 0;
 		minaccuracy = 0;
 		timer = 100;
 		gravity = false;
 		recoil = 2.0;
+		volume = 8.0F;
+		pitch = 0.0F;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + decimalformat.format(headshot * 100) + "%");

@@ -25,6 +25,8 @@ public class PassiveFlintlock extends Firearm
 		reload = 40;
 		gravity = false;
 		recoil = 0.5;
+		volume = 2.0F;
+		pitch = 2.0F;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.AQUA + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Headshot: " + ChatColor.AQUA + decimalformat.format(headshot * 100) + "%");
