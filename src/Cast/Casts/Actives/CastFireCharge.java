@@ -137,7 +137,7 @@ public class CastFireCharge extends ActiveCast implements CommandInterface, List
 					{
 						if (target instanceof LivingEntity)
 						{
-							event.setDamage(damage);
+							event.setDamage(damage); // TODO: Does This Get Ignored By Armor?
 							target.setFireTicks(targetfireticks);
 
 							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),

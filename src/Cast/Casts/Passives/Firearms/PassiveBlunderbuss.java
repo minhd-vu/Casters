@@ -17,8 +17,6 @@ import org.bukkit.util.Vector;
 
 public class PassiveBlunderbuss extends Firearm
 {
-	private int count;
-
 	public PassiveBlunderbuss(String name, String description)
 	{
 		super(name, description);
@@ -29,7 +27,7 @@ public class PassiveBlunderbuss extends Firearm
 		warmup.setAmplifier(0);
 		cooldown.setCooldown(70);
 
-		damage = 5;
+		damage = 50;
 		shots = 10;
 		velocity = 1.0;
 		maxaccuracy = 0.3;

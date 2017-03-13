@@ -27,7 +27,7 @@ public class PassiveFlintlock extends Firearm
 		warmup.setAmplifier(0);
 		cooldown.setCooldown(20);
 
-		damage = 10;
+		damage = 25;
 		shots = 1;
 		velocity = 2.0;
 		maxaccuracy = 0.2;

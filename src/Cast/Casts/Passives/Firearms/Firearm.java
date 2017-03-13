@@ -24,6 +24,8 @@ public abstract class Firearm extends Passive
 {
 	protected List<LlamaSpit> bullets;
 
+	protected Material firearm;
+
 	protected WarmUp warmup;
 	protected Cooldown cooldown;
 
@@ -35,8 +37,6 @@ public abstract class Firearm extends Passive
 	protected long timer;
 	protected long reload;
 	protected boolean gravity;
-
-	protected Material firearm;
 
 	private int count;
 
@@ -70,6 +70,8 @@ public abstract class Firearm extends Passive
 						@Override
 						public void run()
 						{
+							// TODO: Add Headshots. Guardian Beams As Sniper. Knockback (Recoil).
+
 							if (++count > shots)
 							{
 								this.cancel();
@@ -98,7 +100,9 @@ public abstract class Firearm extends Passive
 
 					}.runTaskTimer(Main.getInstance(), 0, 1);
 
-					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 1.0F, 1.0F);
+					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 10.0f);
+
+					cooldown.start(player.getName());
 				}
 			}
 		}
@@ -118,7 +122,24 @@ public abstract class Firearm extends Passive
 
 				if (bullets.contains(bullet))
 				{
-					event.setDamage(damage);
+					double projectileheight = bullet.getLocation().getY();
+					double playerbodyheight = 1.35;
+
+					if (projectileheight > playerbodyheight)
+					{
+						caster.getPlayer().playSound(caster.getPlayer().getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F);
+
+						event.setDamage(damage * 2);
+					}
+
+//					if (Math.abs(bullet.getLocation().getY() - caster.getPlayer().getEyeLocation().getY()) < 0.5)
+//					{
+//					}
+
+					else
+					{
+						event.setDamage(damage);
+					}
 				}
 			}
 		}

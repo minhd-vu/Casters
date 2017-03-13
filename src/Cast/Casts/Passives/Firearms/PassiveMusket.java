@@ -27,9 +27,9 @@ public class PassiveMusket extends Firearm
 		warmup.setAmplifier(0);
 		cooldown.setCooldown(100);
 
-		damage = 20;
+		damage = 75;
 		shots = 1;
-		velocity = 4.0;;
+		velocity = 4.5;;
 		maxaccuracy = 0;
 		minaccuracy = 0;
 		timer = 100;
