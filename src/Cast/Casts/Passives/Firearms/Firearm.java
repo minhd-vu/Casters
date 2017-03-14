@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -143,7 +144,9 @@ public abstract class Firearm extends Passive
 
 		if (caster.getType().getCasts().containsKey(name))
 		{
-			if (caster.getPlayer().getInventory().getItem(event.getPreviousSlot()).getType().equals(firearm))
+			ItemStack item = caster.getPlayer().getInventory().getItem(event.getPreviousSlot());
+
+			if (item != null && item.getType().equals(firearm))
 			{
 				if (caster.getPlayer().isSneaking())
 				{
@@ -167,10 +170,7 @@ public abstract class Firearm extends Passive
 
 				if (bullets.contains(bullet))
 				{
-					double projectileheight = bullet.getLocation().getY();
-					double playerbodyheight = event.getEntity().getLocation().getY() + 1.35;
-
-					if (projectileheight > playerbodyheight)
+					if (bullet.getLocation().getY() > event.getEntity().getLocation().getY() + 1.35)
 					{
 						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F);
 						event.setDamage(damage * headshot);

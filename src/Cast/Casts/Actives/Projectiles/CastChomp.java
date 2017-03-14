@@ -80,7 +80,7 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 								{
 									Block block = blockiterator.next();
 
-									EvokerFangs chomp = ((EvokerFangs) player.getWorld().spawnEntity(block.getLocation().clone().add(0, -1, 0), EntityType.EVOKER_FANGS));
+									EvokerFangs chomp = ((EvokerFangs) player.getWorld().spawnEntity(block.getLocation(), EntityType.EVOKER_FANGS));
 									chomp.setOwner(player);
 
 									projectiles.add(chomp.getUniqueId());
