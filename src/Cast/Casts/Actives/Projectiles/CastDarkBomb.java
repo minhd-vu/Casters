@@ -1,50 +1,48 @@
-package Cast.Casts.Actives;
+package Cast.Casts.Actives.Projectiles;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LargeFireball;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CastFireBomb extends ActiveCast implements CommandInterface, Listener
+public class CastDarkBomb extends Projectile implements CommandInterface, Listener
 {
-	private List<LargeFireball> firebombs;
-
 	private int timer;
 	private double damage;
 	private boolean gravity;
-	private int firebombfireticks;
+	private boolean charged;
+	private boolean incendiary;
+	private int darkbombfireticks;
 	private int targetfireticks;
 	private int areaofeffect;
-	private int explosion;
-	private boolean incendiary;
+	private float explosion;
+	private int yield;
+	private int duration;
+	private int amplifier;
+	private boolean explode;
+	private double velocity;
 	private boolean singletarget;
 
-	public CastFireBomb(String name, String description)
+	public CastDarkBomb(String name, String description)
 	{
 		super(name, description);
 
-		firebombs = new ArrayList<LargeFireball>();
-
-		warmup.setDuration(0);
-		warmup.setAmplifier(0);
-		cooldown.setCooldown(40);
-		manacost = 3;
+		warmup.setDuration(40);
+		warmup.setAmplifier(5);
+		cooldown.setCooldown(100);
+		manacost = 5;
 
 		info.add(ChatColor.DARK_AQUA + "WarmUp: " + ChatColor.GRAY + warmup.getDuration() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
@@ -53,15 +51,20 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		timer = 100;
 		damage = 10;
 		gravity = false;
-		firebombfireticks = 100;
-		targetfireticks = 50;
-		areaofeffect = 5;
-		explosion = 3;
-		incendiary = true;
+		charged = false;
+		darkbombfireticks = 0;
+		targetfireticks = 0;
+		areaofeffect = 1;
+		explosion = 0;
+		yield = 0;
+		duration = 100;
+		amplifier = 1;
+		velocity = 1.0;
 		singletarget = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
+		info.add(ChatColor.DARK_AQUA + "Wither: " + ChatColor.GRAY + amplifier);
 
 		pages.setPage(info);
 	}
@@ -94,14 +97,20 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						LargeFireball firebomb = player.launchProjectile(LargeFireball.class);
-						firebomb.setFireTicks(firebombfireticks);
-						firebomb.setGravity(gravity);
-						firebomb.setShooter(player);
+						WitherSkull darkbomb = (WitherSkull) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.WITHER_SKULL);
+						darkbomb.setShooter(caster.getPlayer());
+						darkbomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+						darkbomb.setFireTicks(darkbombfireticks);
+						darkbomb.setGravity(gravity);
+						darkbomb.setCharged(charged);
+						darkbomb.setIsIncendiary(incendiary);
+						darkbomb.setYield(yield);
+
+						projectiles.add(darkbomb.getUniqueId());
 
 						cast(player);
 
-						player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+						player.getWorld().spigot().playEffect(player.getLocation(), Effect.WITHER_SHOOT);
 
 						cooldown.start(player.getName());
 
@@ -112,9 +121,10 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 							@Override
 							public void run()
 							{
-								if (!firebomb.isDead())
+								if (!darkbomb.isDead())
 								{
-									firebomb.remove();
+									projectiles.remove(darkbomb.getUniqueId());
+									darkbomb.remove();
 								}
 							}
 
@@ -128,47 +138,31 @@ public class CastFireBomb extends ActiveCast implements CommandInterface, Listen
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
 	{
-		if (event.getDamager() instanceof LargeFireball)
+		if (event.getDamager() instanceof WitherSkull)
 		{
-			LargeFireball firebomb = (LargeFireball) event.getDamager();
+			WitherSkull darkbomb = (WitherSkull) event.getDamager();
 
-			if (firebomb.getShooter() instanceof Player)
+			if (projectiles.contains(darkbomb.getUniqueId()) && darkbomb.getShooter() instanceof Player)
 			{
-				List<Entity> entities = firebomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+				event.setCancelled(true);
+
+				List<Entity> entities = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 
 				for (Entity target : entities)
 				{
-					if (!target.equals(firebomb.getShooter()))
+					if (target instanceof LivingEntity && !target.equals(darkbomb.getShooter()))
 					{
-						if (target instanceof LivingEntity)
+						((LivingEntity) target).damage(damage);
+						target.setFireTicks(targetfireticks);
+						((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+
+						if (singletarget)
 						{
-							event.setCancelled(true);
-
-							((LivingEntity) target).damage(damage);
-							target.setFireTicks(targetfireticks);
-
-							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
-									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-
-							firebomb.remove();
-
-							if (singletarget)
-							{
-								return;
-							}
+							return;
 						}
-					}
-
-					if (explosion > 0)
-					{
-						firebomb.getWorld().createExplosion(firebomb.getLocation(), explosion, incendiary);
-
-						return;
 					}
 				}
 			}

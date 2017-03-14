@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -13,7 +12,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastBash extends TargettedCast implements CommandInterface
+public class CastBash extends Targetted implements CommandInterface
 {
 	private double damage;
 	private int range;

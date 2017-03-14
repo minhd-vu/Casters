@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Effects.Bleed;
@@ -15,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastStrike extends TargettedCast implements CommandInterface, Listener
+public class CastStrike extends Targetted implements CommandInterface, Listener
 {
 	private Bleed bleed;
 

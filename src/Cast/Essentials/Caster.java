@@ -1,6 +1,6 @@
 package Cast.Essentials;
 
-import Cast.Casts.Types.Cast;
+import Cast.Casts.Cast;
 import Cast.Configs.Config;
 import Cast.Essentials.Effects.Effect;
 import Cast.Essentials.Schedulers.Cooldown;
@@ -122,7 +122,7 @@ public class Caster
 		bossbar = this.player.getServer().createBossBar(ChatColor.RED + "" + ChatColor.BOLD + "YOU SHOULD NOT BE SEEING THIS!", BarColor.RED, BarStyle.SEGMENTED_6);
 		bossbar.addPlayer(player);
 		bossbar.setVisible(false);
-		removetimer = 10000;
+		removetimer = 5000;
 
 		party = null;
 		invite = null;

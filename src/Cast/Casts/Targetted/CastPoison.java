@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Effects.Poison;
@@ -18,7 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastPoison extends TargettedCast implements CommandInterface, Listener
+public class CastPoison extends Targetted implements CommandInterface, Listener
 {
 	private Poison poison;
 

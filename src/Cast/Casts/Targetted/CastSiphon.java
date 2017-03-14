@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Effects.Siphon;
@@ -15,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastSiphon extends TargettedCast implements CommandInterface, Listener
+public class CastSiphon extends Targetted implements CommandInterface, Listener
 {
 	private Siphon siphon;
 

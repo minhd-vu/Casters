@@ -1,10 +1,10 @@
-package Cast.Casts.Actives;
+package Cast.Casts.Actives.Projectiles;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,16 +13,16 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ShulkerBullet;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastSeeker extends ActiveCast implements CommandInterface, Listener
+public class CastSeeker extends Projectile implements CommandInterface
 {
 	private double damage;
 	private int range;
-	private int deletiontimer;
+	private int timer;
 	private double velocity;
+	private boolean gravity;
 
 	public CastSeeker(String name, String description)
 	{
@@ -39,8 +39,9 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 
 		range = 10;
 		damage = 10;
-		deletiontimer = 600;
+		timer = 100;
 		velocity = 2.0;
+		gravity = true;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -78,6 +79,17 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
 						seeker.setShooter(caster.getPlayer());
 						seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+						seeker.setGravity(gravity);
+
+						projectiles.add(seeker.getUniqueId());
+
+						cast(caster.getPlayer());
+
+						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_SHULKER_SHOOT, 8.0F, 1.0F);
+
+						cooldown.start(caster.getPlayer().getName());
+
+						caster.setCasting(name, false);
 
 						new BukkitRunnable()
 						{
@@ -86,16 +98,12 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 							{
 								if (!seeker.isDead())
 								{
+									projectiles.remove(seeker.getUniqueId());
 									seeker.remove();
 								}
 							}
-						}.runTaskLater(Main.getInstance(), deletiontimer);
 
-						cast(caster.getPlayer());
-
-						cooldown.start(caster.getPlayer().getName());
-
-						caster.setCasting(name, false);
+						}.runTaskLater(Main.getInstance(), timer);
 					}
 
 				}.runTaskLater(Main.getInstance(), warmup.getDuration());
@@ -112,24 +120,12 @@ public class CastSeeker extends ActiveCast implements CommandInterface, Listener
 		{
 			ShulkerBullet seeker = (ShulkerBullet) event.getDamager();
 
-			if (seeker.getShooter() instanceof Player && event.getEntity() instanceof LivingEntity)
+			if (projectiles.contains(seeker.getUniqueId()) && seeker.getShooter() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
 				Caster caster = Main.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
 				LivingEntity target = (LivingEntity) event.getEntity();
 
-				if (caster.hasParty())
-				{
-					if (event.getEntity() instanceof Player)
-					{
-						Caster tcaster = Main.getCasters().get(event.getEntity().getUniqueId());
-
-						if (caster.sameParty(tcaster))
-						{
-							event.setCancelled(true);
-							return;
-						}
-					}
-				}
+				event.setCancelled(true); // TODO: Check If Party Attacks Work.
 
 				target.damage(damage);
 				target.getWorld().playSound(target.getLocation(), Sound.ENTITY_SHULKER_BULLET_HIT, 8.0F, 1.0F);

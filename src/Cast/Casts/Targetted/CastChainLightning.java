@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -17,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastChainLightning extends TargettedCast implements CommandInterface, Listener
+public class CastChainLightning extends Targetted implements CommandInterface, Listener
 {
 	private int period;
 	private double damage;

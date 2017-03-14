@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Effects.Stun;
@@ -14,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastPressurePoint extends TargettedCast implements CommandInterface
+public class CastPressurePoint extends Targetted implements CommandInterface
 {
 	private Stun stun;
 

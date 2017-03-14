@@ -45,12 +45,13 @@ public class Attack implements Listener
 
 					// TODO: Recode This So That It Factors In Enchantments.
 
-					if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType())
-							&& !caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
+					if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) &&
+							!caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
 					{
 						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
 								+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
 					}
+
 					else
 					{
 						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale() + 1); // TODO: Remove When Strength Is Implemented.
@@ -99,7 +100,6 @@ public class Attack implements Listener
 					if (caster.sameParty(target))
 					{
 						event.setCancelled(true);
-						return;
 					}
 				}
 

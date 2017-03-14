@@ -1,6 +1,5 @@
 package Cast.Casts.Actives;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -21,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastMount extends ActiveCast implements CommandInterface, Listener
+public class CastMount extends Active implements CommandInterface, Listener
 {
 	private static List<Horse> horses;
 

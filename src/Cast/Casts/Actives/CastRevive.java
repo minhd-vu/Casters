@@ -1,6 +1,5 @@
 package Cast.Casts.Actives;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -19,7 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastRevive extends ActiveCast implements CommandInterface, Listener
+public class CastRevive extends Active implements CommandInterface, Listener
 {
 	private List<Death> deaths;
 	private int range;

@@ -1,7 +1,6 @@
 package Cast.Casts;
 
-import Cast.Casts.Types.Cast;
-import Cast.Casts.Types.Passive;
+import Cast.Casts.Passives.Passive;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;

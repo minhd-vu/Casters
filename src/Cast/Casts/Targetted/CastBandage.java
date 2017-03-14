@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -14,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastBandage extends TargettedCast implements CommandInterface, Listener
+public class CastBandage extends Targetted implements CommandInterface, Listener
 {
 	private double heal;
 	private int range;

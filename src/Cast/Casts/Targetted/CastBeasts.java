@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -18,7 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-public class CastBeasts extends TargettedCast implements CommandInterface, Listener
+public class CastBeasts extends Targetted implements CommandInterface, Listener
 {
 	private double duration;
 	private int amount;

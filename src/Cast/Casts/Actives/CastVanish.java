@@ -1,6 +1,5 @@
 package Cast.Casts.Actives;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -17,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-public class CastVanish extends ActiveCast implements CommandInterface, Listener
+public class CastVanish extends Active implements CommandInterface, Listener
 {
 	private int duration;
 	private int range;

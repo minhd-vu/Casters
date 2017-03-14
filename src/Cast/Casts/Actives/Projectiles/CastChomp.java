@@ -1,6 +1,5 @@
-package Cast.Casts.Actives;
+package Cast.Casts.Actives.Projectiles;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -15,7 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-public class CastChomp extends ActiveCast implements CommandInterface, Listener
+public class CastChomp extends Projectile implements CommandInterface, Listener
 {
 	private double range;
 	private double damage;
@@ -56,6 +55,7 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);
@@ -69,18 +69,21 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						BlockIterator iter = new BlockIterator((LivingEntity) player, (int) range);
+						BlockIterator blockiterator = new BlockIterator((LivingEntity) player, (int) range);
 
 						new BukkitRunnable()
 						{
 							@Override
 							public void run()
 							{
-								if (iter.hasNext())
+								if (blockiterator.hasNext())
 								{
-									Block block = iter.next();
+									Block block = blockiterator.next();
 
-									((EvokerFangs) player.getWorld().spawnEntity(block.getLocation().clone().add(0, -1, 0), EntityType.EVOKER_FANGS)).setOwner(player);
+									EvokerFangs chomp = ((EvokerFangs) player.getWorld().spawnEntity(block.getLocation().clone().add(0, -1, 0), EntityType.EVOKER_FANGS));
+									chomp.setOwner(player);
+
+									projectiles.add(chomp.getUniqueId());
 
 									if (block.getType().isSolid())
 									{
@@ -111,30 +114,28 @@ public class CastChomp extends ActiveCast implements CommandInterface, Listener
 		{
 			EvokerFangs chomp = (EvokerFangs) event.getDamager();
 
-			if (chomp.getOwner() instanceof Player)
+			if (projectiles.contains(chomp.getUniqueId()) && chomp.getOwner() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
 				Caster caster = Main.getCasters().get(chomp.getOwner().getUniqueId());
+				LivingEntity target = (LivingEntity) event.getEntity();
 
-				event.setDamage(damage);
+				event.setCancelled(true);
 
 				if (caster.hasParty())
 				{
-					if (event.getEntity() instanceof Player)
+					if (target instanceof Player)
 					{
-						Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
+						Caster tcaster = Main.getCasters().get(event.getEntity().getUniqueId());
 
-						if (caster.sameParty(target))
+						if (caster.sameParty(tcaster))
 						{
-							event.setCancelled(true);
 							return;
 						}
 					}
 				}
 
-				if (event.getEntity() instanceof Damageable)
-				{
-					caster.setBossBarEntity((Damageable) event.getEntity());
-				}
+				target.damage(damage);
+				caster.setBossBarEntity((Damageable) event.getEntity());
 			}
 		}
 	}

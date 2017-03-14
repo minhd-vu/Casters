@@ -1,6 +1,5 @@
 package Cast.Casts.Actives;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -15,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import static org.bukkit.Effect.IRON_DOOR_CLOSE;
 
-public class CastDefensiveStance extends ActiveCast implements CommandInterface
+public class CastDefensiveStance extends Active implements CommandInterface
 {
 	private int duration;
 	private int amplitude;

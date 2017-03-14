@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -13,7 +12,7 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastBomb extends TargettedCast implements CommandInterface, Listener
+public class CastBomb extends Targetted implements CommandInterface, Listener
 {
 	private int range;
 	private int fuse;

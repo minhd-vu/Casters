@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Effects.Stun;
@@ -17,7 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class CastCharge extends TargettedCast implements CommandInterface, Listener
+public class CastCharge extends Targetted implements CommandInterface, Listener
 {
 	private Stun stun;
 

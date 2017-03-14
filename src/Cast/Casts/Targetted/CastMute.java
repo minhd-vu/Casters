@@ -1,6 +1,5 @@
 package Cast.Casts.Targetted;
 
-import Cast.Casts.Types.TargettedCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -14,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CastMute extends TargettedCast implements CommandInterface
+public class CastMute extends Targetted implements CommandInterface
 {
 	private double damage;
 	private int range;

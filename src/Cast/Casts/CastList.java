@@ -1,9 +1,8 @@
 package Cast.Casts;
 
-import Cast.Casts.Types.ActiveCast;
-import Cast.Casts.Types.Cast;
-import Cast.Casts.Types.Passive;
-import Cast.Casts.Types.TargettedCast;
+import Cast.Casts.Actives.Active;
+import Cast.Casts.Passives.Passive;
+import Cast.Casts.Targetted.Targetted;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Chat.Pages;
@@ -72,12 +71,12 @@ public class CastList implements CommandInterface
 				{
 					String casttype = "";
 
-					if (cast instanceof ActiveCast)
+					if (cast instanceof Active)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
 								+ "]";
 					}
-					else if (cast instanceof TargettedCast)
+					else if (cast instanceof Targetted)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted" + ChatColor.DARK_GRAY
 								+ "]";
@@ -160,12 +159,12 @@ public class CastList implements CommandInterface
 					{
 						String casttype = "";
 
-						if (cast instanceof ActiveCast)
+						if (cast instanceof Active)
 						{
 							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
 									+ "]";
 						}
-						else if (cast instanceof TargettedCast)
+						else if (cast instanceof Targetted)
 						{
 							casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted"
 									+ ChatColor.DARK_GRAY + "]";

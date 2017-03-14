@@ -1,6 +1,5 @@
-package Cast.Casts.Actives;
+package Cast.Casts.Actives.Projectiles;
 
-import Cast.Casts.Types.ActiveCast;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -11,14 +10,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CastFireball extends ActiveCast implements CommandInterface, Listener
+public class CastFireball extends Projectile implements CommandInterface
 {
 	private int timer;
 	private double damage;
@@ -27,8 +24,6 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 	private int fireballfireticks;
 	private int targetfireticks;
 	private int areaofeffect;
-	private int explosion;
-	private boolean incendiary;
 	private boolean singletarget;
 
 	public CastFireball(String name, String description)
@@ -51,8 +46,6 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 		fireballfireticks = 100;
 		targetfireticks = 50;
 		areaofeffect = 1;
-		explosion = 0;
-		incendiary = false;
 		singletarget = true;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
@@ -75,6 +68,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);
@@ -88,11 +82,13 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 						caster.setCasting(name, true);
 						caster.setMana(manacost);
 
-						Snowball fireball = player.launchProjectile(Snowball.class);
-						fireball.setVelocity(fireball.getVelocity().normalize().multiply(velocity));
+						Snowball fireball = (Snowball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
+						fireball.setShooter(player);
+						fireball.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 						fireball.setFireTicks(fireballfireticks);
 						fireball.setGravity(gravity);
-						fireball.setShooter(player);
+
+						projectiles.add(fireball.getUniqueId());
 
 						cast(player);
 
@@ -109,6 +105,7 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 							{
 								if (!fireball.isDead())
 								{
+									projectiles.remove(fireball.getUniqueId());
 									fireball.remove();
 								}
 							}
@@ -131,26 +128,24 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 		{
 			Snowball fireball = (Snowball) event.getDamager();
 
-			if (fireball.getShooter() instanceof Player)
+			if (projectiles.contains(fireball.getUniqueId()))
 			{
-				List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-				for (Entity target : entities)
+				if (fireball.getShooter() instanceof Player)
 				{
-					if (!target.equals(fireball.getShooter()))
-					{
-						if (target instanceof LivingEntity)
-						{
-							event.setCancelled(true);
+					event.setCancelled(true);
 
+					List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+					for (Entity target : entities)
+					{
+						if (target instanceof LivingEntity && !target.equals(fireball.getShooter()))
+						{
 							((LivingEntity) target).damage(damage);
 							target.setFireTicks(targetfireticks);
 
 							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
 									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-
-							fireball.remove();
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
 
 							if (singletarget)
 							{
@@ -158,13 +153,6 @@ public class CastFireball extends ActiveCast implements CommandInterface, Listen
 							}
 						}
 					}
-				}
-
-				if (explosion > 0)
-				{
-					fireball.getWorld().createExplosion(fireball.getLocation(), explosion, incendiary);
-
-					return;
 				}
 			}
 		}

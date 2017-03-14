@@ -1,6 +1,6 @@
 package Cast.Casts.Passives.Firearms;
 
-import Cast.Casts.Types.Passive;
+import Cast.Casts.Passives.Passive;
 import Cast.Essentials.Caster;
 import Cast.Essentials.Schedulers.Cooldown;
 import Cast.Essentials.Schedulers.WarmUp;
