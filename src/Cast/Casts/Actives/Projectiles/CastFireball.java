@@ -128,17 +128,19 @@ public class CastFireball extends Projectile implements CommandInterface
 		{
 			Snowball fireball = (Snowball) event.getDamager();
 
-			if (projectiles.contains(fireball.getUniqueId()))
+			if (projectiles.contains(fireball.getUniqueId()) && fireball.getShooter() instanceof Player)
 			{
-				if (fireball.getShooter() instanceof Player)
+				Caster caster = Main.getCasters().get(((Player) fireball.getShooter()).getUniqueId());
+
+				event.setCancelled(true);
+
+				List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : entities)
 				{
-					event.setCancelled(true);
-
-					List<Entity> entities = fireball.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-					for (Entity target : entities)
+					if (target instanceof LivingEntity && !target.equals(fireball.getShooter()))
 					{
-						if (target instanceof LivingEntity && !target.equals(fireball.getShooter()))
+						if (!caster.sameParty(target))
 						{
 							((LivingEntity) target).damage(damage);
 							target.setFireTicks(targetfireticks);
@@ -146,11 +148,11 @@ public class CastFireball extends Projectile implements CommandInterface
 							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
 									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
+						}
 
-							if (singletarget)
-							{
-								return;
-							}
+						if (singletarget)
+						{
+							return;
 						}
 					}
 				}

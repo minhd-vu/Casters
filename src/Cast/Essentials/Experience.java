@@ -123,6 +123,7 @@ public class Experience implements Listener
 						}
 					}
 				}
+
 				else if (event.getEntity().getKiller() instanceof Creature)
 				{
 					Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());

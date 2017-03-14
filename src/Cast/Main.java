@@ -36,7 +36,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -645,9 +644,8 @@ public class Main extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter,
-				wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
-				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
+		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
+				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
 				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
 				passivemusket);
 

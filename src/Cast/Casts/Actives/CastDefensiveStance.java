@@ -66,39 +66,62 @@ public class CastDefensiveStance extends Active implements CommandInterface
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setEffect("Defending", duration);
-						caster.setMana(manacost);
-
-						if (caster.hasParty())
+						if (!caster.isInterrupted())
 						{
-							for (Caster member : caster.getParty().getMembers())
+							caster.setCasting(name, true);
+							caster.setEffect("Defending", duration);
+							caster.setMana(manacost);
+
+							if (caster.hasParty())
 							{
-								member.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
-								member.setEffect("Defending", duration);
-							}
-						}
-
-						else
-						{
-							player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
-						}
-
-						player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0, 0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
-						player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
-
-						cast(player);
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								decast(player);
-								caster.setCasting(name, false);
+								for (Caster member : caster.getParty().getMembers())
+								{
+									member.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
+									member.setEffect("Defending", duration);
+								}
 							}
 
-						}.runTaskLater(Main.getInstance(), duration);
+							else
+							{
+								player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0));
+							}
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									for (Caster member : caster.getParty().getMembers())
+									{
+										if (member.isInterrupted())
+										{
+											member.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE); // TODO: Check If This Works.
+											member.setEffect("Defending", 0.0);
+										}
+									}
+								}
+
+							}.runTaskTimer(Main.getInstance(), 1, 1);
+
+							player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0, 0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
+							player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
+
+							cast(player);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (caster.isCasting(name))
+									{
+										decast(player);
+										caster.setCasting(name, false);
+									}
+								}
+
+							}.runTaskLater(Main.getInstance(), duration);
+						}
 
 						cooldown.start(player.getName());
 					}

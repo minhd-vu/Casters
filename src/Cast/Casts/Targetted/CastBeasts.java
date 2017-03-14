@@ -138,12 +138,10 @@ public class CastBeasts extends Targetted implements CommandInterface, Listener
 
 				if (event.getEntity() instanceof LivingEntity)
 				{
-					if (event.getEntity() instanceof Player)
+					if (caster.sameParty(event.getEntity()))
 					{
-						if (caster.sameParty(Main.getCasters().get(event.getEntity().getUniqueId())))
-						{
-							event.setCancelled(true);
-						}
+						event.setCancelled(true);
+						return;
 					}
 
 					event.setDamage(wolfdamage);

@@ -172,6 +172,12 @@ public abstract class Firearm extends Passive
 				{
 					if (bullet.getLocation().getY() > event.getEntity().getLocation().getY() + 1.35)
 					{
+						if (caster.sameParty(event.getEntity()))
+						{
+							event.setCancelled(true);
+							return;
+						}
+
 						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.0F);
 						event.setDamage(damage * headshot);
 					}

@@ -10,13 +10,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CastFireBomb extends Projectile implements CommandInterface, Listener
+public class CastFireBomb extends Projectile implements CommandInterface
 {
 	private int timer;
 	private double damage;
@@ -131,32 +130,31 @@ public class CastFireBomb extends Projectile implements CommandInterface, Listen
 		{
 			LargeFireball firebomb = (LargeFireball) event.getDamager();
 
-			if (projectiles.contains(firebomb.getUniqueId()))
+			if (projectiles.contains(firebomb.getUniqueId()) && firebomb.getShooter() instanceof Player)
 			{
-				if (firebomb.getShooter() instanceof Player)
+				Caster caster = Main.getCasters().get(((Player) firebomb.getShooter()).getUniqueId());
+
+				event.setCancelled(true);
+
+				List<Entity> entities = firebomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				for (Entity target : entities)
 				{
-					List<Entity> entities = firebomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-					for (Entity target : entities)
+					if (target instanceof LivingEntity && !target.equals(firebomb.getShooter()))
 					{
-						if (!target.equals(firebomb.getShooter()))
+						if (!caster.sameParty(target))
 						{
-							if (target instanceof LivingEntity)
-							{
-								event.setCancelled(true);
+							((LivingEntity) target).damage(damage);
+							target.setFireTicks(targetfireticks);
 
-								((LivingEntity) target).damage(damage);
-								target.setFireTicks(targetfireticks);
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
+									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
+						}
 
-								target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
-										Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-
-								if (singletarget)
-								{
-									return;
-								}
-							}
+						if (singletarget)
+						{
+							return;
 						}
 					}
 				}

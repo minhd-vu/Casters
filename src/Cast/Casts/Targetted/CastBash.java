@@ -58,7 +58,7 @@ public class CastBash extends Targetted implements CommandInterface
 			{
 				LivingEntity target = getTarget(player, range, false, false);
 
-				if (target != null && !target.equals(player))
+				if (target != null)
 				{
 					warmup.start(caster, target, name);
 
@@ -68,25 +68,27 @@ public class CastBash extends Targetted implements CommandInterface
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
+							if (!caster.isInterrupted())
+							{
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-							target.damage(damage);
+								target.damage(damage);
 
-							caster.setBossBarEntity(target);
+								caster.interruptCasts(target);
+								caster.setBossBarEntity(target);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
-									1.0F);
+								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0,
+										0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_IRON_TRAPDOOR_OPEN, 1.0F,
+										1.0F);
 
-							cast(player, target);
+								cast(player, target);
 
-							caster.interruptCasts(target);
+								caster.setCasting(name, false);
+							}
 
 							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());

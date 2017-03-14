@@ -147,6 +147,8 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 
 			if (projectiles.contains(darkbomb.getUniqueId()) && darkbomb.getShooter() instanceof Player)
 			{
+				Caster caster = Main.getCasters().get(((Player) darkbomb.getShooter()).getUniqueId());
+
 				event.setCancelled(true);
 
 				List<Entity> entities = darkbomb.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
@@ -155,9 +157,12 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 				{
 					if (target instanceof LivingEntity && !target.equals(darkbomb.getShooter()))
 					{
-						((LivingEntity) target).damage(damage);
-						target.setFireTicks(targetfireticks);
-						((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+						if (!caster.sameParty(target))
+						{
+							((LivingEntity) target).damage(damage);
+							target.setFireTicks(targetfireticks);
+							((LivingEntity) target).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, duration, amplifier));
+						}
 
 						if (singletarget)
 						{

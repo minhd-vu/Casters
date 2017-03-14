@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CastersChoose implements CommandInterface
 {
-	private final long timer = TimeUnit.MILLISECONDS.convert(1L, TimeUnit.DAYS);
+	private final long timer = 0 /*TimeUnit.MILLISECONDS.convert(1L, TimeUnit.DAYS)*/;
 
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
 	private HashMap<UUID, Long> cooldowns = new HashMap<UUID, Long>();

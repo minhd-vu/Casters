@@ -1,6 +1,5 @@
 package Cast.Casts.Actives.Projectiles;
 
-import Cast.Casts.Actives.Active;
 import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
@@ -25,8 +24,6 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 	private int firechargefireticks;
 	private int targetfireticks;
 	private int areaofeffect;
-	private int explosion;
-	private boolean incendiary;
 	private boolean singletarget;
 	private double velocity;
 
@@ -49,8 +46,6 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 		firechargefireticks = 100;
 		targetfireticks = 50;
 		areaofeffect = 3;
-		explosion = 0;
-		incendiary = false;
 		singletarget = false;
 		velocity = 1.0;
 
@@ -133,40 +128,32 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 		{
 			SmallFireball firecharge = (SmallFireball) event.getDamager();
 
-			if (projectiles.contains(firecharge.getUniqueId()))
+			if (projectiles.contains(firecharge.getUniqueId()) && firecharge.getShooter() instanceof Player)
 			{
-				if (firecharge.getShooter() instanceof Player)
+				Caster caster = Main.getCasters().get(((Player) firecharge.getShooter()).getUniqueId());
+
+				List<Entity> entities = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
+
+				event.setCancelled(true);
+
+				for (Entity target : entities)
 				{
-					List<Entity> entities = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
-
-					for (Entity target : entities)
+					if (target instanceof LivingEntity && !target.equals(firecharge.getShooter()))
 					{
-						if (!target.equals(firecharge.getShooter()))
+						if (!caster.sameParty(target))
 						{
-							if (target instanceof LivingEntity)
-							{
-								event.setCancelled(true);
+							((LivingEntity) target).damage(damage);
+							target.setFireTicks(targetfireticks);
 
-								((LivingEntity) target).damage(damage);
-								target.setFireTicks(targetfireticks);
-
-								target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
-										Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
-								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 7.0F, 1.0F);
-
-								if (singletarget)
-								{
-									return;
-								}
-							}
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
+									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
 						}
-					}
 
-					if (explosion > 0)
-					{
-						firecharge.getWorld().createExplosion(firecharge.getLocation(), explosion, incendiary);
-
-						return;
+						if (singletarget)
+						{
+							return;
+						}
 					}
 				}
 			}

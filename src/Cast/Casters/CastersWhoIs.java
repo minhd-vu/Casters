@@ -36,11 +36,11 @@ public class CastersWhoIs implements CommandInterface
 			{
 				Caster caster = Main.getCasters().get(Bukkit.getPlayer(args[1]).getUniqueId());
 				player.sendMessage("\n" + fill + header + fill + "\n" + ChatColor.DARK_AQUA + args[1] + "\n"
-						+ ChatColor.DARK_AQUA + "Class: " + ChatColor.AQUA + caster.getType() + " - "
+						+ ChatColor.DARK_AQUA + "Class: " + ChatColor.AQUA + caster.getType().getName() + " - "
 						+ caster.getTypeLevel() + "/" + caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Race: "
-						+ ChatColor.AQUA + caster.getRace() + " - " + caster.getRaceLevel() + "/"
+						+ ChatColor.AQUA + caster.getRace().getName() + " - " + caster.getRaceLevel() + "/"
 						+ caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Job: " + ChatColor.AQUA
-						+ caster.getJob() + " - " + caster.getJobLevel() + "/" + caster.getJobMaxLevel() + "\n"
+						+ caster.getJob().getName() + " - " + caster.getJobLevel() + "/" + caster.getJobMaxLevel() + "\n"
 						+ ChatColor.DARK_GRAY + bar);
 			}
 		}

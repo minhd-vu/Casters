@@ -19,10 +19,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CastMount extends Active implements CommandInterface, Listener
 {
-	private static List<Horse> horses;
+	private static List<UUID> horses;
 
 	public CastMount(String name, String description)
 	{
@@ -39,7 +40,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 
 		pages.setPage(info);
 
-		horses = new ArrayList<Horse>();
+		horses = new ArrayList<UUID>();
 	}
 
 	@Override
@@ -56,12 +57,12 @@ public class CastMount extends Active implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				if (player.isInsideVehicle())
 				{
-					player.sendMessage(header + ChatColor.GRAY + " You Cannot Be Riding Anything When Using "
-							+ ChatColor.WHITE + name + ChatColor.GRAY + "!");
+					player.sendMessage(header + ChatColor.GRAY + " You Cannot Be Riding Anything When Using " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 
 					return false;
 				}
@@ -80,7 +81,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 						horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
 						horse.setOwner(player);
 						horse.addPassenger(player);
-						horses.add(horse);
+						horses.add(horse.getUniqueId());
 
 						cast(player);
 
@@ -101,9 +102,9 @@ public class CastMount extends Active implements CommandInterface, Listener
 	{
 		if (event.getVehicle() instanceof Horse)
 		{
-			if (horses.contains(event.getVehicle()))
+			if (horses.contains(event.getVehicle().getUniqueId()))
 			{
-				horses.remove(event.getVehicle());
+				horses.remove(event.getVehicle().getUniqueId());
 				event.getVehicle().remove();
 			}
 		}
@@ -118,8 +119,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 
 			if (!caster.getCasts().containsKey(name))
 			{
-				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " You Must Be Have The Cast " + ChatColor.WHITE
-						+ name + ChatColor.GRAY + " To Ride A Horse!");
+				caster.getPlayer().sendMessage(header + ChatColor.GRAY + " You Must Be Have The Cast " + ChatColor.WHITE + name + ChatColor.GRAY + " To Ride A Horse!");
 
 				event.setCancelled(true);
 			}

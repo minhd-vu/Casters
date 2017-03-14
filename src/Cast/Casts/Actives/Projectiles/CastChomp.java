@@ -121,21 +121,11 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 
 				event.setCancelled(true);
 
-				if (caster.hasParty())
+				if (!caster.sameParty(target))
 				{
-					if (target instanceof Player)
-					{
-						Caster tcaster = Main.getCasters().get(event.getEntity().getUniqueId());
-
-						if (caster.sameParty(tcaster))
-						{
-							return;
-						}
-					}
+					target.damage(damage);
+					caster.setBossBarEntity((Damageable) event.getEntity());
 				}
-
-				target.damage(damage);
-				caster.setBossBarEntity((Damageable) event.getEntity());
 			}
 		}
 	}

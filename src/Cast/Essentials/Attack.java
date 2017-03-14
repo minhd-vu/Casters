@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -33,9 +34,7 @@ public class Attack implements Listener
 				{
 					if (entity instanceof Player)
 					{
-						Caster target = Main.getCasters().get(entity.getUniqueId());
-
-						if (caster.sameParty(target))
+						if (caster.sameParty(entity))
 						{
 							event.setCancelled(true);
 
@@ -95,9 +94,7 @@ public class Attack implements Listener
 
 				if (event.getEntity() instanceof Player)
 				{
-					Caster target = Main.getCasters().get(event.getEntity().getUniqueId());
-
-					if (caster.sameParty(target))
+					if (caster.sameParty(event.getEntity()))
 					{
 						event.setCancelled(true);
 					}

@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CastLightningStorm extends Active implements CommandInterface, Listener
@@ -62,46 +63,51 @@ public class CastLightningStorm extends Active implements CommandInterface, List
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				List<Entity> targets = player.getNearbyEntities(range, range, range);
+				List<LivingEntity> livingtargets = new ArrayList<LivingEntity>();
+
+				for (Entity target : targets)
+				{
+					if (target instanceof LivingEntity)
+					{
+						livingtargets.add((LivingEntity) target);
+					}
+				}
 
 				warmup.start(caster, name);
 
-				if (targets.size() > 0)
+				if (livingtargets.size() > 0)
 				{
-					for (Entity target : targets)
+					for (LivingEntity target : livingtargets)
 					{
-						if (target instanceof LivingEntity && !target.equals(player))
+						new BukkitRunnable()
 						{
-							new BukkitRunnable()
+							@Override
+							public void run()
 							{
-								@Override
-								public void run()
-								{
-									caster.setCasting(name, true);
-									caster.setMana(manacost);
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-									target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-									target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER,
-											1.0F, 1.0F);
-									((LivingEntity) target).damage(damage);
-									caster.setBossBarEntity((LivingEntity) target);
+								target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F);
 
-									if (explode)
-									{
-										target.getWorld().createExplosion(target.getLocation(), explosion, incendiary);
-									}
+								((LivingEntity) target).damage(damage);
+								caster.setBossBarEntity((LivingEntity) target);
 
-									cooldown.start(player.getName());
+								cast(player);
 
-									caster.setCasting(name, false);
-								}
+								cooldown.start(player.getName());
 
-							}.runTaskLater(Main.getInstance(), warmup.getDuration());
-						}
+								caster.setCasting(name, false);
+							}
+
+						}.runTaskLater(Main.getInstance(), warmup.getDuration());
 					}
 				}
+
 				else
 				{
 					new BukkitRunnable()
@@ -109,22 +115,11 @@ public class CastLightningStorm extends Active implements CommandInterface, List
 						@Override
 						public void run()
 						{
-							player.sendMessage(
-									header + ChatColor.WHITE + name + ChatColor.GRAY + ": No Targets In Range!");
+							player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + ": No Targets In Range!");
 						}
 
 					}.runTaskLater(Main.getInstance(), warmup.getDuration());
 				}
-
-				new BukkitRunnable()
-				{
-					@Override
-					public void run()
-					{
-						cast(player);
-					}
-
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
 			}
 		}
 

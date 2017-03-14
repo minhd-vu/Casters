@@ -25,8 +25,7 @@ public class Effect
 
 	public double getTime()
 	{
-		return Double.parseDouble(
-				new DecimalFormat("##.#").format(time / 1000.0 + duration - System.currentTimeMillis() / 1000.0));
+		return Double.parseDouble(new DecimalFormat("##.#").format(time / 1000.0 + duration - System.currentTimeMillis() / 1000.0));
 	}
 
 	public void setDuration(double duration)

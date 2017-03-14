@@ -59,6 +59,7 @@ public class CastReflect extends Active implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				warmup.start(caster, name);
@@ -68,28 +69,34 @@ public class CastReflect extends Active implements CommandInterface, Listener
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setEffect("Reflecting", duration);
-						caster.setMana(manacost);
-
-						reflects.put(player.getName(), System.currentTimeMillis());
-
-						player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 3);
-						player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 0.8F,
-								1.0F);
-
-						cast(player);
-
-						new BukkitRunnable()
+						if (!caster.isInterrupted())
 						{
-							@Override
-							public void run()
-							{
-								decast(player);
-								caster.setCasting(name, false);
-							}
+							caster.setCasting(name, true);
+							caster.setEffect("Reflecting", duration);
+							caster.setMana(manacost);
 
-						}.runTaskLater(Main.getInstance(), duration);
+							reflects.put(player.getName(), System.currentTimeMillis());
+
+							player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 3);
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 0.8F,
+									1.0F);
+
+							cast(player);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (caster.isCasting(name)) // TODO: Test To See If Cancelling Reflect Works.
+									{
+										decast(player);
+										caster.setCasting(name, false);
+									}
+								}
+
+							}.runTaskLater(Main.getInstance(), duration);
+						}
 
 						cooldown.start(player.getName());
 					}
@@ -113,16 +120,10 @@ public class CastReflect extends Active implements CommandInterface, Listener
 			{
 				if ((System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getName()) / 1000.0) < duration / 20.0)
 				{
-					if (target instanceof Player)
+					if (caster.sameParty(target))
 					{
-						Caster tcaster = Main.getCasters().get(event.getDamager().getUniqueId());
-
-						if (caster.sameParty(tcaster))
-						{
-							event.setCancelled(true);
-
-							return;
-						}
+						event.setCancelled(true);
+						return;
 					}
 
 					((LivingEntity) target).damage(event.getDamage() * (percentage / 100));

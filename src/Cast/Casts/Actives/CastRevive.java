@@ -70,9 +70,8 @@ public class CastRevive extends Active implements CommandInterface, Listener
 				if (player.getServer().getPlayer(args[1]) != null)
 				{
 					Player target = player.getServer().getPlayer(args[1]);
-					Caster ctarget = Main.getCasters().get(target.getUniqueId());
 
-					if (!caster.sameParty(ctarget))
+					if (!caster.sameParty(target))
 					{
 						caster.getPlayer().sendMessage(header + ChatColor.WHITE + " You " +
 								ChatColor.GRAY + "Must Be In The Same Party To" + ChatColor.WHITE + " Revive " + ChatColor.GRAY + "Someone!");

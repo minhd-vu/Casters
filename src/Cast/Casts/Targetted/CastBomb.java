@@ -84,6 +84,8 @@ public class CastBomb extends Targetted implements CommandInterface, Listener
 								tnt.setVelocity(player.getLocation().getDirection().normalize().multiply(velocity));
 							}
 
+							// TODO: Make Bomb Not Hit Party Members.
+
 							else
 							{
 								tnt = player.getWorld().spawn(target.getLocation(), TNTPrimed.class);

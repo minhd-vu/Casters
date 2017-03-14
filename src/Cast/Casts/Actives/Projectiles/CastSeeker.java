@@ -125,10 +125,13 @@ public class CastSeeker extends Projectile implements CommandInterface
 				Caster caster = Main.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
 				LivingEntity target = (LivingEntity) event.getEntity();
 
-				event.setCancelled(true); // TODO: Check If Party Attacks Work.
+				event.setCancelled(true);
 
-				target.damage(damage);
-				target.getWorld().playSound(target.getLocation(), Sound.ENTITY_SHULKER_BULLET_HIT, 8.0F, 1.0F);
+				if (!caster.sameParty(target))
+				{
+					target.damage(damage);
+					target.getWorld().playSound(target.getLocation(), Sound.ENTITY_SHULKER_BULLET_HIT, 8.0F, 1.0F);
+				}
 			}
 		}
 	}

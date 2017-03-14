@@ -4,9 +4,7 @@ import Cast.CommandInterface;
 import Cast.Essentials.Caster;
 import Cast.Main;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
@@ -14,15 +12,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Set;
-
 public class CastBolt extends Targetted implements CommandInterface, Listener
 {
 	private double damage;
 	private int range;
-	private int explosion;
-	private boolean explode;
-	private boolean incendiary;
 
 	public CastBolt(String name, String description)
 	{
@@ -39,9 +32,6 @@ public class CastBolt extends Targetted implements CommandInterface, Listener
 
 		damage = 10;
 		range = 8;
-		explosion = 5;
-		explode = false;
-		incendiary = false;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -61,11 +51,12 @@ public class CastBolt extends Targetted implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
 
-				if (target != null && !target.equals(player))
+				if (target != null)
 				{
 					warmup.start(caster, target, name);
 
@@ -74,52 +65,21 @@ public class CastBolt extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							// TODO: Find A Way To Make This More Efficient.
-
 							if (!caster.isInterrupted())
 							{
 								caster.setCasting(name, true);
 								caster.setMana(manacost);
 
 								target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F,
-										1.0F);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F);
+
 								target.damage(damage);
-
 								caster.setBossBarEntity(target);
-
-								if (explode)
-								{
-									target.getWorld().createExplosion(target.getLocation(), explosion, incendiary);
-								}
 
 								cast(player, target);
 
-								cooldown.start(player.getName());
-
 								caster.setCasting(name, false);
 							}
-						}
-
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
-				}
-
-				else if (explode)
-				{
-					warmup.start(caster, name);
-
-					Block block = player.getTargetBlock((Set<Material>) null, range);
-
-					new BukkitRunnable()
-					{
-						@Override
-						public void run()
-						{
-							block.getWorld().strikeLightningEffect(block.getLocation());
-							block.getWorld().playSound(block.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F);
-							block.getWorld().createExplosion(block.getLocation(), explosion, incendiary);
-
-							cast(player);
 
 							cooldown.start(player.getName());
 						}

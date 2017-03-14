@@ -45,6 +45,8 @@ public class CastersCommands implements CommandInterface
 				+ " - Shows All Availiable Weapons.");
 		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " recipes" + ChatColor.GRAY
 				+ " - Shows All Custom Craft Recipes.");
+		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " whois" + ChatColor.GRAY
+				+ " - Shows A Player's Information.");
 
 		pages.setHeader(fill + header + fill);
 		pages.setError("Casters");

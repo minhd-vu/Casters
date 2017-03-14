@@ -228,8 +228,7 @@ public class Caster
 				{
 					if (effects.get(effect).hasTime())
 					{
-						entrybuilder
-								.next("    " + ChatColor.LIGHT_PURPLE + effect + " " + effects.get(effect).getTime());
+						entrybuilder.next("    " + ChatColor.LIGHT_PURPLE + effect + " " + effects.get(effect).getTime());
 					}
 				}
 
@@ -299,17 +298,17 @@ public class Caster
 		config.set("Title.Chat", "");
 		config.set("Title.Tab", "");
 		config.set("Level.Type.Current", 1);
-		config.set("Level.Type.Max", 200);
+		config.set("Level.Type.Max", 20);
 		config.set("Level.Race.Current", 1);
-		config.set("Level.Race.Max", 200);
+		config.set("Level.Race.Max", 20);
 		config.set("Level.Job.Current", 1);
 		config.set("Level.Job.Max", 20);
-		config.set("Health.Current", 20.0D);
-		config.set("Health.Max", 20.0D);
-		config.set("Mana.Current", 20.0D);
-		config.set("Mana.Max", 20.0D);
-		config.set("Mana.Regen", 1.0D);
-		config.set("Mana.Timer", 20.0D);
+		config.set("Health.Current", 20.0);
+		config.set("Health.Max", 20.0);
+		config.set("Mana.Current", 20.0);
+		config.set("Mana.Max", 20.0);
+		config.set("Mana.Regen", 1.0);
+		config.set("Mana.Timer", 20.0);
 		config.set("Exp.Type.Current", 0);
 		config.set("Exp.Type.Max", Integer.MAX_VALUE);
 		config.set("Exp.Race.Current", 0);
@@ -474,7 +473,8 @@ public class Caster
 
 		else if (casts.get(name) > typelevel)
 		{
-			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Must Be Level " +
+					ChatColor.WHITE + casts.get(name)
 					+ ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
@@ -509,7 +509,8 @@ public class Caster
 	{
 		if (effects.get("Silenced").hasTime())
 		{
-			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " +
+					ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Silenced!");
 			return true;
 		}
@@ -521,7 +522,8 @@ public class Caster
 	{
 		if (effects.get("Stunned").hasTime())
 		{
-			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " +
+					ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Stunned!");
 			return true;
 		}
@@ -558,9 +560,16 @@ public class Caster
 		combattimer = System.currentTimeMillis();
 	}
 
-	public boolean sameParty(Caster caster)
+	public boolean sameParty(Entity entity)
 	{
-		return hasParty() && (party.getMembers().contains(caster) || party.equals(caster.getParty()));
+		if (entity instanceof Player)
+		{
+			Caster caster = Main.getCasters().get(entity.getUniqueId());
+
+			return hasParty() && (party.getMembers().contains(caster) || party.equals(caster.getParty()));
+		}
+
+		return false;
 	}
 
 	public boolean hasParty()
@@ -909,16 +918,13 @@ public class Caster
 				{
 					if (entity instanceof Player)
 					{
-						entity.sendMessage(
-								ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() + ChatColor.GRAY
-										+ " Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY
-										+ " Casting!");
+						entity.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + player.getName() +
+								ChatColor.GRAY + " Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
 					}
 				}
 
-				player.sendMessage(
-						ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY + " Interrupts " +
-								ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
+				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY +
+						" Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
 
 				if (caster.isCasting())
 				{
@@ -1040,7 +1046,7 @@ public class Caster
 		racemaxexp = (float) (constant * Math.pow(racelevel, scale));
 	}
 
-	public void setJobMaxExp()
+	public void setJobMaxExp() // TODO: Check If Leveling Up Works.
 	{
 		jobmaxexp = (float) (constant * Math.pow(joblevel, scale));
 	}
