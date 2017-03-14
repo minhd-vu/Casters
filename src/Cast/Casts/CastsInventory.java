@@ -182,8 +182,6 @@ public class CastsInventory implements CommandInterface, Listener
 		}
 	}
 
-
-//
 //	@EventHandler
 //	public void PlayerInteractEvent(PlayerInteractEvent event)
 //	{

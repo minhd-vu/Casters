@@ -91,6 +91,7 @@ public class Experience implements Listener
 						caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Lost " + ChatColor.WHITE
 								+ explossplayer + ChatColor.GRAY + " Experience!");
 					}
+
 					else if (event.getEntity().getKiller().equals(caster.getPlayer()))
 					{
 						if (!(caster.getTypeLevel() == caster.getTypeMaxLevel()))
@@ -98,14 +99,13 @@ public class Experience implements Listener
 							if (event.getEntity() instanceof Player)
 							{
 								caster.setTypeExp(caster.getTypeExp() + expgainplayer);
-								caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE
-										+ expgainplayer + ChatColor.GRAY + " Experience!");
+								caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE + expgainplayer + ChatColor.GRAY + " Experience!");
 							}
+
 							else if (event.getEntity() instanceof Creature)
 							{
 								caster.setTypeExp(caster.getTypeExp() + expgaincreature);
-								caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE
-										+ expgaincreature + ChatColor.GRAY + " Experience!");
+								caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE + expgaincreature + ChatColor.GRAY + " Experience!");
 							}
 
 							if (caster.getTypeExp() >= caster.getTypeMaxExp())
@@ -134,8 +134,8 @@ public class Experience implements Listener
 								+ explosscreature + ChatColor.GRAY + " Experience!");
 					}
 				}
-
 			}
+
 			else if (Main.getCasters().containsKey(event.getEntity().getUniqueId()))
 			{
 				Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
@@ -182,6 +182,7 @@ public class Experience implements Listener
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE + expgainmine
 						+ ChatColor.GRAY + " Experience!");
 			}
+
 			else if (event.getBlock().getType().equals(Material.PUMPKIN)
 					|| event.getBlock().getType().equals(Material.CROPS)
 					|| event.getBlock().getType().equals(Material.MELON_BLOCK)
@@ -196,6 +197,7 @@ public class Experience implements Listener
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Gained " + ChatColor.WHITE + expgainfarm
 						+ ChatColor.GRAY + " Experience!");
 			}
+
 			else
 			{
 				caster.setJobExp(caster.getJobExp() + expgainbreak);
