@@ -136,6 +136,7 @@ public class Caster
 			Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Welcome " + ChatColor.WHITE + player.getName()
 					+ ChatColor.DARK_AQUA + " To CasterCraft!");
 		}
+
 		else
 		{
 			config = Main.getConfigManager().getConfig(this.player.getName() + ".yml");
@@ -204,9 +205,9 @@ public class Caster
 						+ ChatColor.DARK_GRAY + ChatColor.MAGIC + "###");
 				entrybuilder.next("    " + nametext.next());
 				entrybuilder.blank();
-				entrybuilder.next("    " + ChatColor.GREEN + "Class: " + type);
-				entrybuilder.next("    " + ChatColor.DARK_GREEN + "Race: " + race);
-				entrybuilder.next("    " + ChatColor.BLUE + "Job: " + job);
+				entrybuilder.next("    " + ChatColor.GREEN + "Class: " + type.getName());
+				entrybuilder.next("    " + ChatColor.DARK_GREEN + "Race: " + race.getName());
+				entrybuilder.next("    " + ChatColor.BLUE + "Job: " + job.getName());
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.DARK_AQUA + "Cooldowns:");
 
@@ -290,13 +291,11 @@ public class Caster
 
 	private void setNewConfig()
 	{
-		// TODO: Change Theses Values Back And Make A Starting Class.
-
-		config.set("Type", "Inferno");
-		config.set("Race", "Dwarf");
-		config.set("Job", "Alchemist");
+		config.set("Type", "Wanderer");
+		config.set("Race", "Soul");
+		config.set("Job", "Unemployed");
 		config.set("Channel", "Global");
-		config.set("Title.Chat", "Inferno");
+		config.set("Title.Chat", "");
 		config.set("Title.Tab", "");
 		config.set("Level.Type.Current", 1);
 		config.set("Level.Type.Max", 200);
@@ -311,11 +310,11 @@ public class Caster
 		config.set("Mana.Regen", 1.0D);
 		config.set("Mana.Timer", 20.0D);
 		config.set("Exp.Type.Current", 0);
-		config.set("Exp.Type.Max", 100);
+		config.set("Exp.Type.Max", Integer.MAX_VALUE);
 		config.set("Exp.Race.Current", 0);
-		config.set("Exp.Race.Max", 100);
+		config.set("Exp.Race.Max", Integer.MAX_VALUE);
 		config.set("Exp.Job.Current", 0);
-		config.set("Exp.Job.Max", 100);
+		config.set("Exp.Job.Max", Integer.MAX_VALUE);
 		config.set("Stats.Points", 0);
 		config.set("Stats.Strength", 0);
 		config.set("Stats.Constitution", 0);
@@ -468,9 +467,10 @@ public class Caster
 							ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
+
 		else if (casts.get(name) > typelevel)
 		{
-			player.sendMessage(header + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Must Be Level " + ChatColor.WHITE + casts.get(name)
 					+ ChatColor.GRAY + " To Use " + ChatColor.WHITE + name + ChatColor.GRAY + "!");
 			return false;
 		}
@@ -505,7 +505,7 @@ public class Caster
 	{
 		if (effects.get("Silenced").hasTime())
 		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Silenced!");
 			return true;
 		}
@@ -517,7 +517,7 @@ public class Caster
 	{
 		if (effects.get("Stunned").hasTime())
 		{
-			player.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
+			player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Cast " + ChatColor.WHITE
 					+ name + ChatColor.GRAY + " While Stunned!");
 			return true;
 		}
@@ -532,7 +532,7 @@ public class Caster
 			return true;
 		}
 
-		player.sendMessage(header + ChatColor.WHITE + name + ChatColor.GRAY + ": Not Enough Mana!");
+		player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + name + ChatColor.GRAY + " - Not Enough Mana!");
 
 		return false;
 	}
@@ -541,36 +541,6 @@ public class Caster
 	{
 		return type.getCasts().containsKey(name) && !isCasting(name) && !isWarmingUp() && !isSilenced(name) && !isStunned(name) && !cooldown.hasCooldown(player, name) &&
 				hasMana(manacost, name);
-	}
-
-	public List<String> getWarmingUp()
-	{
-		List<String> warmups = new ArrayList<String>();
-
-		for (String cast : warmingup.keySet())
-		{
-			if (warmingup.get(cast))
-			{
-				warmups.add(cast);
-			}
-		}
-
-		return warmups;
-	}
-
-	public List<String> getCastings()
-	{
-		List<String> castings = new ArrayList<String>();
-
-		for (String cast : casting.keySet())
-		{
-			if (casting.get(cast))
-			{
-				castings.add(cast);
-			}
-		}
-
-		return castings;
 	}
 
 	public BossBar getBossBar()
@@ -650,8 +620,7 @@ public class Caster
 		config.set("Type", this.type.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.type.getName() + ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.type.getName() + ChatColor.GRAY + "!");
 	}
 
 	public void getConfigs()
@@ -678,8 +647,7 @@ public class Caster
 		config.set("Race", this.race.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.race.getName() + ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.race.getName() + ChatColor.GRAY + "!");
 	}
 
 	public Type getJob()
@@ -693,8 +661,7 @@ public class Caster
 		config.set("Job", this.job.getName());
 		getConfigs();
 
-		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE
-				+ this.job.getName() + ChatColor.GRAY + "!");
+		player.sendMessage(header + ChatColor.GRAY + "You Have Chosen The Path Of The " + ChatColor.WHITE + this.job.getName() + ChatColor.GRAY + "!");
 	}
 
 	public boolean hasEffect(String name)

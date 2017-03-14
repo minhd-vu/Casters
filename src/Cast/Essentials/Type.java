@@ -159,7 +159,7 @@ public class Type
 		return healthregenscale;
 	}
 
-	public void setHealthregenscale(double healthregenscale)
+	public void setHealthRegenScale(double healthregenscale)
 	{
 		this.healthregenscale = healthregenscale;
 	}
@@ -182,11 +182,5 @@ public class Type
 	public void setManaRegenScale(double manaregenscale)
 	{
 		this.manaregenscale = manaregenscale;
-	}
-
-	@Override
-	public String toString()
-	{
-		return name;
 	}
 }

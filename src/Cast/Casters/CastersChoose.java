@@ -9,9 +9,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
 public class CastersChoose implements CommandInterface
 {
+	private final long timer = TimeUnit.MILLISECONDS.convert(1L, TimeUnit.DAYS);
+
 	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "] ";
+	private HashMap<UUID, Long> cooldowns = new HashMap<UUID, Long>();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
@@ -28,54 +35,77 @@ public class CastersChoose implements CommandInterface
 				return true;
 			}
 
-			if (caster.getType().getName().equalsIgnoreCase(args[1]))
+			if (!cooldowns.containsKey(player.getUniqueId()) || System.currentTimeMillis() - cooldowns.get(player.getUniqueId()) > timer)
 			{
-				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Class: " + ChatColor.WHITE
-						+ caster.getType().getName() + ChatColor.GRAY + ".");
-				return true;
-			}
-			else if (caster.getRace().getName().equalsIgnoreCase(args[1]))
-			{
-				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Race: " + ChatColor.WHITE
-						+ caster.getRace().getName() + ChatColor.GRAY + ".");
-				return true;
-			}
-			else if (caster.getJob().getName().equalsIgnoreCase(args[1]))
-			{
-				player.sendMessage(header + ChatColor.GRAY + "You Are Already The Job: " + ChatColor.WHITE
-						+ caster.getJob().getName() + ChatColor.GRAY + ".");
-				return true;
-			}
-
-			for (Type type : Main.getClasses())
-			{
-				if (args[1].equalsIgnoreCase(type.getName()))
+				if (caster.getType().getName().equalsIgnoreCase(args[1]))
 				{
-					caster.setType(type);
+					player.sendMessage(header + ChatColor.GRAY + "You Are Already The Class: " + ChatColor.WHITE
+							+ caster.getType().getName() + ChatColor.GRAY + ".");
 					return true;
 				}
-			}
 
-			for (Type race : Main.getRaces())
-			{
-				if (args[1].equalsIgnoreCase(race.getName()))
+				else if (caster.getRace().getName().equalsIgnoreCase(args[1]))
 				{
-					caster.setRace(race);
+					player.sendMessage(header + ChatColor.GRAY + "You Are Already The Race: " + ChatColor.WHITE
+							+ caster.getRace().getName() + ChatColor.GRAY + ".");
 					return true;
 				}
-			}
 
-			for (Type job : Main.getJobs())
-			{
-				if (args[1].equalsIgnoreCase(job.getName()))
+				else if (caster.getJob().getName().equalsIgnoreCase(args[1]))
 				{
-					caster.setJob(job);
+					player.sendMessage(header + ChatColor.GRAY + "You Are Already The Job: " + ChatColor.WHITE
+							+ caster.getJob().getName() + ChatColor.GRAY + ".");
 					return true;
 				}
+
+				for (Type type : Main.getClasses())
+				{
+					if (args[1].equalsIgnoreCase(type.getName()))
+					{
+						caster.setType(type);
+
+						cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+
+						return true;
+					}
+				}
+
+				for (Type race : Main.getRaces())
+				{
+					if (args[1].equalsIgnoreCase(race.getName()))
+					{
+						caster.setRace(race);
+
+						cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+
+						return true;
+					}
+				}
+
+				for (Type job : Main.getJobs())
+				{
+					if (args[1].equalsIgnoreCase(job.getName()))
+					{
+						caster.setJob(job);
+
+						cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+
+						return true;
+					}
+				}
+
+				player.sendMessage(header + ChatColor.GRAY + "That Class/Race/Job Does Not Exist!");
 			}
 
-			player.sendMessage(header + ChatColor.GRAY + "That Class/Race/Job Does Not Exist!");
-
+			else
+			{
+				player.sendMessage(
+						header + ChatColor.GRAY + "You Have " + ChatColor.AQUA +
+								TimeUnit.HOURS.convert(timer - (System.currentTimeMillis() - cooldowns.get(player.getUniqueId())), TimeUnit.MILLISECONDS) + " Hours " +
+								ChatColor.GRAY + "And " + ChatColor.AQUA +
+								TimeUnit.MINUTES.convert(timer - (System.currentTimeMillis() - cooldowns.get(player.getUniqueId())), TimeUnit.MILLISECONDS) % 60 +
+								" Minutes " + ChatColor.GRAY + "Left!");
+			}
 		}
 
 		return true;

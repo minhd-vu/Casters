@@ -7,35 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4621a64-84e6-4618-8296-b5e699f342e3" name="Default" comment="Added Base Classes For Firearms.">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cast/Casts/Types/ActiveCast.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Types/Active.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Types/Targetted.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastChomp.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastChomp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDarkBomb.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDarkBomb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireCharge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireball.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireball.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastLightningStorm.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastLightningStorm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastMount.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastMount.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastReflect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastRevive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastSeeker.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastSeeker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastTaunt.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastTaunt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastVanish.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Actives/CastVanish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/CastList.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/CastList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBandage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBeasts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBolt.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBolt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBomb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastChainLightning.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastChainLightning.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastCharge.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastCharge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastMute.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastMute.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPoison.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPoison.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPressurePoint.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastPressurePoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" afterPath="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casters/CastersChoose.java" afterPath="$PROJECT_DIR$/src/Cast/Casters/CastersChoose.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Casters/CastersLevel.java" afterPath="$PROJECT_DIR$/src/Cast/Casters/CastersLevel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" afterPath="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Essentials/Type.java" afterPath="$PROJECT_DIR$/src/Cast/Essentials/Type.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cast/Main.java" afterPath="$PROJECT_DIR$/src/Cast/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,21 +31,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CastChomp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastChomp.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="82" column="120" lean-forward="false" selection-start-line="82" selection-start-column="120" selection-end-line="82" selection-end-column="120" />
+            <state relative-caret-position="118">
+              <caret line="35" column="47" lean-forward="true" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Firearm.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java">
+      <file leaf-file-name="CastersLevel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Casters/CastersLevel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="171" column="17" lean-forward="false" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
+            <state relative-caret-position="510">
+              <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Caster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="528" column="5" lean-forward="true" selection-start-line="528" selection-start-column="5" selection-end-line="528" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -87,6 +74,8 @@
     <findStrings>
       <find>hasca</find>
       <find>fireball</find>
+      <find>type</find>
+      <find>hasm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -100,9 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Cast/Essentials/Effects/Bleed.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSiphon.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBolt.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastSeeker.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/CastsInventory.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastCharge.java" />
@@ -115,12 +101,10 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/ActiveCast.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/TargettedCast.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/Passive.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Main.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Targetted/CastStrike.java" />
         <option value="$PROJECT_DIR$/src/Cast/Wands/WandDistorter.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/PassiveBackstab.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Types/Cast.java" />
-        <option value="$PROJECT_DIR$/src/plugin.yml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastDefensiveStance.java" />
         <option value="$PROJECT_DIR$/src/Cast/Essentials/Schedulers/Cooldown.java" />
@@ -142,7 +126,6 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/CastFireBomb.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Active.java" />
         <option value="$PROJECT_DIR$/src/Cast/Essentials/Attack.java" />
-        <option value="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastFireCharge.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/Projectile.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastFireball.java" />
@@ -151,6 +134,12 @@
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastSeeker.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastChomp.java" />
         <option value="$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Essentials/Type.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Essentials/Caster.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Main.java" />
+        <option value="$PROJECT_DIR$/src/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/Cast/Casters/CastersChoose.java" />
+        <option value="$PROJECT_DIR$/src/Cast/Casters/CastersLevel.java" />
       </list>
     </option>
   </component>
@@ -319,96 +308,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Targetted" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Firearms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Passives" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projectiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Actives" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Casters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Casts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -463,6 +362,7 @@
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
     <property name="SearchEverywhereHistoryKey" value="cast si&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastSiphon.java&#10;siph&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Effects/Siphon.java&#10;bleed&#9;PSI&#9;JAVA://Cast.Essentials.Effects.Bleed&#10;castbash&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBash.java&#10;caster&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Caster.java&#10;castre&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;poison&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Essentials/Effects/Poison.java&#10;casstr&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastStrike.java&#10;castpoi&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastPoison.java&#10;setboss&#9;PSI&#9;JAVA://Cast.Essentials.Caster#setBossBarEntity&#10;main&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Main.java&#10;partyleav&#9;PSI&#9;JAVA://Cast.Party.PartyLeave&#10;castfireb&#9;PSI&#9;JAVA://Cast.Casts.Actives.CastFireBomb&#10;attack&#9;PSI&#9;JAVA://Cast.Essentials.Attack&#10;castrev&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Actives/CastRevive.java&#10;castba&#9;FILE&#9;file://C:/Users/minhd/Documents/IntelliJ/Casters/src/Cast/Casts/Targetted/CastBandage.java" />
     <property name="ToolWindowDocumentation.ShowToolbar" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Minecraft Server/Spigot 1.11.2/plugins" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -704,7 +604,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5042644" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21022129" sideWeight="0.33586133" order="8" side_tool="false" content_ui="tabs" x="661" y="570" width="250" height="135" />
+      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1032666" sideWeight="0.33586133" order="8" side_tool="false" content_ui="tabs" x="661" y="570" width="250" height="135" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32995737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.496208" order="2" side_tool="false" content_ui="tabs" />
@@ -712,7 +612,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21443625" sideWeight="0.6641387" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1886196" sideWeight="0.6641387" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21022129" sideWeight="0.53954494" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -774,21 +674,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Effects/Stun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="119" column="25" lean-forward="false" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../Minecraft Server/Spigot 1.11.2/spigot-1.11.2.jar!/org/bukkit/entity/LlamaSpit.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Targetted/CastBash.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
@@ -845,13 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="865">
@@ -872,14 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="88" column="111" lean-forward="true" selection-start-line="88" selection-start-column="111" selection-end-line="88" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="588" column="47" lean-forward="false" selection-start-line="588" selection-start-column="47" selection-end-line="588" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -936,14 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="85" column="29" lean-forward="true" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="61" column="36" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1088,14 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="115" column="39" lean-forward="false" selection-start-line="115" selection-start-column="39" selection-end-line="115" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Cast.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -1166,14 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastChomp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="82" column="120" lean-forward="false" selection-start-line="82" selection-start-column="120" selection-end-line="82" selection-end-column="120" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Passives/Firearms/Firearm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
@@ -1182,5 +1028,141 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casts/Actives/Projectiles/CastChomp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="82" column="120" lean-forward="false" selection-start-line="82" selection-start-column="120" selection-end-line="82" selection-end-column="120" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="41" lean-forward="false" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2700">
+          <caret line="184" column="5" lean-forward="false" selection-start-line="184" selection-start-column="5" selection-end-line="184" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Essentials/Caster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="528" column="5" lean-forward="true" selection-start-line="528" selection-start-column="5" selection-end-line="528" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casters/CastersChoose.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="106" column="72" lean-forward="true" selection-start-line="106" selection-start-column="72" selection-end-line="106" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="35" column="47" lean-forward="true" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cast/Casters/CastersLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>Casters</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Casters</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>TitleTabAndActionBarAPI</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

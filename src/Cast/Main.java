@@ -36,6 +36,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -233,6 +234,13 @@ public class Main extends JavaPlugin implements Listener
 		classes = new ArrayList<Type>();
 		races = new ArrayList<Type>();
 		jobs = new ArrayList<Type>();
+
+		Type wanderer = new Type("Wanderer", "Description");
+		wanderer.setStrength(0);
+		wanderer.setConstitution(0);
+		wanderer.setDexterity(0);
+		wanderer.setIntellect(0);
+		wanderer.setWisdom(0);
 
 		Type paladin = new Type("Paladin", "Description");
 		paladin.setStrength(1);
@@ -451,6 +459,7 @@ public class Main extends JavaPlugin implements Listener
 		cleric.getWeapon().put(Material.WOOD_SPADE, 4);
 		cleric.getCasts().put("Revive", 1);
 
+		classes.add(wanderer);
 		classes.add(paladin);
 		classes.add(cavalier);
 		classes.add(barbarian);
@@ -467,6 +476,8 @@ public class Main extends JavaPlugin implements Listener
 		classes.add(bloodmage);
 		classes.add(monk);
 		classes.add(cleric);
+
+		Type soul = new Type("Soul", "Description");
 
 		Type dwarf = new Type("Dwarf", "Description");
 		dwarf.getArmor().add(Material.DIAMOND_HELMET);
@@ -494,6 +505,7 @@ public class Main extends JavaPlugin implements Listener
 		Type demon = new Type("Demon", "Description");
 		demon.getArmor().add(Material.GOLD_HELMET);
 
+		races.add(soul);
 		races.add(dwarf);
 		races.add(human);
 		races.add(elf);
@@ -502,6 +514,8 @@ public class Main extends JavaPlugin implements Listener
 		races.add(giant);
 		races.add(demon);
 		races.add(undead);
+
+		Type unemployed = new Type("Unemployed", "Description");
 
 		Type alchemist = new Type("Alchemist", "Description");
 		alchemist.getArmor().add(Material.GOLD_HELMET);
@@ -524,6 +538,7 @@ public class Main extends JavaPlugin implements Listener
 		Type miner = new Type("Miner", "Description");
 		miner.getArmor().add(Material.GOLD_HELMET);
 
+		jobs.add(unemployed);
 		jobs.add(alchemist);
 		jobs.add(enchanter);
 		jobs.add(blacksmith);
