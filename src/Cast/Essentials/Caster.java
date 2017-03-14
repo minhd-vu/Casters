@@ -68,6 +68,7 @@ public class Caster
 	private int joblevel;
 	private int jobmaxlevel;
 
+	private double constant;
 	private double scale;
 
 	private float typeexp;
@@ -398,6 +399,9 @@ public class Caster
 		jobexp = (float) config.getDouble("Exp.Job.Current");
 		jobmaxexp = (float) config.getDouble("Exp.Job.Max");
 
+		constant = 100.0;
+		scale = 3.0 / 2.0;
+
 		player.setLevel(typelevel);
 		player.setExp(typeexp / typemaxexp);
 	}
@@ -697,6 +701,11 @@ public class Caster
 	public void setTypeExp(float typeexp)
 	{
 		this.typeexp = typeexp;
+
+		if (this.typeexp < 0)
+		{
+			this.typeexp = 0;
+		}
 	}
 
 	public float getTypeMaxExp()
@@ -1023,17 +1032,17 @@ public class Caster
 
 	public void setTypeMaxExp()
 	{
-		typemaxexp = (float) (typelevel * scale + scale);
+		typemaxexp = (float) (constant * Math.pow(typelevel, scale));
 	}
 
 	public void setRaceMaxExp()
 	{
-		racemaxexp = (float) (typelevel * scale + scale);
+		racemaxexp = (float) (constant * Math.pow(racelevel, scale));
 	}
 
 	public void setJobMaxExp()
 	{
-		jobmaxexp = (float) (joblevel * scale + scale);
+		jobmaxexp = (float) (constant * Math.pow(joblevel, scale));
 	}
 
 	public void setScale(double scale)
