@@ -120,7 +120,7 @@ public class CastChainLightning extends Targetted implements CommandInterface, L
 	public LivingEntity StrikeLightning(Player player, LivingEntity target, ArrayList<LivingEntity> oldtargets)
 	{
 		target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-		target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F);
+		target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 8.0F, 1.0F);
 		target.damage(damage);
 
 		oldtargets.add(target);

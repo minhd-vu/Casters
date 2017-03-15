@@ -94,7 +94,7 @@ public class CastLightningStorm extends Active implements CommandInterface, List
 								for (LivingEntity target : livingtargets)
 								{
 									target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-									target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F); // TODO: Check This.
+									target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 8.0F, 1.0F); // TODO: Check This.
 
 									((LivingEntity) target).damage(damage);
 									caster.setBossBarEntity((LivingEntity) target);

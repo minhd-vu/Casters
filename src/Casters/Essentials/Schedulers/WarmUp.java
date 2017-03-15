@@ -20,7 +20,7 @@ public class WarmUp
 	private int duration;
 	private int amplifier;
 
-	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
 
 	public WarmUp()

@@ -71,7 +71,7 @@ public class CastBolt extends Targetted implements CommandInterface, Listener
 								caster.setMana(manacost);
 
 								target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
-								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1.0F, 1.0F);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 8.0F, 1.0F);
 
 								target.damage(damage);
 								caster.setBossBarEntity(target);
