@@ -25,6 +25,11 @@ public class PartyCreate implements CommandInterface
 				caster.setParty(party);
 				player.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Created A Party!");
 			}
+
+			else
+			{
+				player.sendMessage(Party.header + ChatColor.GRAY + " You Are Already In A Party!");
+			}
 		}
 
 		return true;

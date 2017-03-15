@@ -31,13 +31,10 @@ public class Attack implements Listener
 
 				if (event.getCause().equals(DamageCause.ENTITY_ATTACK))
 				{
-					if (entity instanceof Player)
+					if (caster.sameParty(entity))
 					{
-						if (caster.sameParty(entity))
-						{
-							event.setCancelled(true);
-							return;
-						}
+						event.setCancelled(true);
+						return;
 					}
 
 					// TODO: Recode This So That It Factors In Enchantments.
@@ -51,7 +48,8 @@ public class Attack implements Listener
 
 					else
 					{
-						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale() + 1); // TODO: Remove When Strength Is Implemented.
+						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale() + 1);
+						// TODO: Remove When Strength Is Implemented.
 					}
 				}
 
