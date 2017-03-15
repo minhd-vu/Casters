@@ -1,10 +1,10 @@
 package Casters.Casts.Passives.Firearms;
 
+import Casters.Casters;
 import Casters.Casts.Passives.Passive;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Schedulers.Cooldown;
 import Casters.Essentials.Schedulers.WarmUp;
-import Casters.Casters;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;

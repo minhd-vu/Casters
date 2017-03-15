@@ -1,8 +1,8 @@
 package Casters.Casts.Targetted;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -1,8 +1,8 @@
 package Casters.Casts.Targetted;
 
+import Casters.Casters;
 import Casters.Casts.Cast;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;

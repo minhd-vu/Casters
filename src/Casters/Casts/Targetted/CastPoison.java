@@ -1,9 +1,9 @@
 package Casters.Casts.Targetted;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Poison;
-import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;

@@ -1,8 +1,8 @@
 package Casters.Essentials.Chat;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import Casters.Party.Party;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

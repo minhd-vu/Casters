@@ -1,8 +1,8 @@
 package Casters.Party;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,10 +1,10 @@
 package Casters.Essentials;
 
+import Casters.Casters;
 import Casters.Casts.Cast;
 import Casters.Configs.Config;
 import Casters.Essentials.Effects.Effect;
 import Casters.Essentials.Schedulers.Cooldown;
-import Casters.Casters;
 import Casters.Party.Invite;
 import Casters.Party.Party;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
@@ -942,14 +942,14 @@ public class Caster
 		}
 	}
 
-	public boolean isCasting()
-	{
-		return casting.containsValue(true);
-	}
-
 	public Player getPlayer()
 	{
 		return player;
+	}
+
+	public boolean isCasting()
+	{
+		return casting.containsValue(true);
 	}
 
 	public HashMap<String, Integer> getCasts()

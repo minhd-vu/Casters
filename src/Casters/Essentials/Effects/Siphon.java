@@ -1,7 +1,7 @@
 package Casters.Essentials.Effects;
 
-import Casters.Essentials.Caster;
 import Casters.Casters;
+import Casters.Essentials.Caster;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;

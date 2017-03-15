@@ -1,9 +1,9 @@
 package Casters.Casts.Passives;
 
+import Casters.Casters;
 import Casters.Casts.Cast;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -1,8 +1,8 @@
 package Casters.Commands;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Chat.Pages;
-import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

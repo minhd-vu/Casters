@@ -1,5 +1,6 @@
 package Casters.Casts;
 
+import Casters.Casters;
 import Casters.Casts.Actives.Active;
 import Casters.Casts.Passives.Passive;
 import Casters.Casts.Targetted.Targetted;
@@ -7,7 +8,6 @@ import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Chat.Pages;
 import Casters.Essentials.Type;
-import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -1,6 +1,5 @@
 package Casters;
 
-import Casters.Commands.*;
 import Casters.Casts.Actives.*;
 import Casters.Casts.Actives.Projectiles.*;
 import Casters.Casts.Cast;
@@ -13,6 +12,7 @@ import Casters.Casts.Passives.Firearms.PassiveMusket;
 import Casters.Casts.Passives.PassiveBackstab;
 import Casters.Casts.Passives.PassiveFlameshield;
 import Casters.Casts.Targetted.*;
+import Casters.Commands.*;
 import Casters.Configs.ConfigManager;
 import Casters.Essentials.*;
 import Casters.Essentials.Chat.Chat;

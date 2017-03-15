@@ -1,8 +1,8 @@
 package Casters.Casts.Actives;
 
+import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.command.Command;
@@ -107,15 +107,6 @@ public class CastVanish extends Active implements CommandInterface, Listener
 		return true;
 	}
 
-	@EventHandler
-	public void onEntityDamageEvent(EntityDamageEvent event)
-	{
-		if (event.getEntity() instanceof Player)
-		{
-			cancelInvisibility((Player) event.getEntity()); // TODO: Check This.
-		}
-	}
-
 	private void cancelInvisibility(Player player)
 	{
 		Caster caster = Casters.getCasters().get(player.getUniqueId());
@@ -137,6 +128,15 @@ public class CastVanish extends Active implements CommandInterface, Listener
 
 			caster.getPlayer().sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are Now " + ChatColor.WHITE + "Visible" + ChatColor.GRAY + "!");
 			caster.setCasting(name, false);
+		}
+	}
+
+	@EventHandler
+	public void onEntityDamageEvent(EntityDamageEvent event)
+	{
+		if (event.getEntity() instanceof Player)
+		{
+			cancelInvisibility((Player) event.getEntity()); // TODO: Check This.
 		}
 	}
 }
