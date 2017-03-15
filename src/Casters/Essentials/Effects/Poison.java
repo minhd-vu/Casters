@@ -1,7 +1,7 @@
 package Casters.Essentials.Effects;
 
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -40,7 +40,7 @@ public class Poison
 
 		if (target instanceof Player)
 		{
-			Caster targetcaster = Main.getCasters().get(target.getUniqueId());
+			Caster targetcaster = Casters.getCasters().get(target.getUniqueId());
 			targetcaster.setEffect("Poisoned", duration);
 			target.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Are "
 					+ ChatColor.WHITE + "Poisoned" + ChatColor.GRAY + "!");
@@ -85,7 +85,7 @@ public class Poison
 				}
 			}
 
-		}.runTaskLater(Main.getInstance(), duration);
+		}.runTaskLater(Casters.getInstance(), duration);
 	}
 
 	public Set<UUID> getAffectedPlayers()

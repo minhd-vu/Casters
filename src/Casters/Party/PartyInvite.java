@@ -2,7 +2,7 @@ package Casters.Party;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -19,7 +19,7 @@ public class PartyInvite implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length != 2)
 			{
@@ -39,7 +39,7 @@ public class PartyInvite implements CommandInterface
 						return false;
 					}
 
-					for (Caster c : Main.getCasters().values())
+					for (Caster c : Casters.getCasters().values())
 					{
 						if (!c.equals(caster) && c.getPlayer().getName().equals(args[1]))
 						{
@@ -77,7 +77,7 @@ public class PartyInvite implements CommandInterface
 										}
 									}
 
-								}.runTaskLater(Main.getInstance(), duration);
+								}.runTaskLater(Casters.getInstance(), duration);
 							}
 							else
 							{

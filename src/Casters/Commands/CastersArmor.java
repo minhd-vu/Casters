@@ -1,9 +1,9 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Chat.Pages;
-import Casters.Main;
+import Casters.Casters;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -36,7 +36,7 @@ public class CastersArmor implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			armor.clear();
 			pages.clear();

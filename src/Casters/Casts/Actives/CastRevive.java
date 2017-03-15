@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -56,7 +56,7 @@ public class CastRevive extends Active implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2)
 			{
@@ -140,7 +140,7 @@ public class CastRevive extends Active implements CommandInterface, Listener
 								cooldown.start(player.getName()); // TODO: Check If This Works.
 							}
 
-						}.runTaskLater(Main.getInstance(), warmup.getDuration());
+						}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 					}
 
 					else

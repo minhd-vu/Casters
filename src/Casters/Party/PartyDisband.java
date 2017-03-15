@@ -2,7 +2,7 @@ package Casters.Party;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +16,7 @@ public class PartyDisband implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length < 2)
 			{
@@ -33,7 +33,7 @@ public class PartyDisband implements CommandInterface
 									.sendMessage(Party.header + ChatColor.GRAY + " The Party Has Been Disbanded.");
 						}
 
-						Main.getParties().remove(party);
+						Casters.getParties().remove(party);
 					}
 					else
 					{

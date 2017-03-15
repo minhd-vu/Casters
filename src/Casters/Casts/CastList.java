@@ -7,7 +7,7 @@ import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Chat.Pages;
 import Casters.Essentials.Type;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -35,7 +35,7 @@ public class CastList implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			commands.clear();
 
@@ -67,7 +67,7 @@ public class CastList implements CommandInterface
 			{
 				commands.add(ChatColor.DARK_AQUA + "All Collective Casts:");
 
-				for (Cast cast : Main.getCasts().values())
+				for (Cast cast : Casters.getCasts().values())
 				{
 					String casttype = "";
 
@@ -98,7 +98,7 @@ public class CastList implements CommandInterface
 				return true;
 			}
 
-			for (Type type : Main.getClasses())
+			for (Type type : Casters.getClasses())
 			{
 				if (args[1].equalsIgnoreCase(type.getName()))
 				{
@@ -109,7 +109,7 @@ public class CastList implements CommandInterface
 				}
 			}
 
-			for (Type race : Main.getRaces())
+			for (Type race : Casters.getRaces())
 			{
 				if (args[1].equalsIgnoreCase(race.getName()))
 				{
@@ -120,7 +120,7 @@ public class CastList implements CommandInterface
 				}
 			}
 
-			for (Type job : Main.getJobs())
+			for (Type job : Casters.getJobs())
 			{
 				if (args[1].equalsIgnoreCase(job.getName()))
 				{
@@ -142,7 +142,7 @@ public class CastList implements CommandInterface
 
 		commands.add(ChatColor.DARK_AQUA + name + " Casts:");
 
-		for (Type c : Main.getTypes())
+		for (Type c : Casters.getTypes())
 		{
 			if (c.getName().equalsIgnoreCase(name))
 			{
@@ -150,10 +150,10 @@ public class CastList implements CommandInterface
 				{
 					commands.add(ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + c.getCasts().get(cast) + " - "
 							+ ChatColor.DARK_AQUA + "/cast" + ChatColor.AQUA + " " + cast.toLowerCase() + ChatColor.GRAY
-							+ " - " + Main.getCasts().get(cast).getDescription() + ".");
+							+ " - " + Casters.getCasts().get(cast).getDescription() + ".");
 				}*/
 
-				for (Cast cast : Main.getCasts().values())
+				for (Cast cast : Casters.getCasts().values())
 				{
 					if (c.getCasts().containsKey(cast.getName()))
 					{

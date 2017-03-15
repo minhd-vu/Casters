@@ -3,7 +3,7 @@ package Casters.Casts;
 import Casters.Casts.Passives.Passive;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -37,9 +37,9 @@ public class CastsInventory implements CommandInterface, Listener
 	{
 		castitems = new HashMap<String, ItemStack>();
 
-		for (String name : Main.getCasts().keySet())
+		for (String name : Casters.getCasts().keySet())
 		{
-			Cast cast = Main.getCasts().get(name);
+			Cast cast = Casters.getCasts().get(name);
 
 			if (!(cast instanceof Passive))
 			{
@@ -88,7 +88,7 @@ public class CastsInventory implements CommandInterface, Listener
 	{
 		if (sender instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(((Player) sender).getUniqueId());
+			Caster caster = Casters.getCasters().get(((Player) sender).getUniqueId());
 
 			Inventory inventory = Bukkit.createInventory(caster.getPlayer(), inventorysize,
 					ChatColor.DARK_AQUA + "" + ChatColor.BOLD + caster.getPlayer().getName() + "'s" + ChatColor.AQUA + "" + ChatColor.BOLD + " Casts!");
@@ -136,7 +136,7 @@ public class CastsInventory implements CommandInterface, Listener
 	public void onPlayerItemHeldEvent(PlayerItemHeldEvent event)
 	{
 		Player player = event.getPlayer();
-		Caster caster = Main.getCasters().get(player.getUniqueId());
+		Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 		ItemStack newitem = player.getInventory().getItem(event.getNewSlot());
 		ItemStack olditem = player.getInventory().getItem(event.getPreviousSlot());
@@ -165,7 +165,7 @@ public class CastsInventory implements CommandInterface, Listener
 			if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.SKULL_ITEM) ||
 					event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.SKULL))
 			{
-				if (Main.getCasts().containsKey(ChatColor.stripColor(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName())))
+				if (Casters.getCasts().containsKey(ChatColor.stripColor(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName())))
 				{
 					event.setCancelled(true);
 				}
@@ -174,7 +174,7 @@ public class CastsInventory implements CommandInterface, Listener
 			else if (event.getPlayer().getInventory().getItemInOffHand().getType().equals(Material.SKULL_ITEM) ||
 					event.getPlayer().getInventory().getItemInOffHand().getType().equals(Material.SKULL))
 			{
-				if (Main.getCasts().containsKey(ChatColor.stripColor(event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getDisplayName())))
+				if (Casters.getCasts().containsKey(ChatColor.stripColor(event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getDisplayName())))
 				{
 					event.setCancelled(true);
 				}
@@ -187,7 +187,7 @@ public class CastsInventory implements CommandInterface, Listener
 //	{
 //		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 //		{
-//			event.setCancelled(isCastersItem(event.getPlayer().getInventory().getItemInMainHand()) || isCastersItem(event.getPlayer().getInventory().getItemInOffHand()));
+//			event.setCancelled(isCastersItem(event.getPlayer().getInventory().getItemInCastersHand()) || isCastersItem(event.getPlayer().getInventory().getItemInOffHand()));
 //		}
 //	}
 //

@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -51,7 +51,7 @@ public class CastReflect extends Active implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -95,13 +95,13 @@ public class CastReflect extends Active implements CommandInterface, Listener
 									}
 								}
 
-							}.runTaskLater(Main.getInstance(), duration);
+							}.runTaskLater(Casters.getInstance(), duration);
 						}
 
 						cooldown.start(player.getName());
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -113,7 +113,7 @@ public class CastReflect extends Active implements CommandInterface, Listener
 	{
 		if (event.getEntity() instanceof Player && event.getDamager() instanceof LivingEntity)
 		{
-			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 			LivingEntity target = (LivingEntity) event.getDamager();
 
 			if (caster.isCasting(name))

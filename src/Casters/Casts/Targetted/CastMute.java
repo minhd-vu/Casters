@@ -2,7 +2,7 @@ package Casters.Casts.Targetted;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -49,7 +49,7 @@ public class CastMute extends Targetted implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -78,7 +78,7 @@ public class CastMute extends Targetted implements CommandInterface
 
 							if (target instanceof Player)
 							{
-								Caster tcaster = Main.getCasters().get(target.getUniqueId());
+								Caster tcaster = Casters.getCasters().get(target.getUniqueId());
 
 								tcaster.setEffect("Silenced", duration);
 								caster.setEffect("Silencing", duration);
@@ -107,7 +107,7 @@ public class CastMute extends Targetted implements CommandInterface
 											}
 										}
 									}
-								}.runTaskLater(Main.getInstance(), duration);
+								}.runTaskLater(Casters.getInstance(), duration);
 							}
 
 							cast(player, target);
@@ -117,7 +117,7 @@ public class CastMute extends Targetted implements CommandInterface
 							caster.setCasting(name, false);
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 				}
 			}
 		}

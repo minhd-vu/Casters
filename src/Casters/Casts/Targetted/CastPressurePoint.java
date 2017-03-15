@@ -3,7 +3,7 @@ package Casters.Casts.Targetted;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Stun;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -53,7 +53,7 @@ public class CastPressurePoint extends Targetted implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -94,7 +94,7 @@ public class CastPressurePoint extends Targetted implements CommandInterface
 							cooldown.start(player.getName());
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 				}
 			}
 		}

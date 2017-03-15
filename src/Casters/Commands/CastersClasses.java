@@ -1,9 +1,9 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Chat.Pages;
 import Casters.Essentials.Type;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,7 +22,7 @@ public class CastersClasses implements CommandInterface
 
 	public CastersClasses()
 	{
-		for (Type type : Main.getClasses())
+		for (Type type : Casters.getClasses())
 		{
 			classes.add(ChatColor.DARK_AQUA + type.getName() + ChatColor.GRAY + " - " + type.getDescription() + ".");
 		}

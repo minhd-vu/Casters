@@ -2,7 +2,7 @@ package Casters.Party;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,12 +16,12 @@ public class PartyCreate implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (!caster.hasParty())
 			{
 				Party party = new Party(caster);
-				Main.getParties().add(party);
+				Casters.getParties().add(party);
 				caster.setParty(party);
 				player.sendMessage(Party.header + ChatColor.GREEN + " You Have Successfully Created A Party!");
 			}

@@ -1,6 +1,6 @@
 package Casters.Essentials;
 
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,7 +33,7 @@ public class Regen implements Listener
 		if (event.getItem().getType().equals(Material.POTION))
 		{
 			@SuppressWarnings("unused")
-			Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 			/*-
 			Potion potion = Potion.fromItemStack(event.getItem());

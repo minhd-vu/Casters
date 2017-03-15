@@ -4,7 +4,7 @@ import Casters.Casts.Passives.Passive;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Schedulers.Cooldown;
 import Casters.Essentials.Schedulers.WarmUp;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -63,7 +63,7 @@ public abstract class Firearm extends Passive
 		if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(firearm))
 		{
 			Player player = event.getPlayer();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			{
@@ -99,10 +99,10 @@ public abstract class Firearm extends Passive
 									bullet.remove();
 								}
 
-							}.runTaskLater(Main.getInstance(), timer);
+							}.runTaskLater(Casters.getInstance(), timer);
 						}
 
-					}.runTaskTimer(Main.getInstance(), 0, 1);
+					}.runTaskTimer(Casters.getInstance(), 0, 1);
 
 					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, volume, pitch);
 					player.setVelocity(player.getEyeLocation().getDirection().setY(0).normalize().multiply(-recoil));
@@ -119,7 +119,7 @@ public abstract class Firearm extends Passive
 		if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(firearm))
 		{
 			Player player = event.getPlayer();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (caster.canCastPassive(name, new Cooldown(), 0))
 			{
@@ -139,7 +139,7 @@ public abstract class Firearm extends Passive
 	@EventHandler
 	public void onPlayerItemHeldEvent(PlayerItemHeldEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		if (caster.getType().getCasts().containsKey(name))
 		{
@@ -165,7 +165,7 @@ public abstract class Firearm extends Passive
 
 			if (bullet.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(((Player) bullet.getShooter()).getUniqueId());
+				Caster caster = Casters.getCasters().get(((Player) bullet.getShooter()).getUniqueId());
 
 				if (bullets.contains(bullet))
 				{

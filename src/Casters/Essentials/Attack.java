@@ -1,6 +1,6 @@
 package Casters.Essentials;
 
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -23,7 +23,7 @@ public class Attack implements Listener
 	{
 		if (event.getDamager() instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(event.getDamager().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getDamager().getUniqueId());
 
 			if (event.getEntity() instanceof Damageable)
 			{
@@ -36,7 +36,6 @@ public class Attack implements Listener
 						if (caster.sameParty(entity))
 						{
 							event.setCancelled(true);
-
 							return;
 						}
 					}
@@ -62,7 +61,7 @@ public class Attack implements Listener
 
 		else if (event.getDamager() instanceof Creature)
 		{
-			for (Mob mob : Main.getMobs())
+			for (Mob mob : Casters.getMobs())
 			{
 				if (((Creature) event.getDamager()).getType().equals(mob.getEntityType()) && mob.getDamage() > 0)
 				{
@@ -77,7 +76,7 @@ public class Attack implements Listener
 
 			if (projectile.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(((Player) projectile.getShooter()).getUniqueId());
+				Caster caster = Casters.getCasters().get(((Player) projectile.getShooter()).getUniqueId());
 
 				if (projectile instanceof Arrow)
 				{
@@ -112,7 +111,7 @@ public class Attack implements Listener
 	{
 		if (event.getEntity() instanceof Player && event.getProjectile() instanceof Arrow)
 		{
-			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
 			if (!caster.getWeapon().containsKey(Material.BOW))
 			{

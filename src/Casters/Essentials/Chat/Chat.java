@@ -2,7 +2,7 @@ package Casters.Essentials.Chat;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -83,7 +83,7 @@ public class Chat implements CommandInterface, Listener
 	@EventHandler
 	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		String message = "";
 
@@ -147,7 +147,7 @@ public class Chat implements CommandInterface, Listener
 			case "Party":
 				message += ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "PTY" + ChatColor.DARK_GRAY + "] ";
 
-				for (Caster player : Main.getCasters().values())
+				for (Caster player : Casters.getCasters().values())
 				{
 					if (!caster.getParty().getMembers().contains(player))
 					{

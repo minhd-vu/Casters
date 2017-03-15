@@ -2,7 +2,7 @@ package Casters.Casts.Passives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -37,7 +37,7 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 		if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity)
 		{
 			Player player = (Player) event.getDamager();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 			LivingEntity target = (LivingEntity) event.getEntity();
 
 			if (caster.getCasts().containsKey(name))

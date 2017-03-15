@@ -1,7 +1,7 @@
 package Casters.Essentials.Effects;
 
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -103,6 +103,6 @@ public class Siphon extends Bleed
 				}
 			}
 
-		}.runTaskTimer(Main.getInstance(), period, period);
+		}.runTaskTimer(Casters.getInstance(), period, period);
 	}
 }

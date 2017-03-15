@@ -1,9 +1,9 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Type;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,7 +26,7 @@ public class CastersChoose implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length != 2)
 			{
@@ -58,7 +58,7 @@ public class CastersChoose implements CommandInterface
 					return true;
 				}
 
-				for (Type type : Main.getClasses())
+				for (Type type : Casters.getClasses())
 				{
 					if (args[1].equalsIgnoreCase(type.getName()))
 					{
@@ -70,7 +70,7 @@ public class CastersChoose implements CommandInterface
 					}
 				}
 
-				for (Type race : Main.getRaces())
+				for (Type race : Casters.getRaces())
 				{
 					if (args[1].equalsIgnoreCase(race.getName()))
 					{
@@ -82,7 +82,7 @@ public class CastersChoose implements CommandInterface
 					}
 				}
 
-				for (Type job : Main.getJobs())
+				for (Type job : Casters.getJobs())
 				{
 					if (args[1].equalsIgnoreCase(job.getName()))
 					{

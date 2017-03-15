@@ -3,7 +3,7 @@ package Casters.Casts.Targetted;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Siphon;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -62,7 +62,7 @@ public class CastSiphon extends Targetted implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -113,7 +113,7 @@ public class CastSiphon extends Targetted implements CommandInterface, Listener
 							caster.setCasting(name, false);
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 				}
 			}
 		}

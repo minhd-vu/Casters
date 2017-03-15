@@ -3,7 +3,7 @@ package Casters.Casts.Passives;
 import Casters.Casts.Cast;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -24,7 +24,7 @@ public abstract class Passive extends Cast implements CommandInterface, Listener
 		{
 			Player player = (Player) sender;
 			@SuppressWarnings("unused")
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{

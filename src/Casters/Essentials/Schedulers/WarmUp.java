@@ -1,7 +1,7 @@
 package Casters.Essentials.Schedulers;
 
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -58,7 +58,7 @@ public class WarmUp
 					caster.setWarmingUp(name, false);
 				}
 
-			}.runTaskLater(Main.getInstance(), duration);
+			}.runTaskLater(Casters.getInstance(), duration);
 
 			warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
 
@@ -93,7 +93,7 @@ public class WarmUp
 					caster.setWarmingUp(name, false);
 				}
 
-			}.runTaskLater(Main.getInstance(), duration);
+			}.runTaskLater(Casters.getInstance(), duration);
 
 			warmups.put(caster.getPlayer().getName(), System.currentTimeMillis());
 

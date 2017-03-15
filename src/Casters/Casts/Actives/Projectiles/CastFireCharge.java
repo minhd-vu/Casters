@@ -2,7 +2,7 @@ package Casters.Casts.Actives.Projectiles;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -61,7 +61,7 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -110,10 +110,10 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), timer);
+						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -130,7 +130,7 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 
 			if (projectiles.contains(firecharge.getUniqueId()) && firecharge.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(((Player) firecharge.getShooter()).getUniqueId());
+				Caster caster = Casters.getCasters().get(((Player) firecharge.getShooter()).getUniqueId());
 
 				List<Entity> entities = firecharge.getNearbyEntities(areaofeffect, areaofeffect, areaofeffect);
 

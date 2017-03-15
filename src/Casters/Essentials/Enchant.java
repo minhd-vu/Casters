@@ -1,6 +1,6 @@
 package Casters.Essentials;
 
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class Enchant implements Listener
 	@EventHandler
 	public void onEnchantItemEvent(EnchantItemEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getEnchanter().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getEnchanter().getUniqueId());
 
 		if (!caster.getJob().equals("Enchanter"))
 		{

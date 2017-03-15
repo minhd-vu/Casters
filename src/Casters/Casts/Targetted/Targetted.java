@@ -2,7 +2,7 @@ package Casters.Casts.Targetted;
 
 import Casters.Casts.Cast;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -116,9 +116,9 @@ public abstract class Targetted extends Cast
 				{
 					if (entity instanceof Player)
 					{
-						Caster caster = Main.getCasters().get(player.getUniqueId());
+						Caster caster = Casters.getCasters().get(player.getUniqueId());
 
-						if (caster.hasParty() && caster.getParty().getMembers().contains(Main.getCasters().get(entity.getUniqueId())))
+						if (caster.hasParty() && caster.getParty().getMembers().contains(Casters.getCasters().get(entity.getUniqueId())))
 						{
 							if (targetpartymembers)
 							{

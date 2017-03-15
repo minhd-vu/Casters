@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -53,7 +53,7 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -102,11 +102,11 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 									}
 								}
 
-							}.runTaskLater(Main.getInstance(), duration);
+							}.runTaskLater(Casters.getInstance(), duration);
 						}
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -118,8 +118,8 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 	{
 		if (event.getDamager() instanceof Player && event.getEntity() instanceof Player)
 		{
-			Caster attacker = Main.getCasters().get(event.getDamager().getUniqueId());
-			Caster defender = Main.getCasters().get(event.getEntity().getUniqueId());
+			Caster attacker = Casters.getCasters().get(event.getDamager().getUniqueId());
+			Caster defender = Casters.getCasters().get(event.getEntity().getUniqueId());
 
 			if (attacker.hasEffect("Taunted") && !defender.hasEffect("Taunting"))
 			{

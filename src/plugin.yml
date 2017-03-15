@@ -1,7 +1,7 @@
 name: Casters
 version: 1.1
 author: SirGoldenNugget
-main: Cast.Main
+main: Cast.Casters
 description: Casters Plugin.
 depend: [ScoreboardLib, TitleTabandBarAPI]
 commands:

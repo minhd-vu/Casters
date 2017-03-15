@@ -2,7 +2,7 @@ package Casters.Casts.Actives.Projectiles;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.command.Command;
@@ -75,7 +75,7 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -128,10 +128,10 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), timer);
+						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -147,7 +147,7 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 
 			if (projectiles.contains(darkbomb.getUniqueId()) && darkbomb.getShooter() instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(((Player) darkbomb.getShooter()).getUniqueId());
+				Caster caster = Casters.getCasters().get(((Player) darkbomb.getShooter()).getUniqueId());
 
 				event.setCancelled(true);
 

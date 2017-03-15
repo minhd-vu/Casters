@@ -1,8 +1,8 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Type;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,7 +29,7 @@ public class CastersInfo implements CommandInterface
 				return false;
 			}
 
-			for (Type c : Main.getClasses())
+			for (Type c : Casters.getClasses())
 			{
 				if (c.getName().equalsIgnoreCase(args[1]))
 				{

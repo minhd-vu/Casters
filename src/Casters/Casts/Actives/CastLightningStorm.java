@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -55,7 +55,7 @@ public class CastLightningStorm extends Active implements CommandInterface, List
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -108,7 +108,7 @@ public class CastLightningStorm extends Active implements CommandInterface, List
 							cooldown.start(player.getName());
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 				}
 
 				else

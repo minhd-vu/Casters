@@ -1,7 +1,7 @@
 package Casters.Essentials.Effects;
 
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -36,7 +36,7 @@ public class Bleed
 
 		if (target instanceof Player)
 		{
-			Main.getCasters().get(target.getUniqueId()).setEffect("Bleeding", duration);
+			Casters.getCasters().get(target.getUniqueId()).setEffect("Bleeding", duration);
 			target.sendMessage(
 					header + "You" + ChatColor.GRAY + " Are " + ChatColor.WHITE + "Bleeding" + ChatColor.GRAY + "!");
 		}
@@ -94,6 +94,6 @@ public class Bleed
 				}
 			}
 
-		}.runTaskTimer(Main.getInstance(), period, period);
+		}.runTaskTimer(Casters.getInstance(), period, period);
 	}
 }

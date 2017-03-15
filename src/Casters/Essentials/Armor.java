@@ -1,6 +1,6 @@
 package Casters.Essentials;
 
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,7 +26,7 @@ public class Armor implements Listener
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 		{
@@ -122,7 +122,7 @@ public class Armor implements Listener
 			return;
 		}
 
-		Caster caster = Main.getCasters().get(event.getWhoClicked().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getWhoClicked().getUniqueId());
 
 		if (shift)
 		{
@@ -213,7 +213,7 @@ public class Armor implements Listener
 				}
 			}
 
-		}.runTaskLater(Main.getInstance(), 20);
+		}.runTaskLater(Casters.getInstance(), 20);
 	}
 
 	@EventHandler
@@ -231,7 +231,7 @@ public class Armor implements Listener
 		{
 			if (target instanceof Player)
 			{
-				Caster caster = Main.getCasters().get(target.getUniqueId());
+				Caster caster = Casters.getCasters().get(target.getUniqueId());
 
 				if (caster.getPlayer().getLocation().distance(location) < 2)
 				{

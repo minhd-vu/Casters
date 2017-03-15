@@ -2,7 +2,7 @@ package Casters.Casts.Passives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +30,7 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 	{
 		if (event.getEntity() instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
 			if (caster.getCasts().containsKey(name))
 			{

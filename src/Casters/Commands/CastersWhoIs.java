@@ -1,8 +1,8 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -34,7 +34,7 @@ public class CastersWhoIs implements CommandInterface
 			}
 			else
 			{
-				Caster caster = Main.getCasters().get(Bukkit.getPlayer(args[1]).getUniqueId());
+				Caster caster = Casters.getCasters().get(Bukkit.getPlayer(args[1]).getUniqueId());
 				player.sendMessage("\n" + fill + header + fill + "\n" + ChatColor.DARK_AQUA + args[1] + "\n"
 						+ ChatColor.DARK_AQUA + "Class: " + ChatColor.AQUA + caster.getType().getName() + " - "
 						+ caster.getTypeLevel() + "/" + caster.getRaceMaxLevel() + "\n" + ChatColor.DARK_AQUA + "Race: "

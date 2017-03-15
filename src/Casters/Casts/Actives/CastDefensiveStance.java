@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -48,7 +48,7 @@ public class CastDefensiveStance extends Active implements CommandInterface
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -112,7 +112,7 @@ public class CastDefensiveStance extends Active implements CommandInterface
 									}
 								}
 
-							}.runTaskTimer(Main.getInstance(), 1, 1);
+							}.runTaskTimer(Casters.getInstance(), 1, 1);
 
 							player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), IRON_DOOR_CLOSE, 0, 0, 0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
 							player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 0.8F, 1.0F);
@@ -131,13 +131,13 @@ public class CastDefensiveStance extends Active implements CommandInterface
 									}
 								}
 
-							}.runTaskLater(Main.getInstance(), duration);
+							}.runTaskLater(Casters.getInstance(), duration);
 						}
 
 						cooldown.start(player.getName());
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 

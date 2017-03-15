@@ -2,7 +2,7 @@ package Casters.Party;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ public class PartyChat implements CommandInterface
 		{
 			Player player = (Player) sender;
 			@SuppressWarnings("unused")
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			player.performCommand("chat channel party");
 		}

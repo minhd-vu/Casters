@@ -3,7 +3,7 @@ package Casters.Casts.Targetted;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Poison;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -60,7 +60,7 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -102,7 +102,7 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 							caster.setCasting(name, false);
 						}
 
-					}.runTaskLater(Main.getInstance(), warmup.getDuration());
+					}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 				}
 			}
 		}

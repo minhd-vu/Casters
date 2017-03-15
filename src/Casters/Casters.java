@@ -1,6 +1,6 @@
 package Casters;
 
-import Casters.Casters.*;
+import Casters.Commands.*;
 import Casters.Casts.Actives.*;
 import Casters.Casts.Actives.Projectiles.*;
 import Casters.Casts.Cast;
@@ -43,9 +43,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class Main extends JavaPlugin implements Listener
+public class Casters extends JavaPlugin implements Listener
 {
-	private static Main instance;
+	private static Casters instance;
 
 	private static ConfigManager manager;
 
@@ -143,7 +143,7 @@ public class Main extends JavaPlugin implements Listener
 	private static PartyLeave partyleave;
 	private static PartyDisband partydisband;
 
-	public static Main getInstance()
+	public static Casters getInstance()
 	{
 		return instance;
 	}

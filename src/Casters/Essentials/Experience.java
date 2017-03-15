@@ -1,6 +1,6 @@
 package Casters.Essentials;
 
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -57,7 +57,7 @@ public class Experience implements Listener
 	@EventHandler
 	public void onPlayerLevelChangeEvent(PlayerLevelChangeEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		if (!(caster.getTypeLevel() == caster.getPlayer().getLevel()))
 		{
@@ -68,7 +68,7 @@ public class Experience implements Listener
 	@EventHandler
 	public void onPlayerExpChangeEvent(PlayerExpChangeEvent event)
 	{
-		if (Main.getCasters().containsKey(event.getPlayer().getUniqueId()))
+		if (Casters.getCasters().containsKey(event.getPlayer().getUniqueId()))
 		{
 			event.setAmount(0);
 		}
@@ -83,7 +83,7 @@ public class Experience implements Listener
 			{
 				if (event.getEntity().getKiller() instanceof Player)
 				{
-					Caster caster = Main.getCasters().get(event.getEntity().getKiller().getUniqueId());
+					Caster caster = Casters.getCasters().get(event.getEntity().getKiller().getUniqueId());
 
 					if (event.getEntity().equals(caster.getPlayer()))
 					{
@@ -126,7 +126,7 @@ public class Experience implements Listener
 
 				else if (event.getEntity().getKiller() instanceof Creature)
 				{
-					Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+					Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
 					if (event.getEntity().equals(caster.getPlayer()))
 					{
@@ -137,9 +137,9 @@ public class Experience implements Listener
 				}
 			}
 
-			else if (Main.getCasters().containsKey(event.getEntity().getUniqueId()))
+			else if (Casters.getCasters().containsKey(event.getEntity().getUniqueId()))
 			{
-				Caster caster = Main.getCasters().get(event.getEntity().getUniqueId());
+				Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
 				caster.setTypeExp(caster.getTypeExp() - explossgeneral);
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Lost " + ChatColor.WHITE + explossgeneral
@@ -151,7 +151,7 @@ public class Experience implements Listener
 	@EventHandler
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		new BukkitRunnable()
 		{
@@ -161,13 +161,13 @@ public class Experience implements Listener
 				caster.getPlayer().setExp(caster.getTypeExp() / caster.getTypeMaxExp());
 			}
 
-		}.runTaskLater(Main.getInstance(), 20);
+		}.runTaskLater(Casters.getInstance(), 20);
 	}
 
 	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getPlayer().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getPlayer().getUniqueId());
 
 		if (event.getPlayer().equals(caster.getPlayer()))
 		{
@@ -220,7 +220,7 @@ public class Experience implements Listener
 	@EventHandler
 	public void onCraftItemEvent(CraftItemEvent event)
 	{
-		Caster caster = Main.getCasters().get(event.getWhoClicked().getUniqueId());
+		Caster caster = Casters.getCasters().get(event.getWhoClicked().getUniqueId());
 
 		caster.setJobExp(caster.getJobExp() + expgaincraft);
 		caster.getPlayer().sendMessage(

@@ -1,8 +1,8 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Chat.Pages;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -28,31 +28,31 @@ public class CastersRecipes implements CommandInterface
 		ShapedRecipe rottenfleshtoleather = new ShapedRecipe(leather);
 		rottenfleshtoleather.shape("%%%", "%%%", "%%%");
 		rottenfleshtoleather.setIngredient('%', Material.ROTTEN_FLESH);
-		Main.getInstance().getServer().addRecipe(rottenfleshtoleather);
+		Casters.getInstance().getServer().addRecipe(rottenfleshtoleather);
 
 		ItemStack chainmailhelmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
 		ShapedRecipe ironfencetochainmailhelmet = new ShapedRecipe(chainmailhelmet);
 		ironfencetochainmailhelmet.shape("&&&", "& &");
 		ironfencetochainmailhelmet.setIngredient('&', Material.IRON_FENCE);
-		Main.getInstance().getServer().addRecipe(ironfencetochainmailhelmet);
+		Casters.getInstance().getServer().addRecipe(ironfencetochainmailhelmet);
 
 		ItemStack chainmailchestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
 		ShapedRecipe ironfencetochainmailchestplate = new ShapedRecipe(chainmailchestplate);
 		ironfencetochainmailchestplate.shape("& &", "&&&", "&&&");
 		ironfencetochainmailchestplate.setIngredient('&', Material.IRON_FENCE);
-		Main.getInstance().getServer().addRecipe(ironfencetochainmailchestplate);
+		Casters.getInstance().getServer().addRecipe(ironfencetochainmailchestplate);
 
 		ItemStack chainmailleggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
 		ShapedRecipe ironfencetochainmailleggings = new ShapedRecipe(chainmailleggings);
 		ironfencetochainmailleggings.shape("&&&", "& &", "& &");
 		ironfencetochainmailleggings.setIngredient('&', Material.IRON_FENCE);
-		Main.getInstance().getServer().addRecipe(ironfencetochainmailleggings);
+		Casters.getInstance().getServer().addRecipe(ironfencetochainmailleggings);
 
 		ItemStack chainmailboots = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
 		ShapedRecipe ironfencetochainmailboots = new ShapedRecipe(chainmailboots);
 		ironfencetochainmailboots.shape("& &", "& &");
 		ironfencetochainmailboots.setIngredient('&', Material.IRON_FENCE);
-		Main.getInstance().getServer().addRecipe(ironfencetochainmailboots);
+		Casters.getInstance().getServer().addRecipe(ironfencetochainmailboots);
 
 		commands.add(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "1" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY
 				+ "9 Rotten Flesh -> 1 Leather.");

@@ -1,7 +1,7 @@
 package Casters.Essentials.Effects;
 
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -32,7 +32,7 @@ public class Stun
 	{
 		if (target instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(target.getUniqueId());
+			Caster caster = Casters.getCasters().get(target.getUniqueId());
 			caster.setEffect("Stunned", duration);
 
 			stuns.put(target.getName(), System.currentTimeMillis());
@@ -84,7 +84,7 @@ public class Stun
 					}
 				}
 
-			}.runTaskTimer(Main.getInstance(), 0, 1);
+			}.runTaskTimer(Casters.getInstance(), 0, 1);
 		}
 
 		else if (target instanceof LivingEntity)
@@ -121,7 +121,7 @@ public class Stun
 					return;
 				}
 
-			}.runTaskLater(Main.getInstance(), duration);
+			}.runTaskLater(Casters.getInstance(), duration);
 		}
 	}
 }

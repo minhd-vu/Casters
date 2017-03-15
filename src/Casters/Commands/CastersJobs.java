@@ -1,9 +1,9 @@
-package Casters.Casters;
+package Casters.Commands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Chat.Pages;
 import Casters.Essentials.Type;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,26 +12,26 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastersRaces implements CommandInterface
+public class CastersJobs implements CommandInterface
 {
 	private Pages pages = new Pages();
-	private String fill = "-------------------";
-	private String header = ChatColor.DARK_GRAY + "-[" + ChatColor.DARK_AQUA + "Casters Races" + ChatColor.DARK_GRAY
+	private String fill = "--------------------";
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters Jobs" + ChatColor.DARK_GRAY
 			+ "]";
 
-	private List<String> races = new ArrayList<String>();
+	private List<String> jobs = new ArrayList<String>();
 
-	public CastersRaces()
+	public CastersJobs()
 	{
-		for (Type race : Main.getRaces())
+		for (Type job : Casters.getJobs())
 		{
-			races.add(ChatColor.DARK_AQUA + race.getName() + ChatColor.GRAY + " - " + race.getDescription() + ".");
+			jobs.add(ChatColor.DARK_AQUA + job.getName() + ChatColor.GRAY + " - " + job.getDescription() + ".");
 		}
 
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
-		pages.setError("Casters Races");
-		pages.setCommand("casters races");
-		pages.setPage(races);
+		pages.setError("Casters Jobs");
+		pages.setCommand("casters jobs");
+		pages.setPage(jobs);
 	}
 
 	@Override

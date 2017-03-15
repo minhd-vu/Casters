@@ -4,7 +4,7 @@ import Casters.Casts.Cast;
 import Casters.Configs.Config;
 import Casters.Essentials.Effects.Effect;
 import Casters.Essentials.Schedulers.Cooldown;
-import Casters.Main;
+import Casters.Casters;
 import Casters.Party.Invite;
 import Casters.Party.Party;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
@@ -128,9 +128,9 @@ public class Caster
 		party = null;
 		invite = null;
 
-		if (!Main.getConfigManager().getFileExists(this.player.getName() + ".yml"))
+		if (!Casters.getConfigManager().getFileExists(this.player.getName() + ".yml"))
 		{
-			config = Main.getConfigManager().getNewConfig(this.player.getName() + ".yml",
+			config = Casters.getConfigManager().getNewConfig(this.player.getName() + ".yml",
 					new String[]{this.player.getName() + " Config File."});
 			setNewConfig();
 
@@ -140,7 +140,7 @@ public class Caster
 
 		else
 		{
-			config = Main.getConfigManager().getConfig(this.player.getName() + ".yml");
+			config = Casters.getConfigManager().getConfig(this.player.getName() + ".yml");
 		}
 
 		getConfigType();
@@ -184,7 +184,7 @@ public class Caster
 				}
 			}
 
-		}.runTaskTimer(Main.getInstance(), 0, (long) manatimer);
+		}.runTaskTimer(Casters.getInstance(), 0, (long) manatimer);
 
 		Scoreboard scoreboard = ScoreboardLib.createScoreboard(player).setHandler(new ScoreboardHandler()
 		{
@@ -212,7 +212,7 @@ public class Caster
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.DARK_AQUA + "Cooldowns:");
 
-				for (Cast cast : Main.getCasts().values())
+				for (Cast cast : Casters.getCasts().values())
 				{
 					if (cast.getCooldown().hasCooldown(player.getName()))
 					{
@@ -240,7 +240,7 @@ public class Caster
 
 		scoreboard.activate();
 
-		Main.getTabManager().setHeader(tabheader);
+		Casters.getTabManager().setHeader(tabheader);
 
 		new BukkitRunnable()
 		{
@@ -274,19 +274,19 @@ public class Caster
 					}
 				}
 
-				Main.getActionBarManager()
+				Casters.getActionBarManager()
 						.setBar(ChatColor.RED + "❤ " + Double.parseDouble(decimalformat.format(player.getHealth()))
 								+ "/" + Double.parseDouble(decimalformat.format(player.getMaxHealth())) + "        "
 								+ ChatColor.BLUE + "✦ " + Double.parseDouble(decimalformat.format(mana)) + "/"
 								+ Double.parseDouble(decimalformat.format(maxmana)));
-				Main.getTabManager().setFooter(
+				Casters.getTabManager().setFooter(
 						tabfooter + ChatColor.GRAY + "\nPING: " + ((CraftPlayer) player).getHandle().ping + "\n");
 
-				Main.getActionBarManager().send(player);
-				Main.getTabManager().send(player);
+				Casters.getActionBarManager().send(player);
+				Casters.getTabManager().send(player);
 			}
 
-		}.runTaskTimer(Main.getInstance(), 0, 2);
+		}.runTaskTimer(Casters.getInstance(), 0, 2);
 	}
 
 	private void setNewConfig()
@@ -326,7 +326,7 @@ public class Caster
 
 	private void getConfigType()
 	{
-		for (Type type : Main.getClasses())
+		for (Type type : Casters.getClasses())
 		{
 			if (type.getName().equals(config.getString("Type")))
 			{
@@ -343,7 +343,7 @@ public class Caster
 
 	private void getConfigRace()
 	{
-		for (Type race : Main.getRaces())
+		for (Type race : Casters.getRaces())
 		{
 			if (race.getName().equals(config.getString("Race")))
 			{
@@ -360,7 +360,7 @@ public class Caster
 
 	private void getConfigJob()
 	{
-		for (Type job : Main.getJobs())
+		for (Type job : Casters.getJobs())
 		{
 			if (job.getName().equals(config.getString("Job")))
 			{
@@ -564,7 +564,7 @@ public class Caster
 	{
 		if (entity instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(entity.getUniqueId());
+			Caster caster = Casters.getCasters().get(entity.getUniqueId());
 
 			return hasParty() && (party.getMembers().contains(caster) || party.equals(caster.getParty()));
 		}
@@ -901,7 +901,7 @@ public class Caster
 	{
 		if (target instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(target.getUniqueId());
+			Caster caster = Casters.getCasters().get(target.getUniqueId());
 
 			caster.getPlayer().leaveVehicle(); // TODO: Check This.
 
@@ -979,7 +979,7 @@ public class Caster
 					interrupted = false;
 				}
 
-			}.runTaskLater(Main.getInstance(), 2);
+			}.runTaskLater(Casters.getInstance(), 2);
 		}
 	}
 

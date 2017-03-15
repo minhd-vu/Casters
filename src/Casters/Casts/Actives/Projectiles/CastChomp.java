@@ -2,7 +2,7 @@ package Casters.Casts.Actives.Projectiles;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -47,7 +47,7 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -91,7 +91,7 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 									}
 								}
 							}
-						}.runTaskTimer(Main.getInstance(), 0, 1);
+						}.runTaskTimer(Casters.getInstance(), 0, 1);
 
 						cast(player);
 
@@ -100,7 +100,7 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 						caster.setCasting(name, false);
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -116,7 +116,7 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 
 			if (projectiles.contains(chomp.getUniqueId()) && chomp.getOwner() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
-				Caster caster = Main.getCasters().get(chomp.getOwner().getUniqueId());
+				Caster caster = Casters.getCasters().get(chomp.getOwner().getUniqueId());
 				LivingEntity target = (LivingEntity) event.getEntity();
 
 				event.setCancelled(true);

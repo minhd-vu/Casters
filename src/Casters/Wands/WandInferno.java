@@ -2,7 +2,7 @@ package Casters.Wands;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -69,7 +69,7 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 		{
 			Player player = event.getPlayer();
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			material = player.getInventory().getItemInMainHand().getType();
 
@@ -112,7 +112,7 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 							}
 						}
 
-					}.runTaskTimer(Main.getInstance(), 2, 1);
+					}.runTaskTimer(Casters.getInstance(), 2, 1);
 
 					new BukkitRunnable()
 					{
@@ -126,7 +126,7 @@ public class WandInferno extends Wand implements CommandInterface, Listener
 							}
 						}
 
-					}.runTaskLater(Main.getInstance(), (long) timer);
+					}.runTaskLater(Casters.getInstance(), (long) timer);
 				}
 			}
 		}

@@ -2,7 +2,7 @@ package Casters.Casts.Actives.Projectiles;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -53,7 +53,7 @@ public class CastSeeker extends Projectile implements CommandInterface
 	{
 		if (sender instanceof Player)
 		{
-			Caster caster = Main.getCasters().get(((Player) sender).getUniqueId());
+			Caster caster = Casters.getCasters().get(((Player) sender).getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -102,10 +102,10 @@ public class CastSeeker extends Projectile implements CommandInterface
 								}
 							}
 
-						}.runTaskLater(Main.getInstance(), timer);
+						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -121,7 +121,7 @@ public class CastSeeker extends Projectile implements CommandInterface
 
 			if (projectiles.contains(seeker.getUniqueId()) && seeker.getShooter() instanceof Player && event.getEntity() instanceof LivingEntity)
 			{
-				Caster caster = Main.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
+				Caster caster = Casters.getCasters().get(((Player) seeker.getShooter()).getUniqueId());
 				LivingEntity target = (LivingEntity) event.getEntity();
 
 				event.setCancelled(true);

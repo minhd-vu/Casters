@@ -2,7 +2,7 @@ package Casters.Casts.Actives;
 
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Main;
+import Casters.Casters;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -49,7 +49,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 		if (sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			Caster caster = Main.getCasters().get(player.getUniqueId());
+			Caster caster = Casters.getCasters().get(player.getUniqueId());
 
 			if (args.length == 2 && args[1].equalsIgnoreCase("info"))
 			{
@@ -93,7 +93,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 						cooldown.start(player.getName());
 					}
 
-				}.runTaskLater(Main.getInstance(), warmup.getDuration());
+				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
 			}
 		}
 
@@ -118,7 +118,7 @@ public class CastMount extends Active implements CommandInterface, Listener
 	{
 		if (event.getVehicle() instanceof Horse)
 		{
-			Caster caster = Main.getCasters().get(event.getEntered().getUniqueId());
+			Caster caster = Casters.getCasters().get(event.getEntered().getUniqueId());
 
 			if (!caster.getCasts().containsKey(name))
 			{
