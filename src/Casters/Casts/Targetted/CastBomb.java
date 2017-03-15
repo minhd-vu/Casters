@@ -132,7 +132,7 @@ public class CastBomb extends Projectile implements CommandInterface, Listener
 							caster.setCasting(name, false);
 						}
 
-						cooldown.start(player.getName()); // TODO: Check Interrupt And Everything.
+						cooldown.start(player.getName());
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
@@ -161,7 +161,7 @@ public class CastBomb extends Projectile implements CommandInterface, Listener
 
 					if (!caster.sameParty(target))
 					{
-						target.damage(damage); // TODO: Check If Hit Party.
+						target.damage(damage);
 						caster.setBossBarEntity(target);
 					}
 				}
