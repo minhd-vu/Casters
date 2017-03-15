@@ -40,29 +40,25 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 			Caster caster = Casters.getCasters().get(player.getUniqueId());
 			LivingEntity target = (LivingEntity) event.getEntity();
 
-			if (caster.getCasts().containsKey(name))
+			if (caster.getCasts().containsKey(name) && !caster.sameParty(target) &&
+					caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) &&
+					target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
 			{
-				if (target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
+				if (player.isSneaking())
 				{
-					if (!(caster.hasParty() && caster.getParty().getMembers().contains(target)))
-					{
-						if (player.isSneaking())
-						{
-							target.damage(event.getDamage() * (sneaking / 100.0));
-						}
-						else
-						{
-							target.damage(event.getDamage() * (percentage / 100.0));
-						}
-
-						target.getWorld().spigot().playEffect(target.getLocation(), Effect.COLOURED_DUST, 0, 0, 0.2F,
-								1.0F, 0.2F, 0.0F, 30, 16);
-						target.getWorld().playSound(target.getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 1.0F, 0.6F);
-					}
-
-					event.setCancelled(true);
+					target.damage(event.getDamage() * (sneaking / 100.0));
 				}
+
+				else
+				{
+					target.damage(event.getDamage() * (percentage / 100.0));
+				}
+
+				target.getWorld().spigot().playEffect(target.getLocation(), Effect.COLOURED_DUST, 0, 0, 0.2F, 1.0F, 0.2F, 0.0F, 30, 16);
+				target.getWorld().playSound(target.getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 1.0F, 0.6F);
 			}
+
+			event.setCancelled(true);
 		}
 	}
 }

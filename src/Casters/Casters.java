@@ -213,8 +213,7 @@ public class Casters extends JavaPlugin implements Listener
 	{
 		for (Player player : Bukkit.getOnlinePlayers())
 		{
-			player.kickPlayer(
-					ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
+			player.kickPlayer(ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
 		}
 	}
 
