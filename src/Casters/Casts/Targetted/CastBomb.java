@@ -109,7 +109,7 @@ public class CastBomb extends Projectile implements CommandInterface, Listener
 							bomb.setGravity(gravity);
 							bomb.setFuseTicks(fuse);
 							bomb.setIsIncendiary(incendiary);
-							
+
 							EntityLiving nmsEntityLiving = (EntityLiving) (((CraftLivingEntity) player).getHandle());
 							EntityTNTPrimed nmsTNT = (EntityTNTPrimed) (((CraftTNTPrimed) bomb).getHandle());
 

@@ -538,7 +538,7 @@ public class Caster
 			return true;
 		}
 
-		player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + name + ChatColor.GRAY + " - Not Enough Mana!");
+		player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + name + ChatColor.GRAY + " - Not Enough Mana!");
 
 		return false;
 	}

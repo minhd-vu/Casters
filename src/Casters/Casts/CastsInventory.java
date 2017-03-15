@@ -71,17 +71,17 @@ public class CastsInventory implements CommandInterface, Listener
 		meta.setAuthor("SirGoldenNugget");
 		meta.setGeneration(BookMeta.Generation.ORIGINAL);
 		meta.addPage(
-				ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "1: Setup\n" + ChatColor.BLACK + " In Order To " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast" + ChatColor.BLACK +
-						", Place One Of The " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast Items" + ChatColor.DARK_GRAY + " (Found In The Casts Menu)" + ChatColor.BLACK +
+				ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "1: Setup\n" + ChatColor.BLACK + "In Order To " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast" + ChatColor.BLACK +
+						", Place One Of The " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast\nItems" + ChatColor.DARK_GRAY + " (Found In The Casts Menu)" + ChatColor.BLACK +
 						" And Place It In Your " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Hotbar."); // TODO: Complete This; Add Colors.
 		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "2: Casting\n" + ChatColor.BLACK +
-				" Next, All You Are Required To Do Is Either Press Your" + ChatColor.DARK_AQUA + ChatColor.BOLD + " Hotbar Keys " + ChatColor.DARK_GRAY + "(Usually 1-9)" +
+				"Next, All You Are Required To Do Is Either Press Your" + ChatColor.DARK_AQUA + ChatColor.BOLD + " Hotbar Keys " + ChatColor.DARK_GRAY + "(Usually 1-9)" +
 				ChatColor.BLACK + " Or " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Scroll" + ChatColor.BLACK + " Using The Mouse " + ChatColor.DARK_GRAY + "(Not Recommended)" +
 				ChatColor.BLACK + ".");
-		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "3: Warnings\n" + ChatColor.BLACK + " If You Drop Or Die With Your" + ChatColor.DARK_AQUA + ChatColor.BOLD +
-				" Cast Heads" +
-				ChatColor.BLACK + ", You They Will Be" + ChatColor.RED + ChatColor.BOLD + " Deleted" + ChatColor.BLACK + ". The " + ChatColor.DARK_AQUA + ChatColor.BOLD +
-				"Cast Heads" + ChatColor.BLACK + " Are Also Not Placable.");
+		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "3: Warnings\n" + ChatColor.BLACK + "If You Drop Or Die With Your" + ChatColor.DARK_AQUA + ChatColor.BOLD +
+				" Cast Heads" + ChatColor.BLACK + ", You They Will Be" + ChatColor.RED + ChatColor.BOLD + " Deleted" + ChatColor.BLACK + ". The " + ChatColor.DARK_AQUA +
+				ChatColor.BOLD + "Cast\nHeads" + ChatColor.BLACK + " Are Also Not Placable. Do Not Rename Heads To" + ChatColor.DARK_AQUA + ChatColor.BOLD +
+				" Casts " + ChatColor.BLACK + "Or They Will Be " + ChatColor.RED + ChatColor.BOLD + "Destroyed" + ChatColor.BLACK + "!");
 
 		instructions.setItemMeta(meta);
 
@@ -125,6 +125,16 @@ public class CastsInventory implements CommandInterface, Listener
 		}
 	}
 
+	private boolean isCastItem(ItemStack castitem)
+	{
+		if (castitem != null && castitem.hasItemMeta())
+		{
+			return castitems.containsKey(ChatColor.stripColor(castitem.getItemMeta().getDisplayName()));
+		}
+
+		return false;
+	}
+
 	@EventHandler
 	public void onPlayerDeathEvent(PlayerDeathEvent event)
 	{
@@ -164,16 +174,6 @@ public class CastsInventory implements CommandInterface, Listener
 				player.performCommand("cast " + cast.toLowerCase());
 			}
 		}
-	}
-
-	private boolean isCastItem(ItemStack castitem)
-	{
-		if (castitem != null && castitem.hasItemMeta())
-		{
-			return castitems.containsKey(ChatColor.stripColor(castitem.getItemMeta().getDisplayName()));
-		}
-
-		return false;
 	}
 
 	@EventHandler
