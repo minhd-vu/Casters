@@ -7,11 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4621a64-84e6-4618-8296-b5e699f342e3" name="Default" comment="Added Base Classes For Firearms.">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostfire.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostFire.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastSoulbound.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastDemonSpawn.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casters.java" afterPath="$PROJECT_DIR$/src/Casters/Casters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireball.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireball.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostfire.java" afterPath="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostfire.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +34,8 @@
       <file leaf-file-name="Casters.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Casters/Casters.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="710" column="55" lean-forward="false" selection-start-line="710" selection-start-column="55" selection-end-line="710" selection-end-column="55" />
+            <state relative-caret-position="-600">
+              <caret line="370" column="50" lean-forward="false" selection-start-line="370" selection-start-column="50" selection-end-line="370" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -50,35 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CastTrample.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CastTrample.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="79" column="123" lean-forward="false" selection-start-line="79" selection-start-column="123" selection-end-line="79" selection-end-column="123" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CastFrostFire.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostFire.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1109">
-              <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CastFireball.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireball.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1214">
-              <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="511">
+              <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,9 +66,11 @@
       <file leaf-file-name="CastArcaneShot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-              <folding />
+            <state relative-caret-position="279">
+              <caret line="88" column="110" lean-forward="false" selection-start-line="88" selection-start-column="110" selection-end-line="88" selection-end-column="110" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,18 +78,18 @@
       <file leaf-file-name="CastFireSpit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="60">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CastSoulbound.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastSoulbound.java">
+      <file leaf-file-name="CastDemonSpawn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastDemonSpawn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="30">
+              <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -184,7 +163,6 @@
         <option value="$PROJECT_DIR$/src/Casters/Casts/Passives/Firearms/Firearm.java" />
         <option value="$PROJECT_DIR$/src/Casters/Wands/WandWarlock.java" />
         <option value="$PROJECT_DIR$/src/Casters/Wands/WandShaman.java" />
-        <option value="$PROJECT_DIR$/src/Casters/Wands/WandDistorter.java" />
         <option value="$PROJECT_DIR$/src/Casters/Essentials/Armor.java" />
         <option value="$PROJECT_DIR$/src/Casters/Wands/WandInferno.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/CastLightningStorm.java" />
@@ -203,15 +181,16 @@
         <option value="$PROJECT_DIR$/src/Casters/Casts/Targetted/CastBomb.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Targetted/CastCharge.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Targetted/CastTrample.java" />
-        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java" />
-        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java" />
-        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastSoulbound.java" />
         <option value="$PROJECT_DIR$/src/Casters/Essentials/Chat/Pages.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireball.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostfire.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casters.java" />
+        <option value="$PROJECT_DIR$/src/Casters/Wands/WandDistorter.java" />
         <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostFire.java" />
+        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java" />
+        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastSoulbound.java" />
+        <option value="$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java" />
       </list>
     </option>
   </component>
@@ -1015,14 +994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Wands/WandDistorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="169" column="137" lean-forward="false" selection-start-line="169" selection-start-column="137" selection-end-line="169" selection-end-column="137" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Passives/Firearms/Firearm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1224,30 +1195,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastSoulbound.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../Minecraft Server/Spigot 1.11.2/spigot-1.11.2.jar!/org/bukkit/entity/Entity.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1282,28 +1229,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java">
+    <entry file="file://$PROJECT_DIR$/src/Casters/Casters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="79" column="123" lean-forward="false" selection-start-line="79" selection-start-column="123" selection-end-line="79" selection-end-column="123" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-600">
+          <caret line="370" column="50" lean-forward="false" selection-start-line="370" selection-start-column="50" selection-end-line="370" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Casters/Casters.java">
+    <entry file="file://$PROJECT_DIR$/src/Casters/Wands/WandDistorter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="710" column="55" lean-forward="false" selection-start-line="710" selection-start-column="55" selection-end-line="710" selection-end-column="55" />
+        <state relative-caret-position="447">
+          <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFrostFire.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1109">
-          <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+        <state relative-caret-position="372">
+          <caret line="173" column="25" lean-forward="true" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastDemonSpawn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastFireSpit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/Projectiles/CastArcaneShot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="88" column="110" lean-forward="false" selection-start-line="88" selection-start-column="110" selection-end-line="88" selection-end-column="110" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Casters/Casts/Actives/CastTrample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

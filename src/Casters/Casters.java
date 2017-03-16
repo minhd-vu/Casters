@@ -122,6 +122,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastPressurePoint castpressurepoint;
 	private static CastTrample casttrample;
 	private static CastFrostFire castfrostfire;
+	private static CastArcaneShot castarcaneshot;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -367,6 +368,7 @@ public class Casters extends JavaPlugin implements Listener
 		distorter.getWeapon().put(Material.STONE_HOE, 5);
 		distorter.getWeapon().put(Material.WOOD_HOE, 5);
 		distorter.getCasts().put("DarkBomb", 1);
+		distorter.getCasts().put("ArcaneShot", 1);
 
 		Type inferno = new Type("Inferno", "Description");
 		inferno.getArmor().add(Material.LEATHER_HELMET);
@@ -607,6 +609,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("PressurePoint", castpressurepoint = new CastPressurePoint("PressurePoint", "Hit A Pressure Point And Stun"));
 		casts.put("Trample", casttrample = new CastTrample("Trample", "Trample Your Opponent While On A Horse"));
 		casts.put("FrostFire", castfrostfire = new CastFrostFire("FrostFire", "Fire A Frost Orb"));
+		casts.put("ArcaneShot", castarcaneshot = new CastArcaneShot("ArcaneShot", "Launch A Enderpearl Wherever"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -650,8 +653,8 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
 				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
-				passivemusket);
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, passivebackstab, passiveflameshield,
+				passiveflintlock, passiveblunderbuss, passivemusket);
 
 	}
 
@@ -709,6 +712,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("pressurepoint", castpressurepoint);
 		casthandler.register("trample", casttrample);
 		casthandler.register("frostfire", castfrostfire);
+		casthandler.register("arcaneshot", castarcaneshot);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

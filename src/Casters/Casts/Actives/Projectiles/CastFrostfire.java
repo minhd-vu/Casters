@@ -5,12 +5,15 @@ import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -82,7 +85,7 @@ public class CastFrostFire extends Projectile implements CommandInterface
 
 							Snowball frostfire = (Snowball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
 							frostfire.setShooter(player);
-							frostfire.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+							frostfire.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity)); // TODO: Test With Kuro.
 							frostfire.setGravity(gravity);
 							frostfire.setShooter(player);
 

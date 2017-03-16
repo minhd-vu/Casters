@@ -1,6 +1,6 @@
 package Casters.Casts.Actives.Projectiles;
 
-public class CastSoulbound
+public class CastDemonSpawn
 {
 
 }
