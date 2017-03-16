@@ -897,6 +897,14 @@ public class Caster
 		return 0;
 	}
 
+	public void interruptWarmUp()
+	{
+		if (isWarmingUp())
+		{
+			interrupted = true;
+		}
+	}
+
 	public void interruptCasts(LivingEntity target)
 	{
 		if (target instanceof Player)
@@ -914,6 +922,17 @@ public class Caster
 					caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 				}
 
+				if (caster.isCasting())
+				{
+					for (String cast : caster.getCasts().keySet())
+					{
+						if (caster.isCasting(cast))
+						{
+							caster.setCasting(cast, false);
+						}
+					}
+				}
+
 				List<Entity> entities = player.getNearbyEntities(16, 16, 16);
 
 				for (Entity entity : entities)
@@ -927,17 +946,6 @@ public class Caster
 
 				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY +
 						" Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
-
-				if (caster.isCasting())
-				{
-					for (String cast : caster.getCasts().keySet())
-					{
-						if (caster.isCasting(cast))
-						{
-							caster.setCasting(cast, false);
-						}
-					}
-				}
 			}
 		}
 	}
@@ -964,12 +972,7 @@ public class Caster
 
 	public boolean isInterrupted()
 	{
-		return interrupted;
-	}
-
-	public void setInterrupted(boolean interrupt) // TODO: Check If This Works.
-	{
-		if (interrupted = interrupt)
+		if (interrupted)
 		{
 			new BukkitRunnable()
 			{
@@ -979,8 +982,15 @@ public class Caster
 					interrupted = false;
 				}
 
-			}.runTaskLater(Casters.getInstance(), 2);
+			}.runTaskLater(Casters.getInstance(), 1);
 		}
+
+		return interrupted;
+	}
+
+	public void setInterrupted(boolean interrupted) // TODO: Check If This Works.
+	{
+		this.interrupted = interrupted;
 	}
 
 	public boolean isWarmingUp(String name)

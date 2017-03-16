@@ -6,9 +6,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 
@@ -35,6 +38,12 @@ public class Attack implements Listener
 					{
 						event.setCancelled(true);
 						return;
+					}
+
+					if (caster.isWarmingUp())
+					{
+						caster.setInterrupted(true);
+						caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 					}
 
 					// TODO: Recode This So That It Factors In Enchantments.
@@ -120,6 +129,24 @@ public class Attack implements Listener
 			{
 				arrows.put((Arrow) event.getProjectile(), (double) event.getForce());
 			}
+		}
+	}
+
+	private void cancelWarmUp(Caster caster)
+	{
+		if (caster.isWarmingUp())
+		{
+			caster.setInterrupted(true);
+			caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
+		}
+	}
+
+	@EventHandler
+	public void onPlayerInteractEvent(PlayerInteractEvent event)
+	{
+		if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))
+		{
+			cancelWarmUp(Casters.getCasters().get(event.getPlayer().getUniqueId()));
 		}
 	}
 }

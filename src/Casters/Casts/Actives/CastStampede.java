@@ -11,18 +11,26 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CastStampede extends Active implements CommandInterface, Listener
 {
+	private List<UUID> horses;
+
 	private double damage;
 	private int range;
 	private int duration;
+	private int size;
 
 	public CastStampede(String name, String description)
 	{
 		super(name, description);
+
+		horses = new ArrayList<UUID>();
 
 		warmup.setDuration(40);
 		warmup.setAmplifier(5);
@@ -36,6 +44,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		damage = 5;
 		range = 4;
 		duration = 60;
+		size = 6;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -80,22 +89,13 @@ public class CastStampede extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							List<Entity> entities = player.getNearbyEntities(range, range, range); // TODO: Test With Kuro.
-
-							entities.remove(player.getVehicle());
-
-							for (Entity entity : entities)
+							for (int i = 0; i < size; ++i)
 							{
-								if (entity instanceof LivingEntity && !caster.sameParty(entity))
-								{
-									((LivingEntity) entity).damage(damage);
-									caster.setBossBarEntity((Damageable) entity);
-									player.getWorld().spawnParticle(Particle.FALLING_DUST, entity.getLocation(), 100, 0.5, 1.0, 0.5);
-								}
+								player.getWorld().spawnEntity(player.getLocation().add(player.getLocation().getDirection().add(new Vector(2, 0, 0))), EntityType.HORSE);
 							}
 
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_HORSE_GALLOP, 8.0F, 1.0F);
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_HORSE_BREATHE, 8.0F, 1.0F);
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_HORSE_ANGRY, 8.0F, 1.0F);
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 8.0F, 1.0F);
 
 							cast(player);
 
