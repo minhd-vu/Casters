@@ -62,7 +62,6 @@ public class Casters extends JavaPlugin implements Listener
 	private static HashMap<UUID, Caster> casters;
 
 	private static CastersCommands casterscmd;
-	private static CastersReload castersreload;
 	private static CastersInfo castersinfo;
 	private static CastersLevel casterslevel;
 	private static CastersStats castersstats;
@@ -219,6 +218,10 @@ public class Casters extends JavaPlugin implements Listener
 	{
 		for (Player player : Bukkit.getOnlinePlayers())
 		{
+			casters.get(player.getUniqueId()).setConfig();
+			casters.remove(player.getUniqueId());
+			player.getPlayer().leaveVehicle();
+
 			player.kickPlayer(ChatColor.DARK_AQUA + "  " + ChatColor.BOLD + "CasterCraft" + ChatColor.GRAY + " Is Restarting!");
 		}
 	}
@@ -387,6 +390,7 @@ public class Casters extends JavaPlugin implements Listener
 		inferno.getCasts().put("FireCharge", 1);
 		inferno.getCasts().put("FireBomb", 1);
 		inferno.getCasts().put("Flameshield", 1);
+		inferno.getCasts().put("FireSpit", 1);
 
 		Type shaman = new Type("Shaman", "Description");
 		shaman.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -415,6 +419,7 @@ public class Casters extends JavaPlugin implements Listener
 		warlock.getWeapon().put(Material.WOOD_HOE, 5);
 		warlock.getCasts().put("DarkBomb", 1);
 		warlock.getCasts().put("Siphon", 1);
+		warlock.getCasts().put("DemonSpawn", 1);
 
 		Type oracle = new Type("Oracle", "Description");
 		oracle.getArmor().add(Material.LEATHER_HELMET);
@@ -569,7 +574,6 @@ public class Casters extends JavaPlugin implements Listener
 		casters = new HashMap<UUID, Caster>();
 
 		casterscmd = new CastersCommands();
-		castersreload = new CastersReload();
 		castersinfo = new CastersInfo();
 		casterslevel = new CastersLevel();
 		castersstats = new CastersStats();
@@ -659,8 +663,8 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
 				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab, passiveflameshield,
-				passiveflintlock, passiveblunderbuss, passivemusket);
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab,
+				passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket);
 
 	}
 
@@ -674,7 +678,6 @@ public class Casters extends JavaPlugin implements Listener
 		CommandHandler partyhandler = new CommandHandler();
 
 		castershandler.register("casters", casterscmd);
-		castershandler.register("reload", castersreload); // TODO: Remove This Command When Finished.
 		castershandler.register("info", castersinfo);
 		castershandler.register("level", casterslevel);
 		castershandler.register("stats", castersstats);
@@ -767,9 +770,9 @@ public class Casters extends JavaPlugin implements Listener
 	public void onPlayerJoinEvent(PlayerJoinEvent event)
 	{
 		casters.put(event.getPlayer().getUniqueId(), new Caster(event.getPlayer()));
-		event.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]"
-				+ ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GREEN
-				+ " Has Joined The Server.");
+		event.getPlayer().leaveVehicle();
+		event.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE +
+				event.getPlayer().getName() + ChatColor.GREEN + " Has Joined The Server.");
 	}
 
 	@EventHandler
@@ -778,29 +781,21 @@ public class Casters extends JavaPlugin implements Listener
 		casters.get(event.getPlayer().getUniqueId()).setConfig();
 		casters.remove(event.getPlayer().getUniqueId());
 		event.getPlayer().leaveVehicle();
-		event.setQuitMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]"
-				+ ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.RED
-				+ " Has Left The Server.");
+		event.setQuitMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE +
+				event.getPlayer().getName() + ChatColor.RED + " Has Left The Server.");
 	}
 
 	@EventHandler
 	public void onPlayerKickEvent(PlayerKickEvent event)
 	{
-		casters.get(event.getPlayer().getUniqueId()).setConfig();
-		casters.remove(event.getPlayer().getUniqueId());
-		event.getPlayer().leaveVehicle();
-		event.setLeaveMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY
-				+ "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE + event.getPlayer().getName() + ChatColor.GRAY
-				+ " Was Kicked From The Server.");
+		event.setLeaveMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "CasterCraft" + ChatColor.DARK_GRAY + "]" + ChatColor.AQUA + " >> " + ChatColor.WHITE +
+				event.getPlayer().getName() + ChatColor.GRAY + " Was Kicked From The Server.");
 	}
 
 	@EventHandler
 	public void onPlayerDeathEvent(PlayerDeathEvent event)
 	{
-		event.setDeathMessage(
-				ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Death" + ChatColor.DARK_GRAY + "]" + ChatColor.GRAY + " "
-						+ WordUtils.capitalize(event.getDeathMessage().replaceFirst(event.getEntity().getName(),
-						ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY))
-						+ ".");
+		event.setDeathMessage(ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Death" + ChatColor.DARK_GRAY + "]" + ChatColor.GRAY + " " +
+				WordUtils.capitalize(event.getDeathMessage().replaceFirst(event.getEntity().getName(), ChatColor.WHITE + event.getEntity().getName() + ChatColor.GRAY)) + ".");
 	}
 }
