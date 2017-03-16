@@ -124,6 +124,8 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastTrample casttrample;
 	private static CastFrostFire castfrostfire;
 	private static CastArcaneShot castarcaneshot;
+	private static CastFireSpit castfirespit;
+	private static CastDemonSpawn castdemonspawn;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -612,6 +614,8 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Trample", casttrample = new CastTrample("Trample", "Trample Your Opponent While On A Horse"));
 		casts.put("FrostFire", castfrostfire = new CastFrostFire("FrostFire", "Fire A Frost Orb"));
 		casts.put("ArcaneShot", castarcaneshot = new CastArcaneShot("ArcaneShot", "Launch A Enderpearl Wherever"));
+		casts.put("FireSpit", castfirespit = new CastFireSpit("FireSpit", "Spit A Fireball Somewhere"));
+		casts.put("DemonSpawn", castdemonspawn = new CastDemonSpawn("DemonSpawn", "Spawns A Demon For Your Opponents (Or Friend)"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -655,7 +659,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
 				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, passivebackstab, passiveflameshield,
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab, passiveflameshield,
 				passiveflintlock, passiveblunderbuss, passivemusket);
 
 	}
@@ -716,6 +720,8 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("trample", casttrample);
 		casthandler.register("frostfire", castfrostfire);
 		casthandler.register("arcaneshot", castarcaneshot);
+		casthandler.register("firespit", castfirespit);
+		casthandler.register("demonspawn", castdemonspawn);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

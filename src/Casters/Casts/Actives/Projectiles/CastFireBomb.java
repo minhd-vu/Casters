@@ -51,7 +51,7 @@ public class CastFireBomb extends Projectile implements CommandInterface
 		velocity = 1.0;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
-		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20);
+		info.add(ChatColor.DARK_AQUA + "FireTicks: " + ChatColor.GRAY + targetfireticks / 20.0 + " Seconds");
 
 		pages.setPage(info);
 	}
