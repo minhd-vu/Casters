@@ -3,7 +3,7 @@ package Casters.Casts.Actives.Projectiles;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;

@@ -121,6 +121,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastSeeker castseeker;
 	private static CastPressurePoint castpressurepoint;
 	private static CastTrample casttrample;
+	private static CastFrostFire castfrostfire;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -395,6 +396,7 @@ public class Casters extends JavaPlugin implements Listener
 		shaman.getCasts().put("Bolt", 1);
 		shaman.getCasts().put("LightningStorm", 1);
 		shaman.getCasts().put("ChainLightning", 1);
+		shaman.getCasts().put("FrostFire", 1);
 
 		Type warlock = new Type("Warlock", "Description");
 		warlock.getArmor().add(Material.LEATHER_HELMET);
@@ -599,12 +601,12 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Poison", castpoison = new CastPoison("Poison", "Poisons Your Opponent"));
 		casts.put("Bash", castbash = new CastBash("Bash", "Bash Your Opponent And Interrupt Casts"));
 		casts.put("Mute", castmute = new CastMute("Mute", "Silence Your Opponent"));
-		casts.put("DefensiveStance",
-				castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
+		casts.put("DefensiveStance", castdefensivestance = new CastDefensiveStance("DefensiveStance", "Reduces The Damage Party Members Take."));
 		casts.put("Chomp", castchomp = new CastChomp("Chomp", "Eat Up Your Opponent"));
 		casts.put("Seeker", castseeker = new CastSeeker("Seeker", "Send A Shulker Bullet Onto Your Opponent"));
 		casts.put("PressurePoint", castpressurepoint = new CastPressurePoint("PressurePoint", "Hit A Pressure Point And Stun"));
 		casts.put("Trample", casttrample = new CastTrample("Trample", "Trample Your Opponent While On A Horse"));
+		casts.put("FrostFire", castfrostfire = new CastFrostFire("FrostFire", "Fire A Frost Orb"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -648,7 +650,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
 				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
+				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
 				passivemusket);
 
 	}
@@ -706,6 +708,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("seeker", castseeker);
 		casthandler.register("pressurepoint", castpressurepoint);
 		casthandler.register("trample", casttrample);
+		casthandler.register("frostfire", castfrostfire);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

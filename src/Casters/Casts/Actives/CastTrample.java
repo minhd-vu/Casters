@@ -4,7 +4,6 @@ import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -78,13 +77,13 @@ public class CastTrample extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							List<Entity> entities = player.getNearbyEntities(range, range, range);
+							List<Entity> entities = player.getNearbyEntities(range, range, range); // TODO: Test With Kuro.
 
 							entities.remove(player.getVehicle());
 
 							for (Entity entity : entities)
 							{
-								if(entity instanceof LivingEntity && !caster.sameParty(entity))
+								if (entity instanceof LivingEntity && !caster.sameParty(entity))
 								{
 									((LivingEntity) entity).damage(damage);
 									caster.setBossBarEntity((Damageable) entity);
