@@ -120,6 +120,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastChomp castchomp;
 	private static CastSeeker castseeker;
 	private static CastPressurePoint castpressurepoint;
+	private static CastTrample casttrample;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -271,6 +272,7 @@ public class Casters extends JavaPlugin implements Listener
 		cavalier.getWeapon().put(Material.WOOD_SPADE, 4);
 		cavalier.getCasts().put("Charge", 1);
 		cavalier.getCasts().put("Mount", 1);
+		cavalier.getCasts().put("Trample", 1);
 
 		Type barbarian = new Type("Barbarian", "Description");
 		barbarian.getArmor().add(Material.DIAMOND_HELMET);
@@ -602,6 +604,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Chomp", castchomp = new CastChomp("Chomp", "Eat Up Your Opponent"));
 		casts.put("Seeker", castseeker = new CastSeeker("Seeker", "Send A Shulker Bullet Onto Your Opponent"));
 		casts.put("PressurePoint", castpressurepoint = new CastPressurePoint("PressurePoint", "Hit A Pressure Point And Stun"));
+		casts.put("Trample", casttrample = new CastTrample("Trample", "Trample Your Opponent While On A Horse"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -702,6 +705,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("chomp", castchomp);
 		casthandler.register("seeker", castseeker);
 		casthandler.register("pressurepoint", castpressurepoint);
+		casthandler.register("trample", casttrample);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

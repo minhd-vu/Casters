@@ -4,7 +4,7 @@ import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Stun;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -23,6 +23,7 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 	private int duration;
 	private double damage;
 	private int range;
+	private float stunrange;
 
 	public CastCharge(String name, String description)
 	{
@@ -40,12 +41,14 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 		duration = 60;
 		damage = 4;
 		range = 8;
+		stunrange = 3;
 
 		stun = new Stun(duration);
 
 		info.add(ChatColor.DARK_AQUA + "Stun: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
+		info.add(ChatColor.DARK_AQUA + "Stun Range: " + ChatColor.GRAY + stunrange + " Blocks");
 
 		pages.setPage(info);
 	}
@@ -64,6 +67,7 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
@@ -95,7 +99,7 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 							double x = target.getLocation().getX() - player.getLocation().getX();
 							double z = target.getLocation().getZ() - player.getLocation().getZ();
 
-							Vector v = new Vector(x / (range / 2), vertical, z / (range / 2));
+							Vector v = new Vector(x / (range / 2.0), vertical, z / (range / 2.0));
 
 							player.setVelocity(v);
 
@@ -109,7 +113,7 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 								@Override
 								public void run()
 								{
-									for (Entity e : player.getNearbyEntities(3F, 3F, 3F))
+									for (Entity e : player.getNearbyEntities(stunrange, stunrange, stunrange))
 									{
 										if (e.equals(target))
 										{

@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -25,8 +26,7 @@ public class Pages
 	private String fill = ChatColor.DARK_GRAY + "---------------------";
 
 	private HashMap<Integer, String> pages = new HashMap<Integer, String>();
-	private TextComponent footer = new TextComponent(
-			ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "Next Page" + ChatColor.DARK_GRAY + "]");
+	private TextComponent footer = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "Next Page" + ChatColor.DARK_GRAY + "]");
 
 	public void setHeader(String header)
 	{
@@ -172,15 +172,14 @@ public class Pages
 
 		TextComponent message = new TextComponent(header + pages.get(page));
 
-		footer.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-				new ComponentBuilder(ChatColor.GRAY + "Go To The Next Page!").create()));
-		footer.setClickEvent(
-				new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + cmd + " " + Integer.toString(page + 1)));
+		footer.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Go To The Next Page!").create()));
+		footer.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + cmd + " " + Integer.toString(page + 1)));
 
 		if (!pages.containsKey(page + 1))
 		{
 			message.addExtra("\n" + bar);
 		}
+
 		else
 		{
 			message.addExtra("\n" + fill + "-");
