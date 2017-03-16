@@ -94,6 +94,10 @@ public class CastFireSpit extends Projectile implements CommandInterface
 
 							projectiles.add(firespit.getUniqueId());
 
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+
+							cast(player);
+
 							new BukkitRunnable()
 							{
 								@SuppressWarnings("deprecation")
@@ -127,8 +131,6 @@ public class CastFireSpit extends Projectile implements CommandInterface
 								}
 
 							}.runTaskLater(Casters.getInstance(),  timer);
-
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 8.0F, 1.0F);
 
 							caster.setCasting(name, false);
 						}

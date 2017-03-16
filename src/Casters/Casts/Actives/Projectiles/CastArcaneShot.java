@@ -88,6 +88,10 @@ public class CastArcaneShot extends Projectile implements CommandInterface
 
 							projectiles.add(arcaneshot.getUniqueId()); // TODO: Test If This Hits & Teleports.
 
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDEREYE_LAUNCH);
+
+							cast(player);
+
 							new BukkitRunnable()
 							{
 								@SuppressWarnings("deprecation")
@@ -121,8 +125,6 @@ public class CastArcaneShot extends Projectile implements CommandInterface
 								}
 
 							}.runTaskLater(Casters.getInstance(), timer);
-
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDEREYE_LAUNCH);
 
 							caster.setCasting(name, false);
 						}

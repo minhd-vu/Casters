@@ -90,6 +90,8 @@ public class CastDemonSpawn extends Projectile implements CommandInterface
 
 							player.getWorld().spigot().playEffect(player.getLocation(), Effect.WITHER_SHOOT);
 
+							cast(player);
+
 							new BukkitRunnable()
 							{
 								@SuppressWarnings("deprecation")
@@ -123,8 +125,6 @@ public class CastDemonSpawn extends Projectile implements CommandInterface
 								}
 
 							}.runTaskLater(Casters.getInstance(), timer);
-
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 8.0F, 1.0F);
 
 							caster.setCasting(name, false);
 						}

@@ -91,6 +91,10 @@ public class CastFrostFire extends Projectile implements CommandInterface
 
 							projectiles.add(frostfire.getUniqueId());
 
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 8.0F, 1.0F);
+
+							cast(player);
+
 							new BukkitRunnable()
 							{
 								@SuppressWarnings("deprecation")
@@ -124,8 +128,6 @@ public class CastFrostFire extends Projectile implements CommandInterface
 								}
 
 							}.runTaskLater(Casters.getInstance(),  timer);
-
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 8.0F, 1.0F);
 
 							caster.setCasting(name, false);
 						}

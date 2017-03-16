@@ -26,6 +26,9 @@ public class CastStampede extends Active implements CommandInterface, Listener
 	private int duration;
 	private int size;
 
+	private int left;
+	private int right;
+
 	public CastStampede(String name, String description)
 	{
 		super(name, description);
@@ -45,6 +48,9 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		range = 4;
 		duration = 60;
 		size = 6;
+
+		left = 3;
+		left = 3;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -89,9 +95,14 @@ public class CastStampede extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							for (int i = 0; i < size; ++i)
+							for (int i = 0; i < left; ++i)
 							{
-								player.getWorld().spawnEntity(player.getLocation().add(player.getLocation().getDirection().add(new Vector(2, 0, 0))), EntityType.HORSE);
+								player.getWorld().spawnEntity(player.getLocation().add(player.getLocation().getDirection().add(new Vector(i * 2 + 1, 0, 0))), EntityType.HORSE);
+							}
+
+							for (int i = 0; i < right; ++i)
+							{
+								player.getWorld().spawnEntity(player.getLocation().add(player.getLocation().getDirection().add(new Vector(0, 0, i * 2 + 1))), EntityType.HORSE);
 							}
 
 							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_HORSE_ANGRY, 8.0F, 1.0F);
