@@ -62,6 +62,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static HashMap<UUID, Caster> casters;
 
 	private static CastersCommands casterscmd;
+	private static CastersReload castersreload;
 	private static CastersInfo castersinfo;
 	private static CastersLevel casterslevel;
 	private static CastersStats castersstats;
@@ -566,6 +567,7 @@ public class Casters extends JavaPlugin implements Listener
 		casters = new HashMap<UUID, Caster>();
 
 		casterscmd = new CastersCommands();
+		castersreload = new CastersReload();
 		castersinfo = new CastersInfo();
 		casterslevel = new CastersLevel();
 		castersstats = new CastersStats();
@@ -658,7 +660,7 @@ public class Casters extends JavaPlugin implements Listener
 
 	}
 
-	public void registerCommands()
+	private void registerCommands()
 	{
 		CommandHandler castershandler = new CommandHandler();
 		CommandHandler wandhandler = new CommandHandler();
@@ -668,6 +670,7 @@ public class Casters extends JavaPlugin implements Listener
 		CommandHandler partyhandler = new CommandHandler();
 
 		castershandler.register("casters", casterscmd);
+		castershandler.register("reload", castersreload); // TODO: Remove This Command When Finished.
 		castershandler.register("info", castersinfo);
 		castershandler.register("level", casterslevel);
 		castershandler.register("stats", castersstats);
@@ -746,7 +749,7 @@ public class Casters extends JavaPlugin implements Listener
 		getCommand("party").setExecutor(partyhandler);
 	}
 
-	public static void registerEvents(Plugin plugin, Listener... listeners)
+	private void registerEvents(Plugin plugin, Listener... listeners)
 	{
 		for (Listener listener : listeners)
 		{
