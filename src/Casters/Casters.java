@@ -659,7 +659,6 @@ public class Casters extends JavaPlugin implements Listener
 	private void registerCommands()
 	{
 		CommandHandler castershandler = new CommandHandler();
-		CommandHandler wandhandler = new CommandHandler();
 		CommandHandler casthandler = new CommandHandler();
 		CommandHandler castshandler = new CommandHandler();
 		CommandHandler chathandler = new CommandHandler();
@@ -737,7 +736,6 @@ public class Casters extends JavaPlugin implements Listener
 		partyhandler.register("disband", partydisband);
 
 		getCommand("casters").setExecutor(castershandler);
-		getCommand("wand").setExecutor(wandhandler);
 		getCommand("cast").setExecutor(casthandler);
 		getCommand("casts").setExecutor(castshandler);
 		getCommand("chat").setExecutor(chathandler);

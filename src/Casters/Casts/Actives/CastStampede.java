@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class CastStampede extends Active implements CommandInterface, Listener
@@ -43,35 +44,17 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		damage = 5;
-		range = 4;
-		duration = 40;
+		range = 16;
+		duration = 45;
 		size = 3;
-		speed = 1.2;
-		horsehitrange = 2;
+		speed = 0.32;
+		horsehitrange = 1;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 
 		pages.setPage(info);
-	}
-
-	private void moveHorse(Location location, Horse horse, double speed)
-	{
-		net.minecraft.server.v1_11_R1.Entity horset = ((CraftEntity) horse).getHandle(); // TODO: Attempt To Use This.
-
-		((EntityInsentient) horset).getNavigation().a(2);
-		Object horsef = ((CraftEntity) horse).getHandle();
-		PathEntity path = ((EntityInsentient) horsef).getNavigation().a(location.getX() + 1, location.getY(), location.getZ() + 1);
-
-		if (path != null)
-		{
-			((EntityInsentient) horsef).getNavigation().a(path, 1.0D);
-			((EntityInsentient) horsef).getNavigation().a(2.0D);
-		}
-
-		AttributeInstance attributes = ((EntityInsentient) ((CraftEntity) horse).getHandle()).getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
-		attributes.setValue(speed);
 	}
 
 	@Override
@@ -112,14 +95,22 @@ public class CastStampede extends Active implements CommandInterface, Listener
 
 							List<UUID> horses = new ArrayList<UUID>();
 
-							Vector direction = player.getLocation().getDirection().normalize();
+							Location target = player.getTargetBlock((Set<Material>) null, range).getLocation();
+
+							Vector direction = player.getLocation().getDirection().setY(0.0).normalize();
 							Vector leftdirection = new Vector(direction.getZ(), 0.0, -direction.getX()).normalize();
 							Vector rightdirection = new Vector(-direction.getZ(), 0.0, direction.getX()).normalize();
 
 							for (int i = 0; i < size; ++i)
 							{
-								Horse left = (Horse) player.getWorld().spawnEntity(player.getLocation().add(leftdirection.multiply(i + 1)), EntityType.HORSE);
-								Horse right = (Horse) player.getWorld().spawnEntity(player.getLocation().add(rightdirection.multiply(i + 1)), EntityType.HORSE);
+								Location leftlocation = player.getLocation().add(leftdirection.multiply(i + 1));
+								leftlocation = player.getWorld().getHighestBlockAt(leftlocation).getLocation().setDirection(direction);
+
+								Location rightlocation = player.getLocation().add(rightdirection.multiply(i + 1));
+								rightlocation = player.getWorld().getHighestBlockAt(rightlocation).getLocation().setDirection(direction);
+
+								Horse left = (Horse) player.getWorld().spawnEntity(leftlocation, EntityType.HORSE);
+								Horse right = (Horse) player.getWorld().spawnEntity(rightlocation, EntityType.HORSE);
 
 								left.setOwner(player);
 								right.setOwner(player);
@@ -127,8 +118,10 @@ public class CastStampede extends Active implements CommandInterface, Listener
 								left.setAdult();
 								right.setAdult();
 
-								left.setVelocity(direction.multiply(speed));
-								right.setVelocity(direction.multiply(speed));
+								moveHorse(left.getWorld().getHighestBlockAt(left.getLocation()
+										.add(left.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), left);
+								moveHorse(right.getWorld().getHighestBlockAt(right.getLocation()
+										.add(right.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), right);
 
 								horses.add(left.getUniqueId());
 								horses.add(right.getUniqueId());
@@ -144,25 +137,41 @@ public class CastStampede extends Active implements CommandInterface, Listener
 							new BukkitRunnable()
 							{
 								private int count = 0;
+								private List<UUID> hitentities = new ArrayList<UUID>();
 
 								@Override
 								public void run()
 								{
 									for (UUID uuid : horses)
 									{
-										Horse horse  = (Horse) Bukkit.getEntity(uuid);
+										Horse horse = (Horse) Bukkit.getEntity(uuid);
 
-										if (horse != null && !horse.isDead())
+										if (horse.isValid())
 										{
 											List<Entity> entities = horse.getNearbyEntities(horsehitrange, horsehitrange, horsehitrange);
 
+											entities.remove(caster.getPlayer());
+											entities.remove(caster.getPlayer().getVehicle());
+
+											for (UUID id : horses)
+											{
+												Entity entity = Bukkit.getEntity(id);
+
+												if (entities.contains(entity))
+												{
+													entities.remove(entity);
+												}
+											}
+
 											for (Entity entity : entities)
 											{
-												if (entity instanceof LivingEntity && !caster.sameParty(entity))
+												if (entity instanceof LivingEntity && !hitentities.contains(entity.getUniqueId()) && !caster.sameParty(entity))
 												{
-													((LivingEntity) entity).damage(damage);
+													((LivingEntity) entity).damage(damage); // TODO: Test The Particle & Damage.
 													caster.setBossBarEntity((Damageable) entity);
-													entity.getWorld().spawnParticle(Particle.SMOKE_NORMAL, entity.getLocation(), 15); // TODO: Tset The Particle & Damage.
+													entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, ((LivingEntity) entity).getEyeLocation(), 1);
+
+													hitentities.add(entity.getUniqueId());
 												}
 											}
 										}
@@ -170,12 +179,13 @@ public class CastStampede extends Active implements CommandInterface, Listener
 
 									if (++count > duration)
 									{
+										hitentities.clear();
 										this.cancel();
 										return;
 									}
 								}
 
-							}.runTaskTimer(Casters.getInstance(), 0, 2);
+							}.runTaskTimer(Casters.getInstance(), 0, 10);
 
 							new BukkitRunnable()
 							{
@@ -184,7 +194,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 								{
 									for (UUID horse : horses)
 									{
-										if (!Bukkit.getEntity(horse).isDead())
+										if (Bukkit.getEntity(horse).isValid())
 										{
 											Bukkit.getEntity(horse).remove();
 										}
@@ -204,5 +214,34 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		}
 
 		return true;
+	}
+
+	private void moveHorse(Location location, Horse horse)
+	{
+		new BukkitRunnable()
+		{
+			public void run()
+			{
+				if (!horse.isValid())
+				{
+					this.cancel();
+				}
+
+				net.minecraft.server.v1_11_R1.Entity pett = ((CraftEntity) horse).getHandle();
+				((EntityInsentient) pett).getNavigation().a(2);
+				Object petf = ((CraftEntity) horse).getHandle();
+				PathEntity path = ((EntityInsentient) petf).getNavigation().a(location.getX(), location.getY(), location.getZ());
+
+				if (path != null)
+				{
+					((EntityInsentient) petf).getNavigation().a(path, 1.0D);
+					((EntityInsentient) petf).getNavigation().a(2.0D);
+				}
+
+				AttributeInstance attributes = ((EntityInsentient) ((CraftEntity) horse).getHandle()).getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
+				attributes.setValue(speed);
+			}
+
+		}.runTaskTimer(Casters.getInstance(), 0, 2);
 	}
 }
