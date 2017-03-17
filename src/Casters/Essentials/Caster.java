@@ -911,7 +911,7 @@ public class Caster
 		{
 			Caster caster = Casters.getCasters().get(target.getUniqueId());
 
-			caster.getPlayer().leaveVehicle(); // TODO: Check This.
+			caster.getPlayer().leaveVehicle();
 
 			if (caster.isWarmingUp() || caster.isCasting())
 			{
@@ -945,7 +945,7 @@ public class Caster
 				}
 
 				player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " You" + ChatColor.GRAY +
-						" Interrupts " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
+						" Interrupt " + ChatColor.WHITE + caster.getPlayer().getName() + "'s" + ChatColor.GRAY + " Casting!");
 			}
 		}
 	}
@@ -982,7 +982,7 @@ public class Caster
 					interrupted = false;
 				}
 
-			}.runTaskLater(Casters.getInstance(), 1);
+			}.runTaskLater(Casters.getInstance(), 2);
 		}
 
 		return interrupted;
@@ -991,16 +991,6 @@ public class Caster
 	public void setInterrupted(boolean interrupted) // TODO: Check If This Works.
 	{
 		this.interrupted = interrupted;
-	}
-
-	public boolean isWarmingUp(String name)
-	{
-		if (warmingup.containsKey(name))
-		{
-			return warmingup.get(name);
-		}
-
-		return false;
 	}
 
 	public void setConfig()

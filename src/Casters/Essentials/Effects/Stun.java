@@ -18,7 +18,7 @@ public class Stun
 {
 	private HashMap<String, Long> stuns = new HashMap<String, Long>();
 
-	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]"
+	private String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]"
 			+ ChatColor.WHITE + " ";
 
 	private int duration;

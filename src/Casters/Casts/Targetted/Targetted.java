@@ -112,7 +112,7 @@ public abstract class Targetted extends Cast
 				ey = loc.getY();
 				ez = loc.getZ();
 
-				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5))
+				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5)) // TODO: Recode so that it targets player on horse.
 				{
 					if (entity instanceof Player)
 					{

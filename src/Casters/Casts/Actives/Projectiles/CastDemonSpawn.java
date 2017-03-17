@@ -82,7 +82,7 @@ public class CastDemonSpawn extends Projectile implements CommandInterface
 
 							WitherSkull demonspawn = (WitherSkull) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.WITHER_SKULL);
 							demonspawn.setShooter(player);
-							demonspawn.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity)); // TODO: Test With Kuro.
+							demonspawn.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 							demonspawn.setGravity(gravity);
 							demonspawn.setShooter(player);
 

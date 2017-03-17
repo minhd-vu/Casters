@@ -85,7 +85,7 @@ public class CastFrostFire extends Projectile implements CommandInterface
 
 							Snowball frostfire = (Snowball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
 							frostfire.setShooter(player);
-							frostfire.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity)); // TODO: Test With Kuro.
+							frostfire.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 							frostfire.setGravity(gravity);
 							frostfire.setShooter(player);
 

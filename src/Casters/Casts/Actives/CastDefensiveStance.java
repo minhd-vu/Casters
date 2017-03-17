@@ -94,21 +94,37 @@ public class CastDefensiveStance extends Active implements CommandInterface
 								@Override
 								public void run()
 								{
-									for (Caster member : caster.getParty().getMembers())
+									if (caster.hasParty())
 									{
-										if (member.isInterrupted())
+										for (Caster member : caster.getParty().getMembers())
 										{
-											member.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE); // TODO: Check If This Works.
-											member.setEffect("Defending", 0.0);
-
-											interrupted = true;
+											if (member.isInterrupted())
+											{
+												isInterrupted(member);
+											}
 										}
+									}
+
+									else
+									{
+										isInterrupted(caster);
 									}
 
 									if (++count > duration || interrupted)
 									{
 										this.cancel();
 										return;
+									}
+								}
+
+								private void isInterrupted(Caster caster)
+								{
+									if (caster.isInterrupted())
+									{
+										caster.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+										caster.setEffect("Defending", 0.0);
+
+										interrupted = true;
 									}
 								}
 

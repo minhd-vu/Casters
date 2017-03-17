@@ -82,11 +82,11 @@ public class CastArcaneShot extends Projectile implements CommandInterface
 
 							EnderPearl arcaneshot = (EnderPearl) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.ENDER_PEARL);
 							arcaneshot.setShooter(player);
-							arcaneshot.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity)); // TODO: Test With Kuro.
+							arcaneshot.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 							arcaneshot.setGravity(gravity);
 							arcaneshot.setShooter(player);
 
-							projectiles.add(arcaneshot.getUniqueId()); // TODO: Test If This Hits & Teleports.
+							projectiles.add(arcaneshot.getUniqueId());
 
 							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDEREYE_LAUNCH);
 

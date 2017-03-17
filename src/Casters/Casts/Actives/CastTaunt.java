@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -88,6 +89,20 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 							caster.setEffect("Taunting", duration);
 							caster.setMana(manacost);
 
+							for (LivingEntity target : livingtargets)
+							{
+								if (target instanceof Wolf)
+								{
+
+								}
+
+								if (target instanceof Player)
+								{
+									Casters.getCasters().get(target.getUniqueId())
+											.setEffect("Taunted", duration); // TODO: Recode So That All Damage Is Directed Back To Taunter. At Half Damage.
+								}
+							}
+
 							cast(player);
 
 							new BukkitRunnable()
@@ -95,7 +110,7 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 								@Override
 								public void run()
 								{
-									if (caster.isCasting(name)) // TODO: Check If This Works.
+									if (caster.isCasting(name))
 									{
 										decast(player);
 										caster.setCasting(name, false);
@@ -104,6 +119,8 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 
 							}.runTaskLater(Casters.getInstance(), duration);
 						}
+
+						cooldown.start(player.getName());
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
@@ -124,7 +141,8 @@ public class CastTaunt extends Active implements CommandInterface, Listener
 			if (attacker.hasEffect("Taunted") && !defender.hasEffect("Taunting"))
 			{
 				attacker.getPlayer()
-						.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot Attack That Player While " + ChatColor.WHITE + "Taunted" + ChatColor.GRAY + "!");
+						.sendMessage(header + ChatColor.WHITE + "You" + ChatColor.GRAY + " Cannot" + ChatColor.WHITE + " Attack" + ChatColor.GRAY + " That Player While " +
+								ChatColor.WHITE + "Taunted" + ChatColor.GRAY + "!");
 
 				event.setCancelled(true);
 			}

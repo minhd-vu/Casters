@@ -76,20 +76,23 @@ public class CastPressurePoint extends Targetted implements CommandInterface
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
+							if (!caster.isInterrupted())
+							{
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-							target.damage(damage);
-							caster.setBossBarEntity(target);
+								target.damage(damage);
+								caster.setBossBarEntity(target);
 
-							stun.start(target);
+								stun.start(target);
 
-							player.getWorld().spawnParticle(Particle.END_ROD, target.getLocation(), 100, 0.5, 0.2F, 0.5F);
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_HURT, 8.0F, 1.0F);
+								player.getWorld().spawnParticle(Particle.END_ROD, target.getLocation(), 100, 0.5, 0.2F, 0.5F);
+								player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_HURT, 8.0F, 1.0F);
 
-							cast(player, target);
+								cast(player, target);
 
-							caster.setCasting(name, false);
+								caster.setCasting(name, false);
+							}
 
 							cooldown.start(player.getName());
 						}

@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -136,7 +137,16 @@ public class CastVanish extends Active implements CommandInterface, Listener
 	{
 		if (event.getEntity() instanceof Player)
 		{
-			cancelInvisibility((Player) event.getEntity()); // TODO: Check This.
+			cancelInvisibility((Player) event.getEntity());
+		}
+	}
+
+	@EventHandler
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event)
+	{
+		if (event.getDamager() instanceof Player)
+		{
+			cancelInvisibility((Player) event.getDamager());
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class ChatTitles extends Chat implements CommandInterface
 		titles.put("Assassin", ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Assassin" + ChatColor.DARK_GRAY + "]");
 		titles.put("Duelist", ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Duelist" + ChatColor.DARK_GRAY + "]");
 		titles.put("Fletcher", ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Fletcher" + ChatColor.DARK_GRAY + "]");
-		titles.put("Musketeer", ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Musketeer" + ChatColor.DARK_GRAY + "]"); // TODO: Make Sure This Still Works.
+		titles.put("Musketeer", ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Musketeer" + ChatColor.DARK_GRAY + "]");
 		titles.put("Distorter", ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Distorter" + ChatColor.DARK_GRAY + "]");
 		titles.put("Inferno", ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Inferno" + ChatColor.DARK_GRAY + "]");
 		titles.put("Shaman", ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Shaman" + ChatColor.DARK_GRAY + "]");

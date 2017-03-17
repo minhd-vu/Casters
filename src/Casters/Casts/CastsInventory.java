@@ -73,7 +73,7 @@ public class CastsInventory implements CommandInterface, Listener
 		meta.addPage(
 				ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "1: Setup\n" + ChatColor.BLACK + "In Order To " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast" + ChatColor.BLACK +
 						", Place One Of The " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Cast\nItems" + ChatColor.DARK_GRAY + " (Found In The Casts Menu)" + ChatColor.BLACK +
-						" And Place It In Your " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Hotbar."); // TODO: Complete This; Add Colors.
+						" And Place It In Your " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Hotbar.");
 		meta.addPage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "2: Casting\n" + ChatColor.BLACK +
 				"Next, All You Are Required To Do Is Either Press Your" + ChatColor.DARK_AQUA + ChatColor.BOLD + " Hotbar Keys " + ChatColor.DARK_GRAY + "(Usually 1-9)" +
 				ChatColor.BLACK + " Or " + ChatColor.DARK_AQUA + ChatColor.BOLD + "Scroll" + ChatColor.BLACK + " Using The Mouse " + ChatColor.DARK_GRAY + "(Not Recommended)" +
@@ -117,7 +117,7 @@ public class CastsInventory implements CommandInterface, Listener
 	}
 
 	@EventHandler
-	public void onPlayerDropItemEvent(PlayerDropItemEvent event) // TODO: Revamped, Test To See If It Works.
+	public void onPlayerDropItemEvent(PlayerDropItemEvent event)
 	{
 		if (isCastItem(event.getItemDrop().getItemStack()))
 		{

@@ -594,7 +594,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		casts.put("Fireball", castfireball = new CastFireball("Fireball", "Casts A Fireball"));
 		casts.put("DarkBomb", castdarkbomb = new CastDarkBomb("DarkBomb", "Casts A Dark Bomb"));
-		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Casst A Bolt"));
+		casts.put("Bolt", castbolt = new CastBolt("Bolt", "Strike Down Lightning"));
 		casts.put("Revive", castrevive = new CastRevive("Revive", "Revive A Player"));
 		casts.put("FireBomb", castfirebomb = new CastFireBomb("FireBomb", "Casts A Fire Bomb"));
 		casts.put("FireCharge", castfirecharge = new CastFireCharge("FireCharge", "Casts A Fire Charge"));

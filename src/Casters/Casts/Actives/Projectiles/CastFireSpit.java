@@ -88,7 +88,7 @@ public class CastFireSpit extends Projectile implements CommandInterface
 
 							SmallFireball firespit = (SmallFireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SMALL_FIREBALL);
 							firespit.setShooter(player);
-							firespit.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity)); // TODO: Test With Kuro.
+							firespit.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 							firespit.setGravity(gravity);
 							firespit.setShooter(player);
 

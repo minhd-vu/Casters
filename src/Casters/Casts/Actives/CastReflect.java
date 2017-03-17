@@ -13,19 +13,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class CastReflect extends Active implements CommandInterface, Listener
 {
-	private HashMap<String, Long> reflects = new HashMap<String, Long>();
+	private HashMap<UUID, Long> reflects;
 	private int duration;
 	private double percentage;
 
 	public CastReflect(String name, String description)
 	{
 		super(name, description);
+
+		reflects = new HashMap<UUID, Long>();
 
 		warmup.setDuration(0);
 		warmup.setAmplifier(0);
@@ -75,20 +79,44 @@ public class CastReflect extends Active implements CommandInterface, Listener
 							caster.setEffect("Reflecting", duration);
 							caster.setMana(manacost);
 
-							reflects.put(player.getName(), System.currentTimeMillis());
+							reflects.put(player.getUniqueId(), System.currentTimeMillis());
 
 							player.getWorld().playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, 3);
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 0.8F,
-									1.0F);
+							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 0.8F, 1.0F);
 
 							cast(player);
+
+							new BukkitRunnable()
+							{
+								private int count = 0;
+								private boolean interrupted = false;
+
+								@Override
+								public void run()
+								{
+									if (caster.isInterrupted())
+									{
+										caster.setEffect("Reflecting", 0.0);
+										reflects.remove(player.getUniqueId());
+
+										interrupted = true;
+									}
+
+									if (++count > duration || interrupted)
+									{
+										this.cancel();
+										return;
+									}
+								}
+								
+							}.runTaskTimer(Casters.getInstance(), 1, 1);
 
 							new BukkitRunnable()
 							{
 								@Override
 								public void run()
 								{
-									if (caster.isCasting(name)) // TODO: Test To See If Cancelling Reflect Works.
+									if (caster.isCasting(name))
 									{
 										decast(player);
 										caster.setCasting(name, false);
@@ -116,20 +144,18 @@ public class CastReflect extends Active implements CommandInterface, Listener
 			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 			LivingEntity target = (LivingEntity) event.getDamager();
 
-			if (caster.isCasting(name))
+			if (reflects.containsKey(caster.getPlayer().getUniqueId()) && caster.isCasting(name) &&
+					(System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getUniqueId()) / 1000.0) < duration / 20.0)
 			{
-				if ((System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getName()) / 1000.0) < duration / 20.0)
+				event.setCancelled(true);
+
+				if (caster.sameParty(target))
 				{
-					event.setCancelled(true);
-
-					if (caster.sameParty(target))
-					{
-						return;
-					}
-
-					((LivingEntity) target).damage(event.getDamage() * (percentage / 100.0));
-					caster.setBossBarEntity((LivingEntity) target);
+					return;
 				}
+
+				((LivingEntity) target).damage(event.getDamage() * (percentage / 100.0));
+				caster.setBossBarEntity((LivingEntity) target);
 			}
 		}
 	}

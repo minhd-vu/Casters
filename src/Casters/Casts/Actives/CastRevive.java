@@ -73,10 +73,9 @@ public class CastRevive extends Active implements CommandInterface, Listener
 
 					if (!caster.sameParty(target))
 					{
-						// TODO: Check If Still Works.
-
 						caster.getPlayer().sendMessage(
 								header + ChatColor.WHITE + " You " + ChatColor.GRAY + "Must Be In The Same Party To" + ChatColor.WHITE + " Revive " + ChatColor.GRAY + "Someone!");
+
 						return false;
 					}
 
@@ -137,7 +136,7 @@ public class CastRevive extends Active implements CommandInterface, Listener
 									}
 								}
 
-								cooldown.start(player.getName()); // TODO: Check If This Works.
+								cooldown.start(player.getName());
 							}
 
 						}.runTaskLater(Casters.getInstance(), warmup.getDuration());
