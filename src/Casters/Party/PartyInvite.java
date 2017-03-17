@@ -3,6 +3,10 @@ package Casters.Party;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,6 +16,20 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PartyInvite implements CommandInterface
 {
 	private static final int duration = 30000;
+
+	private TextComponent accept;
+	private TextComponent decline;
+
+	public PartyInvite()
+	{
+		accept = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Accept" + ChatColor.DARK_GRAY + "]");
+		accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Accept The Party Request").create()));
+		accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "party accept"));
+
+		decline = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Decline" + ChatColor.DARK_GRAY + "]");
+		accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Decline The Party Request").create()));
+		accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "party decline"));
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
@@ -54,11 +72,13 @@ public class PartyInvite implements CommandInterface
 								caster.getPlayer().sendMessage(
 										Party.header + ChatColor.GRAY + " You Invite " + ChatColor.WHITE + c.getPlayer().getName() + ChatColor.GRAY + " To The Party.");
 								c.setInvite(new Invite(caster));
-								c.getPlayer().sendMessage(
-										Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Invites You To Join His/Her Party!\n" +
-												Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " accept" + ChatColor.GRAY + " To Join The Party.\n" +
-												Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline" + ChatColor.GRAY +
-												" To Decline The Invitation."); // TODO: Make These Clickable Buttons.
+
+								TextComponent message = new TextComponent(
+										Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Invites You To Join His/Her Party!");
+								message.addExtra(" " + accept);
+								message.addExtra(" " + decline);
+
+								// TODO: Check If Clicking Works.
 
 								new BukkitRunnable()
 								{
