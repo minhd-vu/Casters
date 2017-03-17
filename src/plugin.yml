@@ -11,8 +11,6 @@ commands:
         description: Lists All Cast Commands.
     casts:
         description: List All Casts In Inventory.
-    wand:
-        description: Lists All Wand Commands.
     chat:
         description: Lists All Chat Commands.
     party:

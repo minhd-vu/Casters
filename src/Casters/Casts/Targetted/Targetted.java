@@ -5,9 +5,7 @@ import Casters.Casts.Cast;
 import Casters.Essentials.Caster;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.util.BlockIterator;
 
 import java.util.ArrayList;
@@ -112,13 +110,23 @@ public abstract class Targetted extends Cast
 				ey = loc.getY();
 				ez = loc.getZ();
 
-				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5)) // TODO: Recode so that it targets player on horse.
+				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5)) // TODO: Test With Kuro.
 				{
-					if (entity instanceof Player)
+					if (entity instanceof Player || entity instanceof Vehicle)
 					{
-						Caster caster = Casters.getCasters().get(player.getUniqueId());
+						Caster caster = null;
 
-						if (caster.hasParty() && caster.getParty().getMembers().contains(Casters.getCasters().get(entity.getUniqueId())))
+						if (entity instanceof Player)
+						{
+							caster = Casters.getCasters().get(player.getUniqueId());
+						}
+
+						else if (entity instanceof Vehicle)
+						{
+							caster = Casters.getCasters().get(entity.getPassengers().get(0).getUniqueId());
+						}
+
+						if (caster != null && caster.hasParty() && caster.getParty().getMembers().contains(Casters.getCasters().get(entity.getUniqueId())))
 						{
 							if (targetpartymembers)
 							{

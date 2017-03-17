@@ -19,7 +19,6 @@ import Casters.Essentials.Chat.Chat;
 import Casters.Essentials.Chat.ChatChannel;
 import Casters.Essentials.Chat.ChatTitles;
 import Casters.Party.*;
-import Casters.Wands.*;
 import com.dbsoftware.titletabandbarapi.barapi.ActionBarManager;
 import com.dbsoftware.titletabandbarapi.tabapi.TabManager;
 import com.dbsoftware.titletabandbarapi.titleapi.TitleManager;
@@ -83,13 +82,6 @@ public class Casters extends JavaPlugin implements Listener
 	private static Chat chat;
 	private static ChatTitles chattitles;
 	private static ChatChannel chatchannel;
-
-	private static Wands wand;
-	private static WandList wandlist;
-	private static WandInferno wandinferno;
-	private static WandDistorter wanddistorter;
-	private static WandShaman wandshaman;
-	private static WandWarlock wandwarlock;
 
 	private static HashMap<String, Cast> casts;
 
@@ -642,13 +634,6 @@ public class Casters extends JavaPlugin implements Listener
 		chattitles = new ChatTitles();
 		chatchannel = new ChatChannel();
 
-		wand = new Wands();
-		wandlist = new WandList();
-		wandinferno = new WandInferno("Inferno");
-		wanddistorter = new WandDistorter("Distorter");
-		wandshaman = new WandShaman("Shaman");
-		wandwarlock = new WandWarlock("Warlock");
-
 		parties = new ArrayList<Party>();
 		partycmd = new PartyCommands();
 		partycreate = new PartyCreate();
@@ -664,7 +649,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, wandinferno, wanddistorter, wandshaman, wandwarlock, castsinventory, castfireball, castdarkbomb,
+		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb,
 				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
 				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab,
 				passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket);
@@ -692,9 +677,6 @@ public class Casters extends JavaPlugin implements Listener
 		castershandler.register("weapon", castersweapon);
 		castershandler.register("whois", casterswhois);
 		castershandler.register("recipes", castersrecipes);
-
-		wandhandler.register("wand", wand);
-		wandhandler.register("list", wandlist);
 
 		casthandler.register("cast", cast);
 		casthandler.register("list", castlist);

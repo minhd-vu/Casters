@@ -988,7 +988,7 @@ public class Caster
 		return interrupted;
 	}
 
-	public void setInterrupted(boolean interrupted) // TODO: Check If This Works.
+	public void setInterrupted(boolean interrupted)
 	{
 		this.interrupted = interrupted;
 	}
