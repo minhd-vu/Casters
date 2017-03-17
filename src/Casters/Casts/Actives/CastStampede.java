@@ -7,17 +7,11 @@ import net.minecraft.server.v1_11_R1.AttributeInstance;
 import net.minecraft.server.v1_11_R1.EntityInsentient;
 import net.minecraft.server.v1_11_R1.GenericAttributes;
 import net.minecraft.server.v1_11_R1.PathEntity;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -33,6 +27,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 	private int duration;
 	private int size;
 	private double speed;
+	private int horsehitrange;
 
 	public CastStampede(String name, String description)
 	{
@@ -51,7 +46,8 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		range = 4;
 		duration = 40;
 		size = 3;
-		speed = 0.8;
+		speed = 1.2;
+		horsehitrange = 2;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -62,7 +58,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 
 	private void moveHorse(Location location, Horse horse, double speed)
 	{
-		net.minecraft.server.v1_11_R1.Entity horset = ((CraftEntity) horse).getHandle();
+		net.minecraft.server.v1_11_R1.Entity horset = ((CraftEntity) horse).getHandle(); // TODO: Attempt To Use This.
 
 		((EntityInsentient) horset).getNavigation().a(2);
 		Object horsef = ((CraftEntity) horse).getHandle();
@@ -76,14 +72,6 @@ public class CastStampede extends Active implements CommandInterface, Listener
 
 		AttributeInstance attributes = ((EntityInsentient) ((CraftEntity) horse).getHandle()).getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
 		attributes.setValue(speed);
-
-//		new BukkitRunnable()
-//		{
-//			public void run()
-//			{
-//			}
-//
-//		}.runTaskTimer(Casters.getInstance(), 0L, 20L);
 	}
 
 	@Override
@@ -155,11 +143,38 @@ public class CastStampede extends Active implements CommandInterface, Listener
 
 							new BukkitRunnable()
 							{
+								private int count = 0;
+
 								@Override
 								public void run()
 								{
+									for (UUID uuid : horses)
+									{
+										Horse horse  = (Horse) Bukkit.getEntity(uuid);
 
+										if (horse != null && !horse.isDead())
+										{
+											List<Entity> entities = horse.getNearbyEntities(horsehitrange, horsehitrange, horsehitrange);
+
+											for (Entity entity : entities)
+											{
+												if (entity instanceof LivingEntity && !caster.sameParty(entity))
+												{
+													((LivingEntity) entity).damage(damage);
+													caster.setBossBarEntity((Damageable) entity);
+													entity.getWorld().spawnParticle(Particle.SMOKE_NORMAL, entity.getLocation(), 15); // TODO: Tset The Particle & Damage.
+												}
+											}
+										}
+									}
+
+									if (++count > duration)
+									{
+										this.cancel();
+										return;
+									}
 								}
+
 							}.runTaskTimer(Casters.getInstance(), 0, 2);
 
 							new BukkitRunnable()

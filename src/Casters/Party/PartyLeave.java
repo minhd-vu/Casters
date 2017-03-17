@@ -22,7 +22,7 @@ public class PartyLeave implements CommandInterface
 			{
 				if (caster.hasParty())
 				{
-					if (caster.getParty().getLeader().equals(caster))
+					if (caster.isLeader())
 					{
 						caster.getPlayer().performCommand("party leader " + caster.getParty().getMembers()
 								.get((int) Math.round((Math.random() * (caster.getParty().getMembers().size() - 1))))

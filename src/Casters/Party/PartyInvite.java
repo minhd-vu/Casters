@@ -30,7 +30,7 @@ public class PartyInvite implements CommandInterface
 
 			if (caster.hasParty())
 			{
-				if (caster.getParty().getLeader().equals(caster))
+				if (caster.isLeader())
 				{
 					if (caster.getPlayer().getName().equals(args[1]))
 					{
@@ -48,19 +48,17 @@ public class PartyInvite implements CommandInterface
 								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " "
 										+ c.getPlayer().getName() + ChatColor.GRAY + " Is Already In The Party.");
 							}
+
 							else if (!c.hasParty())
 							{
-								caster.getPlayer()
-										.sendMessage(Party.header + ChatColor.GRAY + " You Invite " + ChatColor.WHITE
-												+ c.getPlayer().getName() + ChatColor.GRAY + " To The Party.");
+								caster.getPlayer().sendMessage(
+										Party.header + ChatColor.GRAY + " You Invite " + ChatColor.WHITE + c.getPlayer().getName() + ChatColor.GRAY + " To The Party.");
 								c.setInvite(new Invite(caster));
-								c.getPlayer()
-										.sendMessage(Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName()
-												+ ChatColor.GRAY + " Invites You To Join His/Her Party!\n"
-												+ Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA
-												+ " accept" + ChatColor.GRAY + " To Join The Party.\n" + Party.header
-												+ ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline"
-												+ ChatColor.GRAY + " To Decline The Invitation.");
+								c.getPlayer().sendMessage(
+										Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Invites You To Join His/Her Party!\n" +
+												Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " accept" + ChatColor.GRAY + " To Join The Party.\n" +
+												Party.header + ChatColor.DARK_AQUA + " /party" + ChatColor.AQUA + " decline" + ChatColor.GRAY +
+												" To Decline The Invitation."); // TODO: Make These Clickable Buttons.
 
 								new BukkitRunnable()
 								{
@@ -70,19 +68,17 @@ public class PartyInvite implements CommandInterface
 										if (c.getInvite() != null)
 										{
 											c.setInvite(null);
-											c.getPlayer()
-													.sendMessage(Party.header + ChatColor.GRAY + " "
-															+ c.getInvite().getSender().getPlayer().getName()
-															+ "'s Party Invitation Has Expired.");
+											c.getPlayer().sendMessage(
+													Party.header + ChatColor.GRAY + " " + c.getInvite().getSender().getPlayer().getName() + "'s Party Invitation Has Expired.");
 										}
 									}
 
 								}.runTaskLater(Casters.getInstance(), duration);
 							}
+
 							else
 							{
-								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " "
-										+ c.getPlayer().getName() + ChatColor.GRAY + " Is Already In A Party.");
+								caster.getPlayer().sendMessage(Party.header + ChatColor.WHITE + " " + c.getPlayer().getName() + ChatColor.GRAY + " Is Already In A Party.");
 							}
 
 							return true;
@@ -91,16 +87,16 @@ public class PartyInvite implements CommandInterface
 
 					caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " That Player Is Not Online!");
 				}
+
 				else
 				{
-					caster.getPlayer()
-							.sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Invite People!");
+					caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Must Be The Leader To Invite People!");
 				}
 			}
+
 			else
 			{
-				caster.getPlayer()
-						.sendMessage(Party.header + ChatColor.GRAY + " You Must Be In A Party To Invite People!");
+				caster.getPlayer().performCommand("party create");
 			}
 		}
 

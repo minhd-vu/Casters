@@ -50,6 +50,7 @@ public class Caster
 
 	private Party party;
 	private Invite invite;
+	private Invite mergerequest;
 
 	private Config config;
 
@@ -127,6 +128,7 @@ public class Caster
 
 		party = null;
 		invite = null;
+		mergerequest = null;
 
 		if (!Casters.getConfigManager().getFileExists(this.player.getName() + ".yml"))
 		{
@@ -560,6 +562,11 @@ public class Caster
 		combattimer = System.currentTimeMillis();
 	}
 
+	public boolean isLeader()
+	{
+		return party.getLeader().equals(this);
+	}
+
 	public boolean sameParty(Entity entity)
 	{
 		if (entity instanceof Player)
@@ -600,6 +607,21 @@ public class Caster
 	public boolean hasInvite()
 	{
 		return invite != null;
+	}
+
+	public Invite getMergeRequest()
+	{
+		return mergerequest;
+	}
+
+	public void setMergeRequest(Invite mergerequest)
+	{
+		this.mergerequest = mergerequest;
+	}
+
+	public boolean hasMergeRequest()
+	{
+		return mergerequest != null;
 	}
 
 	public String getChannel()

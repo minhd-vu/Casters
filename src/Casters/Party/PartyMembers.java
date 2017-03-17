@@ -26,7 +26,7 @@ public class PartyMembers implements CommandInterface
 
 				for (Caster member : caster.getParty().getMembers())
 				{
-					if (!member.equals(caster.getParty().getLeader()))
+					if (!member.isLeader())
 					{
 						message += member.getPlayer().getName() + ", ";
 					}

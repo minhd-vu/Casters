@@ -24,7 +24,7 @@ public class PartyDisband implements CommandInterface
 				{
 					Party party = caster.getParty();
 
-					if (party.getLeader().equals(caster))
+					if (caster.isLeader())
 					{
 						for (Caster member : party.getMembers())
 						{

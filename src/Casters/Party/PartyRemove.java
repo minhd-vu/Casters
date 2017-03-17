@@ -27,7 +27,7 @@ public class PartyRemove implements CommandInterface
 
 			if (caster.hasParty())
 			{
-				if (caster.getParty().getLeader().equals(caster))
+				if (caster.isLeader())
 				{
 					if (caster.getPlayer().getName().equals(args[1]))
 					{
