@@ -146,6 +146,7 @@ public class Pages
 		{
 			page = 1;
 		}
+
 		else if (args.length == base + 1)
 		{
 			try

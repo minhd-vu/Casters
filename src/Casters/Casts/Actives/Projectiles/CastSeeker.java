@@ -72,37 +72,40 @@ public class CastSeeker extends Projectile implements CommandInterface
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
+						if (!caster.isInterrupted())
+						{
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
 
-						ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
-						seeker.setShooter(caster.getPlayer());
-						seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
-						seeker.setGravity(gravity);
+							ShulkerBullet seeker = (ShulkerBullet) caster.getPlayer().getWorld().spawnEntity(caster.getPlayer().getEyeLocation(), EntityType.SHULKER_BULLET);
+							seeker.setShooter(caster.getPlayer());
+							seeker.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+							seeker.setGravity(gravity);
 
-						projectiles.add(seeker.getUniqueId());
+							projectiles.add(seeker.getUniqueId());
 
-						cast(caster.getPlayer());
+							cast(caster.getPlayer());
 
-						caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_SHULKER_SHOOT, 8.0F, 1.0F);
+							caster.getPlayer().getWorld().playSound(caster.getPlayer().getLocation(), Sound.ENTITY_SHULKER_SHOOT, 8.0F, 1.0F);
+
+							caster.setCasting(name, false);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (!seeker.isDead())
+									{
+										projectiles.remove(seeker.getUniqueId());
+										seeker.remove();
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), timer);
+						}
 
 						cooldown.start(caster.getPlayer().getName());
-
-						caster.setCasting(name, false);
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								if (!seeker.isDead())
-								{
-									projectiles.remove(seeker.getUniqueId());
-									seeker.remove();
-								}
-							}
-
-						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());

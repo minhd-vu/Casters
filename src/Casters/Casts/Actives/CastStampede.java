@@ -169,7 +169,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 												{
 													((LivingEntity) entity).damage(damage); // TODO: Test The Particle & Damage.
 													caster.setBossBarEntity((Damageable) entity);
-													entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, ((LivingEntity) entity).getEyeLocation(), 1);
+													entity.getWorld().spawnParticle(Particle.SWEEP_ATTACK, ((LivingEntity) entity).getEyeLocation(), 5, 1.0, 1.0, 1.0);
 
 													hitentities.add(entity.getUniqueId());
 												}
@@ -185,7 +185,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 									}
 								}
 
-							}.runTaskTimer(Casters.getInstance(), 0, 10);
+							}.runTaskTimer(Casters.getInstance(), 0, 2);
 
 							new BukkitRunnable()
 							{
@@ -196,6 +196,8 @@ public class CastStampede extends Active implements CommandInterface, Listener
 									{
 										if (Bukkit.getEntity(horse).isValid())
 										{
+											Bukkit.getEntity(horse).getWorld()
+													.spawnParticle(Particle.BLOCK_CRACK, Bukkit.getEntity(horse).getLocation().add(0, 1, 0), 50, 1.0, 1.0, 1.0);
 											Bukkit.getEntity(horse).remove();
 										}
 									}

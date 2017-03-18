@@ -118,6 +118,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastFireSpit castfirespit;
 	private static CastDemonSpawn castdemonspawn;
 	private static CastStampede caststampede;
+	private static CastSpear castspear;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -275,6 +276,7 @@ public class Casters extends JavaPlugin implements Listener
 		cavalier.getCasts().put("Mount", 1);
 		cavalier.getCasts().put("Trample", 1);
 		cavalier.getCasts().put("Stampede", 1);
+		cavalier.getCasts().put("Spear", 1);
 
 		Type barbarian = new Type("Barbarian", "Description");
 		barbarian.getArmor().add(Material.DIAMOND_HELMET);
@@ -615,6 +617,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("FireSpit", castfirespit = new CastFireSpit("FireSpit", "Spit A Fireball Somewhere"));
 		casts.put("DemonSpawn", castdemonspawn = new CastDemonSpawn("DemonSpawn", "Spawns A Demon For Your Opponents (Or Friend)"));
 		casts.put("Stampede", caststampede = new CastStampede("Stampede", "Summon A Stampede Of Horses"));
+		casts.put("Spear", castspear = new CastSpear("Spear", "Spear Your Enemy And Bring Them Over There"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -710,6 +713,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("firespit", castfirespit);
 		casthandler.register("demonspawn", castdemonspawn);
 		casthandler.register("stampede", caststampede);
+		casthandler.register("spear", castspear);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

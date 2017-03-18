@@ -81,38 +81,41 @@ public class CastFireBomb extends Projectile implements CommandInterface
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
+						if (!caster.isInterrupted())
+						{
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
 
-						LargeFireball firebomb = (LargeFireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.FIREBALL);
-						firebomb.setShooter(player);
-						firebomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
-						firebomb.setFireTicks(firebombfireticks);
-						firebomb.setGravity(gravity);
+							LargeFireball firebomb = (LargeFireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.FIREBALL);
+							firebomb.setShooter(player);
+							firebomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+							firebomb.setFireTicks(firebombfireticks);
+							firebomb.setGravity(gravity);
 
-						projectiles.add(firebomb.getUniqueId());
+							projectiles.add(firebomb.getUniqueId());
 
-						cast(player);
+							cast(player);
 
-						player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+
+							caster.setCasting(name, false);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (!firebomb.isDead())
+									{
+										projectiles.remove(firebomb.getUniqueId());
+										firebomb.remove();
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), timer);
+						}
 
 						cooldown.start(player.getName());
-
-						caster.setCasting(name, false);
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								if (!firebomb.isDead())
-								{
-									projectiles.remove(firebomb.getUniqueId());
-									firebomb.remove();
-								}
-							}
-
-						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());

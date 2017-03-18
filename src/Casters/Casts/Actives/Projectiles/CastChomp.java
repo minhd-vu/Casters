@@ -66,38 +66,41 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
-
-						BlockIterator blockiterator = new BlockIterator((LivingEntity) player, (int) range);
-
-						new BukkitRunnable()
+						if (!caster.isInterrupted())
 						{
-							@Override
-							public void run()
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
+
+							BlockIterator blockiterator = new BlockIterator((LivingEntity) player, (int) range);
+
+							new BukkitRunnable()
 							{
-								if (blockiterator.hasNext())
+								@Override
+								public void run()
 								{
-									Block block = blockiterator.next();
-
-									EvokerFangs chomp = ((EvokerFangs) player.getWorld().spawnEntity(block.getLocation(), EntityType.EVOKER_FANGS));
-									chomp.setOwner(player);
-
-									projectiles.add(chomp.getUniqueId());
-
-									if (block.getType().isSolid())
+									if (blockiterator.hasNext())
 									{
-										cancel();
+										Block block = blockiterator.next();
+
+										EvokerFangs chomp = ((EvokerFangs) player.getWorld().spawnEntity(block.getLocation(), EntityType.EVOKER_FANGS));
+										chomp.setOwner(player);
+
+										projectiles.add(chomp.getUniqueId());
+
+										if (block.getType().isSolid())
+										{
+											cancel();
+										}
 									}
 								}
-							}
-						}.runTaskTimer(Casters.getInstance(), 0, 1);
+							}.runTaskTimer(Casters.getInstance(), 0, 1);
 
-						cast(player);
+							cast(player);
+
+							caster.setCasting(name, false);
+						}
 
 						cooldown.start(player.getName());
-
-						caster.setCasting(name, false);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());

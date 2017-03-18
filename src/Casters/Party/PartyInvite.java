@@ -24,11 +24,11 @@ public class PartyInvite implements CommandInterface
 	{
 		accept = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Accept" + ChatColor.DARK_GRAY + "]");
 		accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Accept The Party Request").create()));
-		accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "party accept"));
+		accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/party accept"));
 
 		decline = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.RED + "Decline" + ChatColor.DARK_GRAY + "]");
-		accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Decline The Party Request").create()));
-		accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "party decline"));
+		decline.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "Decline The Party Request").create()));
+		decline.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/party decline"));
 	}
 
 	@Override
@@ -52,8 +52,7 @@ public class PartyInvite implements CommandInterface
 				{
 					if (caster.getPlayer().getName().equals(args[1]))
 					{
-						caster.getPlayer()
-								.sendMessage(Party.header + ChatColor.GRAY + " You Are Already In The Party.");
+						caster.getPlayer().sendMessage(Party.header + ChatColor.GRAY + " You Are Already In The Party.");
 						return false;
 					}
 
@@ -75,8 +74,12 @@ public class PartyInvite implements CommandInterface
 
 								TextComponent message = new TextComponent(
 										Party.header + " " + ChatColor.WHITE + caster.getPlayer().getName() + ChatColor.GRAY + " Invites You To Join His/Her Party!");
-								message.addExtra(" " + accept);
-								message.addExtra(" " + decline);
+								message.addExtra("\n");
+								message.addExtra(accept);
+								message.addExtra(" ");
+								message.addExtra(decline);
+
+								c.getPlayer().spigot().sendMessage(message);
 
 								// TODO: Check If Clicking Works.
 
@@ -116,7 +119,7 @@ public class PartyInvite implements CommandInterface
 
 			else
 			{
-				caster.getPlayer().performCommand("party create");
+				//caster.getPlayer().performCommand("party create");
 			}
 		}
 

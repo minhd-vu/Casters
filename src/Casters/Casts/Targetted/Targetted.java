@@ -89,7 +89,7 @@ public abstract class Targetted extends Cast
 		BlockIterator blockiterator = new BlockIterator(player, range);
 
 		Block block;
-		Location loc;
+		Location location;
 
 		int bx, by, bz;
 		double ex, ey, ez;
@@ -104,13 +104,13 @@ public abstract class Targetted extends Cast
 
 			for (LivingEntity entity : livingentities)
 			{
-				loc = entity.getLocation();
+				location = entity.getLocation();
 
-				ex = loc.getX();
-				ey = loc.getY();
-				ez = loc.getZ();
+				ex = location.getX();
+				ey = location.getY();
+				ez = location.getZ();
 
-				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5)) // TODO: Test With Kuro.
+				if ((bx - 0.75 <= ex && ex <= bx + 1.75) && (bz - 0.75 <= ez && ez <= bz + 1.75) && (by - 1.0 <= ey && ey <= by + 2.5)) // TODO: Test With Kuro. Not Working
 				{
 					if (entity instanceof Player || entity instanceof Vehicle)
 					{
@@ -123,7 +123,13 @@ public abstract class Targetted extends Cast
 
 						else if (entity instanceof Vehicle)
 						{
-							caster = Casters.getCasters().get(entity.getPassengers().get(0).getUniqueId());
+							for (Entity passenger : entity.getPassengers())
+							{
+								if (passenger instanceof Player)
+								{
+									caster = Casters.getCasters().get(passenger.getUniqueId());
+								}
+							}
 						}
 
 						if (caster != null && caster.hasParty() && caster.getParty().getMembers().contains(Casters.getCasters().get(entity.getUniqueId())))

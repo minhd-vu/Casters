@@ -79,38 +79,41 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
+						if (!caster.isInterrupted())
+						{
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
 
-						SmallFireball firecharge = (SmallFireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SMALL_FIREBALL);
-						firecharge.setShooter(player);
-						firecharge.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
-						firecharge.setFireTicks(firechargefireticks);
-						firecharge.setGravity(gravity);
+							SmallFireball firecharge = (SmallFireball) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SMALL_FIREBALL);
+							firecharge.setShooter(player);
+							firecharge.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+							firecharge.setFireTicks(firechargefireticks);
+							firecharge.setGravity(gravity);
 
-						projectiles.add(firecharge.getUniqueId());
+							projectiles.add(firecharge.getUniqueId());
 
-						cast(player);
+							cast(player);
 
-						player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+
+							caster.setCasting(name, false);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (!firecharge.isDead())
+									{
+										projectiles.remove(firecharge.getUniqueId());
+										firecharge.remove();
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), timer);
+						}
 
 						cooldown.start(player.getName());
-
-						caster.setCasting(name, false);
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								if (!firecharge.isDead())
-								{
-									projectiles.remove(firecharge.getUniqueId());
-									firecharge.remove();
-								}
-							}
-
-						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());

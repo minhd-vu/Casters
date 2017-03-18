@@ -94,41 +94,44 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 					@Override
 					public void run()
 					{
-						caster.setCasting(name, true);
-						caster.setMana(manacost);
+						if (!caster.isInterrupted())
+						{
+							caster.setCasting(name, true);
+							caster.setMana(manacost);
 
-						WitherSkull darkbomb = (WitherSkull) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.WITHER_SKULL);
-						darkbomb.setShooter(caster.getPlayer());
-						darkbomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
-						darkbomb.setFireTicks(darkbombfireticks);
-						darkbomb.setGravity(gravity);
-						darkbomb.setCharged(charged);
-						darkbomb.setIsIncendiary(incendiary);
-						darkbomb.setYield(yield);
+							WitherSkull darkbomb = (WitherSkull) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.WITHER_SKULL);
+							darkbomb.setShooter(caster.getPlayer());
+							darkbomb.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
+							darkbomb.setFireTicks(darkbombfireticks);
+							darkbomb.setGravity(gravity);
+							darkbomb.setCharged(charged);
+							darkbomb.setIsIncendiary(incendiary);
+							darkbomb.setYield(yield);
 
-						projectiles.add(darkbomb.getUniqueId());
+							projectiles.add(darkbomb.getUniqueId());
 
-						cast(player);
+							cast(player);
 
-						player.getWorld().spigot().playEffect(player.getLocation(), Effect.WITHER_SHOOT);
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.WITHER_SHOOT);
+
+							caster.setCasting(name, false);
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (!darkbomb.isDead())
+									{
+										projectiles.remove(darkbomb.getUniqueId());
+										darkbomb.remove();
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), timer);
+						}
 
 						cooldown.start(player.getName());
-
-						caster.setCasting(name, false);
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								if (!darkbomb.isDead())
-								{
-									projectiles.remove(darkbomb.getUniqueId());
-									darkbomb.remove();
-								}
-							}
-
-						}.runTaskLater(Casters.getInstance(), timer);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());
