@@ -90,8 +90,11 @@ public class CastChomp extends Projectile implements CommandInterface, Listener
 										if (block.getType().isSolid())
 										{
 											cancel();
+											return;
 										}
 									}
+
+									cancel();
 								}
 							}.runTaskTimer(Casters.getInstance(), 0, 1);
 
