@@ -84,27 +84,30 @@ public class CastChainLightning extends Targetted implements CommandInterface, L
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							new BukkitRunnable()
+							if (!caster.isInterrupted())
 							{
-								@Override
-								public void run()
+								caster.setCasting(name, true); // TODO: Test Out Cancelling.
+								caster.setMana(manacost);
+
+								new BukkitRunnable()
 								{
-									le = StrikeLightning(player, le, oldtargets);
-									caster.setBossBarEntity(le);
-
-									if (le == null)
+									@Override
+									public void run()
 									{
-										caster.setCasting(name, false);
-										this.cancel();
+										le = StrikeLightning(player, le, oldtargets);
+										caster.setBossBarEntity(le);
+
+										if (le == null || caster.isInterrupted())
+										{
+											caster.setCasting(name, false);
+											this.cancel();
+										}
 									}
-								}
 
-							}.runTaskTimer(Casters.getInstance(), 0, period);
+								}.runTaskTimer(Casters.getInstance(), 0, period);
 
-							cast(player, target);
+								cast(player, target);
+							}
 
 							cooldown.start(player.getName());
 						}
@@ -117,7 +120,7 @@ public class CastChainLightning extends Targetted implements CommandInterface, L
 		return true;
 	}
 
-	public LivingEntity StrikeLightning(Player player, LivingEntity target, ArrayList<LivingEntity> oldtargets)
+	private LivingEntity StrikeLightning(Player player, LivingEntity target, ArrayList<LivingEntity> oldtargets)
 	{
 		target.getWorld().spigot().strikeLightningEffect(target.getLocation(), true);
 		target.getWorld().playSound(target.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 8.0F, 1.0F);

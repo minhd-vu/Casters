@@ -120,7 +120,7 @@ public class CastFrostFire extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!frostfire.isDead())
+									if (frostfire.isValid())
 									{
 										projectiles.remove(frostfire.getUniqueId());
 										frostfire.remove();

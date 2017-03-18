@@ -3,6 +3,7 @@ package Casters.Casts.Passives;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
+import Casters.Essentials.Schedulers.Cooldown;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -21,8 +22,11 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 	{
 		super(name, description);
 
+		cooldown.setCooldown(0);
+
 		percentage = 150;
 		sneaking = 200;
+		manacost = 0;
 
 		info.add(ChatColor.DARK_AQUA + "Bonus Damage: " + ChatColor.AQUA + percentage + "%");
 		info.add(ChatColor.DARK_AQUA + "Sneaking Damage: " + ChatColor.AQUA + sneaking + "%");
@@ -40,7 +44,7 @@ public class PassiveBackstab extends Passive implements CommandInterface, Listen
 			Caster caster = Casters.getCasters().get(player.getUniqueId());
 			LivingEntity target = (LivingEntity) event.getEntity();
 
-			if (caster.getCasts().containsKey(name) && !caster.sameParty(target) &&
+			if (caster.canCastPassive(name, cooldown, manacost) && !caster.sameParty(target) &&
 					caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) && // TODO: Make A Can Cast Passive Method.
 					target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
 			{

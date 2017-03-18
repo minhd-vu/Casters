@@ -118,9 +118,9 @@ public class CastStampede extends Active implements CommandInterface, Listener
 								left.setAdult();
 								right.setAdult();
 
-								moveHorse(left.getWorld().getHighestBlockAt(left.getLocation()
+								MoveHorse(left.getWorld().getHighestBlockAt(left.getLocation()
 										.add(left.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), left);
-								moveHorse(right.getWorld().getHighestBlockAt(right.getLocation()
+								MoveHorse(right.getWorld().getHighestBlockAt(right.getLocation()
 										.add(right.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), right);
 
 								horses.add(left.getUniqueId());
@@ -218,7 +218,7 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		return true;
 	}
 
-	private void moveHorse(Location location, Horse horse)
+	private void MoveHorse(Location location, Horse horse)
 	{
 		new BukkitRunnable()
 		{

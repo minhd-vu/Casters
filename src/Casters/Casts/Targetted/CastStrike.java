@@ -82,20 +82,23 @@ public class CastStrike extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
+							if (!caster.isInterrupted())
+							{
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-							target.damage(damage);
-							caster.setBossBarEntity(target);
+								target.damage(damage);
+								caster.setBossBarEntity(target);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0F, 1.0F);
+								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.CRIT, 0, 0, 0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0F, 1.0F);
 
-							cast(player, target);
+								cast(player, target);
 
-							bleed.start(caster, target, name);
+								bleed.start(caster, target, name);
 
-							caster.setCasting(name, false);
+								caster.setCasting(name, false);
+							}
 
 							cooldown.start(player.getName());
 						}

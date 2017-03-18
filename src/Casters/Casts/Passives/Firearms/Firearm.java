@@ -50,10 +50,10 @@ public abstract class Firearm extends Passive
 	{
 		super(name, description);
 
-		bullets = new ArrayList<LlamaSpit>();
+		cooldown.setCooldown(0);
+		manacost = 0;
 
-		warmup = new WarmUp();
-		cooldown = new Cooldown();
+		bullets = new ArrayList<LlamaSpit>();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -67,7 +67,7 @@ public abstract class Firearm extends Passive
 
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			{
-				if (caster.canCastPassive(name, cooldown, 0))
+				if (caster.canCastPassive(name, cooldown, manacost)) // TODO: Check for null pointer.
 				{
 					new BukkitRunnable()
 					{

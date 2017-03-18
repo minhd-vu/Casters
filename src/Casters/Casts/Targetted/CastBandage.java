@@ -69,27 +69,30 @@ public class CastBandage extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							if (target.getHealth() + heal > target.getMaxHealth())
+							if (!caster.isInterrupted())
 							{
-								target.setHealth(target.getMaxHealth());
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
+
+								if (target.getHealth() + heal > target.getMaxHealth())
+								{
+									target.setHealth(target.getMaxHealth());
+								}
+								else
+								{
+									target.setHealth(target.getHealth() + heal);
+								}
+
+								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.HEART, 0, 0,
+										0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
+								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_PLACE, 4.0F, 1.0F);
+
+								cast(player, target);
+
+								cooldown.start(player.getName());
+
+								caster.setCasting(name, false);
 							}
-							else
-							{
-								target.setHealth(target.getHealth() + heal);
-							}
-
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.HEART, 0, 0,
-									0.5F, 0.5F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_PLACE, 4.0F, 1.0F);
-
-							cast(player, target);
-
-							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Casters.getInstance(), warmup.getDuration());

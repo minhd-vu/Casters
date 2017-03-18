@@ -103,7 +103,7 @@ public class CastFireCharge extends Projectile implements CommandInterface, List
 								@Override
 								public void run()
 								{
-									if (!firecharge.isDead())
+									if (firecharge.isValid())
 									{
 										projectiles.remove(firecharge.getUniqueId());
 										firecharge.remove();

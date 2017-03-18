@@ -105,7 +105,7 @@ public class CastFireBomb extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!firebomb.isDead())
+									if (firebomb.isValid())
 									{
 										projectiles.remove(firebomb.getUniqueId());
 										firebomb.remove();

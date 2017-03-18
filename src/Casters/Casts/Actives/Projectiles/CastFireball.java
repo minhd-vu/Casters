@@ -103,7 +103,7 @@ public class CastFireball extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!fireball.isDead())
+									if (fireball.isValid())
 									{
 										projectiles.remove(fireball.getUniqueId());
 										fireball.remove();

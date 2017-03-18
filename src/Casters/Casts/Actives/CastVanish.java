@@ -83,22 +83,22 @@ public class CastVanish extends Active implements CommandInterface, Listener
 
 							player.getWorld().playEffect(player.getLocation(), Effect.SMOKE, 0, 4);
 							player.sendMessage(header + ChatColor.WHITE + " You" + ChatColor.GRAY + " Have " + ChatColor.WHITE + "Vanished" + ChatColor.GRAY + "!");
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									if (caster.isCasting(name))
+									{
+										cancelInvisibility(player);
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), duration);
 						}
 
 						cooldown.start(player.getName());
-
-						new BukkitRunnable()
-						{
-							@Override
-							public void run()
-							{
-								if (caster.isCasting(name))
-								{
-									cancelInvisibility(player);
-								}
-							}
-
-						}.runTaskLater(Casters.getInstance(), duration);
 					}
 
 				}.runTaskLater(Casters.getInstance(), warmup.getDuration());

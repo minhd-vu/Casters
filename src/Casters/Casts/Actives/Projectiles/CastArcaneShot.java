@@ -117,7 +117,7 @@ public class CastArcaneShot extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!arcaneshot.isDead())
+									if (arcaneshot.isValid())
 									{
 										projectiles.remove(arcaneshot.getUniqueId());
 										arcaneshot.remove();

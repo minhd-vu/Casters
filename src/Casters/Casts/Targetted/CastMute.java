@@ -70,51 +70,54 @@ public class CastMute extends Targetted implements CommandInterface
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							target.damage(damage);
-							caster.setBossBarEntity(target);
-
-							if (target instanceof Player)
+							if (!caster.isInterrupted())
 							{
-								Caster tcaster = Casters.getCasters().get(target.getUniqueId());
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-								tcaster.setEffect("Silenced", duration);
-								caster.setEffect("Silencing", duration);
+								target.damage(damage);
+								caster.setBossBarEntity(target);
 
-								new BukkitRunnable()
+								if (target instanceof Player)
 								{
-									@Override
-									public void run()
+									Caster tcaster = Casters.getCasters().get(target.getUniqueId());
+
+									tcaster.setEffect("Silenced", duration);
+									caster.setEffect("Silencing", duration);
+
+									new BukkitRunnable()
 									{
-										if (target instanceof Player)
+										@Override
+										public void run()
 										{
-											target.sendMessage(header + org.bukkit.ChatColor.WHITE + " You" + org.bukkit.ChatColor.GRAY
-													+ " Have Stopped Being " + org.bukkit.ChatColor.WHITE + "Muted" + org.bukkit.ChatColor.GRAY
-													+ "!");
-										}
-
-										List<Entity> e = target.getNearbyEntities(16, 16, 16);
-
-										for (Entity player : e)
-										{
-											if (player instanceof Player)
+											if (target instanceof Player)
 											{
-												player.sendMessage(header + org.bukkit.ChatColor.WHITE + " " + target.getName()
-														+ org.bukkit.ChatColor.GRAY + " Has Stopped Being " + org.bukkit.ChatColor.WHITE
-														+ "Muted" + org.bukkit.ChatColor.GRAY + "!");
+												target.sendMessage(header + org.bukkit.ChatColor.WHITE + " You" + org.bukkit.ChatColor.GRAY
+														+ " Have Stopped Being " + org.bukkit.ChatColor.WHITE + "Muted" + org.bukkit.ChatColor.GRAY
+														+ "!");
+											}
+
+											List<Entity> e = target.getNearbyEntities(16, 16, 16);
+
+											for (Entity player : e)
+											{
+												if (player instanceof Player)
+												{
+													player.sendMessage(header + org.bukkit.ChatColor.WHITE + " " + target.getName()
+															+ org.bukkit.ChatColor.GRAY + " Has Stopped Being " + org.bukkit.ChatColor.WHITE
+															+ "Muted" + org.bukkit.ChatColor.GRAY + "!");
+												}
 											}
 										}
-									}
-								}.runTaskLater(Casters.getInstance(), duration);
+									}.runTaskLater(Casters.getInstance(), duration);
+								}
+
+								cast(player, target);
+
+								caster.setCasting(name, false);
 							}
 
-							cast(player, target);
-
 							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Casters.getInstance(), warmup.getDuration());

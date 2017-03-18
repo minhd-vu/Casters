@@ -123,7 +123,7 @@ public class CastFireSpit extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!firespit.isDead())
+									if (firespit.isValid())
 									{
 										projectiles.remove(firespit.getUniqueId());
 										firespit.remove();

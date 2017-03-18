@@ -57,7 +57,7 @@ public class Bleed
 			@Override
 			public void run()
 			{
-				if (target == null || target.isDead())
+				if (!target.isValid() || caster.isInterrupted())
 				{
 					cancel();
 					return;

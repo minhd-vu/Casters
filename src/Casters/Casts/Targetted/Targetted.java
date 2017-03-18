@@ -132,7 +132,7 @@ public abstract class Targetted extends Cast
 							}
 						}
 
-						if (caster != null && caster.hasParty() && caster.getParty().getMembers().contains(Casters.getCasters().get(entity.getUniqueId())))
+						if (caster.sameParty(entity))
 						{
 							if (targetpartymembers)
 							{

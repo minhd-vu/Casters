@@ -70,6 +70,7 @@ public class CastSiphon extends Targetted implements CommandInterface, Listener
 
 				return true;
 			}
+
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
 				LivingEntity target = getTarget(player, range, false, false);
@@ -84,33 +85,36 @@ public class CastSiphon extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.WITCH_MAGIC,
-									0, 0, 0.5F, 0.5F, 0.5F, 1.0F, 16, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.ENTITY_WITCH_DRINK, 8.0F, 1.0F);
-
-							target.damage(damage);
-							caster.setBossBarEntity(target);
-
-							if (player.getHealth() + damage * percentage / 100.0 > player.getMaxHealth())
+							if (!caster.isInterrupted())
 							{
-								player.setHealth(player.getMaxHealth());
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
+
+								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.WITCH_MAGIC,
+										0, 0, 0.5F, 0.5F, 0.5F, 1.0F, 16, 16);
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_WITCH_DRINK, 8.0F, 1.0F);
+
+								target.damage(damage);
+								caster.setBossBarEntity(target);
+
+								if (player.getHealth() + damage * percentage / 100.0 > player.getMaxHealth())
+								{
+									player.setHealth(player.getMaxHealth());
+								}
+
+								else
+								{
+									player.setHealth(player.getHealth() + damage * percentage / 100.0);
+								}
+
+								siphon.start(caster, target, name); // TODO: See If Siphon Cancel Works.
+
+								cast(player, target);
+
+								caster.setCasting(name, false);
 							}
-
-							else
-							{
-								player.setHealth(player.getHealth() + damage * percentage / 100.0);
-							}
-
-							siphon.start(caster, target, name);
-
-							cast(player, target);
 
 							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Casters.getInstance(), warmup.getDuration());

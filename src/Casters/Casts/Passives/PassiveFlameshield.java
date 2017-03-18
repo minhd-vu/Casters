@@ -18,6 +18,9 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 	{
 		super(name, description);
 
+		cooldown.setCooldown(0);
+		manacost = 0;
+
 		percentage = 50.0;
 
 		info.add(ChatColor.DARK_AQUA + "Fire Damage Reduction: " + ChatColor.GRAY + percentage + "%");
@@ -32,7 +35,7 @@ public class PassiveFlameshield extends Passive implements CommandInterface, Lis
 		{
 			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
-			if (caster.getCasts().containsKey(name))
+			if (caster.canCastPassive(name, cooldown, manacost))
 			{
 				if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK)
 						|| event.getCause().equals(DamageCause.LAVA))

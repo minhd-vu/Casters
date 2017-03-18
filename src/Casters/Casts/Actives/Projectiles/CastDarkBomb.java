@@ -121,7 +121,7 @@ public class CastDarkBomb extends Projectile implements CommandInterface, Listen
 								@Override
 								public void run()
 								{
-									if (!darkbomb.isDead())
+									if (darkbomb.isValid())
 									{
 										projectiles.remove(darkbomb.getUniqueId());
 										darkbomb.remove();

@@ -95,7 +95,7 @@ public class CastSeeker extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!seeker.isDead())
+									if (seeker.isValid())
 									{
 										projectiles.remove(seeker.getUniqueId());
 										seeker.remove();

@@ -117,7 +117,7 @@ public class CastDemonSpawn extends Projectile implements CommandInterface
 								@Override
 								public void run()
 								{
-									if (!demonspawn.isDead())
+									if (demonspawn.isValid())
 									{
 										projectiles.remove(demonspawn.getUniqueId());
 										demonspawn.remove();

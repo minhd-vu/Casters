@@ -53,7 +53,7 @@ public class Siphon extends Bleed
 			@Override
 			public void run()
 			{
-				if (target == null || target.isDead())
+				if (!target.isValid() || caster.isInterrupted())
 				{
 					cancel();
 					return;

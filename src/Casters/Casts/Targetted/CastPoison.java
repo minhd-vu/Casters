@@ -83,23 +83,26 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setEffect("Poisoning", duration);
-							caster.setMana(manacost);
+							if (!caster.isInterrupted())
+							{
+								caster.setCasting(name, true);
+								caster.setEffect("Poisoning", duration);
+								caster.setMana(manacost);
 
-							poison.start(caster, target, name);
+								poison.start(caster, target, name);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.SLIME, 0, 0,
-									0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_FALL, 1.0F, 1.0F);
+								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.SLIME, 0, 0,
+										0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
+								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_FALL, 1.0F, 1.0F);
 
-							caster.setBossBarEntity(target);
+								caster.setBossBarEntity(target);
 
-							cast(player, target);
+								cast(player, target);
+
+								caster.setCasting(name, false);
+							}
 
 							cooldown.start(player.getName());
-
-							caster.setCasting(name, false);
 						}
 
 					}.runTaskLater(Casters.getInstance(), warmup.getDuration());

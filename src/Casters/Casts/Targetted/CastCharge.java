@@ -82,56 +82,62 @@ public class CastCharge extends Targetted implements CommandInterface, Listener
 						@Override
 						public void run()
 						{
-							caster.setCasting(name, true);
-							caster.setMana(manacost);
-
-							double vertical;
-
-							if (player.leaveVehicle())
+							if (!caster.isInterrupted())
 							{
-								vertical = 0.0;
-							}
-							else
-							{
-								vertical = 0.5;
-							}
+								caster.setCasting(name, true);
+								caster.setMana(manacost);
 
-							double x = target.getLocation().getX() - player.getLocation().getX();
-							double z = target.getLocation().getZ() - player.getLocation().getZ();
+								double vertical;
 
-							Vector v = new Vector(x / (range / 2.0), vertical, z / (range / 2.0));
-
-							player.setVelocity(v);
-
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.CLOUD, 0, 0, 0.0F, 0.1F,
-									0.0F, 0.5F, 25, 12);
-							player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 8.0F,
-									1.0F);
-
-							new BukkitRunnable()
-							{
-								@Override
-								public void run()
+								if (player.leaveVehicle())
 								{
-									for (Entity e : player.getNearbyEntities(stunrange, stunrange, stunrange))
-									{
-										if (e.equals(target))
-										{
-											target.damage(damage);
-											caster.setBossBarEntity(target);
-
-											stun.start(target);
-
-											break;
-										}
-									}
-
-									caster.setCasting(name, false);
+									vertical = 0.0;
+								}
+								else
+								{
+									vertical = 0.5;
 								}
 
-							}.runTaskLater(Casters.getInstance(), (long) (range * 1.25));
+								double x = target.getLocation().getX() - player.getLocation().getX();
+								double z = target.getLocation().getZ() - player.getLocation().getZ();
 
-							cast(player, target);
+								Vector v = new Vector(x / (range / 2.0), vertical, z / (range / 2.0));
+
+								player.setVelocity(v);
+
+								player.getWorld().spigot().playEffect(player.getLocation(), Effect.CLOUD, 0, 0, 0.0F, 0.1F,
+										0.0F, 0.5F, 25, 12);
+								player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 8.0F,
+										1.0F);
+
+								new BukkitRunnable()
+								{
+									@Override
+									public void run()
+									{
+										if (!caster.isInterrupted())
+										{
+											for (Entity e : player.getNearbyEntities(stunrange, stunrange, stunrange))
+											{
+												if (e.equals(target))
+												{
+													target.damage(damage);
+													caster.setBossBarEntity(target);
+
+													stun.start(target);
+
+													break;
+												}
+											}
+										}
+
+										caster.setCasting(name, false);
+									}
+
+								}.runTaskLater(Casters.getInstance(), (long) (range * 1.25));
+
+								cast(player, target);
+							}
 
 							cooldown.start(player.getName());
 						}
