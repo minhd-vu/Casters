@@ -120,6 +120,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastStampede caststampede;
 	private static CastSpear castspear;
 	private static CastFlash castflash;
+	private static CastBlink castblink;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -372,7 +373,7 @@ public class Casters extends JavaPlugin implements Listener
 		distorter.getWeapon().put(Material.WOOD_HOE, 5);
 		distorter.getCasts().put("DarkBomb", 1);
 		distorter.getCasts().put("ArcaneShot", 1);
-		distorter.getCasts().put("Flash", 1);
+		distorter.getCasts().put("Blink", 1);
 
 		Type inferno = new Type("Inferno", "Description");
 		inferno.getArmor().add(Material.LEATHER_HELMET);
@@ -389,6 +390,7 @@ public class Casters extends JavaPlugin implements Listener
 		inferno.getCasts().put("FireBomb", 1);
 		inferno.getCasts().put("Flameshield", 1);
 		inferno.getCasts().put("FireSpit", 1);
+		inferno.getCasts().put("Flash", 1);
 
 		Type shaman = new Type("Shaman", "Description");
 		shaman.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -621,6 +623,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Stampede", caststampede = new CastStampede("Stampede", "Summon A Stampede Of Horses"));
 		casts.put("Spear", castspear = new CastSpear("Spear", "Spear Your Enemy And Bring Them Over There"));
 		casts.put("Flash", castflash = new CastFlash("Flash", "Flash A Ways Away"));
+		casts.put("Blink", castblink = new CastBlink("Blink", "Blink A Ways Away"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -655,11 +658,10 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb,
-				castbolt, castrevive, castfirebomb, castfirecharge, castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect,
-				castsiphon, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab,
-				passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket);
-
+		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
+				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castsiphon, castvanish, castbomb, castmount, castpoison,
+				castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
+				passivemusket);
 	}
 
 	private void registerCommands()
@@ -718,6 +720,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("stampede", caststampede);
 		casthandler.register("spear", castspear);
 		casthandler.register("flash", castflash);
+		casthandler.register("blink", castblink);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

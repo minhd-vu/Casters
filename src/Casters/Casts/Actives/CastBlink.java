@@ -16,11 +16,11 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-public class CastFlash extends Active implements CommandInterface, Listener
+public class CastBlink extends Active implements CommandInterface, Listener
 {
 	private int distance;
 
-	public CastFlash(String name, String description)
+	public CastBlink(String name, String description)
 	{
 		super(name, description);
 
@@ -33,7 +33,7 @@ public class CastFlash extends Active implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		distance = 8;
+		distance = 16;
 
 		info.add(ChatColor.DARK_AQUA + "Distance: " + ChatColor.GRAY + distance + " Blocks");
 
@@ -85,7 +85,7 @@ public class CastFlash extends Active implements CommandInterface, Listener
 								}
 							}
 
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDER_SIGNAL);
 							player.teleport(target.setDirection(player.getEyeLocation().getDirection()), PlayerTeleportEvent.TeleportCause.PLUGIN);
 
 							cast(player);

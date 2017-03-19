@@ -148,8 +148,7 @@ public class CastFireball extends Projectile implements CommandInterface
 							((LivingEntity) target).damage(damage);
 							target.setFireTicks(targetfireticks);
 
-							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D),
-									Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
+							target.getWorld().spigot().playEffect(target.getLocation().add(0.0D, 0.5D, 0.0D), Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 16);
 							target.getWorld().playSound(target.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 8.0F, 1.0F);
 						}
 
