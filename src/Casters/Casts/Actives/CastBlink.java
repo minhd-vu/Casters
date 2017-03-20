@@ -6,13 +6,13 @@ import Casters.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
@@ -40,6 +40,7 @@ public class CastBlink extends Active implements CommandInterface, Listener
 		pages.setPage(info);
 	}
 
+	@SuppressWarnings("deprecated")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -77,16 +78,29 @@ public class CastBlink extends Active implements CommandInterface, Listener
 							{
 								Block block = blockiterator.next();
 
-								target = block.getLocation();
+								target = block.getLocation().add(0, 1, 0);
 
 								if (block.getType().isSolid())
 								{
-									return;
+									break;
 								}
 							}
 
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT); // TODO: Test Out Particles.
+							player.getWorld().spigot().playEffect(player.getEyeLocation(), Effect.COLOURED_DUST, 0, 1, ((float) 113) / 255, ((float) 255) / 255,
+									((float) 242) / 255, 1, 50, 4);
+							player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 8.0F, 1.0F);
 							player.teleport(target.setDirection(player.getEyeLocation().getDirection()));
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									player.getWorld().spigot().playEffect(player.getEyeLocation(), Effect.COLOURED_DUST, 0, 1, ((float) 113) / 255, ((float) 255) / 255,
+											((float) 242) / 255, 1, 50, 4);
+								}
+
+							}.runTaskLater(Casters.getInstance(), 1);
 
 							cast(player);
 

@@ -42,6 +42,7 @@ public class CastFlash extends Active implements CommandInterface, Listener
 		pages.setPage(info);
 	}
 
+	@SuppressWarnings("deprecated")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -79,11 +80,11 @@ public class CastFlash extends Active implements CommandInterface, Listener
 							{
 								Block block = blockiterator.next();
 
-								target = block.getLocation();
+								target = block.getLocation().add(0, 1, 0);
 
 								if (block.getType().isSolid())
 								{
-									return;
+									break;
 								}
 							}
 
