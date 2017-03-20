@@ -4,23 +4,26 @@ import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.BlockIterator;
 
-public class CastBlink extends Active implements CommandInterface, Listener
+import java.util.List;
+
+public class CastWhirlwind extends Active implements CommandInterface, Listener
 {
-	private int distance;
+	private double damage;
+	private int range;
+	private int period;
+	private int duration;
 
-	public CastBlink(String name, String description)
+	public CastWhirlwind(String name, String description)
 	{
 		super(name, description);
 
@@ -33,9 +36,13 @@ public class CastBlink extends Active implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		distance = 16;
+		damage = 5;
+		range = 4;
+		period = 10;
+		duration = 100;
 
-		info.add(ChatColor.DARK_AQUA + "Distance: " + ChatColor.GRAY + distance + " Blocks");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
+		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 
 		pages.setPage(info);
 	}
@@ -69,28 +76,40 @@ public class CastBlink extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							BlockIterator blockiterator = new BlockIterator((LivingEntity) player, (int) distance);
-
-							Location target = player.getLocation();
-
-							while (blockiterator.hasNext())
+							new BukkitRunnable()
 							{
-								Block block = blockiterator.next();
+								private int count = 0;
 
-								target = block.getLocation();
-
-								if (block.getType().isSolid())
+								@Override
+								public void run()
 								{
-									return;
-								}
-							}
+									if (++count * period > duration)
+									{
+										caster.setCasting(name, false); // TODO: Test With Kuro.
+										decast(player);
 
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDER_SIGNAL); // TODO: Test Out Particles.
-							player.teleport(target.setDirection(player.getEyeLocation().getDirection()), PlayerTeleportEvent.TeleportCause.PLUGIN);
+										cancel();
+										return;
+									}
+
+									List<Entity> entities = player.getNearbyEntities(range, range, range);
+
+									for (Entity entity : entities)
+									{
+										if (entity instanceof LivingEntity)
+										{
+											((LivingEntity) entity).damage(damage);
+											caster.setBossBarEntity((Damageable) entity);
+											entity.getWorld().playSound(((LivingEntity) entity).getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 8.0F, 1.0F);
+										}
+									}
+
+									player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_BLAZE_SHOOT, 8.0F, -1.0F); // TODO: Check Sounds.
+								}
+
+							}.runTaskTimer(Casters.getInstance(), 0, period);
 
 							cast(player);
-
-							caster.setCasting(name, false);
 						}
 
 						cooldown.start(player.getName());
