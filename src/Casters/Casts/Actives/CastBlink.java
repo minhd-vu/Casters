@@ -33,7 +33,7 @@ public class CastBlink extends Active implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		distance = 16;
+		distance = 8;
 
 		info.add(ChatColor.DARK_AQUA + "Distance: " + ChatColor.GRAY + distance + " Blocks");
 
@@ -69,7 +69,7 @@ public class CastBlink extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
-							BlockIterator blockiterator = new BlockIterator((LivingEntity) player, (int) distance);
+							BlockIterator blockiterator = new BlockIterator((LivingEntity) player, distance);
 
 							Location target = player.getLocation();
 
@@ -85,8 +85,8 @@ public class CastBlink extends Active implements CommandInterface, Listener
 								}
 							}
 
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.ENDER_SIGNAL); // TODO: Test Out Particles.
-							player.teleport(target.setDirection(player.getEyeLocation().getDirection()), PlayerTeleportEvent.TeleportCause.PLUGIN);
+							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT); // TODO: Test Out Particles.
+							player.teleport(target.setDirection(player.getEyeLocation().getDirection()));
 
 							cast(player);
 

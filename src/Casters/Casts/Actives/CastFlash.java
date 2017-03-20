@@ -4,8 +4,10 @@ import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -85,8 +87,19 @@ public class CastFlash extends Active implements CommandInterface, Listener
 								}
 							}
 
-							player.getWorld().spigot().playEffect(player.getLocation(), Effect.BLAZE_SHOOT);
-							player.teleport(target.setDirection(player.getEyeLocation().getDirection()), PlayerTeleportEvent.TeleportCause.PLUGIN);
+							player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 2);
+							player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_BLAZE_SHOOT, 8.0F, -1.0F);
+							player.teleport(target.setDirection(player.getEyeLocation().getDirection()));
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									player.getWorld().spigot().playEffect(player.getLocation().add(0, 1, 0), Effect.FLAME, 0, 0, 0.2F, 0.2F, 0.2F, 0.1F, 50, 2);
+								}
+
+							}.runTaskLater(Casters.getInstance(), 1);
 
 							cast(player);
 

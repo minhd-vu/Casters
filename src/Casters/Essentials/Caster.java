@@ -168,6 +168,7 @@ public class Caster
 		effects.put("Poisoning", new Effect());
 		effects.put("Poisoned", new Effect());
 		effects.put("Defending", new Effect());
+		effects.put("Spinning", new Effect());
 
 		interrupted = false;
 

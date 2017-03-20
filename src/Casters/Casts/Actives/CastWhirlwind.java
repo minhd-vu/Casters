@@ -12,6 +12,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class CastWhirlwind extends Active implements CommandInterface, Listener
 	private int range;
 	private int period;
 	private int duration;
+	private int amplifier;
 
 	public CastWhirlwind(String name, String description)
 	{
@@ -37,9 +40,10 @@ public class CastWhirlwind extends Active implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		damage = 5;
-		range = 4;
+		range = 2;
 		period = 10;
 		duration = 100;
+		amplifier = 3;
 
 		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
@@ -76,16 +80,20 @@ public class CastWhirlwind extends Active implements CommandInterface, Listener
 							caster.setCasting(name, true);
 							caster.setMana(manacost);
 
+							player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
+
+							caster.setEffect("Spinning", duration);
+
 							new BukkitRunnable()
 							{
-								private int count = 0;
-
 								@Override
 								public void run()
 								{
-									if (++count * period > duration)
+									if (!caster.hasEffect("Spinning") || caster.isInterrupted())
 									{
-										caster.setCasting(name, false); // TODO: Test With Kuro.
+										player.removePotionEffect(PotionEffectType.SLOW);
+										caster.setEffect("Spinning", 0);
+										caster.setCasting(name, false); // TODO: Test Interrupt With Kuro.
 										decast(player);
 
 										cancel();
@@ -96,15 +104,15 @@ public class CastWhirlwind extends Active implements CommandInterface, Listener
 
 									for (Entity entity : entities)
 									{
-										if (entity instanceof LivingEntity)
+										if (entity instanceof LivingEntity && entity.isValid())
 										{
 											((LivingEntity) entity).damage(damage);
 											caster.setBossBarEntity((Damageable) entity);
-											entity.getWorld().playSound(((LivingEntity) entity).getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 8.0F, 1.0F);
+											entity.getWorld().playSound(((LivingEntity) entity).getEyeLocation(), Sound.ENTITY_ITEM_BREAK, 8.0F, 2.0F);
 										}
 									}
 
-									player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_BLAZE_SHOOT, 8.0F, -1.0F); // TODO: Check Sounds.
+									player.getWorld().playSound(player.getEyeLocation(), Sound.ENTITY_BLAZE_SHOOT, 8.0F, -1.0F);
 								}
 
 							}.runTaskTimer(Casters.getInstance(), 0, period);
