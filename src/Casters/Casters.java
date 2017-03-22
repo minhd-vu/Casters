@@ -666,7 +666,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
 				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castsiphon, castvanish, castbomb, castmount, castpoison,
-				castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
+				castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, casthogriders, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
 				passivemusket);
 	}
 

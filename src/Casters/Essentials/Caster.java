@@ -164,11 +164,12 @@ public class Caster
 		effects.put("Taunted", new Effect());
 		effects.put("Taunting", new Effect());
 		effects.put("Invisible", new Effect());
-		effects.put("Backstabbing", new Effect());
+		effects.put("Backtabbing", new Effect());
 		effects.put("Poisoning", new Effect());
 		effects.put("Poisoned", new Effect());
 		effects.put("Defending", new Effect());
 		effects.put("Spinning", new Effect());
+		effects.put("HogRiding", new Effect());
 
 		interrupted = false;
 
@@ -934,7 +935,10 @@ public class Caster
 		{
 			Caster caster = Casters.getCasters().get(target.getUniqueId());
 
-			caster.getPlayer().leaveVehicle();
+			if (caster.getPlayer().leaveVehicle());
+			{
+				caster.setEffect("HogRiding", 0);
+			}
 
 			if (caster.isWarmingUp() || caster.isCasting())
 			{
