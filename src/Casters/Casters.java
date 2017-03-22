@@ -123,6 +123,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastBlink castblink;
 	private static CastWhirlwind castwhirlwind;
 	private static CastHogRiders casthogriders;
+	private static CastCleanse castcleanse;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -474,6 +475,7 @@ public class Casters extends JavaPlugin implements Listener
 		cleric.getWeapon().put(Material.STONE_SPADE, 5);
 		cleric.getWeapon().put(Material.WOOD_SPADE, 4);
 		cleric.getCasts().put("Revive", 1);
+		cleric.getCasts().put("Cleanse", 1);
 
 		classes.add(wanderer);
 		classes.add(paladin);
@@ -630,6 +632,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Blink", castblink = new CastBlink("Blink", "Blink A Ways Away"));
 		casts.put("Whirlwind", castwhirlwind = new CastWhirlwind("Whirlwind", "Spin Furiously Damaging All Nearby Enemies"));
 		casts.put("HogRiders", casthogriders = new CastHogRiders("HogRiders", "Mount All Your Party Members On Hogs"));
+		casts.put("Cleanse", castcleanse = new CastCleanse("Cleanse", "Remove Debuffs From Your Party Members"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -729,6 +732,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("blink", castblink);
 		casthandler.register("whirlwind", castwhirlwind);
 		casthandler.register("hogriders", casthogriders);
+		casthandler.register("cleanse", castcleanse);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
