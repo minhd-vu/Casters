@@ -122,6 +122,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastFlash castflash;
 	private static CastBlink castblink;
 	private static CastWhirlwind castwhirlwind;
+	private static CastHogRiders casthogriders;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -295,6 +296,7 @@ public class Casters extends JavaPlugin implements Listener
 		barbarian.getCasts().put("Bash", 1);
 		barbarian.getCasts().put("Mute", 1);
 		barbarian.getCasts().put("Whirlwind", 1);
+		barbarian.getCasts().put("HogRiders", 1);
 
 		Type blackguard = new Type("Blackguard", "Description");
 		blackguard.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -627,6 +629,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Flash", castflash = new CastFlash("Flash", "Flash A Ways Away"));
 		casts.put("Blink", castblink = new CastBlink("Blink", "Blink A Ways Away"));
 		casts.put("Whirlwind", castwhirlwind = new CastWhirlwind("Whirlwind", "Spin Furiously Damaging All Nearby Enemies"));
+		casts.put("HogRiders", casthogriders = new CastHogRiders("HogRiders", "Mount All Your Party Members On Hogs"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -725,6 +728,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("flash", castflash);
 		casthandler.register("blink", castblink);
 		casthandler.register("whirlwind", castwhirlwind);
+		casthandler.register("hogriders", casthogriders);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
