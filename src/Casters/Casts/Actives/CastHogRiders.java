@@ -3,24 +3,17 @@ package Casters.Casts.Actives;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import net.minecraft.server.v1_11_R1.AttributeInstance;
-import net.minecraft.server.v1_11_R1.EntityInsentient;
-import net.minecraft.server.v1_11_R1.GenericAttributes;
-import net.minecraft.server.v1_11_R1.PathEntity;
+import Casters.Essentials.Mob;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleExitEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -116,7 +109,18 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 									hog.setAI(true);
 									hog.addPassenger(member.getPlayer());
 
-									MovePig(player, hog);
+									new BukkitRunnable()
+									{
+										@Override
+										public void run()
+										{
+											if (Mob.setEntityTargetLocation(member.getPlayer().getTargetBlock((Set<Material>) null, lookrange).getLocation(), hog, speed))
+											{
+												this.cancel();
+											}
+										}
+
+									}.runTaskTimer(Casters.getInstance(), 0 , 2);
 
 									hogs.add(hog.getUniqueId());
 
@@ -151,37 +155,6 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 			}
 		}
 		return true;
-	}
-
-	private void MovePig(Player player, Pig pig)
-	{
-		new BukkitRunnable()
-		{
-			public void run()
-			{
-				if (!pig.isValid())
-				{
-					this.cancel();
-				}
-
-				Location location = player.getTargetBlock((Set<Material>) null, lookrange).getLocation();
-
-				net.minecraft.server.v1_11_R1.Entity pett = ((CraftEntity) pig).getHandle();
-				((EntityInsentient) pett).getNavigation().a(2);
-				Object petf = ((CraftEntity) pig).getHandle();
-				PathEntity path = ((EntityInsentient) petf).getNavigation().a(location.getX(), location.getY(), location.getZ());
-
-				if (path != null)
-				{
-					((EntityInsentient) petf).getNavigation().a(path, 1.0D);
-					((EntityInsentient) petf).getNavigation().a(2.0D);
-				}
-
-				AttributeInstance attributes = ((EntityInsentient) ((CraftEntity) pig).getHandle()).getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
-				attributes.setValue(speed);
-			}
-
-		}.runTaskTimer(Casters.getInstance(), 0, 2);
 	}
 
 	@EventHandler

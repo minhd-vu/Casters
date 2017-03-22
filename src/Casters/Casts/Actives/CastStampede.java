@@ -3,14 +3,10 @@ package Casters.Casts.Actives;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import net.minecraft.server.v1_11_R1.AttributeInstance;
-import net.minecraft.server.v1_11_R1.EntityInsentient;
-import net.minecraft.server.v1_11_R1.GenericAttributes;
-import net.minecraft.server.v1_11_R1.PathEntity;
+import Casters.Essentials.Mob;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
 import org.bukkit.entity.*;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -118,10 +114,37 @@ public class CastStampede extends Active implements CommandInterface, Listener
 								left.setAdult();
 								right.setAdult();
 
-								MoveHorse(left.getWorld().getHighestBlockAt(left.getLocation()
-										.add(left.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), left);
-								MoveHorse(right.getWorld().getHighestBlockAt(right.getLocation()
-										.add(right.getEyeLocation().getDirection().setY(0.0).normalize().multiply(range))).getLocation(), right);
+								final Location lefttarget =
+										player.getWorld().getHighestBlockAt(leftlocation.add(leftlocation.getDirection().normalize().multiply(range))).getLocation();
+
+								final Location righttarget =
+										player.getWorld().getHighestBlockAt(rightlocation.add(rightlocation.getDirection().normalize().multiply(range))).getLocation();
+
+								new BukkitRunnable()
+								{
+									@Override
+									public void run()
+									{
+										if (Mob.setEntityTargetLocation(lefttarget, left, speed))
+										{
+											this.cancel();
+										}
+									}
+
+								}.runTaskTimer(Casters.getInstance(), 0, 2);
+
+								new BukkitRunnable()
+								{
+									@Override
+									public void run()
+									{
+										if (Mob.setEntityTargetLocation(righttarget, right, speed))
+										{
+											this.cancel();
+										}
+									}
+
+								}.runTaskTimer(Casters.getInstance(), 0, 2);
 
 								horses.add(left.getUniqueId());
 								horses.add(right.getUniqueId());
@@ -216,34 +239,5 @@ public class CastStampede extends Active implements CommandInterface, Listener
 		}
 
 		return true;
-	}
-
-	private void MoveHorse(Location location, Horse horse)
-	{
-		new BukkitRunnable()
-		{
-			public void run()
-			{
-				if (!horse.isValid())
-				{
-					this.cancel();
-				}
-
-				net.minecraft.server.v1_11_R1.Entity pett = ((CraftEntity) horse).getHandle();
-				((EntityInsentient) pett).getNavigation().a(2);
-				Object petf = ((CraftEntity) horse).getHandle();
-				PathEntity path = ((EntityInsentient) petf).getNavigation().a(location.getX(), location.getY(), location.getZ());
-
-				if (path != null)
-				{
-					((EntityInsentient) petf).getNavigation().a(path, 1.0D);
-					((EntityInsentient) petf).getNavigation().a(2.0D);
-				}
-
-				AttributeInstance attributes = ((EntityInsentient) ((CraftEntity) horse).getHandle()).getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
-				attributes.setValue(speed);
-			}
-
-		}.runTaskTimer(Casters.getInstance(), 0, 2);
 	}
 }
