@@ -70,7 +70,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastersRaces castersraces;
 	private static CastersJobs castersjobs;
 	private static CastersArmor castersarmor;
-	private static CastersWeapon castersweapon;
+	private static CastersWeapons castersweapon;
 	private static CastersWhoIs casterswhois;
 	private static CastersRecipes castersrecipes;
 
@@ -597,7 +597,7 @@ public class Casters extends JavaPlugin implements Listener
 		castersraces = new CastersRaces();
 		castersjobs = new CastersJobs();
 		castersarmor = new CastersArmor();
-		castersweapon = new CastersWeapon();
+		castersweapon = new CastersWeapons();
 		casterswhois = new CastersWhoIs();
 		castersrecipes = new CastersRecipes();
 
@@ -702,7 +702,7 @@ public class Casters extends JavaPlugin implements Listener
 		castershandler.register("races", castersraces);
 		castershandler.register("jobs", castersjobs);
 		castershandler.register("armor", castersarmor);
-		castershandler.register("weapon", castersweapon);
+		castershandler.register("weapons", castersweapon);
 		castershandler.register("whois", casterswhois);
 		castershandler.register("recipes", castersrecipes);
 

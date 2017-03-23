@@ -1,16 +1,13 @@
 package Casters.Casts.Passives;
 
 import Casters.Casters;
-import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Essentials.Schedulers.Cooldown;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PassiveBackstab extends Passive
@@ -45,7 +42,7 @@ public class PassiveBackstab extends Passive
 			LivingEntity target = (LivingEntity) event.getEntity();
 
 			if (caster.canCastPassive(name, cooldown, manacost) && !caster.sameParty(target) &&
-					caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) && // TODO: Make A Can Cast Passive Method.
+					caster.getWeapons().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) && // TODO: Make A Can Cast Passive Method.
 					target.getLocation().getDirection().dot(player.getLocation().getDirection()) > 0.0D)
 			{
 				event.setCancelled(true);

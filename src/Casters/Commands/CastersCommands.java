@@ -41,7 +41,7 @@ public class CastersCommands implements CommandInterface
 				+ " - Chooses A Class/Race/Job.");
 		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " armor <page>" + ChatColor.GRAY
 				+ " - Shows All Availiable Armor.");
-		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " weapon <page>" + ChatColor.GRAY
+		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " weapons <page>" + ChatColor.GRAY
 				+ " - Shows All Availiable Weapons.");
 		commands.add(ChatColor.DARK_AQUA + "/casters" + ChatColor.AQUA + " recipes" + ChatColor.GRAY
 				+ " - Shows All Custom Craft Recipes.");

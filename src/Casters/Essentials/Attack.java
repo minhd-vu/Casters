@@ -48,11 +48,11 @@ public class Attack implements Listener
 
 					// TODO: Recode This So That It Factors In Enchantments.
 
-					if (caster.getWeapon().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) &&
+					if (caster.getWeapons().containsKey(caster.getPlayer().getInventory().getItemInMainHand().getType()) &&
 							!caster.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.BOW))
 					{
 						event.setDamage(caster.getStrength() * caster.getType().getMeleeDamageScale()
-								+ caster.getWeapon().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
+								+ caster.getWeapons().get(caster.getPlayer().getInventory().getItemInMainHand().getType()));
 					}
 
 					else
@@ -91,7 +91,7 @@ public class Attack implements Listener
 
 					if (arrows.containsKey(arrow))
 					{
-						event.setDamage(caster.getWeapon().get(Material.BOW) * arrows.get(arrow)
+						event.setDamage(caster.getWeapons().get(Material.BOW) * arrows.get(arrow)
 								+ caster.getDexterity() * caster.getType().getBowDamageScale());
 						arrows.remove(arrow);
 					}
@@ -120,7 +120,7 @@ public class Attack implements Listener
 		{
 			Caster caster = Casters.getCasters().get(event.getEntity().getUniqueId());
 
-			if (!caster.getWeapon().containsKey(Material.BOW))
+			if (!caster.getWeapons().containsKey(Material.BOW))
 			{
 				caster.getPlayer().sendMessage(header + ChatColor.GRAY + "Your Class Cannot Use A Bow.");
 				event.setCancelled(true);

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastersWeapon implements CommandInterface
+public class CastersWeapons implements CommandInterface
 {
 	private Pages pages = new Pages();
 	private String fill = "-------------------";
@@ -23,7 +23,7 @@ public class CastersWeapon implements CommandInterface
 
 	private List<String> weapon = new ArrayList<String>();
 
-	public CastersWeapon()
+	public CastersWeapons()
 	{
 		pages.setHeader(ChatColor.DARK_GRAY + fill + header + fill);
 		pages.setError("Casters Weapon");
@@ -43,11 +43,11 @@ public class CastersWeapon implements CommandInterface
 
 			weapon.add(ChatColor.GRAY + "Permitted Weapons: ");
 
-			for (Material material : caster.getWeapon().keySet())
+			for (Material material : caster.getWeapons().keySet())
 			{
 				String weapontext = material.toString().toLowerCase().replace("_", " ");
 
-				weapon.add(ChatColor.DARK_AQUA + WordUtils.capitalize(weapontext) + ChatColor.AQUA + " - " + caster.getWeapon().get(material));
+				weapon.add(ChatColor.DARK_AQUA + WordUtils.capitalize(weapontext) + ChatColor.AQUA + " - " + caster.getWeapons().get(material));
 			}
 
 			pages.setPage(weapon);

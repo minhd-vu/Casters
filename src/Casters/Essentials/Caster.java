@@ -131,12 +131,10 @@ public class Caster
 
 		if (!Casters.getConfigManager().getFileExists(this.player.getName() + ".yml"))
 		{
-			config = Casters.getConfigManager().getNewConfig(this.player.getName() + ".yml",
-					new String[]{this.player.getName() + " Config File."});
+			config = Casters.getConfigManager().getNewConfig(this.player.getName() + ".yml", new String[]{this.player.getName() + " Config File."});
 			setNewConfig();
 
-			Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Welcome " + ChatColor.WHITE + player.getName()
-					+ ChatColor.DARK_AQUA + " To CasterCraft!");
+			Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "Welcome " + ChatColor.WHITE + player.getName() + ChatColor.DARK_AQUA + " To CasterCraft!");
 		}
 
 		else
@@ -910,7 +908,7 @@ public class Caster
 		return armor;
 	}
 
-	public HashMap<Material, Integer> getWeapon()
+	public HashMap<Material, Integer> getWeapons()
 	{
 		return weapon;
 	}
