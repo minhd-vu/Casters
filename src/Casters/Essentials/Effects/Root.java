@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.List;
 
-public class Stun
+public class Root
 {
 	private HashMap<String, Long> stuns = new HashMap<String, Long>();
 
@@ -23,7 +23,7 @@ public class Stun
 
 	private int duration;
 
-	public Stun(int duration)
+	public Root(int duration)
 	{
 		this.duration = duration;
 	}
@@ -33,14 +33,13 @@ public class Stun
 		if (target instanceof Player)
 		{
 			Caster caster = Casters.getCasters().get(target.getUniqueId());
-			caster.setEffect("Stunned", duration);
+			caster.setEffect("Rooted", duration);
 
 			stuns.put(target.getName(), System.currentTimeMillis());
 
 			Location location = target.getLocation();
 
-			target.sendMessage(header + "You" + ChatColor.GRAY + " Have Been " + ChatColor.WHITE + "Stunned"
-					+ ChatColor.GRAY + "!");
+			target.sendMessage(header + "You" + ChatColor.GRAY + " Have Been " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 
 			List<Entity> e = target.getNearbyEntities(16, 16, 16);
 
@@ -48,8 +47,7 @@ public class Stun
 			{
 				if (player instanceof Player)
 				{
-					player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Been " + ChatColor.WHITE
-							+ "Stunned" + ChatColor.GRAY + "!");
+					player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Been " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 				}
 			}
 
@@ -65,8 +63,7 @@ public class Stun
 
 					else
 					{
-						target.sendMessage(header + "You" + ChatColor.GRAY + " Are No Longer " + ChatColor.WHITE
-								+ "Stunned" + ChatColor.GRAY + "!");
+						target.sendMessage(header + "You" + ChatColor.GRAY + " Are No Longer " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 
 						List<Entity> e = target.getNearbyEntities(16, 16, 16);
 
@@ -74,8 +71,7 @@ public class Stun
 						{
 							if (player instanceof Player)
 							{
-								player.sendMessage(header + target.getName() + ChatColor.GRAY + " Is No Longer "
-										+ ChatColor.WHITE + "Stunned" + ChatColor.GRAY + "!");
+								player.sendMessage(header + target.getName() + ChatColor.GRAY + " Is No Longer " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 							}
 						}
 
@@ -97,8 +93,7 @@ public class Stun
 			{
 				if (player instanceof Player)
 				{
-					player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Been " + ChatColor.WHITE
-							+ "Stunned" + ChatColor.GRAY + "!");
+					player.sendMessage(header + target.getName() + ChatColor.GRAY + " Has Been " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 				}
 			}
 
@@ -113,8 +108,7 @@ public class Stun
 					{
 						if (player instanceof Player)
 						{
-							player.sendMessage(header + target.getName() + ChatColor.GRAY + " Is No Longer "
-									+ ChatColor.WHITE + "Stunned" + ChatColor.GRAY + "!");
+							player.sendMessage(header + target.getName() + ChatColor.GRAY + " Is No Longer " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
 						}
 					}
 
@@ -122,6 +116,30 @@ public class Stun
 				}
 
 			}.runTaskLater(Casters.getInstance(), duration);
+		}
+	}
+
+	public void stop(LivingEntity target)
+	{
+		if (target instanceof Player)
+		{
+			Caster caster = Casters.getCasters().get(target.getUniqueId()); // TODO: Finish This.
+			caster.setEffect("Rooted", 0);
+
+			List<Entity> e = target.getNearbyEntities(16, 16, 16);
+
+			for (Entity player : e)
+			{
+				if (player instanceof Player)
+				{
+					player.sendMessage(header + target.getName() + ChatColor.GRAY + " Is No Longer " + ChatColor.WHITE + "Rooted" + ChatColor.GRAY + "!");
+				}
+			}
+		}
+
+		else
+		{
+			target.removePotionEffect(PotionEffectType.SLOW);
 		}
 	}
 }

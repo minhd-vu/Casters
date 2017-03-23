@@ -90,9 +90,23 @@ public class CastInspire extends Active implements CommandInterface
 								if (caster.getPlayer().getLocation().distance(member.getPlayer().getLocation()) < range)
 								{
 									member.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, duration, amplifier));
+									member.setEffect("Inspired", duration);
 									member.getPlayer().sendMessage(header + " You Feel Inspired!");
 								}
 							}
+
+							new BukkitRunnable()
+							{
+								@Override
+								public void run()
+								{
+									for (Caster member : members)
+									{
+										member.getPlayer().sendMessage(header + " You Inspiration Fades.");
+									}
+								}
+
+							}.runTaskLater(Casters.getInstance(), duration);
 
 							cast(player);
 

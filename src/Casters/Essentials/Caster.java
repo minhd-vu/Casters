@@ -170,6 +170,9 @@ public class Caster
 		effects.put("Defending", new Effect());
 		effects.put("Spinning", new Effect());
 		effects.put("HogRiding", new Effect());
+		effects.put("Inspired", new Effect());
+		effects.put("Warcry", new Effect());
+		effects.put("Rooted", new Effect());
 
 		interrupted = false;
 
@@ -182,6 +185,7 @@ public class Caster
 				{
 					mana += manaregen;
 				}
+
 				else
 				{
 					mana = maxmana;

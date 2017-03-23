@@ -125,6 +125,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastHogRiders casthogriders;
 	private static CastCleanse castcleanse;
 	private static CastInspire castinspire;
+	private static CastWarcry castwarcry;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -294,9 +295,7 @@ public class Casters extends JavaPlugin implements Listener
 		barbarian.getWeapon().put(Material.GOLD_AXE, 5);
 		barbarian.getWeapon().put(Material.STONE_AXE, 5);
 		barbarian.getWeapon().put(Material.WOOD_AXE, 5);
-		barbarian.getCasts().put("Taunt", 1);
-		barbarian.getCasts().put("Bash", 1);
-		barbarian.getCasts().put("Mute", 1);
+		barbarian.getCasts().put("Warcry", 1);
 		barbarian.getCasts().put("Whirlwind", 1);
 		barbarian.getCasts().put("HogRiders", 1);
 
@@ -311,6 +310,9 @@ public class Casters extends JavaPlugin implements Listener
 		blackguard.getWeapon().put(Material.STONE_SWORD, 6);
 		blackguard.getWeapon().put(Material.WOOD_SWORD, 5);
 		blackguard.getCasts().put("Strike", 1);
+		barbarian.getCasts().put("Taunt", 1);
+		barbarian.getCasts().put("Bash", 1);
+		barbarian.getCasts().put("Mute", 1);
 
 		Type assassin = new Type("Assassin", "Description");
 		assassin.getArmor().add(Material.GOLD_HELMET);
@@ -636,6 +638,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("HogRiders", casthogriders = new CastHogRiders("HogRiders", "Mount All Your Party Members On Hogs"));
 		casts.put("Cleanse", castcleanse = new CastCleanse("Cleanse", "Remove Debuffs From Your Party Members"));
 		casts.put("Inspire", castinspire = new CastInspire("Inspire", "Inspire Your Allies And Strengthen Them"));
+		casts.put("Warcry", castwarcry = new CastWarcry("Warcry", "Shout And March With Your Army"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -736,6 +739,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("hogriders", casthogriders);
 		casthandler.register("cleanse", castcleanse);
 		casthandler.register("inspire", castinspire);
+		casthandler.register("warcry", castwarcry);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

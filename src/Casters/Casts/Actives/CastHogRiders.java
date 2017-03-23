@@ -122,6 +122,7 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 									hogs.add(hog.getUniqueId());
 
 									member.setEffect("HogRiding", duration);
+									member.getPlayer().sendMessage(header + " You Are Now A Hog Rider!");
 
 									new BukkitRunnable()
 									{
@@ -132,13 +133,12 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 											{
 												hogs.remove(hog.getUniqueId());
 												member.getPlayer().leaveVehicle();
+												member.getPlayer().sendMessage(header + " Your Hog Becomes Tired And Takes A Nap.");
 												hog.remove();
 											}
 										}
 
 									}.runTaskLater(Casters.getInstance(), duration);
-
-									member.getPlayer().sendMessage(header + " You Are Now A Hog Rider!");
 								}
 							}
 
