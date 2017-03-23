@@ -33,10 +33,9 @@ import java.util.*;
 
 public class Caster
 {
-	private static final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters"
-			+ ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
-	private static final String tabheader = ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA
-			+ ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
+	private static final String header = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Casters" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ";
+	private static final String tabheader =
+			ChatColor.DARK_GRAY + "\n" + ChatColor.BOLD + "[" + ChatColor.DARK_AQUA + ChatColor.BOLD + "CasterCraft" + ChatColor.DARK_GRAY + ChatColor.BOLD + "]\n";
 	private static final String tabfooter = ChatColor.YELLOW + "\nTOO MUCH SAUCE!";
 	private static final DecimalFormat decimalformat = new DecimalFormat("##.#");
 
@@ -173,6 +172,7 @@ public class Caster
 		effects.put("Inspired", new Effect());
 		effects.put("Warcry", new Effect());
 		effects.put("Rooted", new Effect());
+		effects.put("Haunted", new Effect());
 
 		interrupted = false;
 
@@ -210,8 +210,7 @@ public class Caster
 			public List<Entry> getEntries(Player player)
 			{
 				EntryBuilder entrybuilder = new EntryBuilder();
-				entrybuilder.next("    " + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###" + casterstext.next()
-						+ ChatColor.DARK_GRAY + ChatColor.MAGIC + "###");
+				entrybuilder.next("    " + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###" + casterstext.next() + ChatColor.DARK_GRAY + ChatColor.MAGIC + "###");
 				entrybuilder.next("    " + nametext.next());
 				entrybuilder.blank();
 				entrybuilder.next("    " + ChatColor.GREEN + "Class: " + type.getName());
@@ -546,7 +545,8 @@ public class Caster
 			return true;
 		}
 
-		player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + name + ChatColor.GRAY + " - Not Enough Mana!");
+		player.sendMessage(
+				ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Cast" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " " + name + ChatColor.GRAY + " - Not Enough Mana!");
 
 		return false;
 	}
@@ -939,7 +939,10 @@ public class Caster
 		{
 			Caster caster = Casters.getCasters().get(target.getUniqueId());
 
-			if (caster.getPlayer().leaveVehicle());
+			if (caster.getPlayer().leaveVehicle())
+			{
+				;
+			}
 			{
 				caster.setEffect("HogRiding", 0);
 			}
@@ -984,6 +987,14 @@ public class Caster
 	public Player getPlayer()
 	{
 		return player;
+	}
+
+	public void setEffect(String name, double duration)
+	{
+		if (effects.containsKey(name))
+		{
+			effects.get(name).setDuration(duration);
+		}
 	}
 
 	public boolean isCasting()
@@ -1061,14 +1072,6 @@ public class Caster
 	public void setWarmingUp(String name, boolean warmingup)
 	{
 		this.warmingup.put(name, warmingup);
-	}
-
-	public void setEffect(String name, double duration)
-	{
-		if (effects.containsKey(name))
-		{
-			effects.get(name).setDuration(duration);
-		}
 	}
 
 	public void setTypeMaxExp()

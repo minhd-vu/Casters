@@ -3,30 +3,24 @@ package Casters.Casts.Targetted;
 import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
-import Casters.Essentials.Effects.Poison;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastPoison extends Targetted implements CommandInterface, Listener
+public class CastHaunt extends Targetted implements CommandInterface
 {
-	private Poison poison;
-
 	private int duration;
 	private int range;
-	private int damagepertick;
+	private int damage;
 	private int amplifier;
 
-	public CastPoison(String name, String description)
+	public CastHaunt(String name, String description)
 	{
 		super(name, description);
 
@@ -39,16 +33,14 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 		info.add(ChatColor.DARK_AQUA + "Cooldown: " + ChatColor.GRAY + cooldown.getCooldown() / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
-		duration = 40;
+		duration = 60;
 		range = 10;
-		damagepertick = 2;
+		damage = 2;
 		amplifier = 2;
-
-		poison = new Poison(damagepertick, duration, amplifier);
 
 		info.add(ChatColor.DARK_AQUA + "Duration: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
-		info.add(ChatColor.DARK_AQUA + "Damage Per Tick: " + ChatColor.GRAY + damagepertick + " HP");
+		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Amplifier: " + ChatColor.GRAY + amplifier);
 
 		pages.setPage(info);
@@ -71,7 +63,6 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 
 			else if (args.length == 1 && caster.canCast(name, cooldown, manacost))
 			{
-
 				LivingEntity target = getTarget(player, range, false, false);
 
 				if (target != null && !target.equals(player))
@@ -87,14 +78,12 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 							if (!caster.isInterrupted())
 							{
 								caster.setCasting(name, true);
-								caster.setEffect("Poisoning", duration);
+								caster.setEffect("Haunted", duration);
 								caster.setMana(manacost);
 
-								poison.start(caster, target, name);
-
-								target.getWorld().spigot().playEffect(target.getLocation().add(0, 1, 0), Effect.SLIME, 0, 0,
-										0.5F, 1.0F, 0.5F, 0.1F, 50, 16);
-								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRAVEL_FALL, 1.0F, 1.0F);
+								target.damage(damage);
+								target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration, amplifier));
+								target.getWorld().playSound(target.getLocation(), Sound.ENTITY_ENDERMEN_SCREAM, 8.0F, 1.0F);
 
 								caster.setBossBarEntity(target);
 
@@ -112,17 +101,5 @@ public class CastPoison extends Targetted implements CommandInterface, Listener
 		}
 
 		return true;
-	}
-
-	@EventHandler
-	public void onEntityDamageEvent(EntityDamageEvent event)
-	{
-		if (event.getCause().equals(DamageCause.POISON))
-		{
-			if (poison.getAffectedPlayers().contains(event.getEntity().getUniqueId()))
-			{
-				event.setDamage(damagepertick);
-			}
-		}
 	}
 }
