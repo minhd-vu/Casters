@@ -1,12 +1,10 @@
 package Casters.Casts.Passives;
 
 import Casters.Casters;
-import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 

@@ -117,7 +117,7 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 											}
 										}
 
-									}.runTaskTimer(Casters.getInstance(), 0 , 2);
+									}.runTaskTimer(Casters.getInstance(), 0, 2);
 
 									hogs.add(hog.getUniqueId());
 

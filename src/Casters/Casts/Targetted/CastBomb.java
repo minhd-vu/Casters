@@ -7,7 +7,6 @@ import Casters.Essentials.Caster;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_11_R1.EntityLiving;
 import net.minecraft.server.v1_11_R1.EntityTNTPrimed;
-import net.minecraft.server.v1_11_R1.Explosion;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;

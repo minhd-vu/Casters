@@ -132,21 +132,21 @@ public class Attack implements Listener
 		}
 	}
 
-	private void cancelWarmUp(Caster caster)
-	{
-		if (caster.isWarmingUp())
-		{
-			caster.setInterrupted(true);
-			caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-		}
-	}
-
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent event)
 	{
 		if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))
 		{
 			cancelWarmUp(Casters.getCasters().get(event.getPlayer().getUniqueId()));
+		}
+	}
+
+	private void cancelWarmUp(Caster caster)
+	{
+		if (caster.isWarmingUp())
+		{
+			caster.setInterrupted(true);
+			caster.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 		}
 	}
 }

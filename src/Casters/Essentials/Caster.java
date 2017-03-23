@@ -923,14 +923,6 @@ public class Caster
 		return 0;
 	}
 
-	public void interruptWarmUp()
-	{
-		if (isWarmingUp())
-		{
-			interrupted = true;
-		}
-	}
-
 	public void interruptCasts(LivingEntity target)
 	{
 		if (target instanceof Player)
@@ -938,9 +930,6 @@ public class Caster
 			Caster caster = Casters.getCasters().get(target.getUniqueId());
 
 			if (caster.getPlayer().leaveVehicle())
-			{
-				;
-			}
 			{
 				caster.setEffect("HogRiding", 0);
 			}

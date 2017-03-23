@@ -5,7 +5,10 @@ import Casters.Casts.Cast;
 import Casters.Essentials.Caster;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.util.BlockIterator;
 
 import java.util.ArrayList;

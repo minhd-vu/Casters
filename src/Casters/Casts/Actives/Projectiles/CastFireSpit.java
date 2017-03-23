@@ -5,15 +5,12 @@ import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -130,7 +127,7 @@ public class CastFireSpit extends Projectile implements CommandInterface
 									}
 								}
 
-							}.runTaskLater(Casters.getInstance(),  timer);
+							}.runTaskLater(Casters.getInstance(), timer);
 
 							caster.setCasting(name, false);
 						}

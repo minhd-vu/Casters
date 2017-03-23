@@ -5,12 +5,9 @@ import net.minecraft.server.v1_11_R1.EntityInsentient;
 import net.minecraft.server.v1_11_R1.GenericAttributes;
 import net.minecraft.server.v1_11_R1.PathEntity;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-
-import java.util.Set;
 
 public class Mob
 {

@@ -5,7 +5,6 @@ import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;

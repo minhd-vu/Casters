@@ -57,6 +57,7 @@ public class CastList implements CommandInterface
 
 					return true;
 				}
+
 				catch (NumberFormatException e)
 				{
 
@@ -76,19 +77,20 @@ public class CastList implements CommandInterface
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Active" + ChatColor.DARK_GRAY
 								+ "]";
 					}
+
 					else if (cast instanceof Targetted)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Targetted" + ChatColor.DARK_GRAY
 								+ "]";
 					}
+
 					else if (cast instanceof Passive)
 					{
 						casttype = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_AQUA + "Passive" + ChatColor.DARK_GRAY
 								+ "]";
 					}
 
-					commands.add(casttype + ChatColor.AQUA + " " + cast.getName() + ChatColor.GRAY + " - "
-							+ cast.getDescription());
+					commands.add(casttype + ChatColor.AQUA + " " + cast.getName() + ChatColor.GRAY + " - " + cast.getDescription());
 				}
 
 				pages.setCommand("cast list all");
