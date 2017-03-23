@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-public class CastFlash extends Active implements CommandInterface, Listener
+public class CastFlash extends Active implements CommandInterface
 {
 	private int distance;
 

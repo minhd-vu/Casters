@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class CastStampede extends Active implements CommandInterface, Listener
+public class CastStampede extends Active implements CommandInterface
 {
 	private double damage;
 	private int range;

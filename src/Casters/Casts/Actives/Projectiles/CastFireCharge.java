@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CastFireCharge extends Projectile implements CommandInterface, Listener
+public class CastFireCharge extends Projectile implements CommandInterface
 {
 	private int timer;
 	private double damage;

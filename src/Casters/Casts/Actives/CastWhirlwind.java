@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CastWhirlwind extends Active implements CommandInterface, Listener
+public class CastWhirlwind extends Active implements CommandInterface
 {
 	private double damage;
 	private int range;

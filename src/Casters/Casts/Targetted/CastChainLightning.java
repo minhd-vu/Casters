@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastChainLightning extends Targetted implements CommandInterface, Listener
+public class CastChainLightning extends Targetted implements CommandInterface
 {
 	private int period;
 	private double damage;

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastStrike extends Targetted implements CommandInterface, Listener
+public class CastStrike extends Targetted implements CommandInterface
 {
 	private Bleed bleed;
 

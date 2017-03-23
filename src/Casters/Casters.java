@@ -124,6 +124,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastWhirlwind castwhirlwind;
 	private static CastHogRiders casthogriders;
 	private static CastCleanse castcleanse;
+	private static CastInspire castinspire;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -463,6 +464,7 @@ public class Casters extends JavaPlugin implements Listener
 		monk.getWeapon().put(Material.WOOD_SPADE, 4);
 		monk.getCasts().put("DefensiveStance", 1);
 		monk.getCasts().put("PressurePoint", 1);
+		monk.getCasts().put("Inspire", 1);
 
 		Type cleric = new Type("Cleric", "Description");
 		cleric.getArmor().add(Material.LEATHER_HELMET);
@@ -633,6 +635,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Whirlwind", castwhirlwind = new CastWhirlwind("Whirlwind", "Spin Furiously Damaging All Nearby Enemies"));
 		casts.put("HogRiders", casthogriders = new CastHogRiders("HogRiders", "Mount All Your Party Members On Hogs"));
 		casts.put("Cleanse", castcleanse = new CastCleanse("Cleanse", "Remove Debuffs From Your Party Members"));
+		casts.put("Inspire", castinspire = new CastInspire("Inspire", "Inspire Your Allies And Strengthen Them"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -667,10 +670,9 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerCommands();
 
-		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castbolt, castrevive, castfirebomb, castfirecharge,
-				castcharge, caststrike, castbandage, castbeasts, castlightningstorm, castchainlightning, castreflect, castsiphon, castvanish, castbomb, castmount, castpoison,
-				castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn, casthogriders, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss,
-				passivemusket);
+		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castrevive, castfirebomb, castfirecharge,
+				castbeasts, castreflect, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn,
+				casthogriders, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket);
 	}
 
 	private void registerCommands()
@@ -733,6 +735,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("whirlwind", castwhirlwind);
 		casthandler.register("hogriders", casthogriders);
 		casthandler.register("cleanse", castcleanse);
+		casthandler.register("inspire", castinspire);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CastCleanse extends Active implements CommandInterface, Listener
+public class CastCleanse extends Active implements CommandInterface
 {
 	private int range;
 
@@ -85,19 +85,14 @@ public class CastCleanse extends Active implements CommandInterface, Listener
 							{
 								if (caster.getPlayer().getLocation().distance(member.getPlayer().getLocation()) < range)
 								{
-									if (member.getPlayer().getFireTicks() > 0 || member.getPlayer().hasPotionEffect(PotionEffectType.SLOW) ||
+									if (member.getPlayer().getFireTicks() > 0 || (member.getPlayer().hasPotionEffect(PotionEffectType.SLOW) && !member.isWarmingUp()) ||
 											member.getPlayer().hasPotionEffect(PotionEffectType.BLINDNESS) || member.getPlayer().hasPotionEffect(PotionEffectType.CONFUSION) ||
 											member.getPlayer().hasPotionEffect(PotionEffectType.WEAKNESS) || member.getPlayer().hasPotionEffect(PotionEffectType.POISON) ||
 											member.getPlayer().hasPotionEffect(PotionEffectType.HUNGER) || member.getPlayer().hasPotionEffect(PotionEffectType.SLOW_DIGGING) ||
 											member.getPlayer().hasPotionEffect(PotionEffectType.WITHER) || member.getPlayer().hasPotionEffect(PotionEffectType.UNLUCK))
 									{
 										member.getPlayer().setFireTicks(0);
-
-										if (!caster.isWarmingUp())
-										{
-											member.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-										}
-
+										member.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 										member.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
 										member.getPlayer().removePotionEffect(PotionEffectType.CONFUSION);
 										member.getPlayer().removePotionEffect(PotionEffectType.WEAKNESS);
@@ -106,8 +101,7 @@ public class CastCleanse extends Active implements CommandInterface, Listener
 										member.getPlayer().removePotionEffect(PotionEffectType.SLOW_DIGGING);
 										member.getPlayer().removePotionEffect(PotionEffectType.WITHER);
 										member.getPlayer().removePotionEffect(PotionEffectType.UNLUCK);
-
-										cast(caster.getPlayer(), member.getPlayer());
+										member.getPlayer().sendMessage(header + " You Are Cleansed Of Debuffs!");
 									}
 								}
 							}

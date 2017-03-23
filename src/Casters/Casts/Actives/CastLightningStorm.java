@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastLightningStorm extends Active implements CommandInterface, Listener
+public class CastLightningStorm extends Active implements CommandInterface
 {
 	private double damage;
 	private int range;

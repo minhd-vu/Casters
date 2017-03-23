@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastBandage extends Targetted implements CommandInterface, Listener
+public class CastBandage extends Targetted implements CommandInterface
 {
 	private double heal;
 	private int range;

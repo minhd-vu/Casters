@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastBolt extends Targetted implements CommandInterface, Listener
+public class CastBolt extends Targetted implements CommandInterface
 {
 	private double damage;
 	private int range;

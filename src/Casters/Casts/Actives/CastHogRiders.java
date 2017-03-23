@@ -18,9 +18,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-/**
- * Makes All Party Members Or Enemies Spawn On Pigs.
- */
 public class CastHogRiders extends Active implements CommandInterface, Listener
 {
 	private List<UUID> hogs;
@@ -116,7 +113,7 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 										{
 											if (Mob.setEntityTargetLocation(member.getPlayer().getTargetBlock((Set<Material>) null, lookrange).getLocation(), hog, speed))
 											{
-												this.cancel();
+												this.cancel(); // TODO: Test With Kuro.
 											}
 										}
 
@@ -140,6 +137,8 @@ public class CastHogRiders extends Active implements CommandInterface, Listener
 										}
 
 									}.runTaskLater(Casters.getInstance(), duration);
+
+									member.getPlayer().sendMessage(header + " You Are Now A Hog Rider!");
 								}
 							}
 

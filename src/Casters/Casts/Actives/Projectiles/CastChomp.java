@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-public class CastChomp extends Projectile implements CommandInterface, Listener
+public class CastChomp extends Projectile implements CommandInterface
 {
 	private double range;
 	private double damage;

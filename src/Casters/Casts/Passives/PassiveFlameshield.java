@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-public class PassiveFlameshield extends Passive implements CommandInterface, Listener
+public class PassiveFlameshield extends Passive
 {
 	private double percentage;
 

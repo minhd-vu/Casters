@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class CastCharge extends Targetted implements CommandInterface, Listener
+public class CastCharge extends Targetted implements CommandInterface
 {
 	private Stun stun;
 

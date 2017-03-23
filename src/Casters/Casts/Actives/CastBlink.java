@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-public class CastBlink extends Active implements CommandInterface, Listener
+public class CastBlink extends Active implements CommandInterface
 {
 	private int distance;
 
