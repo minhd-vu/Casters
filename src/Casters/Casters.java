@@ -10,6 +10,7 @@ import Casters.Casts.Passives.Firearms.PassiveBlunderbuss;
 import Casters.Casts.Passives.Firearms.PassiveFlintlock;
 import Casters.Casts.Passives.Firearms.PassiveMusket;
 import Casters.Casts.Passives.PassiveBackstab;
+import Casters.Casts.Passives.PassiveBerserk;
 import Casters.Casts.Passives.PassiveFlameshield;
 import Casters.Casts.Targetted.*;
 import Casters.Commands.*;
@@ -126,12 +127,14 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastCleanse castcleanse;
 	private static CastInspire castinspire;
 	private static CastWarcry castwarcry;
+	private static CastEntangle castentangle;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
 	private static PassiveFlintlock passiveflintlock;
 	private static PassiveBlunderbuss passiveblunderbuss;
 	private static PassiveMusket passivemusket;
+	private static PassiveBerserk passiveberserk;
 
 	private static CastsInventory castsinventory;
 
@@ -298,6 +301,7 @@ public class Casters extends JavaPlugin implements Listener
 		barbarian.getCasts().put("Warcry", 1);
 		barbarian.getCasts().put("Whirlwind", 1);
 		barbarian.getCasts().put("HogRiders", 1);
+		barbarian.getCasts().put("Berserk", 1);
 
 		Type blackguard = new Type("Blackguard", "Description");
 		blackguard.getArmor().add(Material.CHAINMAIL_HELMET);
@@ -441,6 +445,7 @@ public class Casters extends JavaPlugin implements Listener
 		oracle.getWeapon().put(Material.WOOD_SPADE, 4);
 		oracle.getCasts().put("Chomp", 1);
 		oracle.getCasts().put("Seeker", 1);
+		oracle.getCasts().put("Entangle", 1);
 
 		Type bloodmage = new Type("Bloodmage", "Description");
 		bloodmage.getArmor().add(Material.LEATHER_HELMET);
@@ -639,12 +644,14 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Cleanse", castcleanse = new CastCleanse("Cleanse", "Remove Debuffs From Your Party Members"));
 		casts.put("Inspire", castinspire = new CastInspire("Inspire", "Inspire Your Allies And Strengthen Them"));
 		casts.put("Warcry", castwarcry = new CastWarcry("Warcry", "Shout And March With Your Army"));
+		casts.put("Entangle", castentangle = new CastEntangle("Entangle", "Root Your Opponent In Place"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
 		casts.put("Flintlock", passiveflintlock = new PassiveFlintlock("Flintlock", "Fire A Flintlock Pistol"));
 		casts.put("Blunderbuss", passiveblunderbuss = new PassiveBlunderbuss("Blunderbuss", "Fire A Blunderbuss Shotgun"));
 		casts.put("Musket", passivemusket = new PassiveMusket("Musket", "Fire A Single Shot Musket"));
+		casts.put("Berserk", passiveberserk = new PassiveBerserk("Berserk", "Deal More Damage As You Lose Health"));
 
 		castsinventory = new CastsInventory();
 
@@ -675,7 +682,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castrevive, castfirebomb, castfirecharge,
 				castbeasts, castreflect, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn,
-				casthogriders, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket);
+				casthogriders, castentangle, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket, passiveberserk);
 	}
 
 	private void registerCommands()
@@ -740,12 +747,14 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("cleanse", castcleanse);
 		casthandler.register("inspire", castinspire);
 		casthandler.register("warcry", castwarcry);
+		casthandler.register("entangle", castentangle);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);
 		casthandler.register("flintlock", passiveflintlock);
 		casthandler.register("blunderbuss", passiveblunderbuss);
 		casthandler.register("musket", passivemusket);
+		casthandler.register("berserk", passiveberserk);
 
 		castshandler.register("casts", castsinventory);
 

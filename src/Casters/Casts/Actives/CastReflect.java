@@ -147,7 +147,7 @@ public class CastReflect extends Active implements CommandInterface, Listener
 			if (reflects.containsKey(caster.getPlayer().getUniqueId()) && caster.isCasting(name) &&
 					(System.currentTimeMillis() / 1000.0) - (reflects.get(caster.getPlayer().getUniqueId()) / 1000.0) < duration / 20.0)
 			{
-				event.setCancelled(true);
+				// TODO: Removed The Event Cancelling; Retest.
 
 				if (caster.sameParty(target))
 				{

@@ -58,7 +58,7 @@ public class Root
 				{
 					if (System.currentTimeMillis() / 1000.0 - stuns.get(target.getName()) / 1000.0 < duration / 20.0)
 					{
-						target.teleport(location.setDirection(target.getLocation().getDirection())); // TODO: Test If The DIrection TelePort Works.
+						target.teleport(location.setDirection(target.getLocation().getDirection())); // TODO: Test If The Direction Teleport Works.
 					}
 
 					else
@@ -123,7 +123,7 @@ public class Root
 	{
 		if (target instanceof Player)
 		{
-			Caster caster = Casters.getCasters().get(target.getUniqueId()); // TODO: Finish This.
+			Caster caster = Casters.getCasters().get(target.getUniqueId()); // TODO: Finish This. Make This Code More Efficient.
 			caster.setEffect("Rooted", 0);
 
 			List<Entity> e = target.getNearbyEntities(16, 16, 16);

@@ -4,7 +4,6 @@ import Casters.Casters;
 import Casters.CommandInterface;
 import Casters.Essentials.Caster;
 import Casters.Essentials.Effects.Root;
-import Casters.Essentials.Effects.Stun;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -12,14 +11,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CastEntangle extends Targetted implements CommandInterface
+public class CastEntangle extends Targetted implements CommandInterface, Listener
 {
 	private Root root;
 
 	private int duration;
-	private double damage;
 	private int range;
 
 	public CastEntangle(String name, String description)
@@ -36,13 +37,11 @@ public class CastEntangle extends Targetted implements CommandInterface
 		info.add(ChatColor.DARK_AQUA + "Cost: " + ChatColor.GRAY + manacost + " MP");
 
 		duration = 60;
-		damage = 4;
 		range = 8;
 
 		root = new Root(duration);
 
 		info.add(ChatColor.DARK_AQUA + "Root: " + ChatColor.GRAY + duration / 20.0 + " Seconds");
-		info.add(ChatColor.DARK_AQUA + "Damage: " + ChatColor.GRAY + damage + " HP");
 		info.add(ChatColor.DARK_AQUA + "Range: " + ChatColor.GRAY + range + " Blocks");
 
 		pages.setPage(info);
@@ -82,12 +81,11 @@ public class CastEntangle extends Targetted implements CommandInterface
 								caster.setCasting(name, true);
 								caster.setMana(manacost);
 
-								target.damage(damage);
 								caster.setBossBarEntity(target);
 
 								root.start(target);
 
-								player.getWorld().spawnParticle(Particle.END_ROD, target.getLocation(), 100, 0.5, 0.2F, 0.5F);
+								player.getWorld().spawnParticle(Particle.FALLING_DUST, target.getLocation(), 50, 0.5, 0.2F, 0.5F);
 								player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_HURT, 8.0F, 1.0F);
 
 								cast(player, target);
@@ -104,5 +102,19 @@ public class CastEntangle extends Targetted implements CommandInterface
 		}
 
 		return true;
+	}
+
+	@EventHandler
+	public void onEntityDamageEvent(EntityDamageEvent event)
+	{
+		if (event.getEntity() instanceof Player)
+		{
+			Caster caster = Casters.getCasters().get(event.getEntity());
+
+			if (caster.hasEffect("Rooted"))
+			{
+				root.stop(caster.getPlayer());
+			}
+		}
 	}
 }
