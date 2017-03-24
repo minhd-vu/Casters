@@ -128,6 +128,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastInspire castinspire;
 	private static CastWarcry castwarcry;
 	private static CastEntangle castentangle;
+	private static CastDeepBreath castdeepbreath;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -528,6 +529,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		Type undead = new Type("Undead", "Description");
 		undead.getArmor().add(Material.GOLD_HELMET);
+		undead.getCasts().put("DeepBreath", 1);
 
 		Type demon = new Type("Demon", "Description");
 		demon.getArmor().add(Material.GOLD_HELMET);
@@ -645,6 +647,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Inspire", castinspire = new CastInspire("Inspire", "Inspire Your Allies And Strengthen Them"));
 		casts.put("Warcry", castwarcry = new CastWarcry("Warcry", "Shout And March With Your Army"));
 		casts.put("Entangle", castentangle = new CastEntangle("Entangle", "Root Your Opponent In Place"));
+		casts.put("DeepBreath", castdeepbreath = new CastDeepBreath("DeepBreath", "Hold Your Breath For An Extended Period Of Time"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -748,6 +751,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("inspire", castinspire);
 		casthandler.register("warcry", castwarcry);
 		casthandler.register("entangle", castentangle);
+		casthandler.register("deepbreath", castdeepbreath);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

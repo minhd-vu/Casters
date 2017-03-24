@@ -102,7 +102,7 @@ public class CastDisarm extends Targetted implements CommandInterface
 
 									if (weapons.size() > 0)
 									{
-										tplayer.sendMessage(header + " You Have Been Disarmed!");
+										tplayer.sendMessage(header + " You Have Been Disarmed!"); // TODO: Test With Kuro.
 									}
 
 									new BukkitRunnable()

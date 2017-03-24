@@ -31,7 +31,6 @@ public class CastsInventory implements CommandInterface, Listener
 {
 	private ItemStack instructions;
 	private HashMap<String, ItemStack> castitems;
-	private int inventorysize;
 
 	public CastsInventory()
 	{
@@ -84,8 +83,6 @@ public class CastsInventory implements CommandInterface, Listener
 				" Casts " + ChatColor.BLACK + "Or They Will Be " + ChatColor.RED + ChatColor.BOLD + "Destroyed" + ChatColor.BLACK + "!");
 
 		instructions.setItemMeta(meta);
-
-		inventorysize = 9;
 	}
 
 	@Override
@@ -95,7 +92,7 @@ public class CastsInventory implements CommandInterface, Listener
 		{
 			Caster caster = Casters.getCasters().get(((Player) sender).getUniqueId());
 
-			Inventory inventory = Bukkit.createInventory(caster.getPlayer(), inventorysize,
+			Inventory inventory = Bukkit.createInventory(caster.getPlayer(), (int) (9 * (Math.ceil((caster.getCasts().keySet().size() + 1) / 9.0))), // TODO: Test This Size.
 					ChatColor.DARK_AQUA + "" + ChatColor.BOLD + caster.getPlayer().getName() + "'s" + ChatColor.AQUA + "" + ChatColor.BOLD + " Casts!");
 
 			for (String cast : caster.getCasts().keySet())
@@ -106,7 +103,7 @@ public class CastsInventory implements CommandInterface, Listener
 				}
 			}
 
-			inventory.setItem(inventorysize - 1, instructions);
+			inventory.setItem(inventory.getSize() - 1, instructions);
 
 			caster.getPlayer().openInventory(inventory);
 
