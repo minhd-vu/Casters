@@ -129,6 +129,7 @@ public class Casters extends JavaPlugin implements Listener
 	private static CastWarcry castwarcry;
 	private static CastEntangle castentangle;
 	private static CastDeepBreath castdeepbreath;
+	private static CastHook casthook;
 
 	private static PassiveBackstab passivebackstab;
 	private static PassiveFlameshield passiveflameshield;
@@ -315,9 +316,10 @@ public class Casters extends JavaPlugin implements Listener
 		blackguard.getWeapon().put(Material.STONE_SWORD, 6);
 		blackguard.getWeapon().put(Material.WOOD_SWORD, 5);
 		blackguard.getCasts().put("Strike", 1);
-		barbarian.getCasts().put("Taunt", 1);
-		barbarian.getCasts().put("Bash", 1);
-		barbarian.getCasts().put("Mute", 1);
+		blackguard.getCasts().put("Taunt", 1);
+		blackguard.getCasts().put("Bash", 1);
+		blackguard.getCasts().put("Mute", 1);
+		blackguard.getCasts().put("Hook", 1);
 
 		Type assassin = new Type("Assassin", "Description");
 		assassin.getArmor().add(Material.GOLD_HELMET);
@@ -648,6 +650,7 @@ public class Casters extends JavaPlugin implements Listener
 		casts.put("Warcry", castwarcry = new CastWarcry("Warcry", "Shout And March With Your Army"));
 		casts.put("Entangle", castentangle = new CastEntangle("Entangle", "Root Your Opponent In Place"));
 		casts.put("DeepBreath", castdeepbreath = new CastDeepBreath("DeepBreath", "Hold Your Breath For An Extended Period Of Time"));
+		casts.put("Hook", casthook = new CastHook("Hook", "Pull Your Opponent Towards You"));
 
 		casts.put("Backstab", passivebackstab = new PassiveBackstab("Backstab", "Attacks From Behind Deal More"));
 		casts.put("Flameshield", passiveflameshield = new PassiveFlameshield("Flameshield", "Reduces Fire Damage Dealt To You"));
@@ -685,7 +688,7 @@ public class Casters extends JavaPlugin implements Listener
 
 		registerEvents(this, this, experience, enchant, armor, attack, regen, chat, castsinventory, castfireball, castdarkbomb, castrevive, castfirebomb, castfirecharge,
 				castbeasts, castreflect, castvanish, castbomb, castmount, castpoison, castchomp, castseeker, castfrostfire, castarcaneshot, castfirespit, castdemonspawn,
-				casthogriders, castentangle, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket, passiveberserk);
+				casthogriders, castentangle, casthook, passivebackstab, passiveflameshield, passiveflintlock, passiveblunderbuss, passivemusket, passiveberserk);
 	}
 
 	private void registerCommands()
@@ -752,6 +755,7 @@ public class Casters extends JavaPlugin implements Listener
 		casthandler.register("warcry", castwarcry);
 		casthandler.register("entangle", castentangle);
 		casthandler.register("deepbreath", castdeepbreath);
+		casthandler.register("hook", casthook);
 
 		casthandler.register("backstab", passivebackstab);
 		casthandler.register("flameshield", passiveflameshield);

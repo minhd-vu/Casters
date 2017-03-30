@@ -87,7 +87,6 @@ public class CastFireSpit extends Projectile implements CommandInterface
 							firespit.setShooter(player);
 							firespit.setVelocity(caster.getPlayer().getEyeLocation().getDirection().normalize().multiply(velocity));
 							firespit.setGravity(gravity);
-							firespit.setShooter(player);
 
 							projectiles.add(firespit.getUniqueId());
 
